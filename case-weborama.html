@@ -77,11 +77,35 @@ h2{font-size:20px;font-weight:600;letter-spacing:-0.02em;line-height:1.2;color:v
 .result-list li{font-size:14px;color:var(--muted);padding-left:16px;position:relative;font-weight:300;line-height:1.6}
 .result-list li::before{content:"—";position:absolute;left:0;color:var(--blue);font-weight:600}
 
+/* ── ILLUSTRATIONS ── */
+.illustrations-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.illustrations-grid-2-1{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.illustrations-grid-2-1 .illustration-item:last-child{grid-column:1/-1}
+.illustration-item{display:flex;flex-direction:column;gap:10px}
+.illustration-item-inner{background:var(--bg-soft);border:1px solid var(--border);border-radius:12px;padding:20px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.illustration-item img{width:100%;border-radius:8px;display:block;cursor:zoom-in}
+.illustration-caption{font-size:13px;color:var(--muted);font-weight:300;text-align:center;line-height:1.4}
+
+/* ── TABLE OF CONTENTS ── */
+.toc{position:fixed;right:32px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:2px;z-index:50}
+.toc-link{display:flex;align-items:center;gap:8px;text-decoration:none;font-size:11px;color:var(--muted);font-weight:400;transition:color 0.2s;padding:5px 0;white-space:nowrap}
+.toc-dot{width:5px;height:5px;border-radius:50%;background:var(--border);flex-shrink:0;transition:background 0.2s,transform 0.2s}
+.toc-link.active{color:var(--blue);font-weight:500}
+.toc-link.active .toc-dot{background:var(--blue);transform:scale(1.4)}
+@media(max-width:1200px){.toc{display:none}}
+@media(max-width:640px){.illustrations-grid{grid-template-columns:1fr}.illustrations-grid-2-1{grid-template-columns:1fr}.illustrations-grid-2-1 .illustration-item:last-child{grid-column:1}}
+
 /* ── QUOTE ── */
-.quote{border:1px solid var(--border);border-radius:10px;padding:24px 28px;background:var(--bg-soft);margin-top:16px}
-.quote+.quote{margin-top:12px}
-.quote-text{font-size:15px;color:var(--text);line-height:1.75;font-weight:300;margin-bottom:12px}
-.quote-author{font-size:13px;color:var(--muted)}
+.quote{border:1px solid var(--border);border-radius:14px;padding:28px 32px;background:var(--bg);margin-top:16px;position:relative;overflow:hidden}
+.quote+.quote{margin-top:14px}
+.quote::before{content:'\201C';position:absolute;top:-10px;right:20px;font-size:100px;line-height:1;color:var(--blue);opacity:0.07;font-family:Georgia,serif;font-weight:700;pointer-events:none}
+.quote-stars{display:flex;gap:3px;margin-bottom:14px}
+.quote-stars span{color:#F59E0B;font-size:16px}
+.quote-text{font-size:15px;color:var(--text);line-height:1.75;font-weight:300;font-style:italic;margin-bottom:20px}
+.quote-author{display:flex;align-items:center;gap:12px;padding-top:18px;border-top:1px solid var(--border)}
+.quote-avatar{width:38px;height:38px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid var(--border)}
+.quote-author-name{font-size:14px;font-weight:600;color:var(--text);margin-bottom:2px}
+.quote-author-role{font-size:12px;color:var(--muted);font-weight:300}
 
 /* ── NEXT CASES ── */
 .next-section{padding:56px 0 0;border-top:1px solid var(--border)}
@@ -117,6 +141,15 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
   </ul>
 </nav>
 
+<aside class="toc">
+  <a class="toc-link" href="#audit"><span class="toc-dot"></span>01 — Audit</a>
+  <a class="toc-link" href="#ateliers"><span class="toc-dot"></span>02 — Ateliers</a>
+  <a class="toc-link" href="#conception"><span class="toc-dot"></span>03 — Conception</a>
+  <a class="toc-link" href="#documentation"><span class="toc-dot"></span>04 — Documentation</a>
+  <a class="toc-link" href="#suite"><span class="toc-dot"></span>05 — Suite</a>
+  <a class="toc-link" href="#recommandation"><span class="toc-dot"></span>Recommandation</a>
+</aside>
+
 <div class="case-header">
 <div class="container">
   <a class="back" href="index.html#projets">
@@ -139,7 +172,7 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
     <div class="meta-item"><strong>Équipe</strong>3 designers · 3 devs · 4 PO · 1 CPO</div>
     <div class="meta-item"><strong>Outils</strong>Figma · Zeroheight · Storybook · Figma Make</div>
   </div>
-  <p class="case-intro">Weborama est une AdTech spécialisée dans la data et l'IA sémantique. L'entreprise développait 4 outils SaaS sans Design System commun : incohérences visuelles, friction entre designers et développeurs, livraison ralentie. J'ai pris la direction du projet pour auditer l'existant, concevoir un Design System unifié et en assurer l'adoption durable sur les 4 applications.</p>
+  <p class="case-intro">Weborama est une AdTech spécialisée dans la data et l'IA sémantique. L'entreprise développait 4 outils SaaS sans Design System commun — incohérences visuelles, friction entre designers et développeurs, livraison ralentie. J'ai pris la direction du projet pour auditer l'existant, concevoir un Design System unifié et en assurer l'adoption sur les 4 applications.</p>
   <div class="stats-row">
     <div class="stat"><div class="stat-val">−80%</div><div class="stat-label">de composants après rationalisation</div></div>
     <div class="stat"><div class="stat-val">974</div><div class="stat-label">composants audités sur 4 apps</div></div>
@@ -153,36 +186,66 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
 
 <div class="container">
 
-  <div class="case-section">
+  <div class="case-section" id="audit">
     <p class="sec-label">01 — Audit</p>
     <div class="sec-body">
       <h2>Cartographie des 4 applications</h2>
       <p>J'ai audité l'ensemble des 4 bibliothèques Figma : <strong>974 composants, 44 variables et 14 variations de couleur</strong>. Objectif : avoir une vision globale avant d'engager la moindre décision.</p>
-      <p>J'ai analysé les composants récurrents, identifié les incohérences visuelles et recensé les éléments communs. Résultat : <strong>11 composants en doublon</strong> identifiés — point de départ direct pour la réduction de 80%. L'accessibilité de chaque composant a été vérifiée avec Stark (contraste WCAG, lisibilité).</p>
+      <p>J'ai analysé les récurrences, identifié les incohérences et recensé les doublons. Résultat : <strong>11 composants en doublon</strong> identifiés — point de départ direct pour la réduction de 80%. L'accessibilité a été vérifiée sur chaque composant avec Stark (contraste WCAG, lisibilité).</p>
+      <div class="illustrations-grid-2-1" style="margin-top:24px">
+        <figure class="illustration-item">
+          <div class="illustration-item-inner"><img src="images/weborama-audit-1.jpg" alt="Audit Weborama"></div>
+          <figcaption class="illustration-caption">Cartographie des composants existants</figcaption>
+        </figure>
+        <figure class="illustration-item">
+          <div class="illustration-item-inner"><img src="images/weborama-audit-2.jpg" alt="Analyse des incohérences"></div>
+          <figcaption class="illustration-caption">Analyse des incohérences visuelles</figcaption>
+        </figure>
+      </div>
     </div>
   </div>
 
-  <div class="case-section">
+  <div class="case-section" id="ateliers">
     <p class="sec-label">02 — Ateliers</p>
     <div class="sec-body">
       <h2>Co-construction &amp; évangélisation</h2>
-      <p>J'ai piloté une série d'ateliers réunissant <strong>3 designers et jusqu'à 3 développeurs</strong>, intégrés progressivement à chaque décision de suppression, modification ou création de composant. Ces sessions ont permis de statuer sur les composants à conserver ou supprimer, d'éliminer les doublons et d'établir une convention de nommage commune.</p>
-      <p>Au-delà des décisions de conception, ces ateliers avaient un objectif d'évangélisation : sensibiliser les équipes à l'Atomic Design, aux conventions de nommage et à l'usage des variables — pour garantir une adoption durable.</p>
+      <p>J'ai piloté une série d'ateliers réunissant <strong>3 designers et jusqu'à 3 développeurs</strong>, intégrés progressivement à chaque décision — suppression, modification ou création de composant. Ces sessions ont permis de statuer sur les composants à conserver, d'éliminer les doublons et d'établir une convention de nommage commune.</p>
+      <p>Ces ateliers avaient aussi un objectif d'évangélisation : sensibiliser les équipes à l'Atomic Design, aux conventions de nommage et à l'usage des variables — pour garantir une adoption durable.</p>
+      <div class="illustrations-grid" style="margin-top:24px;grid-template-columns:1fr">
+        <figure class="illustration-item">
+          <div class="illustration-item-inner"><img src="images/weborama-atelier-1.jpg" alt="Atelier Design System"></div>
+          <figcaption class="illustration-caption">Atelier de co-construction avec les équipes</figcaption>
+        </figure>
+      </div>
     </div>
   </div>
 
-  <div class="case-section">
+  <div class="case-section" id="conception">
     <p class="sec-label">03 — Conception</p>
     <div class="sec-body">
       <h2>Design System de zéro</h2>
-      <p>Fort des décisions prises en atelier, j'ai conçu l'ensemble du Design System à partir de zéro selon les principes de l'Atomic Design.</p>
+      <p>Fort des décisions prises en atelier, j'ai conçu l'ensemble du Design System selon les principes de l'Atomic Design.</p>
       <p><strong>Fondations</strong> — palettes avec 4 modes (un par application), typographies, espacements, bibliothèque d'icônes commune. Variables organisées en 5 collections : Primitives, Colors, Spacing, Typography, Border.</p>
       <p><strong>Composants</strong> — 24 composants déclinés en 195 variants, du plus atomique au plus complexe, connectés aux variables sémantiques.</p>
       <p><strong>Templates</strong> — 7 templates réutilisables pour produire des interfaces conformes plus rapidement.</p>
+      <div class="illustrations-grid" style="margin-top:24px">
+        <figure class="illustration-item">
+          <div class="illustration-item-inner"><img src="images/weborama-ds-1.jpg" alt="Fondations Design System"></div>
+          <figcaption class="illustration-caption">Fondations & variables</figcaption>
+        </figure>
+        <figure class="illustration-item">
+          <div class="illustration-item-inner"><img src="images/weborama-ds-2.jpg" alt="Composants"></div>
+          <figcaption class="illustration-caption">Bibliothèque de composants</figcaption>
+        </figure>
+        <figure class="illustration-item">
+          <div class="illustration-item-inner"><img src="images/weborama-ds-3.jpg" alt="Templates"></div>
+          <figcaption class="illustration-caption">Templates d'interfaces</figcaption>
+        </figure>
+      </div>
     </div>
   </div>
 
-  <div class="case-section">
+  <div class="case-section" id="documentation">
     <p class="sec-label">04 — Documentation</p>
     <div class="sec-body">
       <h2>Zeroheight &amp; Storybook</h2>
@@ -193,24 +256,41 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
         <li>4 modes de couleurs déployés sur les 4 applications</li>
         <li>Source de vérité unique partagée design + développement</li>
       </ul>
+      <div class="illustrations-grid-2-1" style="margin-top:24px">
+        <figure class="illustration-item">
+          <div class="illustration-item-inner"><img src="images/weborama-doc-1.jpg" alt="Documentation Zeroheight"></div>
+          <figcaption class="illustration-caption">Documentation Zeroheight</figcaption>
+        </figure>
+        <figure class="illustration-item">
+          <div class="illustration-item-inner"><img src="images/weborama-doc-2.jpg" alt="Storybook"></div>
+          <figcaption class="illustration-caption">Intégration Storybook</figcaption>
+        </figure>
+      </div>
     </div>
   </div>
 
-  <div class="case-section">
-    <p class="sec-label">Suite</p>
+  <div class="case-section" id="suite">
+    <p class="sec-label">05 — Suite</p>
     <div class="sec-body">
       <h2>Nouvelle application SaaS avec Figma Make</h2>
-      <p>Le Design System a ensuite servi de base pour concevoir un nouvel outil SaaS interne. Partir d'un Design System documenté comme contrainte de départ pour <strong>Figma Make</strong> a permis de générer des premières pistes d'interfaces directement cohérentes avec les applications existantes — sans dette visuelle, avec un temps d'exploration significativement réduit.</p>
+      <p>Le Design System a ensuite servi de base pour concevoir un nouvel outil SaaS interne. Partir d'un Design System documenté comme contrainte de départ pour <strong>Figma Make</strong> a permis de générer des premières pistes d'interfaces directement cohérentes avec les applications existantes — sans dette visuelle, temps d'exploration significativement réduit.</p>
     </div>
   </div>
 
-  <div class="case-section">
+  <div class="case-section" id="recommandation">
     <p class="sec-label">Recommandation</p>
     <div class="sec-body">
       <h2></h2>
       <div class="quote">
+        <div class="quote-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
         <p class="quote-text">« En tant que Product Designer, Thomas a su faire de l'IA un véritable allié stratégique, l'intégrant avec maîtrise dans ses méthodes de conception pour créer des produits plus intelligents, optimiser les parcours utilisateurs et renforcer durablement la performance des produits Weborama. »</p>
-        <p class="quote-author">Donia Ben Ghorbal — Lead Product Designer, Weborama</p>
+        <div class="quote-author">
+          <img class="quote-avatar" src="images/avatar-donia.png" alt="Donia Ben Ghorbal">
+          <div>
+            <p class="quote-author-name">Donia Ben Ghorbal</p>
+            <p class="quote-author-role">Lead Product Designer · Weborama</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -237,6 +317,45 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
   <p>© 2026 Thomas Reynier</p>
   <p>Product Designer · Paris</p>
 </footer>
+
+<script>
+  const tocLinks = document.querySelectorAll('.toc-link');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        tocLinks.forEach(l => l.classList.remove('active'));
+        const a = document.querySelector(`.toc-link[href="#${entry.target.id}"]`);
+        if(a) a.classList.add('active');
+      }
+    });
+  }, {rootMargin:'-15% 0px -70% 0px'});
+  document.querySelectorAll('.case-section[id]').forEach(s => observer.observe(s));
+</script>
+
+<script>
+  document.querySelectorAll('.illustration-item img').forEach(img => {
+    img.addEventListener('click', () => {
+      const overlay = document.createElement('div');
+      overlay.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;background:#0a0a0a;z-index:9999;display:flex;align-items:center;justify-content:center;padding:24px;box-sizing:border-box;cursor:zoom-out';
+      const frame = document.createElement('div');
+      frame.style.cssText = 'background:#1a1a1a;border-radius:16px;padding:16px;display:flex;align-items:center;justify-content:center;cursor:default';
+      const pic = document.createElement('img');
+      pic.src = img.src;
+      pic.style.cssText = 'max-width:calc(90vw - 32px);max-height:calc(88vh - 32px);object-fit:contain;border-radius:8px;display:block';
+      const btn = document.createElement('button');
+      btn.textContent = '✕';
+      btn.style.cssText = 'position:fixed;top:20px;right:24px;width:36px;height:36px;background:rgba(255,255,255,0.15);border:none;border-radius:50%;color:#fff;font-size:18px;cursor:pointer;z-index:10000';
+      const close = () => document.body.removeChild(overlay);
+      btn.addEventListener('click', close);
+      overlay.addEventListener('click', e => { if(e.target === overlay) close(); });
+      document.addEventListener('keydown', function esc(e) { if(e.key==='Escape'){ close(); document.removeEventListener('keydown',esc); }});
+      frame.appendChild(pic);
+      overlay.appendChild(frame);
+      overlay.appendChild(btn);
+      document.body.appendChild(overlay);
+    });
+  });
+</script>
 
 </body>
 </html>

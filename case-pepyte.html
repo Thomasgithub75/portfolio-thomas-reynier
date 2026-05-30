@@ -97,9 +97,17 @@ h2{font-size:20px;font-weight:600;letter-spacing:-0.02em;line-height:1.2;color:v
 .illustrations-grid-2-1{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .illustrations-grid-2-1 .illustration-item:last-child{grid-column:1/-1}
 .illustration-item{display:flex;flex-direction:column;gap:10px}
-.illustration-item-inner{background:var(--bg-soft);border:1px solid var(--border);border-radius:12px;padding:20px;display:flex;align-items:center;justify-content:center}
+.illustration-item-inner{background:var(--bg-soft);border:1px solid var(--border);border-radius:12px;padding:20px;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .illustration-item img{width:100%;border-radius:8px;display:block}
 .illustration-caption{font-size:13px;color:var(--muted);font-weight:300;text-align:center;line-height:1.4}
+
+/* ── TABLE OF CONTENTS ── */
+.toc{position:fixed;right:32px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:2px;z-index:50}
+.toc-link{display:flex;align-items:center;gap:8px;text-decoration:none;font-size:11px;color:var(--muted);font-weight:400;transition:color 0.2s;padding:5px 0;white-space:nowrap}
+.toc-dot{width:5px;height:5px;border-radius:50%;background:var(--border);flex-shrink:0;transition:background 0.2s,transform 0.2s}
+.toc-link.active{color:var(--blue);font-weight:500}
+.toc-link.active .toc-dot{background:var(--blue);transform:scale(1.4)}
+@media(max-width:1200px){.toc{display:none}}
 @media(max-width:640px){.illustrations-grid{grid-template-columns:1fr}.illustrations-grid-2-1{grid-template-columns:1fr}.illustrations-grid-2-1 .illustration-item:last-child{grid-column:1}}
 
 /* ── NEXT CASES ── */
@@ -138,6 +146,20 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
     <li><a href="index.html#contact" class="nav-cta">Me contacter</a></li>
   </ul>
 </nav>
+
+<aside class="toc">
+  <a class="toc-link" href="#contexte"><span class="toc-dot"></span>Contexte</a>
+  <a class="toc-link" href="#audit"><span class="toc-dot"></span>01 — Audit</a>
+  <a class="toc-link" href="#entretiens"><span class="toc-dot"></span>02 — Entretiens</a>
+  <a class="toc-link" href="#priorisation"><span class="toc-dot"></span>03 — Priorisation</a>
+  <a class="toc-link" href="#formulaires"><span class="toc-dot"></span>04 — Formulaires</a>
+  <a class="toc-link" href="#atelier"><span class="toc-dot"></span>05 — Atelier</a>
+  <a class="toc-link" href="#scoring"><span class="toc-dot"></span>06 — Scoring</a>
+  <a class="toc-link" href="#parcours"><span class="toc-dot"></span>07 — Parcours</a>
+  <a class="toc-link" href="#tests"><span class="toc-dot"></span>08 — Tests</a>
+  <a class="toc-link" href="#resultats"><span class="toc-dot"></span>09 — Résultats</a>
+  <a class="toc-link" href="#recommandations"><span class="toc-dot"></span>Recommandations</a>
+</aside>
 
 <div class="case-header">
 <div class="container">
@@ -197,7 +219,7 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
 
 <div class="container">
 
-  <div class="case-section">
+  <div class="case-section" id="contexte">
     <p class="sec-label">Contexte</p>
     <div class="sec-body">
       <h2>Le problème</h2>
@@ -206,7 +228,7 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
     </div>
   </div>
 
-  <div class="case-section">
+  <div class="case-section" id="audit">
     <p class="sec-label">01 — Audit</p>
     <div class="sec-body">
       <h2>Cartographie de l'existant</h2>
@@ -229,7 +251,7 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
     </div>
   </div>
 
-  <div class="case-section">
+  <div class="case-section" id="entretiens">
     <p class="sec-label">02 — Entretiens</p>
     <div class="sec-body">
       <h2>10 entretiens recruteurs</h2>
@@ -252,7 +274,7 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
     </div>
   </div>
 
-  <div class="case-section">
+  <div class="case-section" id="priorisation">
     <p class="sec-label">03 — Priorisation</p>
     <div class="sec-body">
       <h2>Priorisation par les données</h2>
@@ -261,7 +283,7 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
     </div>
   </div>
 
-  <div class="case-section">
+  <div class="case-section" id="formulaires">
     <p class="sec-label">04 — Formulaires</p>
     <div class="sec-body">
       <h2>De la recherche aux interfaces</h2>
@@ -275,7 +297,7 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
     </div>
   </div>
 
-  <div class="case-section">
+  <div class="case-section" id="atelier">
     <p class="sec-label">05 — Atelier matching</p>
     <div class="sec-body">
       <h2>Comprendre les règles de matching</h2>
@@ -291,7 +313,7 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
     </div>
   </div>
 
-  <div class="case-section">
+  <div class="case-section" id="scoring">
     <p class="sec-label">06 — Scoring</p>
     <div class="sec-body">
       <h2>Co-créer un système de notation</h2>
@@ -311,7 +333,7 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
     </div>
   </div>
 
-  <div class="case-section">
+  <div class="case-section" id="parcours">
     <p class="sec-label">07 — Parcours UX</p>
     <div class="sec-body">
       <h2>Concevoir un parcours orienté action</h2>
@@ -334,7 +356,7 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
     </div>
   </div>
 
-  <div class="case-section">
+  <div class="case-section" id="tests">
     <p class="sec-label">08 — Tests & itérations</p>
     <div class="sec-body">
       <h2>Valider et affiner avec les utilisateurs</h2>
@@ -374,7 +396,7 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
     </div>
   </div>
 
-  <div class="case-section">
+  <div class="case-section" id="resultats">
     <p class="sec-label">09 — Résultats</p>
     <div class="sec-body">
       <h2>Impact sur le produit</h2>
@@ -389,7 +411,7 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
     </div>
   </div>
 
-  <div class="case-section">
+  <div class="case-section" id="recommandations">
     <p class="sec-label">Recommandations</p>
     <div class="sec-body">
       <h2></h2>
@@ -440,6 +462,21 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
   <p>© 2026 Thomas Reynier</p>
   <p>Product Designer · Paris</p>
 </footer>
+
+<script>
+  // Sommaire sticky
+  const tocLinks = document.querySelectorAll('.toc-link');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        tocLinks.forEach(l => l.classList.remove('active'));
+        const a = document.querySelector(`.toc-link[href="#${entry.target.id}"]`);
+        if(a) a.classList.add('active');
+      }
+    });
+  }, {rootMargin:'-15% 0px -70% 0px'});
+  document.querySelectorAll('.case-section[id]').forEach(s => observer.observe(s));
+</script>
 
 <script>
   document.querySelectorAll('.illustration-item img').forEach(img => {

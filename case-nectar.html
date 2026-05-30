@@ -77,11 +77,23 @@ h2{font-size:20px;font-weight:600;letter-spacing:-0.02em;line-height:1.2;color:v
 .result-list li{font-size:14px;color:var(--muted);padding-left:16px;position:relative;font-weight:300;line-height:1.6}
 .result-list li::before{content:"—";position:absolute;left:0;color:var(--blue);font-weight:600}
 
-/* ── QUOTE ── */
-.quote{border:1px solid var(--border);border-radius:10px;padding:24px 28px;background:var(--bg-soft);margin-top:16px}
-.quote+.quote{margin-top:12px}
-.quote-text{font-size:15px;color:var(--text);line-height:1.75;font-weight:300;margin-bottom:12px}
-.quote-author{font-size:13px;color:var(--muted)}
+/* ── ILLUSTRATIONS ── */
+.illustrations-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.illustrations-grid-2-1{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.illustrations-grid-2-1 .illustration-item:last-child{grid-column:1/-1}
+.illustration-item{display:flex;flex-direction:column;gap:10px}
+.illustration-item-inner{background:var(--bg-soft);border:1px solid var(--border);border-radius:12px;padding:20px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.illustration-item img{width:100%;border-radius:8px;display:block;cursor:zoom-in}
+.illustration-caption{font-size:13px;color:var(--muted);font-weight:300;text-align:center;line-height:1.4}
+
+/* ── TABLE OF CONTENTS ── */
+.toc{position:fixed;right:32px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:2px;z-index:50}
+.toc-link{display:flex;align-items:center;gap:8px;text-decoration:none;font-size:11px;color:var(--muted);font-weight:400;transition:color 0.2s;padding:5px 0;white-space:nowrap}
+.toc-dot{width:5px;height:5px;border-radius:50%;background:var(--border);flex-shrink:0;transition:background 0.2s,transform 0.2s}
+.toc-link.active{color:var(--blue);font-weight:500}
+.toc-link.active .toc-dot{background:var(--blue);transform:scale(1.4)}
+@media(max-width:1200px){.toc{display:none}}
+@media(max-width:640px){.illustrations-grid{grid-template-columns:1fr}.illustrations-grid-2-1{grid-template-columns:1fr}.illustrations-grid-2-1 .illustration-item:last-child{grid-column:1}}
 
 /* ── NEXT CASES ── */
 .next-section{padding:56px 0 0;border-top:1px solid var(--border)}
@@ -116,6 +128,14 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
     <li><a href="index.html#contact" class="nav-cta">Me contacter</a></li>
   </ul>
 </nav>
+
+<aside class="toc">
+  <a class="toc-link" href="#contexte"><span class="toc-dot"></span>Contexte</a>
+  <a class="toc-link" href="#recherche"><span class="toc-dot"></span>01 — Recherche</a>
+  <a class="toc-link" href="#benchmark"><span class="toc-dot"></span>02 — Benchmark</a>
+  <a class="toc-link" href="#ideation"><span class="toc-dot"></span>03 — Idéation</a>
+  <a class="toc-link" href="#design-system"><span class="toc-dot"></span>04 — Design System</a>
+</aside>
 
 <div class="case-header">
 <div class="container">
@@ -152,26 +172,36 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
 
 <div class="container">
 
-  <div class="case-section">
+  <div class="case-section" id="contexte">
     <p class="sec-label">Contexte</p>
     <div class="sec-body">
       <h2>Le produit</h2>
       <p>Nectar est un outil mobile-first B2B permettant aux commerciaux de capturer leurs insights post-RDV en moins d'une minute et de les transmettre directement au backlog produit sous forme de cartes priorisées.</p>
-      <p>Ce projet poursuit deux objectifs : concevoir un MVP simple avec une priorisation déterministe et transparente, et formaliser un <strong>process de conception piloté par IA</strong>, réplicable et documenté dans un fichier claude.md. Je suis seul sur ce projet — de la recherche utilisateur au développement.</p>
+      <p>Ce projet poursuit deux objectifs : concevoir un MVP simple avec une priorisation déterministe et transparente, et formaliser un <strong>process de conception piloté par IA</strong>, réplicable et documenté. Je suis seul sur ce projet — de la recherche utilisateur au développement.</p>
     </div>
   </div>
 
-  <div class="case-section">
+  <div class="case-section" id="recherche">
     <p class="sec-label">01 — Recherche</p>
     <div class="sec-body">
       <h2>Entretiens assistés par IA</h2>
-      <p>J'ai mené des entretiens auprès de commerciaux et de Product Managers pour comprendre les usages, identifier les frictions et valider les hypothèses terrain. La trame d'entretien a été <strong>générée par Claude</strong> (questions ouvertes, JTBD, frictions). Les enregistrements ont été retranscrits automatiquement, les comptes rendus rédigés et centralisés dans Notion.</p>
+      <p>J'ai mené des entretiens auprès de commerciaux et de Product Managers pour comprendre les usages, identifier les frictions et valider les hypothèses terrain. La trame a été <strong>générée par Claude</strong> (questions ouvertes, JTBD, frictions). Les enregistrements ont été retranscrits automatiquement, les comptes rendus rédigés et centralisés dans Notion.</p>
       <p>Les entretiens ont fait émerger des besoins clairs : saisie rapide sur mobile, zéro effort de reformulation, priorisation automatique des insights, boucle de feedback visible pour le commercial.</p>
+      <div class="illustrations-grid-2-1" style="margin-top:24px">
+        <figure class="illustration-item">
+          <div class="illustration-item-inner"><img src="images/nectar-recherche-1.jpg" alt="Recherche Nectar"></div>
+          <figcaption class="illustration-caption">Trame d'entretien générée par Claude</figcaption>
+        </figure>
+        <figure class="illustration-item">
+          <div class="illustration-item-inner"><img src="images/nectar-recherche-2.jpg" alt="Compte rendu Nectar"></div>
+          <figcaption class="illustration-caption">Compte rendu centralisé dans Notion</figcaption>
+        </figure>
+      </div>
     </div>
   </div>
 
-  <div class="case-section">
-    <p class="sec-label">02 — Benchmark &amp; définition</p>
+  <div class="case-section" id="benchmark">
+    <p class="sec-label">02 — Benchmark</p>
     <div class="sec-body">
       <h2>Cadrer le produit avant d'idéer</h2>
       <p>J'ai exploré Mobbin à partir de requêtes générées par Claude pour identifier les patterns pertinents : saisie minimaliste, catégorisation par chips, feed d'insights scannables, badge de priorité visible. Les patterns complexes ou non essentiels ont été écartés.</p>
@@ -179,16 +209,30 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
     </div>
   </div>
 
-  <div class="case-section">
+  <div class="case-section" id="ideation">
     <p class="sec-label">03 — Idéation</p>
     <div class="sec-body">
       <h2>Génération d'interfaces dans Figma Make</h2>
       <p>Les décisions produit ont été transformées en <strong>prompts structurés générés par Claude</strong>, intégrant le flow utilisateur, l'anatomie des écrans et les contraintes de style. Ces prompts ont été transmis à Figma Make pour produire rapidement des premières pistes cohérentes.</p>
       <p>Principes UX retenus : navigation épurée, CTA flottant centré, accès aux filtres via bottom sheet, saisie limitée à 3 champs (Client, Catégorie, Détail). L'IA accompagne sans contraindre — pattern inspiré de Linear : suggestions proposées à la confirmation, contrôle final laissé au commercial.</p>
+      <div class="illustrations-grid" style="margin-top:24px">
+        <figure class="illustration-item">
+          <div class="illustration-item-inner"><img src="images/nectar-screen-1.jpg" alt="Écran Nectar 1"></div>
+          <figcaption class="illustration-caption">Feed d'insights</figcaption>
+        </figure>
+        <figure class="illustration-item">
+          <div class="illustration-item-inner"><img src="images/nectar-screen-2.jpg" alt="Écran Nectar 2"></div>
+          <figcaption class="illustration-caption">Saisie d'un insight</figcaption>
+        </figure>
+        <figure class="illustration-item">
+          <div class="illustration-item-inner"><img src="images/nectar-screen-3.jpg" alt="Écran Nectar 3"></div>
+          <figcaption class="illustration-caption">Vue backlog priorisé</figcaption>
+        </figure>
+      </div>
     </div>
   </div>
 
-  <div class="case-section">
+  <div class="case-section" id="design-system">
     <p class="sec-label">04 — Design System</p>
     <div class="sec-body">
       <h2>Variables &amp; composants via Claude MCP</h2>
@@ -225,6 +269,45 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
   <p>© 2026 Thomas Reynier</p>
   <p>Product Designer · Paris</p>
 </footer>
+
+<script>
+  const tocLinks = document.querySelectorAll('.toc-link');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        tocLinks.forEach(l => l.classList.remove('active'));
+        const a = document.querySelector(`.toc-link[href="#${entry.target.id}"]`);
+        if(a) a.classList.add('active');
+      }
+    });
+  }, {rootMargin:'-15% 0px -70% 0px'});
+  document.querySelectorAll('.case-section[id]').forEach(s => observer.observe(s));
+</script>
+
+<script>
+  document.querySelectorAll('.illustration-item img').forEach(img => {
+    img.addEventListener('click', () => {
+      const overlay = document.createElement('div');
+      overlay.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;background:#0a0a0a;z-index:9999;display:flex;align-items:center;justify-content:center;padding:24px;box-sizing:border-box;cursor:zoom-out';
+      const frame = document.createElement('div');
+      frame.style.cssText = 'background:#1a1a1a;border-radius:16px;padding:16px;display:flex;align-items:center;justify-content:center;cursor:default';
+      const pic = document.createElement('img');
+      pic.src = img.src;
+      pic.style.cssText = 'max-width:calc(90vw - 32px);max-height:calc(88vh - 32px);object-fit:contain;border-radius:8px;display:block';
+      const btn = document.createElement('button');
+      btn.textContent = '✕';
+      btn.style.cssText = 'position:fixed;top:20px;right:24px;width:36px;height:36px;background:rgba(255,255,255,0.15);border:none;border-radius:50%;color:#fff;font-size:18px;cursor:pointer;z-index:10000';
+      const close = () => document.body.removeChild(overlay);
+      btn.addEventListener('click', close);
+      overlay.addEventListener('click', e => { if(e.target === overlay) close(); });
+      document.addEventListener('keydown', function esc(e) { if(e.key==='Escape'){ close(); document.removeEventListener('keydown',esc); }});
+      frame.appendChild(pic);
+      overlay.appendChild(frame);
+      overlay.appendChild(btn);
+      document.body.appendChild(overlay);
+    });
+  });
+</script>
 
 </body>
 </html>
