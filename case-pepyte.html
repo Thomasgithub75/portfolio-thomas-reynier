@@ -43,9 +43,7 @@ nav ul a:hover{color:var(--text)}
 .header-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px}
 .htag{font-size:12px;padding:3px 10px;border-radius:4px;background:var(--blue-light);color:var(--blue);font-weight:500}
 h1{font-size:clamp(28px,4vw,44px);font-weight:600;letter-spacing:-0.03em;line-height:1.1;color:var(--text);margin-bottom:20px}
-.meta-row{display:flex;flex-wrap:wrap;gap:0;margin-bottom:40px;padding-bottom:32px;border-bottom:1px solid var(--border)}
-.meta-item{font-size:13px;color:var(--muted);padding-right:28px;padding-bottom:8px}
-.meta-item strong{color:var(--text);font-weight:500;display:block;font-size:11px;letter-spacing:.05em;text-transform:uppercase;margin-bottom:3px}
+.meta-row{margin-bottom:40px;padding-bottom:32px;border-bottom:1px solid var(--border);font-size:14px;color:var(--muted);font-weight:300;line-height:1.6}
 .case-intro{font-size:17px;color:var(--muted);line-height:1.75;font-weight:300;border-left:3px solid var(--blue);padding-left:20px;margin-bottom:0}
 .case-title-row{display:flex;align-items:center;gap:16px;margin-bottom:20px}
 .case-title-row h1{margin-bottom:0}
@@ -136,7 +134,6 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
   .stats-row{grid-template-columns:repeat(2,1fr)}
   .next-grid{grid-template-columns:1fr}
   nav ul{display:none}
-  .meta-row{flex-direction:column;gap:12px}
 }
 </style>
 </head>
@@ -183,13 +180,7 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
     <img class="case-logo" src="images/logo-pepyte.svg" alt="Pepyte">
     <h1>Pepyte</h1>
   </div>
-  <div class="meta-row">
-    <div class="meta-item"><strong>Client</strong>Pepyte — HR tech SaaS</div>
-    <div class="meta-item"><strong>Rôle</strong>Product Designer</div>
-    <div class="meta-item"><strong>Durée</strong>26 mois</div>
-    <div class="meta-item"><strong>Équipe</strong>2 designers · CEO · PM · Lead Dev</div>
-    <div class="meta-item"><strong>Outils</strong>Figma · Notion · Figma Make</div>
-  </div>
+  <p class="meta-row">Product Designer · Pepyte — HR tech SaaS · 26 mois · Figma ·  Notion ·  Figma Make</p>
   <p class="case-intro">Pepyte est une startup HR tech dont le matching entre offres et candidats était réalisé manuellement, dépendant de l'expertise individuelle et difficile à scaler. Ma mission : conduire la recherche utilisateur, restructurer les formulaires et concevoir la fonctionnalité de matching — du premier entretien jusqu'au produit livré.</p>
   <div class="stats-row">
     <div class="stat"><div class="stat-val">15</div><div class="stat-label">recruteurs impliqués en recherche</div></div>
