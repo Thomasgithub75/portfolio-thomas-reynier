@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weborama — Design System — Thomas Reynier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#1A56DB;
+  --blue-light:#EEF4FF;
+  --blue-mid:#3B82F6;
+  --text:#111827;
+  --muted:#6B7280;
+  --border:#E5E7EB;
+  --bg:#FFFFFF;
+  --bg-soft:#F9FAFB;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 2rem;height:56px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-weight:500;font-size:15px;color:var(--text);text-decoration:none;letter-spacing:-0.01em}
+nav ul{list-style:none;display:flex;gap:2rem;align-items:center}
+nav ul a{font-size:14px;color:var(--muted);text-decoration:none;transition:color .2s;font-weight:400}
+nav ul a:hover{color:var(--text)}
+.nav-cta{background:var(--blue);color:#fff!important;padding:7px 16px;border-radius:6px;font-weight:500!important;font-size:14px!important}
+.nav-cta:hover{opacity:.88;color:#fff!important}
+
+/* ── LAYOUT ── */
+.container{max-width:760px;margin:0 auto;padding:0 2rem}
+.divider{border:none;border-top:1px solid var(--border);margin:0}
+
+/* ── CASE HEADER ── */
+.case-header{padding:120px 0 64px}
+.back{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);text-decoration:none;margin-bottom:36px;transition:color .2s;font-weight:400}
+.back:hover{color:var(--text)}
+.back svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.8}
+.header-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px}
+.htag{font-size:12px;padding:3px 10px;border-radius:4px;background:var(--blue-light);color:var(--blue);font-weight:500}
+h1{font-size:clamp(28px,4vw,44px);font-weight:600;letter-spacing:-0.03em;line-height:1.1;color:var(--text);margin-bottom:20px}
+.meta-row{display:flex;flex-wrap:wrap;gap:0;margin-bottom:40px;padding-bottom:32px;border-bottom:1px solid var(--border)}
+.meta-item{font-size:13px;color:var(--muted);padding-right:28px;padding-bottom:8px}
+.meta-item strong{color:var(--text);font-weight:500;display:block;font-size:11px;letter-spacing:.05em;text-transform:uppercase;margin-bottom:3px}
+.case-intro{font-size:17px;color:var(--muted);line-height:1.75;font-weight:300;border-left:3px solid var(--blue);padding-left:20px;margin-bottom:0}
+
+/* ── STATS ── */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin:40px 0 0}
+.stat{background:var(--bg);padding:20px 20px}
+.stat-val{font-size:30px;font-weight:600;color:var(--blue);letter-spacing:-0.03em;line-height:1;margin-bottom:6px}
+.stat-label{font-size:13px;color:var(--muted);font-weight:300;line-height:1.4}
+
+/* ── SECTION ── */
+.case-section{padding:52px 0;border-top:1px solid var(--border);display:grid;grid-template-columns:148px 1fr;gap:0 48px}
+.sec-label{font-size:11px;font-weight:600;color:var(--blue);letter-spacing:.08em;text-transform:uppercase;padding-top:5px;line-height:1.4}
+.sec-body{}
+h2{font-size:20px;font-weight:600;letter-spacing:-0.02em;line-height:1.2;color:var(--text);margin-bottom:16px}
+.sec-body p{font-size:15px;color:var(--muted);line-height:1.75;font-weight:300}
+.sec-body p+p{margin-top:14px}
+.sec-body strong{color:var(--text);font-weight:500}
+
+/* ── STEP LIST ── */
+.steps{border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-top:24px}
+.step{padding:20px 24px;border-bottom:1px solid var(--border);background:var(--bg);transition:background .15s}
+.step:last-child{border-bottom:none}
+.step:hover{background:var(--bg-soft)}
+.step-num{font-size:11px;font-weight:600;color:var(--blue);letter-spacing:.06em;margin-bottom:5px}
+.step-title{font-size:15px;font-weight:500;color:var(--text);margin-bottom:4px}
+.step-body{font-size:14px;color:var(--muted);line-height:1.65;font-weight:300}
+
+/* ── BULLET LIST ── */
+.result-list{list-style:none;margin-top:20px;display:flex;flex-direction:column;gap:8px}
+.result-list li{font-size:14px;color:var(--muted);padding-left:16px;position:relative;font-weight:300;line-height:1.6}
+.result-list li::before{content:"—";position:absolute;left:0;color:var(--blue);font-weight:600}
+
+/* ── QUOTE ── */
+.quote{border:1px solid var(--border);border-radius:10px;padding:24px 28px;background:var(--bg-soft);margin-top:16px}
+.quote+.quote{margin-top:12px}
+.quote-text{font-size:15px;color:var(--text);line-height:1.75;font-weight:300;margin-bottom:12px}
+.quote-author{font-size:13px;color:var(--muted)}
+
+/* ── NEXT CASES ── */
+.next-section{padding:56px 0 0;border-top:1px solid var(--border)}
+.section-label{font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin-bottom:20px}
+.next-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.next-card{background:var(--bg);padding:28px;text-decoration:none;color:inherit;transition:background .15s;display:block}
+.next-card:hover{background:var(--bg-soft)}
+.next-co{font-size:11px;font-weight:600;color:var(--blue);letter-spacing:.06em;margin-bottom:8px}
+.next-title{font-size:15px;font-weight:500;color:var(--text);line-height:1.35}
+.next-desc{font-size:13px;color:var(--muted);margin-top:4px;font-weight:300}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--border);padding:28px 2rem;display:flex;justify-content:space-between;align-items:center;max-width:760px;margin:0 auto}
+footer p{font-size:13px;color:var(--muted);font-weight:300}
+
+/* ── RESPONSIVE ── */
+@media(max-width:640px){
+  .case-section{grid-template-columns:1fr;gap:8px}
+  .stats-row{grid-template-columns:repeat(2,1fr)}
+  .next-grid{grid-template-columns:1fr}
+  nav ul{display:none}
+  .meta-row{flex-direction:column;gap:12px}
+}
+</style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="index.html">Thomas Reynier</a>
+  <ul>
+    <li><a href="index.html#hero">Accueil</a></li>
+    <li><a href="index.html#projets">Projets</a></li>
+    <li><a href="index.html#contact" class="nav-cta">Me contacter</a></li>
+  </ul>
+</nav>
+
+<div class="case-header">
+<div class="container">
+  <a class="back" href="index.html#projets">
+    <svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    Retour aux projets
+  </a>
+  <div class="header-tags">
+    <span class="htag">Design System</span>
+    <span class="htag">Atomic Design</span>
+    <span class="htag">Variables &amp; Tokens</span>
+    <span class="htag">Documentation</span>
+    <span class="htag">Zeroheight</span>
+    <span class="htag">Figma Make</span>
+  </div>
+  <h1>Weborama</h1>
+  <div class="meta-row">
+    <div class="meta-item"><strong>Client</strong>Weborama — AdTech SaaS</div>
+    <div class="meta-item"><strong>Rôle</strong>Product Designer</div>
+    <div class="meta-item"><strong>Durée</strong>16 mois</div>
+    <div class="meta-item"><strong>Équipe</strong>3 designers · 3 devs · 4 PO · 1 CPO</div>
+    <div class="meta-item"><strong>Outils</strong>Figma · Zeroheight · Storybook · Figma Make</div>
+  </div>
+  <p class="case-intro">Weborama est une AdTech spécialisée dans la data et l'IA sémantique. L'entreprise développait 4 outils SaaS sans Design System commun : incohérences visuelles, friction entre designers et développeurs, livraison ralentie. J'ai pris la direction du projet pour auditer l'existant, concevoir un Design System unifié et en assurer l'adoption durable sur les 4 applications.</p>
+  <div class="stats-row">
+    <div class="stat"><div class="stat-val">−80%</div><div class="stat-label">de composants après rationalisation</div></div>
+    <div class="stat"><div class="stat-val">974</div><div class="stat-label">composants audités sur 4 apps</div></div>
+    <div class="stat"><div class="stat-val">175</div><div class="stat-label">variables en 5 collections</div></div>
+    <div class="stat"><div class="stat-val">4</div><div class="stat-label">modes de couleurs, un par app</div></div>
+  </div>
+</div>
+</div>
+
+<hr class="divider">
+
+<div class="container">
+
+  <div class="case-section">
+    <p class="sec-label">01 — Audit</p>
+    <div class="sec-body">
+      <h2>Cartographie des 4 applications</h2>
+      <p>J'ai audité l'ensemble des 4 bibliothèques Figma : <strong>974 composants, 44 variables et 14 variations de couleur</strong>. Objectif : avoir une vision globale avant d'engager la moindre décision.</p>
+      <p>J'ai analysé les composants récurrents, identifié les incohérences visuelles et recensé les éléments communs. Résultat : <strong>11 composants en doublon</strong> identifiés — point de départ direct pour la réduction de 80%. L'accessibilité de chaque composant a été vérifiée avec Stark (contraste WCAG, lisibilité).</p>
+    </div>
+  </div>
+
+  <div class="case-section">
+    <p class="sec-label">02 — Ateliers</p>
+    <div class="sec-body">
+      <h2>Co-construction &amp; évangélisation</h2>
+      <p>J'ai piloté une série d'ateliers réunissant <strong>3 designers et jusqu'à 3 développeurs</strong>, intégrés progressivement à chaque décision de suppression, modification ou création de composant. Ces sessions ont permis de statuer sur les composants à conserver ou supprimer, d'éliminer les doublons et d'établir une convention de nommage commune.</p>
+      <p>Au-delà des décisions de conception, ces ateliers avaient un objectif d'évangélisation : sensibiliser les équipes à l'Atomic Design, aux conventions de nommage et à l'usage des variables — pour garantir une adoption durable.</p>
+    </div>
+  </div>
+
+  <div class="case-section">
+    <p class="sec-label">03 — Conception</p>
+    <div class="sec-body">
+      <h2>Design System de zéro</h2>
+      <p>Fort des décisions prises en atelier, j'ai conçu l'ensemble du Design System à partir de zéro selon les principes de l'Atomic Design.</p>
+      <p><strong>Fondations</strong> — palettes avec 4 modes (un par application), typographies, espacements, bibliothèque d'icônes commune. Variables organisées en 5 collections : Primitives, Colors, Spacing, Typography, Border.</p>
+      <p><strong>Composants</strong> — 24 composants déclinés en 195 variants, du plus atomique au plus complexe, connectés aux variables sémantiques.</p>
+      <p><strong>Templates</strong> — 7 templates réutilisables pour produire des interfaces conformes plus rapidement.</p>
+    </div>
+  </div>
+
+  <div class="case-section">
+    <p class="sec-label">04 — Documentation</p>
+    <div class="sec-body">
+      <h2>Zeroheight &amp; Storybook</h2>
+      <p><strong>Zeroheight</strong> centralise la documentation design : fondations, variables (tokens), composants et règles d'usage. Chaque composant est documenté avec ses variants, ses règles d'utilisation et des exemples concrets.</p>
+      <p><strong>Storybook</strong> permet aux développeurs de visualiser, tester et intégrer chaque composant de manière isolée côté front. Ce double référentiel assure l'alignement durable entre design et développement.</p>
+      <ul class="result-list">
+        <li>100% des composants documentés dans Zeroheight et Storybook</li>
+        <li>4 modes de couleurs déployés sur les 4 applications</li>
+        <li>Source de vérité unique partagée design + développement</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="case-section">
+    <p class="sec-label">Suite</p>
+    <div class="sec-body">
+      <h2>Nouvelle application SaaS avec Figma Make</h2>
+      <p>Le Design System a ensuite servi de base pour concevoir un nouvel outil SaaS interne. Partir d'un Design System documenté comme contrainte de départ pour <strong>Figma Make</strong> a permis de générer des premières pistes d'interfaces directement cohérentes avec les applications existantes — sans dette visuelle, avec un temps d'exploration significativement réduit.</p>
+    </div>
+  </div>
+
+  <div class="case-section">
+    <p class="sec-label">Recommandation</p>
+    <div class="sec-body">
+      <h2></h2>
+      <div class="quote">
+        <p class="quote-text">« En tant que Product Designer, Thomas a su faire de l'IA un véritable allié stratégique, l'intégrant avec maîtrise dans ses méthodes de conception pour créer des produits plus intelligents, optimiser les parcours utilisateurs et renforcer durablement la performance des produits Weborama. »</p>
+        <p class="quote-author">Donia Ben Ghorbal — Lead Product Designer, Weborama</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<div class="next-section">
+  <div class="container">
+    <p class="section-label">Autres projets</p>
+    <div class="next-grid"><a class="next-card" href="case-pepyte.html">
+        <p class="next-co">Pepyte</p>
+        <p class="next-title">Recherche utilisateur & fonctionnalité de matching</p>
+        <p class="next-desc">HR tech SaaS · 26 mois</p>
+      </a><a class="next-card" href="case-nectar.html">
+        <p class="next-co">Nectar</p>
+        <p class="next-title">Founding Design IA — MVP SaaS piloté par IA</p>
+        <p class="next-desc">B2B SaaS · Projet personnel</p>
+      </a></div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Thomas Reynier</p>
+  <p>Product Designer · Paris</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nectar — Founding Design IA — Thomas Reynier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#1A56DB;
+  --blue-light:#EEF4FF;
+  --blue-mid:#3B82F6;
+  --text:#111827;
+  --muted:#6B7280;
+  --border:#E5E7EB;
+  --bg:#FFFFFF;
+  --bg-soft:#F9FAFB;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 2rem;height:56px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-weight:500;font-size:15px;color:var(--text);text-decoration:none;letter-spacing:-0.01em}
+nav ul{list-style:none;display:flex;gap:2rem;align-items:center}
+nav ul a{font-size:14px;color:var(--muted);text-decoration:none;transition:color .2s;font-weight:400}
+nav ul a:hover{color:var(--text)}
+.nav-cta{background:var(--blue);color:#fff!important;padding:7px 16px;border-radius:6px;font-weight:500!important;font-size:14px!important}
+.nav-cta:hover{opacity:.88;color:#fff!important}
+
+/* ── LAYOUT ── */
+.container{max-width:760px;margin:0 auto;padding:0 2rem}
+.divider{border:none;border-top:1px solid var(--border);margin:0}
+
+/* ── CASE HEADER ── */
+.case-header{padding:120px 0 64px}
+.back{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);text-decoration:none;margin-bottom:36px;transition:color .2s;font-weight:400}
+.back:hover{color:var(--text)}
+.back svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.8}
+.header-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px}
+.htag{font-size:12px;padding:3px 10px;border-radius:4px;background:var(--blue-light);color:var(--blue);font-weight:500}
+h1{font-size:clamp(28px,4vw,44px);font-weight:600;letter-spacing:-0.03em;line-height:1.1;color:var(--text);margin-bottom:20px}
+.meta-row{display:flex;flex-wrap:wrap;gap:0;margin-bottom:40px;padding-bottom:32px;border-bottom:1px solid var(--border)}
+.meta-item{font-size:13px;color:var(--muted);padding-right:28px;padding-bottom:8px}
+.meta-item strong{color:var(--text);font-weight:500;display:block;font-size:11px;letter-spacing:.05em;text-transform:uppercase;margin-bottom:3px}
+.case-intro{font-size:17px;color:var(--muted);line-height:1.75;font-weight:300;border-left:3px solid var(--blue);padding-left:20px;margin-bottom:0}
+
+/* ── STATS ── */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin:40px 0 0}
+.stat{background:var(--bg);padding:20px 20px}
+.stat-val{font-size:30px;font-weight:600;color:var(--blue);letter-spacing:-0.03em;line-height:1;margin-bottom:6px}
+.stat-label{font-size:13px;color:var(--muted);font-weight:300;line-height:1.4}
+
+/* ── SECTION ── */
+.case-section{padding:52px 0;border-top:1px solid var(--border);display:grid;grid-template-columns:148px 1fr;gap:0 48px}
+.sec-label{font-size:11px;font-weight:600;color:var(--blue);letter-spacing:.08em;text-transform:uppercase;padding-top:5px;line-height:1.4}
+.sec-body{}
+h2{font-size:20px;font-weight:600;letter-spacing:-0.02em;line-height:1.2;color:var(--text);margin-bottom:16px}
+.sec-body p{font-size:15px;color:var(--muted);line-height:1.75;font-weight:300}
+.sec-body p+p{margin-top:14px}
+.sec-body strong{color:var(--text);font-weight:500}
+
+/* ── STEP LIST ── */
+.steps{border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-top:24px}
+.step{padding:20px 24px;border-bottom:1px solid var(--border);background:var(--bg);transition:background .15s}
+.step:last-child{border-bottom:none}
+.step:hover{background:var(--bg-soft)}
+.step-num{font-size:11px;font-weight:600;color:var(--blue);letter-spacing:.06em;margin-bottom:5px}
+.step-title{font-size:15px;font-weight:500;color:var(--text);margin-bottom:4px}
+.step-body{font-size:14px;color:var(--muted);line-height:1.65;font-weight:300}
+
+/* ── BULLET LIST ── */
+.result-list{list-style:none;margin-top:20px;display:flex;flex-direction:column;gap:8px}
+.result-list li{font-size:14px;color:var(--muted);padding-left:16px;position:relative;font-weight:300;line-height:1.6}
+.result-list li::before{content:"—";position:absolute;left:0;color:var(--blue);font-weight:600}
+
+/* ── QUOTE ── */
+.quote{border:1px solid var(--border);border-radius:10px;padding:24px 28px;background:var(--bg-soft);margin-top:16px}
+.quote+.quote{margin-top:12px}
+.quote-text{font-size:15px;color:var(--text);line-height:1.75;font-weight:300;margin-bottom:12px}
+.quote-author{font-size:13px;color:var(--muted)}
+
+/* ── NEXT CASES ── */
+.next-section{padding:56px 0 0;border-top:1px solid var(--border)}
+.section-label{font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin-bottom:20px}
+.next-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.next-card{background:var(--bg);padding:28px;text-decoration:none;color:inherit;transition:background .15s;display:block}
+.next-card:hover{background:var(--bg-soft)}
+.next-co{font-size:11px;font-weight:600;color:var(--blue);letter-spacing:.06em;margin-bottom:8px}
+.next-title{font-size:15px;font-weight:500;color:var(--text);line-height:1.35}
+.next-desc{font-size:13px;color:var(--muted);margin-top:4px;font-weight:300}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--border);padding:28px 2rem;display:flex;justify-content:space-between;align-items:center;max-width:760px;margin:0 auto}
+footer p{font-size:13px;color:var(--muted);font-weight:300}
+
+/* ── RESPONSIVE ── */
+@media(max-width:640px){
+  .case-section{grid-template-columns:1fr;gap:8px}
+  .stats-row{grid-template-columns:repeat(2,1fr)}
+  .next-grid{grid-template-columns:1fr}
+  nav ul{display:none}
+  .meta-row{flex-direction:column;gap:12px}
+}
+</style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="index.html">Thomas Reynier</a>
+  <ul>
+    <li><a href="index.html#hero">Accueil</a></li>
+    <li><a href="index.html#projets">Projets</a></li>
+    <li><a href="index.html#contact" class="nav-cta">Me contacter</a></li>
+  </ul>
+</nav>
+
+<div class="case-header">
+<div class="container">
+  <a class="back" href="index.html#projets">
+    <svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    Retour aux projets
+  </a>
+  <div class="header-tags">
+    <span class="htag">UX Research</span>
+    <span class="htag">Benchmark</span>
+    <span class="htag">Figma Make</span>
+    <span class="htag">Design System</span>
+    <span class="htag">Claude MCP</span>
+    <span class="htag">Founding Design IA</span>
+  </div>
+  <h1>Nectar</h1>
+  <div class="meta-row">
+    <div class="meta-item"><strong>Projet</strong>Personnel — B2B SaaS</div>
+    <div class="meta-item"><strong>Rôle</strong>AI Product Designer</div>
+    <div class="meta-item"><strong>Statut</strong>En cours</div>
+    <div class="meta-item"><strong>Stack</strong>Figma · Figma Make · Claude · Supabase · Vercel</div>
+  </div>
+  <p class="case-intro">70 à 80% des insights terrain des commerciaux ne parviennent jamais aux Product Managers. J'ai conçu Nectar pour résoudre ce problème — et pour formaliser un process de conception entièrement piloté par IA, réplicable et documenté.</p>
+  <div class="stats-row">
+    <div class="stat"><div class="stat-val">&lt;1 min</div><div class="stat-label">pour saisir un insight</div></div>
+    <div class="stat"><div class="stat-val">3</div><div class="stat-label">champs de saisie maximum</div></div>
+    <div class="stat"><div class="stat-val">8</div><div class="stat-label">écrans livrés</div></div>
+    <div class="stat"><div class="stat-val">100%</div><div class="stat-label">du process piloté par IA</div></div>
+  </div>
+</div>
+</div>
+
+<hr class="divider">
+
+<div class="container">
+
+  <div class="case-section">
+    <p class="sec-label">Contexte</p>
+    <div class="sec-body">
+      <h2>Le produit</h2>
+      <p>Nectar est un outil mobile-first B2B permettant aux commerciaux de capturer leurs insights post-RDV en moins d'une minute et de les transmettre directement au backlog produit sous forme de cartes priorisées.</p>
+      <p>Ce projet poursuit deux objectifs : concevoir un MVP simple avec une priorisation déterministe et transparente, et formaliser un <strong>process de conception piloté par IA</strong>, réplicable et documenté dans un fichier claude.md. Je suis seul sur ce projet — de la recherche utilisateur au développement.</p>
+    </div>
+  </div>
+
+  <div class="case-section">
+    <p class="sec-label">01 — Recherche</p>
+    <div class="sec-body">
+      <h2>Entretiens assistés par IA</h2>
+      <p>J'ai mené des entretiens auprès de commerciaux et de Product Managers pour comprendre les usages, identifier les frictions et valider les hypothèses terrain. La trame d'entretien a été <strong>générée par Claude</strong> (questions ouvertes, JTBD, frictions). Les enregistrements ont été retranscrits automatiquement, les comptes rendus rédigés et centralisés dans Notion.</p>
+      <p>Les entretiens ont fait émerger des besoins clairs : saisie rapide sur mobile, zéro effort de reformulation, priorisation automatique des insights, boucle de feedback visible pour le commercial.</p>
+    </div>
+  </div>
+
+  <div class="case-section">
+    <p class="sec-label">02 — Benchmark &amp; définition</p>
+    <div class="sec-body">
+      <h2>Cadrer le produit avant d'idéer</h2>
+      <p>J'ai exploré Mobbin à partir de requêtes générées par Claude pour identifier les patterns pertinents : saisie minimaliste, catégorisation par chips, feed d'insights scannables, badge de priorité visible. Les patterns complexes ou non essentiels ont été écartés.</p>
+      <p>Avant de passer à Figma Make, j'ai cadré le produit : <strong>3 champs de saisie maximum</strong>, IA frugale (titre normalisé + détection de similarité, sans décision automatisée), scoring basé sur la fréquence clients, <strong>15 edge cases</strong> documentés. Ce cadrage en amont est essentiel pour limiter les itérations avec Figma Make.</p>
+    </div>
+  </div>
+
+  <div class="case-section">
+    <p class="sec-label">03 — Idéation</p>
+    <div class="sec-body">
+      <h2>Génération d'interfaces dans Figma Make</h2>
+      <p>Les décisions produit ont été transformées en <strong>prompts structurés générés par Claude</strong>, intégrant le flow utilisateur, l'anatomie des écrans et les contraintes de style. Ces prompts ont été transmis à Figma Make pour produire rapidement des premières pistes cohérentes.</p>
+      <p>Principes UX retenus : navigation épurée, CTA flottant centré, accès aux filtres via bottom sheet, saisie limitée à 3 champs (Client, Catégorie, Détail). L'IA accompagne sans contraindre — pattern inspiré de Linear : suggestions proposées à la confirmation, contrôle final laissé au commercial.</p>
+    </div>
+  </div>
+
+  <div class="case-section">
+    <p class="sec-label">04 — Design System</p>
+    <div class="sec-body">
+      <h2>Variables &amp; composants via Claude MCP</h2>
+      <p>J'ai conçu le Design System en architecture Atomic Design. Les variables et composants ont été <strong>créés automatiquement dans Figma via le MCP Claude</strong>, à partir des règles définies. 5 collections de variables (Primitives, Colors, Spacing, Typography, Border), 6 rampes de couleurs × 10 niveaux, tokens sémantiques reliés à chaque composant.</p>
+      <p>La documentation est générée automatiquement dans Notion via un workflow Claude → Figma. L'ensemble du process est formalisé dans un fichier <strong>claude.md réplicable</strong>.</p>
+      <ul class="result-list">
+        <li>8 écrans livrés couvrant l'ensemble du parcours utilisateur</li>
+        <li>Variables et composants générés automatiquement via MCP</li>
+        <li>Documentation centralisée et auto-générée dans Notion</li>
+        <li>Process documenté et réplicable — claude.md</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+
+<div class="next-section">
+  <div class="container">
+    <p class="section-label">Autres projets</p>
+    <div class="next-grid"><a class="next-card" href="case-pepyte.html">
+        <p class="next-co">Pepyte</p>
+        <p class="next-title">Recherche utilisateur & fonctionnalité de matching</p>
+        <p class="next-desc">HR tech SaaS · 26 mois</p>
+      </a><a class="next-card" href="case-weborama.html">
+        <p class="next-co">Weborama</p>
+        <p class="next-title">Design System unifié & nouvelle application SaaS</p>
+        <p class="next-desc">AdTech SaaS · 16 mois</p>
+      </a></div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Thomas Reynier</p>
+  <p>Product Designer · Paris</p>
+</footer>
+
+</body>
+</html>
