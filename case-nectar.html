@@ -56,6 +56,7 @@ h1{font-size:clamp(28px,4vw,44px);font-weight:600;letter-spacing:-0.03em;line-he
 
 /* ── SECTION ── */
 .case-section{padding:52px 0;border-top:1px solid var(--border);display:grid;grid-template-columns:148px 1fr;gap:0 48px}
+.container > .case-section:first-child,.illustrations-section + .case-section{border-top:none;padding-top:40px}
 .sec-label{font-size:11px;font-weight:600;color:var(--blue);letter-spacing:.08em;text-transform:uppercase;padding-top:5px;line-height:1.4}
 .sec-body{}
 h2{font-size:20px;font-weight:600;letter-spacing:-0.02em;line-height:1.2;color:var(--text);margin-bottom:16px}
@@ -85,15 +86,14 @@ h2{font-size:20px;font-weight:600;letter-spacing:-0.02em;line-height:1.2;color:v
 .illustration-item-inner{background:var(--bg-soft);border:1px solid var(--border);border-radius:12px;padding:20px;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .illustration-item img{width:100%;border-radius:8px;display:block;cursor:zoom-in}
 .illustration-caption{font-size:13px;color:var(--muted);font-weight:300;text-align:center;line-height:1.4}
+@media(max-width:640px){.illustrations-grid{grid-template-columns:1fr}.illustrations-grid-2-1{grid-template-columns:1fr}.illustrations-grid-2-1 .illustration-item:last-child{grid-column:1}}
 
 /* ── TABLE OF CONTENTS ── */
-.toc{position:fixed;left:calc(50% + 400px);top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:2px;z-index:50}
-.toc-link{display:flex;align-items:center;gap:8px;text-decoration:none;font-size:11px;color:var(--muted);font-weight:400;transition:color 0.2s;padding:5px 0;white-space:nowrap}
-.toc-dot{width:5px;height:5px;border-radius:50%;background:var(--border);flex-shrink:0;transition:background 0.2s,transform 0.2s}
-.toc-link.active{color:var(--blue);font-weight:500}
-.toc-link.active .toc-dot{background:var(--blue);transform:scale(1.4)}
+.toc{position:fixed;left:calc(50% + 400px);top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:0;z-index:50;min-width:140px}
+.toc-title{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;padding-left:12px}
+.toc-link{display:block;text-decoration:none;font-size:12px;color:var(--muted);font-weight:400;transition:color 0.2s;padding:6px 12px;white-space:nowrap;border-left:2px solid transparent;transition:color 0.2s,border-color 0.2s}
+.toc-link.active{color:var(--blue);font-weight:500;border-left-color:var(--blue)}
 @media(max-width:1200px){.toc{display:none}}
-@media(max-width:640px){.illustrations-grid{grid-template-columns:1fr}.illustrations-grid-2-1{grid-template-columns:1fr}.illustrations-grid-2-1 .illustration-item:last-child{grid-column:1}}
 
 /* ── NEXT CASES ── */
 .next-section{padding:56px 0 0;border-top:1px solid var(--border)}
@@ -130,11 +130,14 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
 </nav>
 
 <aside class="toc">
-  <a class="toc-link" href="#contexte"><span class="toc-dot"></span>Contexte</a>
-  <a class="toc-link" href="#recherche"><span class="toc-dot"></span>01 — Recherche</a>
-  <a class="toc-link" href="#benchmark"><span class="toc-dot"></span>02 — Benchmark</a>
-  <a class="toc-link" href="#ideation"><span class="toc-dot"></span>03 — Idéation</a>
-  <a class="toc-link" href="#design-system"><span class="toc-dot"></span>04 — Design System</a>
+  <p class="toc-title">Sommaire</p>
+  <a class="toc-link" href="#contexte">Contexte</a>
+  <a class="toc-link" href="#recherche">01 — Recherche</a>
+  <a class="toc-link" href="#definition">02 — Définition</a>
+  <a class="toc-link" href="#benchmark">03 — Benchmark</a>
+  <a class="toc-link" href="#ideation">04 — Idéation</a>
+  <a class="toc-link" href="#design-system">05 — Design System</a>
+  <a class="toc-link" href="#developpement">06 — Développement</a>
 </aside>
 
 <div class="case-header">
@@ -158,11 +161,11 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
     <div class="meta-item"><strong>Statut</strong>En cours</div>
     <div class="meta-item"><strong>Stack</strong>Figma · Figma Make · Claude · Supabase · Vercel</div>
   </div>
-  <p class="case-intro">70 à 80% des insights terrain des commerciaux ne parviennent jamais aux Product Managers. J'ai conçu Nectar pour résoudre ce problème — et pour formaliser un process de conception entièrement piloté par IA, réplicable et documenté.</p>
+  <p class="case-intro">70 à 80% des insights terrain des commerciaux ne parviennent jamais aux Product Managers. J'ai conçu Nectar pour résoudre ce problème — et pour formaliser un process de conception entièrement piloté par IA, de la recherche utilisateur au développement.</p>
   <div class="stats-row">
     <div class="stat"><div class="stat-val">&lt;1 min</div><div class="stat-label">pour saisir un insight</div></div>
     <div class="stat"><div class="stat-val">3</div><div class="stat-label">champs de saisie maximum</div></div>
-    <div class="stat"><div class="stat-val">8</div><div class="stat-label">écrans livrés</div></div>
+    <div class="stat"><div class="stat-val">5</div><div class="stat-label">écrans produits livrés</div></div>
     <div class="stat"><div class="stat-val">100%</div><div class="stat-label">du process piloté par IA</div></div>
   </div>
 </div>
@@ -177,55 +180,162 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
     <div class="sec-body">
       <h2>Le produit</h2>
       <p>Nectar est un outil mobile-first B2B permettant aux commerciaux de capturer leurs insights post-RDV en moins d'une minute et de les transmettre directement au backlog produit sous forme de cartes priorisées.</p>
-      <p>Ce projet poursuit deux objectifs : concevoir un MVP simple avec une priorisation déterministe et transparente, et formaliser un <strong>process de conception piloté par IA</strong>, réplicable et documenté. Je suis seul sur ce projet — de la recherche utilisateur au développement.</p>
+      <p>Ce projet poursuit deux objectifs : concevoir un MVP simple avec une priorisation déterministe et transparente, et <strong>formaliser un process de conception piloté par IA</strong>, réplicable et documenté. Je pilote ce projet seul — de la recherche utilisateur au développement.</p>
     </div>
   </div>
 
   <div class="case-section" id="recherche">
     <p class="sec-label">01 — Recherche</p>
     <div class="sec-body">
-      <h2>Entretiens assistés par IA</h2>
-      <p>J'ai mené des entretiens auprès de commerciaux et de Product Managers pour comprendre les usages, identifier les frictions et valider les hypothèses terrain. La trame a été <strong>générée par Claude</strong> (questions ouvertes, JTBD, frictions). Les enregistrements ont été retranscrits automatiquement, les comptes rendus rédigés et centralisés dans Notion.</p>
-      <p>Les entretiens ont fait émerger des besoins clairs : saisie rapide sur mobile, zéro effort de reformulation, priorisation automatique des insights, boucle de feedback visible pour le commercial.</p>
+      <h2>Entretiens utilisateurs & intégration de l'IA</h2>
+      <p>J'ai mené des entretiens auprès de commerciaux et de Product Managers pour valider les hypothèses et comprendre leurs besoins réels. Dès cette étape, l'IA est intégrée à chaque phase du process.</p>
+      <p>Les retours sont clairs : les PM veulent des insights accessibles et priorisés, les commerciaux veulent pouvoir les remonter depuis leur mobile après un RDV — sans friction, sans reformulation.</p>
+      <div class="steps">
+        <div class="step">
+          <p class="step-num">ÉTAPE 01</p>
+          <p class="step-title">Claude crée la trame</p>
+          <p class="step-body">Guide d'entretien structuré généré par Claude — questions ouvertes, JTBD, frictions identifiées.</p>
+        </div>
+        <div class="step">
+          <p class="step-num">ÉTAPE 02</p>
+          <p class="step-title">L'IA enregistre & retranscrit</p>
+          <p class="step-body">Enregistrement et retranscription automatique de chaque entretien. Une demi-journée de travail économisée par session.</p>
+        </div>
+        <div class="step">
+          <p class="step-num">ÉTAPE 03</p>
+          <p class="step-title">Claude synthétise</p>
+          <p class="step-body">Analyse automatique des pain points, JTBD et opportunités à partir des retranscriptions.</p>
+        </div>
+        <div class="step">
+          <p class="step-num">ÉTAPE 04</p>
+          <p class="step-title">Notion documente</p>
+          <p class="step-body">Création automatique des comptes rendus dans un projet Notion dédié via Claude.</p>
+        </div>
+      </div>
+      <ul class="result-list">
+        <li>4 décisions produit définies : saisie rapide, reformulation IA, scoring par fréquence, mobile-first</li>
+        <li>1 journée de travail économisée par entretien grâce à la retranscription automatique</li>
+        <li>Comptes rendus générés automatiquement après chaque session</li>
+      </ul>
       <div class="illustrations-grid-2-1" style="margin-top:24px">
         <figure class="illustration-item">
-          <div class="illustration-item-inner"><img src="images/nectar-recherche-1.jpg" alt="Recherche Nectar"></div>
+          <div class="illustration-item-inner"><img src="images/nectar-recherche-1.jpg" alt="Trame entretien Nectar"></div>
           <figcaption class="illustration-caption">Trame d'entretien générée par Claude</figcaption>
         </figure>
         <figure class="illustration-item">
-          <div class="illustration-item-inner"><img src="images/nectar-recherche-2.jpg" alt="Compte rendu Nectar"></div>
-          <figcaption class="illustration-caption">Compte rendu centralisé dans Notion</figcaption>
+          <div class="illustration-item-inner"><img src="images/nectar-recherche-2.jpg" alt="Compte rendu Notion"></div>
+          <figcaption class="illustration-caption">Compte rendu automatique dans Notion</figcaption>
         </figure>
       </div>
     </div>
   </div>
 
-  <div class="case-section" id="benchmark">
-    <p class="sec-label">02 — Benchmark</p>
+  <div class="case-section" id="definition">
+    <p class="sec-label">02 — Définition</p>
     <div class="sec-body">
-      <h2>Cadrer le produit avant d'idéer</h2>
-      <p>J'ai exploré Mobbin à partir de requêtes générées par Claude pour identifier les patterns pertinents : saisie minimaliste, catégorisation par chips, feed d'insights scannables, badge de priorité visible. Les patterns complexes ou non essentiels ont été écartés.</p>
-      <p>Avant de passer à Figma Make, j'ai cadré le produit : <strong>3 champs de saisie maximum</strong>, IA frugale (titre normalisé + détection de similarité, sans décision automatisée), scoring basé sur la fréquence clients, <strong>15 edge cases</strong> documentés. Ce cadrage en amont est essentiel pour limiter les itérations avec Figma Make.</p>
+      <h2>Principes de conception & cadrage produit</h2>
+      <p>À partir des entretiens, Claude génère la définition du problème et pose les contraintes de conception. L'objectif : aller vite du besoin utilisateur au produit opérationnel, sans dette de conception.</p>
+      <ul class="result-list">
+        <li>3 champs de saisie maximum — saisie en moins d'une minute</li>
+        <li>Mobile-first — conçu pour l'usage post-RDV</li>
+        <li>IA frugale — titre normalisé + détection de similarité, aucune décision automatisée</li>
+        <li>Scoring transparent — calcul basé sur la fréquence clients, 100% automatique</li>
+        <li>15 edge cases documentés — abandon, échec IA, formulaire incomplet…</li>
+      </ul>
+      <p style="margin-top:20px">Architecture produit : <strong>input → insight brut (IA + rules) → normalisation + détection similarité → output PM → backlog priorisé.</strong></p>
+      <div class="steps" style="margin-top:24px">
+        <div class="step">
+          <p class="step-num">IA POUR LA DÉFINITION 01</p>
+          <p class="step-title">Structurer le parcours</p>
+          <p class="step-body">Parcours utilisateur, choix des inputs/outputs et prompt IA générés par Claude à partir des comptes rendus d'entretien.</p>
+        </div>
+        <div class="step">
+          <p class="step-num">IA POUR LA DÉFINITION 02</p>
+          <p class="step-title">Décider par la donnée</p>
+          <p class="step-body">Formule de scoring, contraintes techniques et règles de matching définies et documentées avec l'aide de Claude.</p>
+        </div>
+        <div class="step">
+          <p class="step-num">IA POUR LA DÉFINITION 03</p>
+          <p class="step-title">Formaliser & documenter</p>
+          <p class="step-body">Zoning des composants, edge cases et compte rendu générés automatiquement pour alimenter la phase d'idéation.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="case-section" id="benchmark">
+    <p class="sec-label">03 — Benchmark</p>
+    <div class="sec-body">
+      <h2>Méthodologie du benchmark</h2>
+      <p>J'explore Mobbin à partir de requêtes générées par Claude pour identifier les patterns pertinents. Je sélectionne les résultats, les documente avec mes recommandations, puis Claude génère un compte rendu dans Notion qui sert de base à la phase d'idéation.</p>
+      <div class="steps">
+        <div class="step">
+          <p class="step-num">ÉTAPE 01</p>
+          <p class="step-title">Claude génère les requêtes</p>
+          <p class="step-body">Saisie rapide, catégorisation par chips, feed scannable, badge de priorité, filtres, détection de contenu similaire.</p>
+        </div>
+        <div class="step">
+          <p class="step-num">ÉTAPE 02</p>
+          <p class="step-title">Sélection dans Mobbin</p>
+          <p class="step-body">7 écrans retenus dans un nouveau projet dédié, importés dans Figma pour analyse.</p>
+        </div>
+        <div class="step">
+          <p class="step-num">ÉTAPE 03</p>
+          <p class="step-title">Documentation des patterns</p>
+          <p class="step-body">Fiche de spécification pour chaque pattern : points forts, pertinence pour le MVP, éléments hors scope.</p>
+        </div>
+        <div class="step">
+          <p class="step-num">ÉTAPE 04</p>
+          <p class="step-title">Claude documente dans Notion</p>
+          <p class="step-body">Compte rendu structuré généré automatiquement — 7 patterns documentés, prêts pour l'idéation.</p>
+        </div>
+      </div>
+      <ul class="result-list">
+        <li>7 patterns UX sélectionnés et documentés avec points forts et pertinence</li>
+        <li>1 compte rendu structuré dans Notion, prêt pour la phase d'idéation</li>
+      </ul>
     </div>
   </div>
 
   <div class="case-section" id="ideation">
-    <p class="sec-label">03 — Idéation</p>
+    <p class="sec-label">04 — Idéation</p>
     <div class="sec-body">
-      <h2>Génération d'interfaces dans Figma Make</h2>
-      <p>Les décisions produit ont été transformées en <strong>prompts structurés générés par Claude</strong>, intégrant le flow utilisateur, l'anatomie des écrans et les contraintes de style. Ces prompts ont été transmis à Figma Make pour produire rapidement des premières pistes cohérentes.</p>
-      <p>Principes UX retenus : navigation épurée, CTA flottant centré, accès aux filtres via bottom sheet, saisie limitée à 3 champs (Client, Catégorie, Détail). L'IA accompagne sans contraindre — pattern inspiré de Linear : suggestions proposées à la confirmation, contrôle final laissé au commercial.</p>
+      <h2>Prompt à destination de Figma Make</h2>
+      <p>Les prompts sont construits avec Claude et intègrent l'ensemble des décisions précédentes : recherche utilisateur, définition et benchmark. Figma Make génère les écrans pour explorer et itérer rapidement.</p>
+      <ul class="result-list">
+        <li>Saisie & backlog — flow liste → saisie → validation, structuration automatique des insights</li>
+        <li>Scoring & automatisation — logique basée sur la fréquence, objective et sans effort pour l'utilisateur</li>
+        <li>IA suggestive, jamais décisive — suggestions de titre proposées, l'utilisateur confirme ou modifie (pattern Linear)</li>
+        <li>15 edge cases identifiés et documentés</li>
+      </ul>
+      <div class="steps" style="margin-top:24px">
+        <div class="step">
+          <p class="step-num">IA POUR L'IDÉATION 01</p>
+          <p class="step-title">Contexte</p>
+          <p class="step-body">Décisions UX issues des étapes précédentes compilées dans un document structuré.</p>
+        </div>
+        <div class="step">
+          <p class="step-num">IA POUR L'IDÉATION 02</p>
+          <p class="step-title">Prompt généré par Claude</p>
+          <p class="step-body">Prompt v1 intégrant le flow, l'anatomie des écrans, les contraintes de style et les edge cases.</p>
+        </div>
+        <div class="step">
+          <p class="step-num">IA POUR L'IDÉATION 03</p>
+          <p class="step-title">Écrans générés dans Figma Make</p>
+          <p class="step-body">Premières pistes cohérentes produites en quelques minutes, directement exploitables pour itérer.</p>
+        </div>
+      </div>
       <div class="illustrations-grid" style="margin-top:24px">
         <figure class="illustration-item">
-          <div class="illustration-item-inner"><img src="images/nectar-screen-1.jpg" alt="Écran Nectar 1"></div>
+          <div class="illustration-item-inner"><img src="images/nectar-screen-1.jpg" alt="Feed insights Nectar"></div>
           <figcaption class="illustration-caption">Feed d'insights</figcaption>
         </figure>
         <figure class="illustration-item">
-          <div class="illustration-item-inner"><img src="images/nectar-screen-2.jpg" alt="Écran Nectar 2"></div>
+          <div class="illustration-item-inner"><img src="images/nectar-screen-2.jpg" alt="Saisie insight Nectar"></div>
           <figcaption class="illustration-caption">Saisie d'un insight</figcaption>
         </figure>
         <figure class="illustration-item">
-          <div class="illustration-item-inner"><img src="images/nectar-screen-3.jpg" alt="Écran Nectar 3"></div>
+          <div class="illustration-item-inner"><img src="images/nectar-screen-3.jpg" alt="Backlog priorisé Nectar"></div>
           <figcaption class="illustration-caption">Vue backlog priorisé</figcaption>
         </figure>
       </div>
@@ -233,15 +343,46 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
   </div>
 
   <div class="case-section" id="design-system">
-    <p class="sec-label">04 — Design System</p>
+    <p class="sec-label">05 — Design System</p>
     <div class="sec-body">
-      <h2>Variables &amp; composants via Claude MCP</h2>
-      <p>J'ai conçu le Design System en architecture Atomic Design. Les variables et composants ont été <strong>créés automatiquement dans Figma via le MCP Claude</strong>, à partir des règles définies. 5 collections de variables (Primitives, Colors, Spacing, Typography, Border), 6 rampes de couleurs × 10 niveaux, tokens sémantiques reliés à chaque composant.</p>
-      <p>La documentation est générée automatiquement dans Notion via un workflow Claude → Figma. L'ensemble du process est formalisé dans un fichier <strong>claude.md réplicable</strong>.</p>
+      <h2>Conception du Design System par l'IA</h2>
+      <p>Avant de produire les maquettes finales, j'ai mis en place un Design System pour poser des bases solides pour la conception, l'ajout de nouvelles fonctionnalités et le développement. L'architecture suit les principes de l'Atomic Design.</p>
+      <p>Via le MCP Claude, les variables et composants sont <strong>créés automatiquement dans Figma</strong>, et la documentation est générée dans Notion — ce qui réduit significativement le temps de construction du Design System.</p>
       <ul class="result-list">
-        <li>8 écrans livrés couvrant l'ensemble du parcours utilisateur</li>
-        <li>Variables et composants générés automatiquement via MCP</li>
-        <li>Documentation centralisée et auto-générée dans Notion</li>
+        <li>5 collections de variables — Primitives, Colors, Spacing, Typography, Border</li>
+        <li>13 composants déclinés en 45 variants, avec états et tokens associés</li>
+        <li>Documentation auto-générée dans Notion via workflow Claude + Figma MCP</li>
+      </ul>
+      <p style="margin-top:16px"><strong>Limite identifiée :</strong> certains variants nécessitent encore une intervention manuelle pour les cas les plus complexes.</p>
+    </div>
+  </div>
+
+  <div class="case-section" id="developpement">
+    <p class="sec-label">06 — Développement</p>
+    <div class="sec-body">
+      <h2>De Figma au produit avec Claude Code</h2>
+      <p>J'utilise Claude Code pour couvrir chaque étape du développement — de la configuration Supabase au déploiement Vercel — en respectant le Design System conçu dans Figma.</p>
+      <div class="steps">
+        <div class="step">
+          <p class="step-num">STACK FRONTEND</p>
+          <p class="step-title">TypeScript · Tailwind · Next.js · GitHub</p>
+          <p class="step-body">12 composants React conformes au Design System Figma. 5 écrans livrés : Login, Backlog, Saisie, Vérification, Détail.</p>
+        </div>
+        <div class="step">
+          <p class="step-num">STACK BACKEND</p>
+          <p class="step-title">Supabase · Vercel · Claude API · Gemini Flash</p>
+          <p class="step-body">1 endpoint IA : structuration des insights + détection de similarité. Déploiement continu sur Vercel.</p>
+        </div>
+        <div class="step">
+          <p class="step-num">DOCUMENTATION</p>
+          <p class="step-title">Notion MCP · claude.md réplicable</p>
+          <p class="step-body">L'ensemble du process est formalisé dans un fichier claude.md documenté et réplicable sur d'autres projets.</p>
+        </div>
+      </div>
+      <ul class="result-list">
+        <li>12 composants React conformes au Design System Figma</li>
+        <li>5 écrans produits — Login · Backlog · Saisie · Vérification · Détail</li>
+        <li>1 endpoint IA — structuration + détection de similarité</li>
         <li>Process documenté et réplicable — claude.md</li>
       </ul>
     </div>

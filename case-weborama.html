@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Weborama — Design System — Thomas Reynier</title>
+<title>Weborama — Design System & nouvelle app SaaS — Thomas Reynier</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -56,6 +56,7 @@ h1{font-size:clamp(28px,4vw,44px);font-weight:600;letter-spacing:-0.03em;line-he
 
 /* ── SECTION ── */
 .case-section{padding:52px 0;border-top:1px solid var(--border);display:grid;grid-template-columns:148px 1fr;gap:0 48px}
+.container > .case-section:first-child,.illustrations-section + .case-section{border-top:none;padding-top:40px}
 .sec-label{font-size:11px;font-weight:600;color:var(--blue);letter-spacing:.08em;text-transform:uppercase;padding-top:5px;line-height:1.4}
 .sec-body{}
 h2{font-size:20px;font-weight:600;letter-spacing:-0.02em;line-height:1.2;color:var(--text);margin-bottom:16px}
@@ -85,15 +86,14 @@ h2{font-size:20px;font-weight:600;letter-spacing:-0.02em;line-height:1.2;color:v
 .illustration-item-inner{background:var(--bg-soft);border:1px solid var(--border);border-radius:12px;padding:20px;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .illustration-item img{width:100%;border-radius:8px;display:block;cursor:zoom-in}
 .illustration-caption{font-size:13px;color:var(--muted);font-weight:300;text-align:center;line-height:1.4}
+@media(max-width:640px){.illustrations-grid{grid-template-columns:1fr}.illustrations-grid-2-1{grid-template-columns:1fr}.illustrations-grid-2-1 .illustration-item:last-child{grid-column:1}}
 
 /* ── TABLE OF CONTENTS ── */
-.toc{position:fixed;left:calc(50% + 400px);top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:2px;z-index:50}
-.toc-link{display:flex;align-items:center;gap:8px;text-decoration:none;font-size:11px;color:var(--muted);font-weight:400;transition:color 0.2s;padding:5px 0;white-space:nowrap}
-.toc-dot{width:5px;height:5px;border-radius:50%;background:var(--border);flex-shrink:0;transition:background 0.2s,transform 0.2s}
-.toc-link.active{color:var(--blue);font-weight:500}
-.toc-link.active .toc-dot{background:var(--blue);transform:scale(1.4)}
+.toc{position:fixed;left:calc(50% + 400px);top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:0;z-index:50;min-width:140px}
+.toc-title{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;padding-left:12px}
+.toc-link{display:block;text-decoration:none;font-size:12px;color:var(--muted);font-weight:400;transition:color 0.2s;padding:6px 12px;white-space:nowrap;border-left:2px solid transparent;transition:color 0.2s,border-color 0.2s}
+.toc-link.active{color:var(--blue);font-weight:500;border-left-color:var(--blue)}
 @media(max-width:1200px){.toc{display:none}}
-@media(max-width:640px){.illustrations-grid{grid-template-columns:1fr}.illustrations-grid-2-1{grid-template-columns:1fr}.illustrations-grid-2-1 .illustration-item:last-child{grid-column:1}}
 
 /* ── QUOTE ── */
 .quote{border:1px solid var(--border);border-radius:14px;padding:28px 32px;background:var(--bg);margin-top:16px;position:relative;overflow:hidden}
@@ -142,12 +142,14 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
 </nav>
 
 <aside class="toc">
-  <a class="toc-link" href="#audit"><span class="toc-dot"></span>01 — Audit</a>
-  <a class="toc-link" href="#ateliers"><span class="toc-dot"></span>02 — Ateliers</a>
-  <a class="toc-link" href="#conception"><span class="toc-dot"></span>03 — Conception</a>
-  <a class="toc-link" href="#documentation"><span class="toc-dot"></span>04 — Documentation</a>
-  <a class="toc-link" href="#suite"><span class="toc-dot"></span>05 — Suite</a>
-  <a class="toc-link" href="#recommandation"><span class="toc-dot"></span>Recommandation</a>
+  <p class="toc-title">Sommaire</p>
+  <a class="toc-link" href="#contexte">Contexte</a>
+  <a class="toc-link" href="#audit">01 — Audit DS</a>
+  <a class="toc-link" href="#ux-design">02 — UX Design</a>
+  <a class="toc-link" href="#design-system">03 — Design System</a>
+  <a class="toc-link" href="#context-ia">04 — Context IA</a>
+  <a class="toc-link" href="#ideation">05 — Idéation IA</a>
+  <a class="toc-link" href="#recommandation">Recommandation</a>
 </aside>
 
 <div class="case-header">
@@ -160,9 +162,9 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
     <span class="htag">Design System</span>
     <span class="htag">Atomic Design</span>
     <span class="htag">Variables &amp; Tokens</span>
-    <span class="htag">Documentation</span>
-    <span class="htag">Zeroheight</span>
     <span class="htag">Figma Make</span>
+    <span class="htag">AI Ready</span>
+    <span class="htag">UX Design</span>
   </div>
   <h1>Weborama</h1>
   <div class="meta-row">
@@ -172,12 +174,12 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
     <div class="meta-item"><strong>Équipe</strong>3 designers · 3 devs · 4 PO · 1 CPO</div>
     <div class="meta-item"><strong>Outils</strong>Figma · Zeroheight · Storybook · Figma Make</div>
   </div>
-  <p class="case-intro">Weborama est une AdTech spécialisée dans la data et l'IA sémantique. L'entreprise développait 4 outils SaaS sans Design System commun — incohérences visuelles, friction entre designers et développeurs, livraison ralentie. J'ai pris la direction du projet pour auditer l'existant, concevoir un Design System unifié et en assurer l'adoption sur les 4 applications.</p>
+  <p class="case-intro">Weborama est une AdTech spécialisée dans la data et l'IA sémantique. Ma mission couvre deux axes : rationaliser le Design System des 4 applications existantes, puis concevoir une nouvelle application SaaS avec un process « AI Ready » permettant de générer des prototypes haute-fidélité via Figma Make.</p>
   <div class="stats-row">
+    <div class="stat"><div class="stat-val">2</div><div class="stat-label">Design Systems livrés</div></div>
     <div class="stat"><div class="stat-val">−80%</div><div class="stat-label">de composants après rationalisation</div></div>
-    <div class="stat"><div class="stat-val">974</div><div class="stat-label">composants audités sur 4 apps</div></div>
-    <div class="stat"><div class="stat-val">175</div><div class="stat-label">variables en 5 collections</div></div>
-    <div class="stat"><div class="stat-val">4</div><div class="stat-label">modes de couleurs, un par app</div></div>
+    <div class="stat"><div class="stat-val">4</div><div class="stat-label">équipes alignées sur une source unique</div></div>
+    <div class="stat"><div class="stat-val">100%</div><div class="stat-label">prototypes IA conformes au Design System</div></div>
   </div>
 </div>
 </div>
@@ -186,12 +188,29 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
 
 <div class="container">
 
-  <div class="case-section" id="audit">
-    <p class="sec-label">01 — Audit</p>
+  <div class="case-section" id="contexte">
+    <p class="sec-label">Contexte</p>
     <div class="sec-body">
-      <h2>Cartographie des 4 applications</h2>
-      <p>J'ai audité l'ensemble des 4 bibliothèques Figma : <strong>974 composants, 44 variables et 14 variations de couleur</strong>. Objectif : avoir une vision globale avant d'engager la moindre décision.</p>
-      <p>J'ai analysé les récurrences, identifié les incohérences et recensé les doublons. Résultat : <strong>11 composants en doublon</strong> identifiés — point de départ direct pour la réduction de 80%. L'accessibilité a été vérifiée sur chaque composant avec Stark (contraste WCAG, lisibilité).</p>
+      <h2>Deux missions, une continuité</h2>
+      <p>Weborama développait 4 outils SaaS sans Design System commun — incohérences visuelles, friction entre designers et développeurs, livraison ralentie. J'ai d'abord audité l'existant et conçu un Design System unifié pour les 4 applications.</p>
+      <p>Dans un second temps, Weborama souhaitait lancer un nouvel outil SaaS à partir d'explorations menées par les équipes Produit et Commerciales via Figma Make. Ces prototypes constituaient une base solide, mais nécessitaient une conception UX structurée et un Design System dédié.</p>
+      <p>J'ai pris en charge l'ensemble de la conception de la nouvelle application — de l'audit UX jusqu'à la synchronisation du Design System avec Figma Make — en tant que designer principal, en reportant au Lead Designer.</p>
+    </div>
+  </div>
+
+  <div class="case-section" id="audit">
+    <p class="sec-label">01 — Audit DS</p>
+    <div class="sec-body">
+      <h2>Rationalisation des 4 applications existantes</h2>
+      <p>J'ai audité l'ensemble des 4 bibliothèques Figma : <strong>974 composants, 44 variables et 14 variations de couleur</strong>. J'ai analysé les récurrences, identifié les incohérences et recensé les doublons. <strong>11 composants en doublon</strong> identifiés — point de départ pour la réduction de 80%.</p>
+      <p>J'ai piloté des ateliers réunissant <strong>3 designers et jusqu'à 3 développeurs</strong> pour statuer sur chaque composant, éliminer les doublons et établir une convention de nommage commune. Ces sessions avaient aussi un objectif d'évangélisation : Atomic Design, tokens, variables.</p>
+      <ul class="result-list">
+        <li>974 composants audités sur 4 applications</li>
+        <li>−80% de composants après rationalisation</li>
+        <li>175 variables organisées en 5 collections</li>
+        <li>4 modes de couleurs, un par application</li>
+        <li>100% des composants documentés dans Zeroheight et Storybook</li>
+      </ul>
       <div class="illustrations-grid-2-1" style="margin-top:24px">
         <figure class="illustration-item">
           <div class="illustration-item-inner"><img src="images/weborama-audit-1.jpg" alt="Audit Weborama"></div>
@@ -205,75 +224,152 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
     </div>
   </div>
 
-  <div class="case-section" id="ateliers">
-    <p class="sec-label">02 — Ateliers</p>
+  <div class="case-section" id="ux-design">
+    <p class="sec-label">02 — UX Design</p>
     <div class="sec-body">
-      <h2>Co-construction &amp; évangélisation</h2>
-      <p>J'ai piloté une série d'ateliers réunissant <strong>3 designers et jusqu'à 3 développeurs</strong>, intégrés progressivement à chaque décision — suppression, modification ou création de composant. Ces sessions ont permis de statuer sur les composants à conserver, d'éliminer les doublons et d'établir une convention de nommage commune.</p>
-      <p>Ces ateliers avaient aussi un objectif d'évangélisation : sensibiliser les équipes à l'Atomic Design, aux conventions de nommage et à l'usage des variables — pour garantir une adoption durable.</p>
-      <div class="illustrations-grid" style="margin-top:24px;grid-template-columns:1fr">
-        <figure class="illustration-item">
-          <div class="illustration-item-inner"><img src="images/weborama-atelier-1.jpg" alt="Atelier Design System"></div>
-          <figcaption class="illustration-caption">Atelier de co-construction avec les équipes</figcaption>
-        </figure>
+      <h2>Audit & conception de la nouvelle application</h2>
+      <p>À partir des explorations menées par les équipes PO et BU via Figma Make, j'analyse l'ensemble des parcours et réalise un benchmark des outils concurrents pour identifier les opportunités d'amélioration et simplifier l'expérience.</p>
+      <div class="steps">
+        <div class="step">
+          <p class="step-num">ÉTAPE 01</p>
+          <p class="step-title">Analyse de l'existant</p>
+          <p class="step-body">Les prototypes générés par les équipes PO et BU constituent une base solide, mais certaines étapes ralentissent l'expérience. J'identifie les frictions et les opportunités de simplification.</p>
+        </div>
+        <div class="step">
+          <p class="step-num">ÉTAPE 02</p>
+          <p class="step-title">Benchmark</p>
+          <p class="step-body">Analyse des outils concurrents et des conventions UX du marché pour identifier les standards attendus et les opportunités applicables à l'outil.</p>
+        </div>
+        <div class="step">
+          <p class="step-num">ÉTAPE 03</p>
+          <p class="step-title">Optimisations & parcours</p>
+          <p class="step-body">Réduction du nombre d'étapes, simplification des parcours, meilleure conformité aux standards UX. Le parcours principal est ramené de 3 étapes à 1. Toutes les propositions sont acceptées par les équipes Produit et Commerciale.</p>
+        </div>
       </div>
-    </div>
-  </div>
-
-  <div class="case-section" id="conception">
-    <p class="sec-label">03 — Conception</p>
-    <div class="sec-body">
-      <h2>Design System de zéro</h2>
-      <p>Fort des décisions prises en atelier, j'ai conçu l'ensemble du Design System selon les principes de l'Atomic Design.</p>
-      <p><strong>Fondations</strong> — palettes avec 4 modes (un par application), typographies, espacements, bibliothèque d'icônes commune. Variables organisées en 5 collections : Primitives, Colors, Spacing, Typography, Border.</p>
-      <p><strong>Composants</strong> — 24 composants déclinés en 195 variants, du plus atomique au plus complexe, connectés aux variables sémantiques.</p>
-      <p><strong>Templates</strong> — 7 templates réutilisables pour produire des interfaces conformes plus rapidement.</p>
-      <div class="illustrations-grid" style="margin-top:24px">
-        <figure class="illustration-item">
-          <div class="illustration-item-inner"><img src="images/weborama-ds-1.jpg" alt="Fondations Design System"></div>
-          <figcaption class="illustration-caption">Fondations & variables</figcaption>
-        </figure>
-        <figure class="illustration-item">
-          <div class="illustration-item-inner"><img src="images/weborama-ds-2.jpg" alt="Composants"></div>
-          <figcaption class="illustration-caption">Bibliothèque de composants</figcaption>
-        </figure>
-        <figure class="illustration-item">
-          <div class="illustration-item-inner"><img src="images/weborama-ds-3.jpg" alt="Templates"></div>
-          <figcaption class="illustration-caption">Templates d'interfaces</figcaption>
-        </figure>
-      </div>
-    </div>
-  </div>
-
-  <div class="case-section" id="documentation">
-    <p class="sec-label">04 — Documentation</p>
-    <div class="sec-body">
-      <h2>Zeroheight &amp; Storybook</h2>
-      <p><strong>Zeroheight</strong> centralise la documentation design : fondations, variables (tokens), composants et règles d'usage. Chaque composant est documenté avec ses variants, ses règles d'utilisation et des exemples concrets.</p>
-      <p><strong>Storybook</strong> permet aux développeurs de visualiser, tester et intégrer chaque composant de manière isolée côté front. Ce double référentiel assure l'alignement durable entre design et développement.</p>
       <ul class="result-list">
-        <li>100% des composants documentés dans Zeroheight et Storybook</li>
-        <li>4 modes de couleurs déployés sur les 4 applications</li>
-        <li>Source de vérité unique partagée design + développement</li>
+        <li>100% des propositions acceptées par les équipes produit et commerciale</li>
+        <li>5 écrans retravaillés — parcours principal et pages de résultats</li>
+        <li>3 écrans supprimés — complexité réduite sans perte de fonctionnalité</li>
       </ul>
       <div class="illustrations-grid-2-1" style="margin-top:24px">
         <figure class="illustration-item">
-          <div class="illustration-item-inner"><img src="images/weborama-doc-1.jpg" alt="Documentation Zeroheight"></div>
-          <figcaption class="illustration-caption">Documentation Zeroheight</figcaption>
+          <div class="illustration-item-inner"><img src="images/weborama-ux-1.jpg" alt="Audit UX Weborama"></div>
+          <figcaption class="illustration-caption">Analyse des parcours existants</figcaption>
         </figure>
         <figure class="illustration-item">
-          <div class="illustration-item-inner"><img src="images/weborama-doc-2.jpg" alt="Storybook"></div>
-          <figcaption class="illustration-caption">Intégration Storybook</figcaption>
+          <div class="illustration-item-inner"><img src="images/weborama-ux-2.jpg" alt="Benchmark Weborama"></div>
+          <figcaption class="illustration-caption">Benchmark concurrentiel</figcaption>
         </figure>
       </div>
     </div>
   </div>
 
-  <div class="case-section" id="suite">
-    <p class="sec-label">05 — Suite</p>
+  <div class="case-section" id="design-system">
+    <p class="sec-label">03 — Design System</p>
     <div class="sec-body">
-      <h2>Nouvelle application SaaS avec Figma Make</h2>
-      <p>Le Design System a ensuite servi de base pour concevoir un nouvel outil SaaS interne. Partir d'un Design System documenté comme contrainte de départ pour <strong>Figma Make</strong> a permis de générer des premières pistes d'interfaces directement cohérentes avec les applications existantes — sans dette visuelle, temps d'exploration significativement réduit.</p>
+      <h2>Conception du Design System de la nouvelle app</h2>
+      <p>Je conçois le Design System de la nouvelle application SaaS selon une approche structurée : fondations solides, composants en Atomic Design, variables définies et optimisées pour l'intégration dans Figma Make.</p>
+      <div class="steps">
+        <div class="step">
+          <p class="step-num">ÉTAPE 01</p>
+          <p class="step-title">Variables</p>
+          <p class="step-body">Variables définies en deux modes (clair et sombre), plus les variables de typographie, d'espacement et de bordures. 4 collections en tokens sémantiques light / dark.</p>
+        </div>
+        <div class="step">
+          <p class="step-num">ÉTAPE 02</p>
+          <p class="step-title">Composants & variants</p>
+          <p class="step-body">8 composants conçus selon l'Atomic Design. Chaque composant intègre des tokens de couleur et d'espacement, ainsi que ses variants et états.</p>
+        </div>
+        <div class="step">
+          <p class="step-num">ÉTAPE 03</p>
+          <p class="step-title">Accessibilité</p>
+          <p class="step-body">Intégrée dès la création des fondations, variables et composants pour garantir des interfaces inclusives.</p>
+        </div>
+        <div class="step">
+          <p class="step-num">ÉTAPE 04</p>
+          <p class="step-title">Templates</p>
+          <p class="step-body">2 templates réutilisables permettant aux équipes de produire des interfaces cohérentes et de les intégrer directement dans Figma Make.</p>
+        </div>
+      </div>
+      <ul class="result-list">
+        <li>8 composants conçus selon l'Atomic Design avec tokens et variants</li>
+        <li>4 collections de variables — color, spacing, radius en tokens sémantiques light / dark</li>
+        <li>2 modes (light et dark) appliqués via les variables sur tous les composants</li>
+        <li>2 templates réutilisables optimisés pour l'import dans Figma Make</li>
+      </ul>
+      <div class="illustrations-grid" style="margin-top:24px">
+        <figure class="illustration-item">
+          <div class="illustration-item-inner"><img src="images/weborama-ds-1.jpg" alt="Variables Design System"></div>
+          <figcaption class="illustration-caption">Variables & tokens sémantiques</figcaption>
+        </figure>
+        <figure class="illustration-item">
+          <div class="illustration-item-inner"><img src="images/weborama-ds-2.jpg" alt="Composants Design System"></div>
+          <figcaption class="illustration-caption">Bibliothèque de composants</figcaption>
+        </figure>
+        <figure class="illustration-item">
+          <div class="illustration-item-inner"><img src="images/weborama-ds-3.jpg" alt="Templates Design System"></div>
+          <figcaption class="illustration-caption">Templates réutilisables</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+
+  <div class="case-section" id="context-ia">
+    <p class="sec-label">04 — Context pour l'IA</p>
+    <div class="sec-body">
+      <h2>Synchronisation du Design System avec Figma Make</h2>
+      <p>Je mets en place un process « AI Ready » structuré en deux étapes : la préparation des maquettes et la rédaction des guidelines. L'objectif : que Figma Make génère des prototypes directement fidèles au Design System.</p>
+      <div class="steps">
+        <div class="step">
+          <p class="step-num">ÉTAPE 01</p>
+          <p class="step-title">Préparation des maquettes</p>
+          <p class="step-body">Avant l'import dans Figma Make, je vérifie 4 prérequis : nommage strict des frames, auto-layout parfait, gestion des scrolls avec clip content, utilisation exclusive des composants et variables du Design System. Je publie ensuite la bibliothèque et la synchronise avec Figma Make.</p>
+        </div>
+        <div class="step">
+          <p class="step-num">ÉTAPE 02</p>
+          <p class="step-title">Rédaction des guidelines</p>
+          <p class="step-body">Je structure les guidelines dans Figma Make pour cadrer l'IA : un fichier principal guidelines.md, des fichiers par composant (ex : button.md) et un dossier tokens (colors.md, spacing.md). Ce système garantit des maquettes fidèles au Design System à chaque génération.</p>
+        </div>
+      </div>
+      <ul class="result-list">
+        <li>1 fichier guidelines.md — point d'entrée unique orientant l'IA</li>
+        <li>8 composants documentés avec usage, structure, tokens et variants</li>
+        <li>4 collections de variables structurées en tokens sémantiques</li>
+      </ul>
+      <div class="illustrations-grid-2-1" style="margin-top:24px">
+        <figure class="illustration-item">
+          <div class="illustration-item-inner"><img src="images/weborama-context-1.jpg" alt="Préparation Figma Make"></div>
+          <figcaption class="illustration-caption">Préparation des maquettes pour Figma Make</figcaption>
+        </figure>
+        <figure class="illustration-item">
+          <div class="illustration-item-inner"><img src="images/weborama-context-2.jpg" alt="Guidelines Figma Make"></div>
+          <figcaption class="illustration-caption">Rédaction des guidelines.md</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+
+  <div class="case-section" id="ideation">
+    <p class="sec-label">05 — Idéation par l'IA</p>
+    <div class="sec-body">
+      <h2>Génération de maquettes via Figma Make</h2>
+      <p>Le Design System synchronisé et les guidelines en place, Figma Make peut générer des prototypes haute-fidélité alignés avec le Design System. Les explorations sont rapides, cohérentes et directement exploitables par les équipes.</p>
+      <ul class="result-list">
+        <li>4 équipes alignées — PO, BU, Design, Dev</li>
+        <li>100% des prototypes générés fidèles au Design System</li>
+        <li>Itérations rapides — exploration accélérée par l'IA</li>
+        <li>1 process AI Ready documenté et réplicable</li>
+      </ul>
+      <div class="illustrations-grid-2-1" style="margin-top:24px">
+        <figure class="illustration-item">
+          <div class="illustration-item-inner"><img src="images/weborama-ideation-1.jpg" alt="Maquette générée Figma Make"></div>
+          <figcaption class="illustration-caption">Maquette générée via Figma Make</figcaption>
+        </figure>
+        <figure class="illustration-item">
+          <div class="illustration-item-inner"><img src="images/weborama-ideation-2.jpg" alt="Itération Figma Make"></div>
+          <figcaption class="illustration-caption">Itération rapide par l'IA</figcaption>
+        </figure>
+      </div>
     </div>
   </div>
 

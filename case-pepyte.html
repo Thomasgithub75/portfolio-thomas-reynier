@@ -56,6 +56,7 @@ h1{font-size:clamp(28px,4vw,44px);font-weight:600;letter-spacing:-0.03em;line-he
 
 /* ── SECTION ── */
 .case-section{padding:52px 0;border-top:1px solid var(--border);display:grid;grid-template-columns:148px 1fr;gap:0 48px}
+.container > .case-section:first-child,.illustrations-section + .case-section{border-top:none;padding-top:40px}
 .sec-label{font-size:11px;font-weight:600;color:var(--blue);letter-spacing:.08em;text-transform:uppercase;padding-top:5px;line-height:1.4}
 .sec-body{}
 h2{font-size:20px;font-weight:600;letter-spacing:-0.02em;line-height:1.2;color:var(--text);margin-bottom:16px}
@@ -102,11 +103,10 @@ h2{font-size:20px;font-weight:600;letter-spacing:-0.02em;line-height:1.2;color:v
 .illustration-caption{font-size:13px;color:var(--muted);font-weight:300;text-align:center;line-height:1.4}
 
 /* ── TABLE OF CONTENTS ── */
-.toc{position:fixed;left:calc(50% + 400px);top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:2px;z-index:50}
-.toc-link{display:flex;align-items:center;gap:8px;text-decoration:none;font-size:11px;color:var(--muted);font-weight:400;transition:color 0.2s;padding:5px 0;white-space:nowrap}
-.toc-dot{width:5px;height:5px;border-radius:50%;background:var(--border);flex-shrink:0;transition:background 0.2s,transform 0.2s}
-.toc-link.active{color:var(--blue);font-weight:500}
-.toc-link.active .toc-dot{background:var(--blue);transform:scale(1.4)}
+.toc{position:fixed;left:calc(50% + 400px);top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:0;z-index:50;min-width:140px}
+.toc-title{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;padding-left:12px}
+.toc-link{display:block;text-decoration:none;font-size:12px;color:var(--muted);font-weight:400;transition:color 0.2s;padding:6px 12px;white-space:nowrap;border-left:2px solid transparent;transition:color 0.2s,border-color 0.2s}
+.toc-link.active{color:var(--blue);font-weight:500;border-left-color:var(--blue)}
 @media(max-width:1200px){.toc{display:none}}
 @media(max-width:640px){.illustrations-grid{grid-template-columns:1fr}.illustrations-grid-2-1{grid-template-columns:1fr}.illustrations-grid-2-1 .illustration-item:last-child{grid-column:1}}
 
@@ -148,17 +148,18 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
 </nav>
 
 <aside class="toc">
-  <a class="toc-link" href="#contexte"><span class="toc-dot"></span>Contexte</a>
-  <a class="toc-link" href="#audit"><span class="toc-dot"></span>01 — Audit</a>
-  <a class="toc-link" href="#entretiens"><span class="toc-dot"></span>02 — Entretiens</a>
-  <a class="toc-link" href="#priorisation"><span class="toc-dot"></span>03 — Priorisation</a>
-  <a class="toc-link" href="#formulaires"><span class="toc-dot"></span>04 — Formulaires</a>
-  <a class="toc-link" href="#atelier"><span class="toc-dot"></span>05 — Atelier</a>
-  <a class="toc-link" href="#scoring"><span class="toc-dot"></span>06 — Scoring</a>
-  <a class="toc-link" href="#parcours"><span class="toc-dot"></span>07 — Parcours</a>
-  <a class="toc-link" href="#tests"><span class="toc-dot"></span>08 — Tests</a>
-  <a class="toc-link" href="#resultats"><span class="toc-dot"></span>09 — Résultats</a>
-  <a class="toc-link" href="#recommandations"><span class="toc-dot"></span>Recommandations</a>
+  <p class="toc-title">Sommaire</p>
+  <a class="toc-link" href="#contexte">Contexte</a>
+  <a class="toc-link" href="#audit">01 — Audit</a>
+  <a class="toc-link" href="#entretiens">02 — Entretiens</a>
+  <a class="toc-link" href="#priorisation">03 — Priorisation</a>
+  <a class="toc-link" href="#formulaires">04 — Formulaires</a>
+  <a class="toc-link" href="#atelier">05 — Atelier</a>
+  <a class="toc-link" href="#scoring">06 — Scoring</a>
+  <a class="toc-link" href="#parcours">07 — Parcours</a>
+  <a class="toc-link" href="#tests">08 — Tests</a>
+  <a class="toc-link" href="#resultats">09 — Résultats</a>
+  <a class="toc-link" href="#recommandations">Recommandations</a>
 </aside>
 
 <div class="case-header">
