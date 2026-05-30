@@ -23,7 +23,8 @@ html{scroll-behavior:smooth}
 body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
 
 /* ── NAV ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 2rem;height:56px;display:flex;align-items:center;justify-content:space-between}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0;height:56px;display:flex;align-items:center;justify-content:center}
+.nav-inner{max-width:760px;width:100%;padding:0 2rem;display:flex;align-items:center;justify-content:space-between}
 .logo{font-weight:500;font-size:15px;color:var(--text);text-decoration:none;letter-spacing:-0.01em}
 nav ul{list-style:none;display:flex;gap:2rem;align-items:center}
 nav ul a{font-size:14px;color:var(--muted);text-decoration:none;transition:color .2s;font-weight:400}
@@ -133,12 +134,8 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
 </head>
 <body>
 <nav>
-  <a class="logo" href="index.html">Thomas Reynier</a>
-  <ul>
-    <li><a href="index.html#hero">Accueil</a></li>
-    <li><a href="index.html#projets">Projets</a></li>
-    <li><a href="index.html#contact" class="nav-cta">Me contacter</a></li>
-  </ul>
+  <div class="nav-inner">
+    </div>
 </nav>
 
 <aside class="toc">

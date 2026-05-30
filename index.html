@@ -12,7 +12,8 @@
 :root{--blue:#1A56DB;--blue-light:#EEF4FF;--blue-mid:#3B82F6;--text:#111827;--muted:#6B7280;--border:#E5E7EB;--bg:#FFFFFF;--bg-soft:#F9FAFB}
 html{scroll-behavior:smooth}
 body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 2rem;height:60px;display:flex;align-items:center;justify-content:space-between}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0;height:60px;display:flex;align-items:center;justify-content:center}
+.nav-inner{max-width:760px;width:100%;padding:0 2rem;display:flex;align-items:center;justify-content:space-between}
 .nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
 .nav-logo{width:32px;height:32px;object-fit:contain;display:block}
 .nav-logo-placeholder{width:32px;height:32px;background:var(--blue);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;letter-spacing:-0.01em}
