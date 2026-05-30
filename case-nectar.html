@@ -47,6 +47,9 @@ h1{font-size:clamp(28px,4vw,44px);font-weight:600;letter-spacing:-0.03em;line-he
 .meta-item{font-size:13px;color:var(--muted);padding-right:28px;padding-bottom:8px}
 .meta-item strong{color:var(--text);font-weight:500;display:block;font-size:11px;letter-spacing:.05em;text-transform:uppercase;margin-bottom:3px}
 .case-intro{font-size:17px;color:var(--muted);line-height:1.75;font-weight:300;border-left:3px solid var(--blue);padding-left:20px;margin-bottom:0}
+.case-title-row{display:flex;align-items:center;gap:16px;margin-bottom:20px}
+.case-title-row h1{margin-bottom:0}
+.case-logo{height:32px;width:auto;object-fit:contain;flex-shrink:0}
 
 /* ── STATS ── */
 .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin:40px 0 0}
@@ -154,7 +157,10 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
     <span class="htag">Claude MCP</span>
     <span class="htag">Founding Design IA</span>
   </div>
-  <h1>Nectar</h1>
+  <div class="case-title-row">
+    <img class="case-logo" src="images/logo-nectar.svg" alt="Nectar">
+    <h1>Nectar</h1>
+  </div>
   <div class="meta-row">
     <div class="meta-item"><strong>Projet</strong>Personnel — B2B SaaS</div>
     <div class="meta-item"><strong>Rôle</strong>AI Product Designer</div>
@@ -164,14 +170,12 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
   <p class="case-intro">70 à 80% des insights terrain des commerciaux ne parviennent jamais aux Product Managers. J'ai conçu Nectar pour résoudre ce problème — et pour formaliser un process de conception entièrement piloté par IA, de la recherche utilisateur au développement.</p>
   <div class="stats-row">
     <div class="stat"><div class="stat-val">&lt;1 min</div><div class="stat-label">pour saisir un insight</div></div>
-    <div class="stat"><div class="stat-val">3</div><div class="stat-label">champs de saisie maximum</div></div>
-    <div class="stat"><div class="stat-val">5</div><div class="stat-label">écrans produits livrés</div></div>
-    <div class="stat"><div class="stat-val">100%</div><div class="stat-label">du process piloté par IA</div></div>
+    <div class="stat"><div class="stat-val">6</div><div class="stat-label">phases de conception pilotées par IA</div></div>
+    <div class="stat"><div class="stat-val">12</div><div class="stat-label">composants React conformes au Design System</div></div>
+    <div class="stat"><div class="stat-val">100%</div><div class="stat-label">du process piloté par IA, de la recherche au dev</div></div>
   </div>
 </div>
 </div>
-
-<hr class="divider">
 
 <div class="container">
 
