@@ -93,7 +93,7 @@ h2{font-size:20px;font-weight:600;letter-spacing:-0.02em;line-height:1.2;color:v
 @media(max-width:640px){.illustrations-grid{grid-template-columns:1fr}.illustrations-grid-2-1{grid-template-columns:1fr}.illustrations-grid-2-1 .illustration-item:last-child{grid-column:1}}
 
 /* ── TABLE OF CONTENTS ── */
-.toc{position:fixed;left:calc(50% + 500px);top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:0;z-index:50;min-width:140px}
+.toc{position:fixed;left:calc(50% + 500px);top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:0;z-index:50;min-width:140px;transition:opacity 0.3s}
 .toc-title{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;padding-left:12px}
 .toc-link{display:block;text-decoration:none;font-size:12px;color:var(--muted);font-weight:400;transition:color 0.2s;padding:6px 12px;white-space:nowrap;border-left:2px solid transparent;transition:color 0.2s,border-color 0.2s}
 .toc-link.active{color:var(--blue);font-weight:500;border-left-color:var(--blue)}
@@ -474,6 +474,19 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
     });
   }, {rootMargin:'-15% 0px -70% 0px'});
   document.querySelectorAll('.case-section[id]').forEach(s => observer.observe(s));
+
+  // Hide TOC when Autres projets section is visible
+  const toc = document.querySelector('.toc');
+  const nextSection = document.querySelector('.next-section');
+  if (nextSection && toc) {
+    const hideObs = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        toc.style.opacity = entry.isIntersecting ? '0' : '1';
+        toc.style.pointerEvents = entry.isIntersecting ? 'none' : 'auto';
+      });
+    }, {threshold: 0.05});
+    hideObs.observe(nextSection);
+  }
 </script>
 
 <script>
