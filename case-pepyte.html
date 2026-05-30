@@ -112,6 +112,25 @@ h2{font-size:20px;font-weight:600;letter-spacing:-0.02em;line-height:1.2;color:v
 @media(max-width:1200px){.toc{display:none}}
 @media(max-width:640px){.illustrations-grid{grid-template-columns:1fr}.illustrations-grid-2-1{grid-template-columns:1fr}.illustrations-grid-2-1 .illustration-item:last-child{grid-column:1}}
 
+/* ── PROJECT CARDS (autres projets) ── */
+.projects-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.project-card{background:var(--bg);display:flex;flex-direction:column;transition:border-color 0.2s,box-shadow 0.2s;text-decoration:none;color:inherit;border-radius:10px;border:2px solid var(--border);overflow:hidden}
+.project-card:hover{border-color:var(--blue);box-shadow:0 4px 24px rgba(26,86,219,0.1)}
+.project-thumb{width:100%;height:160px;background:var(--bg-soft);border-bottom:1px solid var(--border);overflow:hidden;flex-shrink:0}
+.project-thumb img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform 0.4s ease}
+.project-card:hover .project-thumb img{transform:scale(1.04)}
+.project-body{padding:20px;display:flex;flex-direction:column;gap:10px;flex:1}
+.project-header{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.project-header-left{display:flex;align-items:center;gap:8px;flex:1;min-width:0}
+.project-logo-sm{width:20px;height:20px;border-radius:4px;object-fit:contain;flex-shrink:0}
+.project-role-badge{font-size:11px;font-weight:600;color:var(--blue);background:var(--blue-light);padding:3px 10px;border-radius:20px;white-space:nowrap;border:1px solid rgba(26,86,219,0.12)}
+.project-dur{font-size:12px;color:var(--muted);font-weight:400;white-space:nowrap;flex-shrink:0}
+.project-name{font-size:17px;font-weight:600;color:var(--text);letter-spacing:-0.02em;line-height:1.2}
+.project-desc{font-size:13px;color:var(--muted);line-height:1.6;font-weight:300}
+.project-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+.p-tag{font-size:12px;padding:3px 10px;border-radius:20px;background:var(--blue-light);color:var(--blue);font-weight:500}
+@media(max-width:640px){.projects-grid-2{grid-template-columns:1fr}}
+
 /* ── NEXT CASES ── */
 .next-section{padding:56px 0 0;border-top:1px solid var(--border)}
 .section-label{font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin-bottom:20px}
@@ -435,15 +454,43 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
 <div class="next-section">
   <div class="container">
     <p class="section-label">Autres projets</p>
-    <div class="next-grid"><a class="next-card" href="case-weborama.html">
-        <p class="next-co">Weborama</p>
-        <p class="next-title">Design System unifié & nouvelle application SaaS</p>
-        <p class="next-desc">AdTech SaaS · 16 mois</p>
-      </a><a class="next-card" href="case-nectar.html">
-        <p class="next-co">Nectar</p>
-        <p class="next-title">Founding Design IA — MVP SaaS piloté par IA</p>
-        <p class="next-desc">B2B SaaS · Projet personnel</p>
-      </a></div>
+    <div class="projects-grid-2">
+      <a class="project-card" href="case-weborama.html">
+        <div class="project-thumb"><img src="images/thumb-weborama.jpg" alt="Weborama"></div>
+        <div class="project-body">
+          <div class="project-header">
+            <div class="project-header-left">
+              <img class="project-logo-sm" src="images/logo-weborama.svg" alt="Weborama">
+              <span class="project-role-badge">Design System Lead</span>
+            </div>
+            <span class="project-dur">16 mois</span>
+          </div>
+          <p class="project-name">Weborama</p>
+          <p class="project-desc">2 Design Systems, process AI Ready et idéation via Figma Make — 4 équipes alignées sur une source unique.</p>
+          <div class="project-tags">
+            <span class="p-tag">Design System</span><span class="p-tag">Figma Make</span><span class="p-tag">AI Ready</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="project-card" href="case-nectar.html">
+        <div class="project-thumb"><img src="images/thumb-nectar.jpg" alt="Nectar"></div>
+        <div class="project-body">
+          <div class="project-header">
+            <div class="project-header-left">
+              <img class="project-logo-sm" src="images/logo-nectar.svg" alt="Nectar">
+              <span class="project-role-badge">Founding Designer</span>
+            </div>
+            <span class="project-dur">En cours</span>
+          </div>
+          <p class="project-name">Nectar</p>
+          <p class="project-desc">MVP SaaS piloté par IA — de la recherche utilisateur au développement, 100% du process assisté par IA.</p>
+          <div class="project-tags">
+            <span class="p-tag">UX Research</span><span class="p-tag">Figma Make</span><span class="p-tag">Claude</span>
+          </div>
+        </div>
+      </a>
+    </div>
   </div>
 </div>
 
