@@ -171,11 +171,13 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
 <aside class="toc">
   <p class="toc-title">Sommaire</p>
   <a class="toc-link" href="#contexte">Contexte</a>
-  <a class="toc-link" href="#audit">01 — Audit DS</a>
-  <a class="toc-link" href="#ux-design">02 — UX Design</a>
-  <a class="toc-link" href="#design-system">03 — Design System</a>
-  <a class="toc-link" href="#context-ia">04 — Context IA</a>
-  <a class="toc-link" href="#ideation">05 — Idéation IA</a>
+  <a class="toc-link" href="#audit">01 — Audit</a>
+  <a class="toc-link" href="#design-system-unifie">02 — Design System</a>
+  <a class="toc-link" href="#fonctionnalites">03 — Fonctionnalités</a>
+  <a class="toc-link" href="#ux-design">04 — UX Design</a>
+  <a class="toc-link" href="#design-system">05 — DS Figma Make</a>
+  <a class="toc-link" href="#context-ia">06 — Context IA</a>
+  <a class="toc-link" href="#ideation">07 — Idéation IA</a>
   <a class="toc-link" href="#recommandation">Recommandation</a>
 </aside>
 
@@ -221,33 +223,73 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
   </div>
 
   <div class="case-section" id="audit">
-    <p class="sec-label">01 — Audit DS</p>
+    <p class="sec-label">01 — Audit</p>
     <div class="sec-body">
-      <h2>Rationalisation des 4 applications existantes</h2>
-      <p>J'ai audité l'ensemble des 4 bibliothèques Figma : <strong>974 composants, 44 variables et 14 variations de couleur</strong>. J'ai analysé les récurrences, identifié les incohérences et recensé les doublons. <strong>11 composants en doublon</strong> identifiés — point de départ pour la réduction de 80%.</p>
-      <p>J'ai piloté des ateliers réunissant <strong>3 designers et jusqu'à 3 développeurs</strong> pour statuer sur chaque composant, éliminer les doublons et établir une convention de nommage commune. Ces sessions avaient aussi un objectif d'évangélisation : Atomic Design, tokens, variables.</p>
+      <h2>État des lieux : 4 bibliothèques, zéro cohérence</h2>
+      <p>J'ai audité l'ensemble des 4 bibliothèques Figma : <strong>974 composants, 44 variables et 14 variations de couleur</strong>. Chaque application avait évolué indépendamment — les mêmes composants existaient en plusieurs versions incompatibles, les conventions de nommage divergeaient, et les développeurs ne savaient plus quelle version implémenter.</p>
+      <p>J'ai piloté des ateliers réunissant <strong>3 designers et jusqu'à 3 développeurs</strong> pour statuer sur chaque composant : garder, fusionner ou supprimer. Ces sessions avaient aussi un objectif d'évangélisation — Atomic Design, tokens, variables — pour que l'adoption du futur DS soit durable.</p>
       <ul class="result-list">
         <li>974 composants audités sur 4 applications</li>
+        <li>11 composants en doublon identifiés comme point de départ</li>
         <li>−80% de composants après rationalisation</li>
-        <li>175 variables organisées en 5 collections</li>
-        <li>4 modes de couleurs, un par application</li>
-        <li>100% des composants documentés dans Zeroheight et Storybook</li>
       </ul>
-      <div class="illustrations-grid-2-1" style="margin-top:24px">
+      <div class="illustrations-grid" style="margin-top:24px;grid-template-columns:1fr">
         <figure class="illustration-item">
           <div class="illustration-item-inner"><img src="images/weborama-audit-1.jpg" alt="Audit Weborama"></div>
-          <figcaption class="illustration-caption">Cartographie des composants existants</figcaption>
+          <figcaption class="illustration-caption">Cartographie des composants existants — état avant</figcaption>
         </figure>
+      </div>
+    </div>
+  </div>
+
+  <div class="case-section" id="design-system-unifie">
+    <p class="sec-label">02 — Design System</p>
+    <div class="sec-body">
+      <h2>Un Design System unifié pour les 4 applications</h2>
+      <p>Fort des décisions prises en atelier, j'ai conçu le nouveau Design System de zéro selon les principes de l'Atomic Design. L'objectif : une source de vérité unique pour les 4 applications, partagée design et développement.</p>
+      <p><strong>Fondations</strong> — palettes avec 4 modes (un par application), typographies, espacements, bibliothèque d'icônes commune. 175 variables organisées en 5 collections : Primitives, Colors, Spacing, Typography, Border.</p>
+      <p><strong>Composants</strong> — 24 composants déclinés en 195 variants, du plus atomique au plus complexe, connectés aux variables sémantiques. <strong>Templates</strong> — 7 templates réutilisables pour produire des interfaces conformes plus rapidement. Ces templates serviront directement de base pour concevoir de nouvelles fonctionnalités.</p>
+      <p>La documentation est centralisée dans <strong>Zeroheight</strong> (design) et <strong>Storybook</strong> (développement), assurant l'alignement durable entre les deux équipes.</p>
+      <ul class="result-list">
+        <li>24 composants · 195 variants connectés aux variables sémantiques</li>
+        <li>175 variables en 5 collections · 4 modes de couleurs</li>
+        <li>7 templates réutilisables</li>
+        <li>100% documentés dans Zeroheight et Storybook</li>
+      </ul>
+      <div class="illustrations-grid" style="margin-top:24px;grid-template-columns:1fr">
         <figure class="illustration-item">
-          <div class="illustration-item-inner"><img src="images/weborama-audit-2.jpg" alt="Analyse des incohérences"></div>
-          <figcaption class="illustration-caption">Analyse des incohérences visuelles</figcaption>
+          <div class="illustration-item-inner"><img src="images/weborama-ds-unifie-1.jpg" alt="Design System unifié Weborama"></div>
+          <figcaption class="illustration-caption">Design System unifié — variables, composants et templates</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+
+  <div class="case-section" id="fonctionnalites">
+    <p class="sec-label">03 — Fonctionnalités</p>
+    <div class="sec-body">
+      <h2>Le DS comme accélérateur de conception</h2>
+      <p>Le Design System n'est pas une fin en soi — c'est un accélérateur. Avec les fondations en place et les templates disponibles, la conception de nouvelles fonctionnalités est devenue plus rapide et plus cohérente.</p>
+      <p>Exemple concret : la conception d'un <strong>flux unifié pour exporter des datasets vers des destinations externes</strong> (S3, Yandex…). Le parcours se déroule en deux étapes : créer une destination réutilisable, puis configurer un transfert avec contrôle fin des colonnes. Zéro outil tiers — tout dans le Data Hub.</p>
+      <p>Les templates existants du DS ont fourni les patterns de formulaire, les états de validation et les composants de configuration. La conception s'est concentrée sur le <strong>parcours et la logique fonctionnelle</strong>, pas sur les briques de base — déjà définies, testées, documentées.</p>
+      <ul class="result-list">
+        <li>Parcours conçu en 2 étapes claires et cohérentes</li>
+        <li>Templates du DS réutilisés directement — aucune brique à recréer</li>
+        <li>Contrôle fin des colonnes sans quitter l'application</li>
+        <li>Zéro outil tiers nécessaire</li>
+      </ul>
+      <div class="illustrations-grid" style="margin-top:24px;grid-template-columns:1fr">
+        <figure class="illustration-item">
+          <div class="illustration-item-inner"><img src="images/weborama-feature-1.jpg" alt="Flux export datasets Weborama"></div>
+          <figcaption class="illustration-caption">Flux d'export de datasets — conçu avec les templates du DS</figcaption>
         </figure>
       </div>
     </div>
   </div>
 
   <div class="case-section" id="ux-design">
-    <p class="sec-label">02 — UX Design</p>
+    <p class="sec-label">04 — UX Design</p>
+    <p class="sec-label">04 — UX Design</p>
     <div class="sec-body">
       <h2>Audit & conception de la nouvelle application</h2>
       <p>À partir des explorations menées par les équipes PO et BU via Figma Make, j'analyse l'ensemble des parcours et réalise un benchmark des outils concurrents pour identifier les opportunités d'amélioration et simplifier l'expérience.</p>
@@ -287,7 +329,7 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
   </div>
 
   <div class="case-section" id="design-system">
-    <p class="sec-label">03 — Design System</p>
+    <p class="sec-label">05 — DS Figma Make</p>
     <div class="sec-body">
       <h2>Conception du Design System de la nouvelle app</h2>
       <p>Je conçois le Design System de la nouvelle application SaaS selon une approche structurée : fondations solides, composants en Atomic Design, variables définies et optimisées pour l'intégration dans Figma Make.</p>
@@ -337,7 +379,7 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
   </div>
 
   <div class="case-section" id="context-ia">
-    <p class="sec-label">04 — Context pour l'IA</p>
+    <p class="sec-label">06 — Context pour l'IA</p>
     <div class="sec-body">
       <h2>Synchronisation du Design System avec Figma Make</h2>
       <p>Je mets en place un process « AI Ready » structuré en deux étapes : la préparation des maquettes et la rédaction des guidelines. L'objectif : que Figma Make génère des prototypes directement fidèles au Design System.</p>
@@ -372,7 +414,7 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
   </div>
 
   <div class="case-section" id="ideation">
-    <p class="sec-label">05 — Idéation par l'IA</p>
+    <p class="sec-label">07 — Idéation par l'IA</p>
     <div class="sec-body">
       <h2>Génération de maquettes via Figma Make</h2>
       <p>Le Design System synchronisé et les guidelines en place, Figma Make peut générer des prototypes haute-fidélité alignés avec le Design System. Les explorations sont rapides, cohérentes et directement exploitables par les équipes.</p>
