@@ -174,10 +174,10 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
   <a class="toc-link" href="#audit">01 — Audit</a>
   <a class="toc-link" href="#design-system-unifie">02 — Design System</a>
   <a class="toc-link" href="#fonctionnalites">03 — Fonctionnalités</a>
-  <a class="toc-link" href="#ux-design">04 — UX Design</a>
-  <a class="toc-link" href="#design-system">05 — DS Figma Make</a>
-  <a class="toc-link" href="#context-ia">06 — Context IA</a>
-  <a class="toc-link" href="#ideation">07 — Idéation IA</a>
+  <a class="toc-link" href="#ux-design">04 — UX Research</a>
+  <a class="toc-link" href="#design-system">05 — Design System</a>
+  <a class="toc-link" href="#context-ia">06 — Process IA Ready</a>
+  <a class="toc-link" href="#ideation">07 — Fonctionnalités IA</a>
   <a class="toc-link" href="#recommandation">Recommandation</a>
 </aside>
 
@@ -288,36 +288,22 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
   </div>
 
   <div class="case-section" id="ux-design">
-    <p class="sec-label">04 — UX Design</p>
+    <p class="sec-label">04 — UX Research</p>
     <div class="sec-body">
-      <h2>Audit & conception de la nouvelle application</h2>
-      <p>À partir des explorations menées par les équipes PO et BU via Figma Make, j'analyse l'ensemble des parcours et réalise un benchmark des outils concurrents pour identifier les opportunités d'amélioration et simplifier l'expérience.</p>
-      <div class="steps">
-        <div class="step">
-          <p class="step-num">ÉTAPE 01</p>
-          <p class="step-title">Analyse de l'existant</p>
-          <p class="step-body">Les prototypes générés par les équipes PO et BU constituent une base solide, mais certaines étapes ralentissent l'expérience. J'identifie les frictions et les opportunités de simplification.</p>
-        </div>
-        <div class="step">
-          <p class="step-num">ÉTAPE 02</p>
-          <p class="step-title">Benchmark</p>
-          <p class="step-body">Analyse des outils concurrents et des conventions UX du marché pour identifier les standards attendus et les opportunités applicables à l'outil.</p>
-        </div>
-        <div class="step">
-          <p class="step-num">ÉTAPE 03</p>
-          <p class="step-title">Optimisations & parcours</p>
-          <p class="step-body">Réduction du nombre d'étapes, simplification des parcours, meilleure conformité aux standards UX. Le parcours principal est ramené de 3 étapes à 1. Toutes les propositions sont acceptées par les équipes Produit et Commerciale.</p>
-        </div>
-      </div>
+      <h2>Comprendre avant de concevoir</h2>
+      <p>Weborama souhaitait lancer une nouvelle application SaaS à partir d'explorations générées par les équipes Produit et Commerciales via Figma Make. Ces prototypes constituaient une base de travail, mais nécessitaient une démarche UX structurée avant d'aller plus loin.</p>
+      <p>J'ai mené une phase de recherche complète : analyse des prototypes existants pour identifier les frictions, benchmark des outils concurrents pour cadrer les standards attendus, puis conception du parcours utilisateur final. Chaque décision de conception s'appuie sur ces insights.</p>
       <ul class="result-list">
-        <li>100% des propositions acceptées par les équipes produit et commerciale</li>
-        <li>5 écrans retravaillés — parcours principal et pages de résultats</li>
+        <li>Analyse des prototypes PO & BU — frictions identifiées, opportunités définies</li>
+        <li>Benchmark des conventions UX du marché</li>
+        <li>Parcours utilisateur conçu et validé avec les équipes</li>
+        <li>100% des propositions acceptées par les équipes Produit et Commerciale</li>
         <li>3 écrans supprimés — complexité réduite sans perte de fonctionnalité</li>
       </ul>
       <div class="illustrations-grid-2-1" style="margin-top:24px">
         <figure class="illustration-item">
-          <div class="illustration-item-inner"><img src="images/weborama-ux-1.jpg" alt="Audit UX Weborama"></div>
-          <figcaption class="illustration-caption">Analyse des parcours existants</figcaption>
+          <div class="illustration-item-inner"><img src="images/weborama-ux-1.jpg" alt="Analyse parcours Weborama"></div>
+          <figcaption class="illustration-caption">Analyse des parcours & frictions</figcaption>
         </figure>
         <figure class="illustration-item">
           <div class="illustration-item-inner"><img src="images/weborama-ux-2.jpg" alt="Benchmark Weborama"></div>
@@ -328,37 +314,36 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
   </div>
 
   <div class="case-section" id="design-system">
-    <p class="sec-label">05 — DS Figma Make</p>
+    <p class="sec-label">05 — Design System</p>
     <div class="sec-body">
-      <h2>Conception du Design System de la nouvelle app</h2>
-      <p>Je conçois le Design System de la nouvelle application SaaS selon une approche structurée : fondations solides, composants en Atomic Design, variables définies et optimisées pour l'intégration dans Figma Make.</p>
+      <h2>Un Design System pensé pour l'IA</h2>
+      <p>J'ai conçu le Design System de la nouvelle application avec un double objectif : fournir une base solide pour les équipes design et dev, et être nativement compatible avec Figma Make pour accélérer l'idéation par l'IA.</p>
       <div class="steps">
         <div class="step">
           <p class="step-num">ÉTAPE 01</p>
-          <p class="step-title">Variables</p>
-          <p class="step-body">Variables définies en deux modes (clair et sombre), plus les variables de typographie, d'espacement et de bordures. 4 collections en tokens sémantiques light / dark.</p>
+          <p class="step-title">Variables & tokens</p>
+          <p class="step-body">Variables définies en deux modes (clair et sombre). 4 collections de tokens sémantiques : colors, spacing, radius, typography. Chaque token est nommé selon une convention stricte, lisible par l'IA comme par les développeurs.</p>
         </div>
         <div class="step">
           <p class="step-num">ÉTAPE 02</p>
           <p class="step-title">Composants & variants</p>
-          <p class="step-body">8 composants conçus selon l'Atomic Design. Chaque composant intègre des tokens de couleur et d'espacement, ainsi que ses variants et états.</p>
+          <p class="step-body">8 composants conçus selon l'Atomic Design — des atomes aux organismes. Chaque composant intègre ses tokens, ses états et ses variants. L'accessibilité est intégrée dès les fondations.</p>
         </div>
         <div class="step">
           <p class="step-num">ÉTAPE 03</p>
-          <p class="step-title">Accessibilité</p>
-          <p class="step-body">Intégrée dès la création des fondations, variables et composants pour garantir des interfaces inclusives.</p>
+          <p class="step-title">Templates</p>
+          <p class="step-body">2 templates réutilisables conçus pour produire des interfaces cohérentes rapidement — et directement exploitables dans Figma Make pour générer des écrans haute-fidélité.</p>
         </div>
         <div class="step">
           <p class="step-num">ÉTAPE 04</p>
-          <p class="step-title">Templates</p>
-          <p class="step-body">2 templates réutilisables permettant aux équipes de produire des interfaces cohérentes et de les intégrer directement dans Figma Make.</p>
+          <p class="step-title">Validation dans Storybook</p>
+          <p class="step-body">Chaque composant est validé avec l'équipe de développement dans Storybook : comportements, états, tokens implémentés. Ce processus garantit la cohérence entre le DS Figma et l'implémentation front.</p>
         </div>
       </div>
       <ul class="result-list">
-        <li>8 composants conçus selon l'Atomic Design avec tokens et variants</li>
-        <li>4 collections de variables — color, spacing, radius en tokens sémantiques light / dark</li>
-        <li>2 modes (light et dark) appliqués via les variables sur tous les composants</li>
-        <li>2 templates réutilisables optimisés pour l'import dans Figma Make</li>
+        <li>8 composants · 4 collections de tokens · 2 modes light / dark</li>
+        <li>2 templates optimisés pour Figma Make</li>
+        <li>Validé en Storybook avec l'équipe dev</li>
       </ul>
       <div class="illustrations-grid" style="margin-top:24px">
         <figure class="illustration-item">
@@ -367,70 +352,74 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
         </figure>
         <figure class="illustration-item">
           <div class="illustration-item-inner"><img src="images/weborama-ds-2.jpg" alt="Composants Design System"></div>
-          <figcaption class="illustration-caption">Bibliothèque de composants</figcaption>
+          <figcaption class="illustration-caption">Composants & variants</figcaption>
         </figure>
         <figure class="illustration-item">
           <div class="illustration-item-inner"><img src="images/weborama-ds-3.jpg" alt="Templates Design System"></div>
-          <figcaption class="illustration-caption">Templates réutilisables</figcaption>
+          <figcaption class="illustration-caption">Templates & validation Storybook</figcaption>
         </figure>
       </div>
     </div>
   </div>
 
   <div class="case-section" id="context-ia">
-    <p class="sec-label">06 — Context pour l'IA</p>
+    <p class="sec-label">06 — Process IA Ready</p>
     <div class="sec-body">
-      <h2>Synchronisation du Design System avec Figma Make</h2>
-      <p>Je mets en place un process « AI Ready » structuré en deux étapes : la préparation des maquettes et la rédaction des guidelines. L'objectif : que Figma Make génère des prototypes directement fidèles au Design System.</p>
+      <h2>Implémenter la connaissance du DS dans l'IA</h2>
+      <p>Un Design System bien conçu ne suffit pas à cadrer l'IA — il faut lui transmettre la connaissance. J'ai mis en place un process en deux temps pour que Figma Make génère des prototypes directement fidèles au Design System, sans intervention manuelle.</p>
       <div class="steps">
         <div class="step">
           <p class="step-num">ÉTAPE 01</p>
           <p class="step-title">Préparation des maquettes</p>
-          <p class="step-body">Avant l'import dans Figma Make, je vérifie 4 prérequis : nommage strict des frames, auto-layout parfait, gestion des scrolls avec clip content, utilisation exclusive des composants et variables du Design System. Je publie ensuite la bibliothèque et la synchronise avec Figma Make.</p>
+          <p class="step-body">Protocole strict avant synchronisation : nommage des frames, auto-layout, gestion des scrolls (clip content), utilisation exclusive des composants et variables publiés. La bibliothèque est ensuite synchronisée avec Figma Make.</p>
         </div>
         <div class="step">
           <p class="step-num">ÉTAPE 02</p>
-          <p class="step-title">Rédaction des guidelines</p>
-          <p class="step-body">Je structure les guidelines dans Figma Make pour cadrer l'IA : un fichier principal guidelines.md, des fichiers par composant (ex : button.md) et un dossier tokens (colors.md, spacing.md). Ce système garantit des maquettes fidèles au Design System à chaque génération.</p>
+          <p class="step-title">Implémentation du knowledge dans le code Figma Make</p>
+          <p class="step-body">J'ai intégré la connaissance du Design System directement dans le code de Figma Make via des fichiers markdown : un fichier principal guidelines.md, des fichiers dédiés par composant (button.md, input.md…) et un dossier tokens (colors.md, spacing.md). L'IA dispose ainsi des règles d'usage, des contraintes de style et des tokens pour chaque génération.</p>
         </div>
       </div>
       <ul class="result-list">
-        <li>1 fichier guidelines.md — point d'entrée unique orientant l'IA</li>
-        <li>8 composants documentés avec usage, structure, tokens et variants</li>
-        <li>4 collections de variables structurées en tokens sémantiques</li>
+        <li>1 guidelines.md — point d'entrée unique pour cadrer l'IA</li>
+        <li>8 fichiers composants documentés avec usage, tokens et variants</li>
+        <li>4 collections de tokens structurées pour la lecture par l'IA</li>
+        <li>100% des prototypes générés conformes au Design System</li>
       </ul>
       <div class="illustrations-grid-2-1" style="margin-top:24px">
         <figure class="illustration-item">
           <div class="illustration-item-inner"><img src="images/weborama-context-1.jpg" alt="Préparation Figma Make"></div>
-          <figcaption class="illustration-caption">Préparation des maquettes pour Figma Make</figcaption>
+          <figcaption class="illustration-caption">Préparation & synchronisation Figma Make</figcaption>
         </figure>
         <figure class="illustration-item">
-          <div class="illustration-item-inner"><img src="images/weborama-context-2.jpg" alt="Guidelines Figma Make"></div>
-          <figcaption class="illustration-caption">Rédaction des guidelines.md</figcaption>
+          <div class="illustration-item-inner"><img src="images/weborama-context-2.jpg" alt="Knowledge Figma Make"></div>
+          <figcaption class="illustration-caption">Implémentation du knowledge dans le code</figcaption>
         </figure>
       </div>
     </div>
   </div>
 
   <div class="case-section" id="ideation">
-    <p class="sec-label">07 — Idéation par l'IA</p>
+    <p class="sec-label">07 — Fonctionnalités IA</p>
     <div class="sec-body">
-      <h2>Génération de maquettes via Figma Make</h2>
-      <p>Le Design System synchronisé et les guidelines en place, Figma Make peut générer des prototypes haute-fidélité alignés avec le Design System. Les explorations sont rapides, cohérentes et directement exploitables par les équipes.</p>
+      <h2>Concevoir de nouvelles fonctionnalités avec l'IA</h2>
+      <p>Le process IA Ready en place, Figma Make génère des prototypes alignés avec le DS dès le premier prompt. Les explorations sont rapides, cohérentes et directement présentables aux équipes. C'est sur cette base que j'ai pu concevoir de nouvelles fonctionnalités ambitieuses.</p>
+      <p>Exemple : la <strong>génération d'audience par IA à partir d'un brief en langage naturel</strong>. L'utilisateur décrit sa cible en quelques mots. L'IA produit une persona, estime le volume d'audience (ex. 2,1M) et génère les règles de segmentation WAM prêtes à l'emploi — directement dans l'interface, sans outil tiers.</p>
+      <p>Cette fonctionnalité a été idéée, maquettée et itérée entièrement via Figma Make, en s'appuyant sur les composants et templates du DS. Le time-to-prototype est passé de plusieurs jours à quelques heures.</p>
       <ul class="result-list">
-        <li>4 équipes alignées — PO, BU, Design, Dev</li>
-        <li>100% des prototypes générés fidèles au Design System</li>
-        <li>Itérations rapides — exploration accélérée par l'IA</li>
-        <li>1 process AI Ready documenté et réplicable</li>
+        <li>Génération d'audience IA depuis un brief en langage naturel</li>
+        <li>Persona + volume estimé + règles WAM générés automatiquement</li>
+        <li>Zéro outil tiers — tout dans l'interface</li>
+        <li>Time-to-prototype réduit grâce au process IA Ready</li>
+        <li>4 équipes alignées sur le process — PO, BU, Design, Dev</li>
       </ul>
       <div class="illustrations-grid-2-1" style="margin-top:24px">
         <figure class="illustration-item">
-          <div class="illustration-item-inner"><img src="images/weborama-ideation-1.jpg" alt="Maquette générée Figma Make"></div>
-          <figcaption class="illustration-caption">Maquette générée via Figma Make</figcaption>
+          <div class="illustration-item-inner"><img src="images/weborama-ideation-1.jpg" alt="Idéation Figma Make"></div>
+          <figcaption class="illustration-caption">Idéation via Figma Make</figcaption>
         </figure>
         <figure class="illustration-item">
-          <div class="illustration-item-inner"><img src="images/weborama-ideation-2.jpg" alt="Itération Figma Make"></div>
-          <figcaption class="illustration-caption">Itération rapide par l'IA</figcaption>
+          <div class="illustration-item-inner"><img src="images/weborama-ideation-2.jpg" alt="Génération audience IA"></div>
+          <figcaption class="illustration-caption">Génération d'audience par IA</figcaption>
         </figure>
       </div>
     </div>
