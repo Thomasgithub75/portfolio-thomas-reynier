@@ -21,6 +21,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,
 nav ul{list-style:none;display:flex;gap:2rem;align-items:center}
 nav ul a{font-size:14px;color:var(--muted);text-decoration:none;transition:color 0.2s;font-weight:400}
 nav ul a:hover{color:var(--text)}
+nav ul a.nav-active{color:var(--text);font-weight:500}
 .nav-cta{font-size:14px!important;background:var(--blue);color:#fff!important;padding:7px 16px;border-radius:6px;font-weight:500!important}
 .nav-cta:hover{opacity:0.88;color:#fff!important}
 .container{max-width:960px;margin:0 auto;padding:0 2rem}
@@ -121,6 +122,7 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
       <span class="logo">Thomas Reynier</span>
     </a>
     <ul>
+      <li><a href="#hero">Accueil</a></li>
       <li><a href="#competences">Expertises</a></li>
       <li><a href="#projets">Projets</a></li>
       <li><a href="#contact" class="nav-cta">Contact</a></li>
@@ -391,6 +393,28 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
 </footer>
 
 <script>
+// Active nav link based on scroll position
+(function() {
+  const sections = [
+    { id: 'hero', link: document.querySelector('nav ul a[href="#hero"]') },
+    { id: 'competences', link: document.querySelector('nav ul a[href="#competences"]') },
+    { id: 'projets', link: document.querySelector('nav ul a[href="#projets"]') },
+    { id: 'contact', link: document.querySelector('nav ul a[href="#contact"]') }
+  ];
+  function updateActive() {
+    const scrollY = window.scrollY + window.innerHeight * 0.3;
+    let current = sections[0];
+    sections.forEach(s => {
+      const el = document.getElementById(s.id);
+      if (el && el.offsetTop <= scrollY) current = s;
+    });
+    sections.forEach(s => s.link && s.link.classList.remove('nav-active'));
+    if (current.link) current.link.classList.add('nav-active');
+  }
+  window.addEventListener('scroll', updateActive, { passive: true });
+  updateActive();
+})();
+
 function toggleTags(btn, e) {
   e.preventDefault();
   var hidden = btn.parentElement.querySelectorAll('.tag-hidden');
