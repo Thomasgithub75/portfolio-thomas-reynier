@@ -117,13 +117,22 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
 .burger.active span:nth-child(2){opacity:0}
 .burger.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 nav.menu-open{background:#ffffff;backdrop-filter:none}
+@keyframes menuSlide{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+.mob-footer{display:none;position:fixed;bottom:0;left:0;right:0;height:72px;background:#fff;border-top:1px solid var(--border);padding:0 2rem;z-index:201;align-items:center;justify-content:space-between}
+nav.menu-open .mob-footer{display:flex}
+.mob-footer-email{font-size:13px;color:var(--muted);font-weight:300}
+.mob-footer-icons{display:flex;gap:8px}
+.mob-footer-icon{width:36px;height:36px;border-radius:8px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--muted);text-decoration:none}
+.mob-footer-icon svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.8}
 @media(max-width:600px){
   .hero-content{grid-template-columns:1fr}.hero-image{max-width:220px;order:-1}.project-body{grid-template-columns:1fr}.project-arrow{display:none}
   nav ul{display:none}
-  nav ul.open{display:flex;flex-direction:column;position:fixed;top:60px;left:0;right:0;bottom:0;background:#ffffff;z-index:200;padding:0;border-top:1px solid var(--border);align-items:stretch}
+  nav ul.open{display:flex;flex-direction:column;position:fixed;top:60px;left:0;right:0;bottom:72px;background:#ffffff;z-index:200;padding:8px 0 0;border-top:1px solid var(--border);align-items:stretch;animation:menuSlide .22s ease;overflow-y:auto}
   nav ul.open li{border-bottom:1px solid var(--border);width:100%}
-  nav ul.open a{display:block;padding:20px 2rem;font-size:17px;color:var(--text);font-weight:400;text-align:left}
-  nav ul.open .nav-cta{display:block;text-align:left;background:none;color:var(--blue)!important;font-weight:600!important;padding:20px 2rem;border-radius:0}
+  nav ul.open li:last-child{border-bottom:none;padding:20px 2rem 0}
+  nav ul.open a{display:block;padding:22px 2rem;font-size:20px;font-weight:500;color:var(--text);text-align:left;transition:background .15s}
+  nav ul.open a:active{background:var(--bg-soft)}
+  nav ul.open .nav-cta{display:block;text-align:center;background:var(--blue);color:#fff!important;font-weight:600!important;padding:16px!important;border-radius:10px;font-size:16px!important}
   .burger{display:flex}
 }
 </style>
@@ -145,6 +154,17 @@ nav.menu-open{background:#ffffff;backdrop-filter:none}
     <button class="burger" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
+    <div class="mob-footer">
+      <span class="mob-footer-email">reynier.design@gmail.com</span>
+      <div class="mob-footer-icons">
+        <a href="https://mail.google.com/mail/?view=cm&to=reynier.design@gmail.com" target="_blank" class="mob-footer-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/thomas-reynier-product-design/" target="_blank" class="mob-footer-icon">
+          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+      </div>
+    </div>
   </div>
 </nav>
 
