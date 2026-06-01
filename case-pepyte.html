@@ -147,9 +147,26 @@ h2{font-size:20px;font-weight:600;letter-spacing:-0.02em;line-height:1.2;color:v
 /* ── LIGHTBOX ── */
 .illustration-item img{cursor:zoom-in}
 
+/* ── CASE CTA ── */
+.case-cta{padding:64px 0;border-top:1px solid var(--border);text-align:center}
+.cta-eyebrow{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin-bottom:12px}
+.case-cta h2{font-size:clamp(22px,3vw,32px);font-weight:600;letter-spacing:-0.02em;color:var(--text);margin-bottom:8px}
+.cta-sub{font-size:15px;color:var(--muted);font-weight:300;margin-bottom:32px;line-height:1.6}
+.cta-buttons{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.cta-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:8px;font-size:15px;font-weight:500;text-decoration:none;transition:all .2s;font-family:'Outfit',sans-serif}
+.cta-btn-primary{background:var(--blue);color:#fff}
+.cta-btn-primary:hover{opacity:.88}
+.cta-btn-ghost{border:1.5px solid var(--border);color:var(--text);background:var(--bg)}
+.cta-btn-ghost:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-light)}
+.cta-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0}
+
 /* ── FOOTER ── */
-footer{border-top:1px solid var(--border);padding:28px 2rem;display:flex;justify-content:space-between;align-items:center;max-width:960px;margin:0 auto}
+footer{border-top:1px solid var(--border);padding:24px 2rem;display:flex;justify-content:space-between;align-items:center;max-width:960px;margin:0 auto}
 footer p{font-size:13px;color:var(--muted);font-weight:300}
+.footer-icons{display:flex;gap:4px;align-items:center}
+.footer-icon{display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:8px;color:var(--muted);transition:color .2s,background .2s;text-decoration:none}
+.footer-icon:hover{color:var(--blue);background:var(--blue-light)}
+.footer-icon svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.8}
 
 /* ── RESPONSIVE ── */
 @media(max-width:640px){
@@ -244,7 +261,7 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
     <div class="sec-body">
       <h2>Le problème</h2>
       <p>Le matching était réalisé manuellement, basé sur l'expérience individuelle de chaque recruteur. Les formulaires existants généraient une donnée trop peu structurée pour automatiser quoi que ce soit. Avant de concevoir le matching, il fallait remettre les formulaires à niveau.</p>
-      <p>J'ai piloté l'ensemble de la démarche : recherche terrain, restructuration des formulaires, conception du matching — en collaboration avec les co-CEO, le PM et l'équipe de développement.</p>
+      <p>J'ai piloté la démarche : recherche terrain, restructuration des formulaires, conception du matching — en collaboration avec les co-CEO, le PM et l'équipe dev.</p>
     </div>
   </div>
 
@@ -308,7 +325,7 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
     <div class="sec-body">
       <h2>De la recherche aux interfaces</h2>
       <p>J'ai intégré les <strong>10 champs prioritaires</strong> dans les trois formulaires sans alourdir l'expérience de saisie. Les entretiens avaient mis en évidence une friction récurrente avec les dropdowns — trop lents, trop rigides. Je les ai remplacés par des <strong>pills sélectionnables</strong> avec suggestions contextuelles.</p>
-      <p>J'ai également conçu un <strong>menu de personnalisation</strong> permettant à chaque recruteur d'activer ou masquer les champs selon ses processus. L'interface reste épurée, les usages couverts.</p>
+      <p>J'ai également conçu un <strong>menu de personnalisation</strong> permettant à chaque recruteur d'activer ou masquer les champs selon ses processus.</p>
       <ul class="result-list">
         <li>10 nouveaux champs intégrés, validés par les données</li>
         <li>Dropdowns remplacés par des pills — saisie plus rapide</li>
@@ -323,7 +340,6 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
       <h2>Comprendre les règles de matching</h2>
       <p>Avant de concevoir le matching, j'avais besoin de comprendre comment les recruteurs font correspondre un candidat à une offre au quotidien. Ce savoir-faire était implicite, non formalisé, variable d'un recruteur à l'autre.</p>
       <p>J'ai organisé un atelier collaboratif en deux temps : chaque participant liste ses critères de matching (séniorité, secteur, rémunération, langues…), puis les classe par niveau d'importance. Cinq niveaux ont émergé : <strong>Essentiel, Important, Bonus, Red flag éliminatoire</strong> et <strong>Red flag non éliminatoire</strong>.</p>
-      <p>Cette co-construction avec les recruteurs a posé les fondations d'une logique de scoring directement intégrable dans le produit.</p>
       <div class="illustrations-grid" style="margin-top:24px;grid-template-columns:1fr">
         <figure class="illustration-item">
           <div class="illustration-item-inner"><img src="images/pepyte-atelier-1.jpg" alt="Atelier matching Pepyte"></div>
@@ -338,7 +354,7 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
     <div class="sec-body">
       <h2>Co-créer un système de notation</h2>
       <p>À partir des critères identifiés en atelier, j'ai formalisé une <strong>grille de scoring</strong> en trois catégories : critères Classiques (socle du matching), Bonus (différenciation) et Malus (pénalisants ou bloquants). Chaque critère est pondéré selon son poids dans la décision finale.</p>
-      <p>En impliquant les recruteurs dans la définition des règles, on s'assurait que le score affiché dans l'interface serait compris — et donc utilisé. <strong>12 critères</strong> ont été hiérarchisés, dont 3 critères d'exclusion automatique, et un seuil minimal de correspondance a été défini.</p>
+      <p>En impliquant les recruteurs dans la définition des règles, le score affiché sera compris et utilisé. <strong>12 critères</strong> hiérarchisés, dont 3 d'exclusion automatique, et un seuil minimal de correspondance défini.</p>
       <ul class="result-list">
         <li>12 critères de matching hiérarchisés et pondérés</li>
         <li>3 critères d'exclusion automatique</li>
@@ -358,7 +374,7 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
     <div class="sec-body">
       <h2>Concevoir un parcours orienté action</h2>
       <p>Les règles de matching formalisées, j'ai conçu le parcours utilisateur autour d'un principe simple : le recruteur ne doit pas avoir à interpréter — il doit pouvoir décider rapidement.</p>
-      <p>Le parcours se déroule en <strong>3 étapes</strong> : sélection de l'offre → consultation des résultats triés par score → action sur chaque candidat. Les critères correspondants sont mis en évidence, les non-correspondants restent visibles mais atténués. Les actions (ajouter / rejeter) sont accessibles directement depuis la liste, sans rupture de contexte.</p>
+      <p>Le parcours se déroule en <strong>3 étapes</strong> : sélection de l'offre → résultats triés par score → action sur chaque candidat. Les critères correspondants sont mis en évidence, les non-correspondants atténués. Les actions (ajouter / rejeter) sont accessibles depuis la liste.</p>
       <div class="illustrations-grid" style="margin-top:24px">
         <figure class="illustration-item">
           <div class="illustration-item-inner"><img src="images/pepyte-matching-1.jpg" alt="Sélection de l'offre"></div>
@@ -380,12 +396,12 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
     <p class="sec-label">08 — Tests & itérations</p>
     <div class="sec-body">
       <h2>Valider et affiner avec les utilisateurs</h2>
-      <p>Le parcours et les règles de matching ont été testés avec les recruteurs, puis ajustés avec l'équipe produit. Plusieurs axes d'amélioration ont guidé les itérations.</p>
+      <p>Le parcours et les règles ont été testés avec les recruteurs puis ajustés.</p>
       <div class="steps">
         <div class="step">
           <p class="step-num">AMÉLIORATION 01</p>
           <p class="step-title">Seuil minimum de matching</p>
-          <p class="step-body">Sans filtre, les recruteurs se retrouvaient avec des candidats peu pertinents dans les résultats. L'ajout d'un seuil minimum de correspondance a permis de n'afficher que les profils réellement qualifiés, réduisant la charge d'analyse.</p>
+          <p class="step-body">Sans filtre, des candidats peu pertinents apparaissaient dans les résultats. Un seuil minimum n'affiche que les profils qualifiés.</p>
         </div>
         <div class="step">
           <p class="step-num">AMÉLIORATION 02</p>
@@ -400,7 +416,7 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
         <div class="step">
           <p class="step-num">AMÉLIORATION 04</p>
           <p class="step-title">Lisibilité optimisée</p>
-          <p class="step-body">Les critères correspondants sont désormais mis en avant avec un tag actif, les critères non correspondants affichés en état disabled et repositionnés en fin de liste. Ce réordonnancement réduit la charge cognitive et permet d'évaluer un profil en quelques secondes.</p>
+          <p class="step-body">Critères correspondants mis en avant avec un tag actif, non-correspondants en état disabled et repositionnés en fin de liste.</p>
         </div>
       </div>
       <div class="illustrations-grid" style="margin-top:24px;grid-template-columns:1fr 1fr">
@@ -420,7 +436,7 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
     <p class="sec-label">09 — Résultats</p>
     <div class="sec-body">
       <h2>Impact sur le produit</h2>
-      <p>De la recherche terrain jusqu'aux tests d'itération, la démarche a permis de livrer un matching ancré dans les usages réels. En co-concevant les règles avec les recruteurs, le score affiché est compris, challengeable, et adopté.</p>
+      <p>La démarche a livré un matching ancré dans les usages réels. Les règles co-construites avec les recruteurs garantissent un score compris et adopté.</p>
       <ul class="result-list">
         <li>Matching instantané entre offres et candidats</li>
         <li>Priorisation claire via un score lisible et explicable</li>
@@ -462,6 +478,23 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
 
 </div>
 
+<div class="case-cta">
+  <div class="container">
+    <p class="cta-eyebrow">Vous avez aimé ce projet ?</p>
+    <h2>Travaillons ensemble</h2>
+    <p class="cta-sub">Disponible pour des missions freelance, des opportunités CDI<br>ou des collaborations ponctuelles à Paris.</p>
+    <div class="cta-buttons">
+      <a href="mailto:reynier.design@gmail.com" class="cta-btn cta-btn-primary">
+        <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+        Me contacter
+      </a>
+      <a href="https://www.linkedin.com/in/thomas-reynier-product-design/" target="_blank" rel="noopener" class="cta-btn cta-btn-ghost">
+        <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        Mon profil LinkedIn
+      </a>
+    </div>
+  </div>
+</div>
 
 <div class="next-section" id="autres-projets">
   <div class="container">
@@ -507,8 +540,18 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
 </div>
 
 <footer>
-  <p>© 2026 Thomas Reynier</p>
-  <p>Product Designer · Paris</p>
+  <p>© 2026 Thomas Reynier · Product Designer · Paris</p>
+  <div class="footer-icons">
+    <a href="mailto:reynier.design@gmail.com" class="footer-icon" title="Email">
+      <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+    </a>
+    <a href="https://www.linkedin.com/in/thomas-reynier-product-design/" target="_blank" rel="noopener" class="footer-icon" title="LinkedIn">
+      <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+    </a>
+    <a href="cv-thomas-reynier.pdf" download class="footer-icon" title="Télécharger mon CV">
+      <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    </a>
+  </div>
 </footer>
 
 <script>

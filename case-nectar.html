@@ -129,9 +129,39 @@ h2{font-size:20px;font-weight:600;letter-spacing:-0.02em;line-height:1.2;color:v
 .next-title{font-size:15px;font-weight:500;color:var(--text);line-height:1.35}
 .next-desc{font-size:13px;color:var(--muted);margin-top:4px;font-weight:300}
 
+/* ── CASE CTA ── */
+.case-cta{padding:64px 0;border-top:1px solid var(--border);text-align:center}
+.cta-eyebrow{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin-bottom:12px}
+.case-cta h2{font-size:clamp(22px,3vw,32px);font-weight:600;letter-spacing:-0.02em;color:var(--text);margin-bottom:8px}
+.cta-sub{font-size:15px;color:var(--muted);font-weight:300;margin-bottom:32px;line-height:1.6}
+.cta-buttons{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.cta-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:8px;font-size:15px;font-weight:500;text-decoration:none;transition:all .2s;font-family:'Outfit',sans-serif}
+.cta-btn-primary{background:var(--blue);color:#fff}
+.cta-btn-primary:hover{opacity:.88}
+.cta-btn-ghost{border:1.5px solid var(--border);color:var(--text);background:var(--bg)}
+.cta-btn-ghost:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-light)}
+.cta-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0}
+
 /* ── FOOTER ── */
-footer{border-top:1px solid var(--border);padding:28px 2rem;display:flex;justify-content:space-between;align-items:center;max-width:960px;margin:0 auto}
+footer{border-top:1px solid var(--border);padding:24px 2rem;display:flex;justify-content:space-between;align-items:center;max-width:960px;margin:0 auto}
 footer p{font-size:13px;color:var(--muted);font-weight:300}
+.footer-icons{display:flex;gap:4px;align-items:center}
+.footer-icon{display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:8px;color:var(--muted);transition:color .2s,background .2s;text-decoration:none}
+.footer-icon:hover{color:var(--blue);background:var(--blue-light)}
+.footer-icon svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.8}
+
+/* ── ILLUSTRATIONS SECTION ── */
+.illustrations-section{padding:48px 0 0}
+.illustrations-label{font-size:11px;font-weight:600;color:var(--blue);letter-spacing:.08em;text-transform:uppercase;margin-bottom:20px}
+
+/* ── MISSION BANNER ── */
+.mission-banner{background:var(--bg-soft);border:1px solid var(--border);border-left:4px solid var(--blue);border-radius:10px;padding:24px 28px;margin:48px 0 0}
+.mission-banner-label{font-size:11px;font-weight:700;color:var(--blue);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+.mission-banner-title{font-size:20px;font-weight:600;color:var(--text);letter-spacing:-0.02em;line-height:1.2;margin-bottom:8px}
+.mission-banner-desc{font-size:14px;color:var(--muted);font-weight:300;line-height:1.6}
+
+/* ── TOC MISSION ── */
+.toc-mission{display:block;font-size:10px;font-weight:700;color:var(--blue);letter-spacing:.08em;text-transform:uppercase;padding:12px 12px 4px;margin-top:4px}
 
 /* ── RESPONSIVE ── */
 @media(max-width:640px){
@@ -160,11 +190,13 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
 <aside class="toc">
   <p class="toc-title">Sommaire</p>
   <a class="toc-link" href="#contexte">Contexte</a>
+  <span class="toc-mission">Phase 01 — Conception</span>
   <a class="toc-link" href="#recherche">01 — Recherche</a>
   <a class="toc-link" href="#definition">02 — Définition</a>
   <a class="toc-link" href="#benchmark">03 — Benchmark</a>
   <a class="toc-link" href="#ideation">04 — Idéation</a>
   <a class="toc-link" href="#design-system">05 — Design System</a>
+  <span class="toc-mission">Phase 02 — Build</span>
   <a class="toc-link" href="#developpement">06 — Développement</a>
 </aside>
 
@@ -199,13 +231,37 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
 
 <div class="container">
 
+  <div class="illustrations-section">
+    <p class="illustrations-label">Maquettes finales</p>
+    <div class="illustrations-grid">
+      <figure class="illustration-item">
+        <div class="illustration-item-inner"><img src="images/nectar-screen-1.jpg" alt="Feed insights Nectar" onerror="this.closest('.illustration-item').style.display='none'"></div>
+        <figcaption class="illustration-caption">Feed d'insights</figcaption>
+      </figure>
+      <figure class="illustration-item">
+        <div class="illustration-item-inner"><img src="images/nectar-screen-2.jpg" alt="Saisie insight Nectar" onerror="this.closest('.illustration-item').style.display='none'"></div>
+        <figcaption class="illustration-caption">Saisie d'un insight</figcaption>
+      </figure>
+      <figure class="illustration-item">
+        <div class="illustration-item-inner"><img src="images/nectar-screen-3.jpg" alt="Backlog priorisé Nectar" onerror="this.closest('.illustration-item').style.display='none'"></div>
+        <figcaption class="illustration-caption">Vue backlog priorisé</figcaption>
+      </figure>
+    </div>
+  </div>
+
   <div class="case-section" id="contexte">
     <p class="sec-label">Contexte</p>
     <div class="sec-body">
       <h2>Le produit</h2>
       <p>Nectar est un outil mobile-first B2B permettant aux commerciaux de capturer leurs insights post-RDV en moins d'une minute et de les transmettre directement au backlog produit sous forme de cartes priorisées.</p>
-      <p>Ce projet poursuit deux objectifs : concevoir un MVP simple avec une priorisation déterministe et transparente, et <strong>formaliser un process de conception piloté par IA</strong>, réplicable et documenté. Je pilote ce projet seul — de la recherche utilisateur au développement.</p>
+      <p>Deux objectifs : concevoir un MVP avec une priorisation déterministe et transparente, et <strong>formaliser un process de conception piloté par IA</strong>, réplicable. Je pilote ce projet seul — de la recherche au développement.</p>
     </div>
+  </div>
+
+  <div class="mission-banner">
+    <p class="mission-banner-label">Phase 01</p>
+    <p class="mission-banner-title">Conception — pilotée par IA</p>
+    <p class="mission-banner-desc">Recherche utilisateur, définition produit, benchmark, idéation et Design System — chaque étape assistée par Claude.</p>
   </div>
 
   <div class="case-section" id="recherche">
@@ -243,11 +299,11 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
       </ul>
       <div class="illustrations-grid-2" style="margin-top:24px">
         <figure class="illustration-item">
-          <div class="illustration-item-inner"><img src="images/nectar-recherche-1.jpg" alt="Trame entretien Nectar"></div>
+          <div class="illustration-item-inner"><img src="images/nectar-recherche-1.jpg" alt="Trame entretien Nectar" onerror="this.closest('.illustration-item').style.display='none'"></div>
           <figcaption class="illustration-caption">Trame d'entretien générée par Claude</figcaption>
         </figure>
         <figure class="illustration-item">
-          <div class="illustration-item-inner"><img src="images/nectar-recherche-2.jpg" alt="Compte rendu Notion"></div>
+          <div class="illustration-item-inner"><img src="images/nectar-recherche-2.jpg" alt="Compte rendu Notion" onerror="this.closest('.illustration-item').style.display='none'"></div>
           <figcaption class="illustration-caption">Compte rendu automatique dans Notion</figcaption>
         </figure>
       </div>
@@ -258,7 +314,7 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
     <p class="sec-label">02 — Définition</p>
     <div class="sec-body">
       <h2>Principes de conception & cadrage produit</h2>
-      <p>À partir des entretiens, Claude génère la définition du problème et pose les contraintes de conception. L'objectif : aller vite du besoin utilisateur au produit opérationnel, sans dette de conception.</p>
+      <p>À partir des entretiens, Claude génère la définition du problème et les contraintes de conception.</p>
       <ul class="result-list">
         <li>3 champs de saisie maximum — saisie en moins d'une minute</li>
         <li>Mobile-first — conçu pour l'usage post-RDV</li>
@@ -325,7 +381,7 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
     <p class="sec-label">04 — Idéation</p>
     <div class="sec-body">
       <h2>Prompt à destination de Figma Make</h2>
-      <p>Les prompts sont construits avec Claude et intègrent l'ensemble des décisions précédentes : recherche utilisateur, définition et benchmark. Figma Make génère les écrans pour explorer et itérer rapidement.</p>
+      <p>Les prompts sont construits avec Claude et intègrent les décisions précédentes : recherche, définition et benchmark. Figma Make génère les écrans pour explorer et itérer.</p>
       <ul class="result-list">
         <li>Saisie & backlog — flow liste → saisie → validation, structuration automatique des insights</li>
         <li>Scoring & automatisation — logique basée sur la fréquence, objective et sans effort pour l'utilisateur</li>
@@ -346,20 +402,20 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
         <div class="step">
           <p class="step-num">IA POUR L'IDÉATION 03</p>
           <p class="step-title">Écrans générés dans Figma Make</p>
-          <p class="step-body">Premières pistes cohérentes produites en quelques minutes, directement exploitables pour itérer.</p>
+          <p class="step-body">Premières pistes produites en quelques minutes.</p>
         </div>
       </div>
       <div class="illustrations-grid" style="margin-top:24px">
         <figure class="illustration-item">
-          <div class="illustration-item-inner"><img src="images/nectar-screen-1.jpg" alt="Feed insights Nectar"></div>
+          <div class="illustration-item-inner"><img src="images/nectar-screen-1.jpg" alt="Feed insights Nectar" onerror="this.closest('.illustration-item').style.display='none'"></div>
           <figcaption class="illustration-caption">Feed d'insights</figcaption>
         </figure>
         <figure class="illustration-item">
-          <div class="illustration-item-inner"><img src="images/nectar-screen-2.jpg" alt="Saisie insight Nectar"></div>
+          <div class="illustration-item-inner"><img src="images/nectar-screen-2.jpg" alt="Saisie insight Nectar" onerror="this.closest('.illustration-item').style.display='none'"></div>
           <figcaption class="illustration-caption">Saisie d'un insight</figcaption>
         </figure>
         <figure class="illustration-item">
-          <div class="illustration-item-inner"><img src="images/nectar-screen-3.jpg" alt="Backlog priorisé Nectar"></div>
+          <div class="illustration-item-inner"><img src="images/nectar-screen-3.jpg" alt="Backlog priorisé Nectar" onerror="this.closest('.illustration-item').style.display='none'"></div>
           <figcaption class="illustration-caption">Vue backlog priorisé</figcaption>
         </figure>
       </div>
@@ -370,8 +426,8 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
     <p class="sec-label">05 — Design System</p>
     <div class="sec-body">
       <h2>Conception du Design System par l'IA</h2>
-      <p>Avant de produire les maquettes finales, j'ai mis en place un Design System pour poser des bases solides pour la conception, l'ajout de nouvelles fonctionnalités et le développement. L'architecture suit les principes de l'Atomic Design.</p>
-      <p>Via le MCP Claude, les variables et composants sont <strong>créés automatiquement dans Figma</strong>, et la documentation est générée dans Notion — ce qui réduit significativement le temps de construction du Design System.</p>
+      <p>J'ai mis en place un Design System avant les maquettes, pour poser des bases solides pour la conception et le développement. L'architecture suit les principes de l'Atomic Design.</p>
+      <p>Via le MCP Claude, les variables et composants sont <strong>créés automatiquement dans Figma</strong> et documentés dans Notion.</p>
       <ul class="result-list">
         <li>5 collections de variables — Primitives, Colors, Spacing, Typography, Border</li>
         <li>13 composants déclinés en 45 variants, avec états et tokens associés</li>
@@ -379,6 +435,12 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
       </ul>
       <p style="margin-top:16px"><strong>Limite identifiée :</strong> certains variants nécessitent encore une intervention manuelle pour les cas les plus complexes.</p>
     </div>
+  </div>
+
+  <div class="mission-banner">
+    <p class="mission-banner-label">Phase 02</p>
+    <p class="mission-banner-title">Build & Livraison</p>
+    <p class="mission-banner-desc">De Figma au produit live avec Claude Code — frontend, backend, déploiement Vercel.</p>
   </div>
 
   <div class="case-section" id="developpement">
@@ -414,6 +476,23 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
 
 </div>
 
+<div class="case-cta">
+  <div class="container">
+    <p class="cta-eyebrow">Vous avez aimé ce projet ?</p>
+    <h2>Travaillons ensemble</h2>
+    <p class="cta-sub">Disponible pour des missions freelance, des opportunités CDI<br>ou des collaborations ponctuelles à Paris.</p>
+    <div class="cta-buttons">
+      <a href="mailto:reynier.design@gmail.com" class="cta-btn cta-btn-primary">
+        <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+        Me contacter
+      </a>
+      <a href="https://www.linkedin.com/in/thomas-reynier-product-design/" target="_blank" rel="noopener" class="cta-btn cta-btn-ghost">
+        <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        Mon profil LinkedIn
+      </a>
+    </div>
+  </div>
+</div>
 
 <div class="next-section" id="autres-projets">
   <div class="container">
@@ -459,8 +538,18 @@ footer p{font-size:13px;color:var(--muted);font-weight:300}
 </div>
 
 <footer>
-  <p>© 2026 Thomas Reynier</p>
-  <p>Product Designer · Paris</p>
+  <p>© 2026 Thomas Reynier · Product Designer · Paris</p>
+  <div class="footer-icons">
+    <a href="mailto:reynier.design@gmail.com" class="footer-icon" title="Email">
+      <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+    </a>
+    <a href="https://www.linkedin.com/in/thomas-reynier-product-design/" target="_blank" rel="noopener" class="footer-icon" title="LinkedIn">
+      <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+    </a>
+    <a href="cv-thomas-reynier.pdf" download class="footer-icon" title="Télécharger mon CV">
+      <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    </a>
+  </div>
 </footer>
 
 <script>
