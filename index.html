@@ -68,9 +68,7 @@ h2{font-size:clamp(24px,3.5vw,32px);font-weight:600;letter-spacing:-0.025em;line
 .projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .project-card{background:var(--bg);display:flex;flex-direction:column;transition:border-color 0.2s,box-shadow 0.2s,background 0.2s,transform 0.2s;text-decoration:none;color:inherit;border-radius:10px;border:2px solid var(--border);overflow:hidden}
 .project-card:hover{border-color:var(--blue);box-shadow:0 8px 32px rgba(26,86,219,0.12);background:var(--bg);transform:translateY(-4px)}
-.project-thumb{width:100%;height:200px;background:var(--bg-soft);border-bottom:1px solid var(--border);overflow:hidden;flex-shrink:0;position:relative}
-.project-thumb::after{content:'Voir le projet →';position:absolute;bottom:12px;left:12px;background:var(--blue);color:#fff;font-size:12px;font-weight:500;font-family:'Outfit',sans-serif;padding:6px 12px;border-radius:6px;opacity:0;transform:translateY(6px);transition:opacity 0.2s,transform 0.2s;pointer-events:none}
-.project-card:hover .project-thumb::after{opacity:1;transform:translateY(0)}
+.project-thumb{width:100%;height:200px;background:var(--bg-soft);border-bottom:1px solid var(--border);overflow:hidden;flex-shrink:0}
 .project-thumb img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform 0.4s ease}
 .project-card:hover .project-thumb img{transform:scale(1.04)}
 .project-body{padding:20px;display:flex;flex-direction:column;gap:10px;flex:1}
