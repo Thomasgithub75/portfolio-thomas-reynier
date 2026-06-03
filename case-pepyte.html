@@ -72,12 +72,17 @@ h2{font-size:20px;font-weight:600;letter-spacing:-0.02em;line-height:1.2;color:v
 .sec-body strong{color:var(--text);font-weight:500}
 
 /* ── STEP LIST ── */
-.steps{border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-top:24px}
-.step{padding:20px 24px;border-bottom:1px solid var(--border);background:var(--bg);transition:background .15s}
-.step:last-child{border-bottom:none}
-.step:hover{background:var(--bg-soft)}
-.step-num{font-size:11px;font-weight:600;color:var(--blue);letter-spacing:.06em;margin-bottom:5px}
-.step-title{font-size:15px;font-weight:500;color:var(--text);margin-bottom:4px}
+.steps{display:flex;flex-direction:column;margin-top:24px}
+.step{display:flex;gap:20px;padding-bottom:28px;border:none;background:none;position:relative}
+.step:last-child{padding-bottom:0}
+.step-icon-col{display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:40px}
+.step-icon{width:40px;height:40px;border-radius:50%;background:var(--blue-light);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden}
+.step-icon img,.step-icon svg{width:22px;height:22px;object-fit:contain}
+.step-line{width:1.5px;flex:1;background:var(--border);margin-top:6px;min-height:16px}
+.step:last-child .step-line{display:none}
+.step-content{flex:1;padding-top:4px}
+.step-num{font-size:11px;font-weight:600;color:var(--blue);letter-spacing:.06em;margin-bottom:6px}
+.step-title{font-size:16px;font-weight:600;color:var(--text);margin-bottom:6px}
 .step-body{font-size:14px;color:var(--muted);line-height:1.65;font-weight:300}
 
 /* ── BULLET LIST ── */
@@ -410,7 +415,7 @@ nav.menu-open .mob-footer{display:flex}
       <p>J'ai organisé un atelier collaboratif en deux temps : chaque participant liste ses critères de matching (séniorité, secteur, rémunération, langues…), puis les classe par niveau d'importance. Cinq niveaux ont émergé : <strong>Essentiel, Important, Bonus, Red flag éliminatoire</strong> et <strong>Red flag non éliminatoire</strong>.</p>
       <div class="illustrations-grid" style="margin-top:24px;grid-template-columns:1fr">
         <figure class="illustration-item">
-          <div class="illustration-item-inner"><img src="images/pepyte-atelier-1.jpg" alt="Atelier matching Pepyte"></div>
+          <div class="illustration-item-inner"><img src="images/pepyte-atelier-1.jpg" alt="Atelier matching Pepyte" data-no-zoom></div>
           <figcaption class="illustration-caption">Atelier d'identification et hiérarchisation des critères</figcaption>
         </figure>
       </div>
@@ -428,12 +433,6 @@ nav.menu-open .mob-footer{display:flex}
         <li>3 critères d'exclusion automatique</li>
         <li>Seuil minimal de matching défini avec les équipes</li>
       </ul>
-      <div class="illustrations-grid" style="margin-top:24px;grid-template-columns:1fr">
-        <figure class="illustration-item">
-          <div class="illustration-item-inner"><img src="images/pepyte-scoring.jpg" alt="Tableau des règles de matching"></div>
-          <figcaption class="illustration-caption">Tableau des règles de matching et système de points</figcaption>
-        </figure>
-      </div>
     </div>
   </div>
 
@@ -467,24 +466,40 @@ nav.menu-open .mob-footer{display:flex}
       <p>Le parcours et les règles ont été testés avec les recruteurs puis ajustés.</p>
       <div class="steps">
         <div class="step">
+          <div class="step-icon-col"><div class="step-icon"></div><div class="step-line"></div></div>
+          <div class="step-content">
           <p class="step-num">AMÉLIORATION 01</p>
           <p class="step-title">Seuil minimum de matching</p>
           <p class="step-body">Sans filtre, des candidats peu pertinents apparaissaient dans les résultats. Un seuil minimum n'affiche que les profils qualifiés.</p>
+        
+          </div>
         </div>
         <div class="step">
+          <div class="step-icon-col"><div class="step-icon"></div><div class="step-line"></div></div>
+          <div class="step-content">
           <p class="step-num">AMÉLIORATION 02</p>
           <p class="step-title">Règles d'élimination automatique</p>
           <p class="step-body">Certains critères sont bloquants : un candidat indisponible ou hors zone géographique ne doit pas apparaître dans les résultats, quel que soit son score. Les critères red flag éliminatoires ont été formalisés pour filtrer automatiquement ces profils.</p>
+        
+          </div>
         </div>
         <div class="step">
+          <div class="step-icon-col"><div class="step-icon"></div><div class="step-line"></div></div>
+          <div class="step-content">
           <p class="step-num">AMÉLIORATION 03</p>
           <p class="step-title">Contextualisation du matching</p>
           <p class="step-body">Les recruteurs avaient du mal à évaluer les résultats sans voir les critères de l'offre en référence. J'ai intégré l'affichage des critères de l'offre directement dans la vue résultats pour ancrer le matching dans son contexte.</p>
+        
+          </div>
         </div>
         <div class="step">
+          <div class="step-icon-col"><div class="step-icon"></div><div class="step-line"></div></div>
+          <div class="step-content">
           <p class="step-num">AMÉLIORATION 04</p>
           <p class="step-title">Lisibilité optimisée</p>
           <p class="step-body">Critères correspondants mis en avant avec un tag actif, non-correspondants en état disabled et repositionnés en fin de liste.</p>
+        
+          </div>
         </div>
       </div>
       <div class="illustrations-grid" style="margin-top:24px;grid-template-columns:1fr 1fr">
@@ -672,6 +687,7 @@ nav.menu-open .mob-footer{display:flex}
 
 <script>
   document.querySelectorAll('.illustration-item img').forEach(img => {
+    if (img.hasAttribute('data-no-zoom')) return;
     img.addEventListener('click', () => {
       const overlay = document.createElement('div');
       overlay.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;background:#0a0a0a;z-index:9999;display:flex;align-items:center;justify-content:center;padding:24px;box-sizing:border-box;cursor:zoom-out';

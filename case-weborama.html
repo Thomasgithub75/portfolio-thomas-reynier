@@ -72,12 +72,17 @@ h2{font-size:20px;font-weight:600;letter-spacing:-0.02em;line-height:1.2;color:v
 .sec-body strong{color:var(--text);font-weight:500}
 
 /* ── STEP LIST ── */
-.steps{border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-top:24px}
-.step{padding:20px 24px;border-bottom:1px solid var(--border);background:var(--bg);transition:background .15s}
-.step:last-child{border-bottom:none}
-.step:hover{background:var(--bg-soft)}
-.step-num{font-size:11px;font-weight:600;color:var(--blue);letter-spacing:.06em;margin-bottom:5px}
-.step-title{font-size:15px;font-weight:500;color:var(--text);margin-bottom:4px}
+.steps{display:flex;flex-direction:column;margin-top:24px}
+.step{display:flex;gap:20px;padding-bottom:28px;border:none;background:none;position:relative}
+.step:last-child{padding-bottom:0}
+.step-icon-col{display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:40px}
+.step-icon{width:40px;height:40px;border-radius:50%;background:var(--blue-light);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden}
+.step-icon img,.step-icon svg{width:22px;height:22px;object-fit:contain}
+.step-line{width:1.5px;flex:1;background:var(--border);margin-top:6px;min-height:16px}
+.step:last-child .step-line{display:none}
+.step-content{flex:1;padding-top:4px}
+.step-num{font-size:11px;font-weight:600;color:var(--blue);letter-spacing:.06em;margin-bottom:6px}
+.step-title{font-size:16px;font-weight:600;color:var(--text);margin-bottom:6px}
 .step-body{font-size:14px;color:var(--muted);line-height:1.65;font-weight:300}
 
 /* ── BULLET LIST ── */
@@ -289,7 +294,7 @@ nav.menu-open .mob-footer{display:flex}
   <div class="stats-row">
     <div class="stat"><div class="stat-val">2</div><div class="stat-label">Design Systems livrés</div></div>
     <div class="stat"><div class="stat-val">−80%</div><div class="stat-label">de composants après rationalisation</div></div>
-    <div class="stat"><div class="stat-val">+100</div><div class="stat-label">features conçues sur le Design System</div></div>
+    <div class="stat"><div class="stat-val">195</div><div class="stat-label">variants créés pour les 4 applications</div></div>
     <div class="stat"><div class="stat-val">100%</div><div class="stat-label">prototypes IA conformes au Design System</div></div>
   </div>
 </div>
@@ -402,7 +407,7 @@ nav.menu-open .mob-footer{display:flex}
 
   <div class="mission-banner">
     <p class="mission-banner-label">Mission 02</p>
-    <p class="mission-banner-title">Nouvelle application SaaS — Data Hub</p>
+    <p class="mission-banner-title">Nouvelle application SaaS</p>
     <p class="mission-banner-desc">UX Research, Design System dédié, process IA Ready et conception de fonctionnalités IA pour accélérer l'exploration produit.</p>
   </div>
 
@@ -435,24 +440,40 @@ nav.menu-open .mob-footer{display:flex}
       <p>J'ai conçu le Design System de la nouvelle application pour fournir une base solide aux équipes design et dev, compatible nativement avec Figma Make.</p>
       <div class="steps">
         <div class="step">
+          <div class="step-icon-col"><div class="step-icon"></div><div class="step-line"></div></div>
+          <div class="step-content">
           <p class="step-num">ÉTAPE 01</p>
           <p class="step-title">Variables & tokens</p>
           <p class="step-body">Variables définies en deux modes (clair et sombre). 4 collections de tokens sémantiques : colors, spacing, radius, typography.</p>
+        
+          </div>
         </div>
         <div class="step">
+          <div class="step-icon-col"><div class="step-icon"></div><div class="step-line"></div></div>
+          <div class="step-content">
           <p class="step-num">ÉTAPE 02</p>
           <p class="step-title">Composants & variants</p>
           <p class="step-body">8 composants conçus selon l'Atomic Design — des atomes aux organismes. Chaque composant intègre ses tokens, ses états et ses variants. L'accessibilité est intégrée dès les fondations.</p>
+        
+          </div>
         </div>
         <div class="step">
+          <div class="step-icon-col"><div class="step-icon"></div><div class="step-line"></div></div>
+          <div class="step-content">
           <p class="step-num">ÉTAPE 03</p>
           <p class="step-title">Templates</p>
           <p class="step-body">2 templates réutilisables pour produire des interfaces cohérentes, exploitables dans Figma Make.</p>
+        
+          </div>
         </div>
         <div class="step">
+          <div class="step-icon-col"><div class="step-icon"></div><div class="step-line"></div></div>
+          <div class="step-content">
           <p class="step-num">ÉTAPE 04</p>
           <p class="step-title">Validation dans Storybook</p>
           <p class="step-body">Chaque composant est validé avec l'équipe dev dans Storybook : comportements, états, tokens.</p>
+        
+          </div>
         </div>
       </div>
       <ul class="result-list">
@@ -462,15 +483,15 @@ nav.menu-open .mob-footer{display:flex}
       </ul>
       <div class="illustrations-grid" style="margin-top:24px">
         <figure class="illustration-item">
-          <div class="illustration-item-inner"><img src="images/weborama-ds-1.jpg" alt="Variables Design System"></div>
+          <div class="illustration-item-inner" style="height:200px"><img src="images/weborama-ds-1.jpg" alt="Variables Design System" style="width:100%;height:100%;object-fit:contain"></div>
           <figcaption class="illustration-caption">Variables & tokens sémantiques</figcaption>
         </figure>
         <figure class="illustration-item">
-          <div class="illustration-item-inner"><img src="images/weborama-ds-2.jpg" alt="Composants Design System"></div>
+          <div class="illustration-item-inner" style="height:200px"><img src="images/weborama-ds-2.jpg" alt="Composants Design System" style="width:100%;height:100%;object-fit:contain"></div>
           <figcaption class="illustration-caption">Exemple de composant — Bouton</figcaption>
         </figure>
         <figure class="illustration-item">
-          <div class="illustration-item-inner"><img src="images/weborama-ds-3.jpg" alt="Template Design System"></div>
+          <div class="illustration-item-inner" style="height:200px"><img src="images/weborama-ds-3.jpg" alt="Template Design System" style="width:100%;height:100%;object-fit:contain"></div>
           <figcaption class="illustration-caption">Template créé dans le Design System</figcaption>
         </figure>
       </div>
@@ -484,14 +505,22 @@ nav.menu-open .mob-footer{display:flex}
       <p>Un Design System ne suffit pas à cadrer l'IA — il faut lui transmettre la connaissance. J'ai mis en place un process en deux temps pour que Figma Make génère des prototypes fidèles au Design System.</p>
       <div class="steps">
         <div class="step">
+          <div class="step-icon-col"><div class="step-icon"></div><div class="step-line"></div></div>
+          <div class="step-content">
           <p class="step-num">ÉTAPE 01</p>
           <p class="step-title">Préparation des maquettes</p>
           <p class="step-body">Protocole avant synchronisation : nommage des frames, auto-layout, clip content, utilisation exclusive des composants et variables publiés. Bibliothèque synchronisée avec Figma Make.</p>
+        
+          </div>
         </div>
         <div class="step">
+          <div class="step-icon-col"><div class="step-icon"></div><div class="step-line"></div></div>
+          <div class="step-content">
           <p class="step-num">ÉTAPE 02</p>
           <p class="step-title">Implémentation du knowledge dans le code Figma Make</p>
           <p class="step-body">Connaissance du Design System intégrée dans le code Figma Make via des fichiers markdown : guidelines.md, fichiers par composant (button.md, input.md…) et dossier tokens (colors.md, spacing.md).</p>
+        
+          </div>
         </div>
       </div>
       <ul class="result-list">

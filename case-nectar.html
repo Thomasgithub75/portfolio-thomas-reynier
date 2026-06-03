@@ -72,12 +72,17 @@ h2{font-size:20px;font-weight:600;letter-spacing:-0.02em;line-height:1.2;color:v
 .sec-body strong{color:var(--text);font-weight:500}
 
 /* ── STEP LIST ── */
-.steps{border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-top:24px}
-.step{padding:20px 24px;border-bottom:1px solid var(--border);background:var(--bg);transition:background .15s}
-.step:last-child{border-bottom:none}
-.step:hover{background:var(--bg-soft)}
-.step-num{font-size:11px;font-weight:600;color:var(--blue);letter-spacing:.06em;margin-bottom:5px}
-.step-title{font-size:15px;font-weight:500;color:var(--text);margin-bottom:4px}
+.steps{display:flex;flex-direction:column;margin-top:24px}
+.step{display:flex;gap:20px;padding-bottom:28px;border:none;background:none;position:relative}
+.step:last-child{padding-bottom:0}
+.step-icon-col{display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:40px}
+.step-icon{width:40px;height:40px;border-radius:50%;background:var(--blue-light);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden}
+.step-icon img,.step-icon svg{width:22px;height:22px;object-fit:contain}
+.step-line{width:1.5px;flex:1;background:var(--border);margin-top:6px;min-height:16px}
+.step:last-child .step-line{display:none}
+.step-content{flex:1;padding-top:4px}
+.step-num{font-size:11px;font-weight:600;color:var(--blue);letter-spacing:.06em;margin-bottom:6px}
+.step-title{font-size:16px;font-weight:600;color:var(--text);margin-bottom:6px}
 .step-body{font-size:14px;color:var(--muted);line-height:1.65;font-weight:300}
 
 /* ── BULLET LIST ── */
@@ -318,24 +323,40 @@ nav.menu-open .mob-footer{display:flex}
       <p>Les retours sont clairs : les PM veulent des insights accessibles et priorisés, les commerciaux veulent pouvoir les remonter depuis leur mobile après un RDV — sans friction, sans reformulation.</p>
       <div class="steps">
         <div class="step">
+          <div class="step-icon-col"><div class="step-icon"></div><div class="step-line"></div></div>
+          <div class="step-content">
           <p class="step-num">ÉTAPE 01</p>
           <p class="step-title">Claude crée la trame</p>
           <p class="step-body">Guide d'entretien structuré généré par Claude — questions ouvertes, JTBD, frictions identifiées.</p>
+        
+          </div>
         </div>
         <div class="step">
+          <div class="step-icon-col"><div class="step-icon"></div><div class="step-line"></div></div>
+          <div class="step-content">
           <p class="step-num">ÉTAPE 02</p>
           <p class="step-title">L'IA enregistre & retranscrit</p>
           <p class="step-body">Enregistrement et retranscription automatique de chaque entretien. Une demi-journée de travail économisée par session.</p>
+        
+          </div>
         </div>
         <div class="step">
+          <div class="step-icon-col"><div class="step-icon"></div><div class="step-line"></div></div>
+          <div class="step-content">
           <p class="step-num">ÉTAPE 03</p>
           <p class="step-title">Claude synthétise</p>
           <p class="step-body">Analyse automatique des pain points, JTBD et opportunités à partir des retranscriptions.</p>
+        
+          </div>
         </div>
         <div class="step">
+          <div class="step-icon-col"><div class="step-icon"></div><div class="step-line"></div></div>
+          <div class="step-content">
           <p class="step-num">ÉTAPE 04</p>
           <p class="step-title">Notion documente</p>
           <p class="step-body">Création automatique des comptes rendus dans un projet Notion dédié via Claude.</p>
+        
+          </div>
         </div>
       </div>
       <ul class="result-list">
@@ -367,19 +388,31 @@ nav.menu-open .mob-footer{display:flex}
       <p style="margin-top:20px">Architecture produit : <strong>input → insight brut (IA + rules) → normalisation + détection similarité → output PM → backlog priorisé.</strong></p>
       <div class="steps" style="margin-top:24px">
         <div class="step">
+          <div class="step-icon-col"><div class="step-icon"></div><div class="step-line"></div></div>
+          <div class="step-content">
           <p class="step-num">IA POUR LA DÉFINITION 01</p>
           <p class="step-title">Structurer le parcours</p>
           <p class="step-body">Parcours utilisateur, choix des inputs/outputs et prompt IA générés par Claude à partir des comptes rendus d'entretien.</p>
+        
+          </div>
         </div>
         <div class="step">
+          <div class="step-icon-col"><div class="step-icon"></div><div class="step-line"></div></div>
+          <div class="step-content">
           <p class="step-num">IA POUR LA DÉFINITION 02</p>
           <p class="step-title">Décider par la donnée</p>
           <p class="step-body">Formule de scoring, contraintes techniques et règles de matching définies et documentées avec l'aide de Claude.</p>
+        
+          </div>
         </div>
         <div class="step">
+          <div class="step-icon-col"><div class="step-icon"></div><div class="step-line"></div></div>
+          <div class="step-content">
           <p class="step-num">IA POUR LA DÉFINITION 03</p>
           <p class="step-title">Formaliser & documenter</p>
           <p class="step-body">Zoning des composants, edge cases et compte rendu générés automatiquement pour alimenter la phase d'idéation.</p>
+        
+          </div>
         </div>
       </div>
     </div>
@@ -392,24 +425,40 @@ nav.menu-open .mob-footer{display:flex}
       <p>J'explore Mobbin à partir de requêtes générées par Claude pour identifier les patterns pertinents. Je sélectionne les résultats, les documente avec mes recommandations, puis Claude génère un compte rendu dans Notion qui sert de base à la phase d'idéation.</p>
       <div class="steps">
         <div class="step">
+          <div class="step-icon-col"><div class="step-icon"></div><div class="step-line"></div></div>
+          <div class="step-content">
           <p class="step-num">ÉTAPE 01</p>
           <p class="step-title">Claude génère les requêtes</p>
           <p class="step-body">Saisie rapide, catégorisation par chips, feed scannable, badge de priorité, filtres, détection de contenu similaire.</p>
+        
+          </div>
         </div>
         <div class="step">
+          <div class="step-icon-col"><div class="step-icon"></div><div class="step-line"></div></div>
+          <div class="step-content">
           <p class="step-num">ÉTAPE 02</p>
           <p class="step-title">Sélection dans Mobbin</p>
           <p class="step-body">7 écrans retenus dans un nouveau projet dédié, importés dans Figma pour analyse.</p>
+        
+          </div>
         </div>
         <div class="step">
+          <div class="step-icon-col"><div class="step-icon"></div><div class="step-line"></div></div>
+          <div class="step-content">
           <p class="step-num">ÉTAPE 03</p>
           <p class="step-title">Documentation des patterns</p>
           <p class="step-body">Fiche de spécification pour chaque pattern : points forts, pertinence pour le MVP, éléments hors scope.</p>
+        
+          </div>
         </div>
         <div class="step">
+          <div class="step-icon-col"><div class="step-icon"></div><div class="step-line"></div></div>
+          <div class="step-content">
           <p class="step-num">ÉTAPE 04</p>
           <p class="step-title">Claude documente dans Notion</p>
           <p class="step-body">Compte rendu structuré généré automatiquement — 7 patterns documentés, prêts pour l'idéation.</p>
+        
+          </div>
         </div>
       </div>
       <ul class="result-list">
@@ -442,19 +491,31 @@ nav.menu-open .mob-footer{display:flex}
       </ul>
       <div class="steps" style="margin-top:24px">
         <div class="step">
+          <div class="step-icon-col"><div class="step-icon"></div><div class="step-line"></div></div>
+          <div class="step-content">
           <p class="step-num">IA POUR L'IDÉATION 01</p>
           <p class="step-title">Contexte</p>
           <p class="step-body">Décisions UX issues des étapes précédentes compilées dans un document structuré.</p>
+        
+          </div>
         </div>
         <div class="step">
+          <div class="step-icon-col"><div class="step-icon"></div><div class="step-line"></div></div>
+          <div class="step-content">
           <p class="step-num">IA POUR L'IDÉATION 02</p>
           <p class="step-title">Prompt généré par Claude</p>
           <p class="step-body">Prompt v1 intégrant le flow, l'anatomie des écrans, les contraintes de style et les edge cases.</p>
+        
+          </div>
         </div>
         <div class="step">
+          <div class="step-icon-col"><div class="step-icon"></div><div class="step-line"></div></div>
+          <div class="step-content">
           <p class="step-num">IA POUR L'IDÉATION 03</p>
           <p class="step-title">Écrans générés dans Figma Make</p>
           <p class="step-body">Premières pistes produites en quelques minutes.</p>
+        
+          </div>
         </div>
       </div>
       <div class="illustrations-grid" style="margin-top:24px;grid-template-columns:1fr">
@@ -510,19 +571,31 @@ nav.menu-open .mob-footer{display:flex}
       <p>J'utilise Claude Code pour couvrir chaque étape du développement — de la configuration Supabase au déploiement Vercel — en respectant le Design System conçu dans Figma.</p>
       <div class="steps">
         <div class="step">
+          <div class="step-icon-col"><div class="step-icon"></div><div class="step-line"></div></div>
+          <div class="step-content">
           <p class="step-num">STACK FRONTEND</p>
           <p class="step-title">TypeScript · Tailwind · Next.js · GitHub</p>
           <p class="step-body">12 composants React conformes au Design System Figma. 5 écrans livrés : Login, Backlog, Saisie, Vérification, Détail.</p>
+        
+          </div>
         </div>
         <div class="step">
+          <div class="step-icon-col"><div class="step-icon"></div><div class="step-line"></div></div>
+          <div class="step-content">
           <p class="step-num">STACK BACKEND</p>
           <p class="step-title">Supabase · Vercel · Claude API · Gemini Flash</p>
           <p class="step-body">1 endpoint IA : structuration des insights + détection de similarité. Déploiement continu sur Vercel.</p>
+        
+          </div>
         </div>
         <div class="step">
+          <div class="step-icon-col"><div class="step-icon"></div><div class="step-line"></div></div>
+          <div class="step-content">
           <p class="step-num">DOCUMENTATION</p>
           <p class="step-title">Notion MCP · claude.md réplicable</p>
           <p class="step-body">L'ensemble du process est formalisé dans un fichier claude.md documenté et réplicable sur d'autres projets.</p>
+        
+          </div>
         </div>
       </div>
       <ul class="result-list">
