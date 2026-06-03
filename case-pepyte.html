@@ -73,14 +73,14 @@ h2{font-size:20px;font-weight:600;letter-spacing:-0.02em;line-height:1.2;color:v
 
 /* ── STEP LIST ── */
 .steps{display:flex;flex-direction:column;margin-top:24px}
-.step{display:flex;gap:24px;padding-bottom:44px;border:none;background:none}
-.step:last-child{padding-bottom:0}
-.step-icon-col{display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:44px}
+.step{display:flex;gap:24px;padding-bottom:0;border:none;background:none;align-items:flex-start}
+.step:last-child .step-content{padding-bottom:0}
+.step-icon-col{display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:44px;align-self:stretch}
 .step-icon{width:44px;height:44px;border-radius:50%;background:white;border:1.5px solid #E5E7EB;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden}
 .step-icon img,.step-icon svg{width:30px;height:30px;object-fit:contain;border-radius:4px}
 .step-line{width:1px;flex:1;background:#D1D5DB;margin-top:2px}
 .step:last-child .step-line{display:none}
-.step-content{flex:1;padding-top:2px}
+.step-content{flex:1;padding-top:2px;padding-bottom:44px}
 .steps .step-num{font-size:11px!important;font-weight:600!important;color:#1A56DB!important;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px;display:block}
 .steps .step-title{font-size:18px!important;font-weight:700!important;color:#111827!important;letter-spacing:-0.01em;line-height:1.3;margin-bottom:8px}
 .steps .step-body{font-size:14px!important;color:#6B7280!important;line-height:1.7;font-weight:400!important}
