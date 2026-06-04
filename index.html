@@ -101,11 +101,11 @@ h2{font-size:clamp(24px,3.5vw,32px);font-weight:600;letter-spacing:-0.025em;line
 .exp-tag-clickable:active{transform:scale(0.97)}
 .exp-tag-core{border:1.5px solid #1A56DB;color:#1A56DB;background:transparent}
 .exp-tag-core:hover{background:#E8EFFD}
-.exp-tag-core.active{background:#1A56DB;color:#fff;outline:2px solid #1A56DB;outline-offset:2px}
+.exp-tag-core.is-active{background:#1A56DB;color:#fff}
 .exp-tag-secondary{border:1.5px solid #B5D4F4;color:#185FA5;background:transparent}
 .exp-tag-secondary:hover{background:#E8EFFD}
-.exp-tag-secondary.active{background:#E8EFFD;outline:2px solid #1A56DB;outline-offset:2px}
-.exp-tag-clickable.dimmed{opacity:0.3}
+.exp-tag-secondary.is-active{background:#E8EFFD;border-color:#1A56DB}
+.exp-tag-clickable.is-dimmed{opacity:0.3}
 .exp-tag-design{background:#EEEDFE;color:#534AB7;border:0.5px solid #AFA9EC}
 .exp-tag-dev{background:#E1F5EE;color:#0F6E56;border:0.5px solid #5DCAA5}
 .exp-tag-pm{background:#FAEEDA;color:#854F0B;border:0.5px solid #EF9F27}
@@ -371,8 +371,8 @@ nav.menu-open .mob-footer{display:flex}
             </div>
           </div>
           <div class="exp-tags">
-            <span class="badge exp-tag-lang-natif">Français — Natif</span>
-            <span class="badge exp-tag-lang-pro">Anglais — Professionnel</span>
+            <span class="badge" style="background:#1A56DB;color:#fff;border:0.5px solid #1A56DB;font-weight:500">Français — Natif</span>
+            <span class="badge" style="background:#E8EFFD;color:#185FA5;border:0.5px solid #B5D4F4">Anglais — Professionnel</span>
           </div>
         </div>
 
