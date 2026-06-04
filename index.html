@@ -698,10 +698,7 @@ function syncPanel() {
   const activeTags = getActiveTags();
   const anyActive = activeTags.length > 0;
 
-  // Dimming
-  document.querySelectorAll('.exp-tag-clickable').forEach(t => {
-    t.classList.toggle('is-dimmed', anyActive && !t.classList.contains('is-active'));
-  });
+  // Pas de dimming — tous les tags restent enabled
 
   if (!anyActive) { closePanel(); return; }
 
