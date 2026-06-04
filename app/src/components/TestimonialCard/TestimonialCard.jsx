@@ -110,8 +110,6 @@ export default function TestimonialCard({
     display: 'flex',
     flexDirection: 'column',
     gap: '14px',         // identique proposals
-    transition: 'box-shadow 0.2s',
-    '&:hover': { boxShadow: '0 6px 28px rgba(26,86,219,0.09)' },
   };
 
   // ── Featured — pleine largeur, 2 colonnes internes ──
