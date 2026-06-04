@@ -11,13 +11,14 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --blue:#1956DB;
-  --blue-light:#EEF4FF;
-  --blue-mid:#3B82F6;
-  --text:#111827;
-  --muted:#6B7280;
+  --blue-light:#EEF3FD;
+  --blue-mid:#3B70E1;
+  --text:#1A2540;
+  --muted:#5B6A8A;
   --border:#E5E7EB;
   --bg:#FFFFFF;
   --bg-soft:#F9FAFB;
+  --proj-bg:#EEF3FD;--proj-fg:#1956DB;--proj-border:#C3D5F9;
 }
 html{scroll-behavior:smooth}
 body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
@@ -42,18 +43,19 @@ nav ul a.nav-cta::after{display:none}
 .divider{border:none;border-top:1px solid var(--border);margin:0}
 
 /* ── CASE HEADER ── */
-.case-header{padding:120px 0 64px}
+.case-header{padding:120px 0 64px;background:linear-gradient(145deg,var(--proj-bg) 0%,#fff 55%);position:relative;overflow:hidden}
+.case-header::before{content:'';position:absolute;top:-80px;right:-80px;width:320px;height:320px;background:radial-gradient(circle,rgba(25,86,219,.06) 0%,transparent 70%);pointer-events:none}
 .back{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);text-decoration:none;margin-bottom:36px;transition:color .2s;font-weight:400}
 .back:hover{color:var(--text)}
 .back svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.8}
 .header-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px}
-.htag{font-size:12px;padding:3px 10px;border-radius:4px;background:var(--blue-light);color:var(--blue);font-weight:500}
+.htag{font-size:12px;padding:3px 10px;border-radius:5px;background:var(--proj-bg);color:var(--proj-fg);font-weight:500;border:1px solid var(--proj-border)}
 .badge{display:inline-flex;align-items:center;justify-content:center;gap:4px;padding:2px 6px;border-radius:9999px;font-family:'Outfit',sans-serif;font-size:12px;font-weight:500;line-height:1.4;white-space:nowrap;cursor:default;user-select:none;background:#D1E9FF;color:#1570EF}
 .tag{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:6px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;line-height:1.4;white-space:nowrap;background:#1570EF;color:#FFFFFF}
 .tag--display{cursor:default;user-select:none}
 h1{font-size:clamp(28px,4vw,44px);font-weight:600;letter-spacing:-0.03em;line-height:1.1;color:var(--text);margin-bottom:20px}
 .meta-row{margin-bottom:8px;padding-bottom:0;border-bottom:none;font-size:14px;color:var(--muted);font-weight:300;line-height:1.6}
-.case-intro{font-size:17px;color:var(--muted);line-height:1.75;font-weight:300;border-left:3px solid var(--blue);padding-left:20px;margin-bottom:0}
+.case-intro{font-size:17px;color:var(--muted);line-height:1.75;font-weight:300;border-left:3px solid var(--proj-fg);padding-left:20px;margin-bottom:0}
 .case-title-row{display:flex;align-items:center;gap:16px;margin-bottom:20px}
 .case-title-row h1{margin-bottom:0}
 .case-logo{height:32px;width:auto;object-fit:contain;flex-shrink:0}
@@ -67,7 +69,10 @@ h1{font-size:clamp(28px,4vw,44px);font-weight:600;letter-spacing:-0.03em;line-he
 /* ── SECTION ── */
 .case-section{padding:52px 0;border-top:1px solid var(--border);display:grid;grid-template-columns:148px 1fr;gap:0 48px}
 .container > .case-section:first-child,.illustrations-section + .case-section{border-top:none;padding-top:40px}
-.sec-label{font-size:11px;font-weight:600;color:var(--blue);letter-spacing:.08em;text-transform:uppercase;padding-top:5px;line-height:1.4}
+.sec-label{display:flex;flex-direction:column;gap:2px;padding-top:2px}
+.sec-label-num{font-size:36px;font-weight:800;color:var(--proj-bg);letter-spacing:-.04em;line-height:1;font-family:'Outfit',sans-serif}
+.sec-label-step{font-size:10px;font-weight:700;color:var(--proj-fg);letter-spacing:.1em;text-transform:uppercase;margin-top:-4px}
+.sec-label-plain{font-size:11px;font-weight:600;color:var(--blue);letter-spacing:.08em;text-transform:uppercase;padding-top:5px;line-height:1.4}
 .sec-body{}
 h2{font-size:20px;font-weight:600;letter-spacing:-0.02em;line-height:1.2;color:var(--text);margin-bottom:16px}
 .sec-body p{font-size:15px;color:var(--muted);line-height:1.75;font-weight:300}
@@ -114,10 +119,12 @@ h2{font-size:20px;font-weight:600;letter-spacing:-0.02em;line-height:1.2;color:v
 .illustrations-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .illustrations-grid-2-1 .illustration-item:last-child{grid-column:1/-1}
 .illustration-item{display:flex;flex-direction:column;gap:10px}
-.illustration-item-inner{background:var(--bg-soft);border:1px solid var(--border);border-radius:12px;padding:20px;display:flex;align-items:center;justify-content:center;overflow:hidden;transition:transform 0.2s ease,box-shadow 0.2s ease}
-.illustration-item:hover .illustration-item-inner{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,0.07)}
-.illustration-item img{width:100%;border-radius:8px;display:block}
-.illustration-caption{font-size:13px;color:var(--muted);font-weight:300;text-align:center;line-height:1.4}
+.illustration-item-inner{border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:transform 0.2s ease,box-shadow 0.2s ease;cursor:zoom-in}
+.illustration-item:hover .illustration-item-inner{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.1)}
+.illustration-item img{width:100%;display:block;transition:transform .4s ease}
+.illustration-item:hover img{transform:scale(1.04)}
+.illustration-caption{font-size:12px;color:var(--muted);font-weight:400;text-align:center;line-height:1.4;display:flex;align-items:center;justify-content:center;gap:6px}
+.illustration-caption::before,.illustration-caption::after{content:'';width:14px;height:1px;background:var(--border)}
 
 /* ── TABLE OF CONTENTS ── */
 .toc{position:fixed;left:calc(50% + 500px);top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:0;z-index:50;min-width:140px;transition:opacity 0.3s}
@@ -147,14 +154,18 @@ h2{font-size:20px;font-weight:600;letter-spacing:-0.02em;line-height:1.2;color:v
 @media(max-width:640px){.projects-grid-2{grid-template-columns:1fr}}
 
 /* ── NEXT CASES ── */
-.next-section{padding:56px 0 0;border-top:1px solid var(--border)}
+.next-section{background:#F6F8FB;padding:56px 0}
+.projects-grid-2{gap:16px!important;background:none!important;border:none!important;border-radius:0!important}
+.project-card{border-radius:12px!important;border:1px solid var(--border)!important;transition:transform .2s,box-shadow .2s,border-color .2s!important}
+.project-card:hover{transform:translateY(-4px)!important;box-shadow:0 12px 36px rgba(0,0,0,.08)!important;border-color:var(--border)!important}
+.project-card:hover .project-thumb img{transform:scale(1.04)}
+.project-thumb img{transition:transform .4s ease}
+.proj-cta{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:600;color:var(--blue);margin-top:4px}
+.proj-cta svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.role-weborama{background:#E3F7EE!important;color:#0E7A56!important;border:1px solid #A7E3CA!important}
+.role-nectar{background:#FEF3E2!important;color:#A05C0A!important;border:1px solid #F9D5A0!important}
+.role-pepyte{background:#F0EDFE!important;color:#6B45D6!important;border:1px solid #D6CCFC!important}
 .section-label{font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin-bottom:20px}
-.next-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:10px;overflow:hidden}
-.next-card{background:var(--bg);padding:28px;text-decoration:none;color:inherit;transition:background .15s;display:block}
-.next-card:hover{background:var(--bg-soft)}
-.next-co{font-size:11px;font-weight:600;color:var(--blue);letter-spacing:.06em;margin-bottom:8px}
-.next-title{font-size:15px;font-weight:500;color:var(--text);line-height:1.35}
-.next-desc{font-size:13px;color:var(--muted);margin-top:4px;font-weight:300}
 
 /* ── LIGHTBOX ── */
 .illustration-item img{cursor:zoom-in}
@@ -319,7 +330,7 @@ nav.menu-open .mob-footer{display:flex}
   </div>
 
   <div class="case-section" id="contexte">
-    <p class="sec-label">Contexte</p>
+    <p class="sec-label sec-label-plain">Contexte</p>
     <div class="sec-body">
       <h2>Le problème</h2>
       <p>Le matching était réalisé manuellement, basé sur l'expérience individuelle de chaque recruteur. Les formulaires existants généraient une donnée trop peu structurée pour automatiser quoi que ce soit. Avant de concevoir le matching, il fallait remettre les formulaires à niveau.</p>
@@ -328,7 +339,7 @@ nav.menu-open .mob-footer{display:flex}
   </div>
 
   <div class="case-section" id="audit">
-    <p class="sec-label">01 — Audit</p>
+    <div class="sec-label"><span class="sec-label-num">01</span><span class="sec-label-step">Audit</span></div>
     <div class="sec-body">
       <h2>Cartographie de l'existant</h2>
       <p>J'ai commencé par inventorier l'ensemble des champs existants : <strong>62 champs</strong> répartis sur 3 formulaires (Candidat, Offre, Entreprise).</p>
@@ -351,7 +362,7 @@ nav.menu-open .mob-footer{display:flex}
   </div>
 
   <div class="case-section" id="entretiens">
-    <p class="sec-label">02 — Entretiens</p>
+    <div class="sec-label"><span class="sec-label-num">02</span><span class="sec-label-step">Entretiens</span></div>
     <div class="sec-body">
       <h2>10 entretiens recruteurs</h2>
       <p>J'ai mené 10 entretiens avec des recruteurs, incluant une phase d'observation directe : chaque participant présentait son outil en conditions réelles. L'objectif était de comprendre les informations réellement collectées, les arbitrages quotidiens et les limites des outils existants.</p>
@@ -374,7 +385,7 @@ nav.menu-open .mob-footer{display:flex}
   </div>
 
   <div class="case-section" id="priorisation">
-    <p class="sec-label">03 — Priorisation</p>
+    <div class="sec-label"><span class="sec-label-num">03</span><span class="sec-label-step">Priorisation</span></div>
     <div class="sec-body">
       <h2>Priorisation par les données</h2>
       <p>J'ai consolidé tous les champs identifiés (audit, benchmark, entretiens) dans un questionnaire soumis à <strong>15 recruteurs</strong> via Notion Form. Pour chaque champ : obligatoire, optionnel ou sans avis.</p>
@@ -383,7 +394,7 @@ nav.menu-open .mob-footer{display:flex}
   </div>
 
   <div class="case-section" id="formulaires">
-    <p class="sec-label">04 — Formulaires</p>
+    <div class="sec-label"><span class="sec-label-num">04</span><span class="sec-label-step">Formulaires</span></div>
     <div class="sec-body">
       <h2>De la recherche aux interfaces</h2>
       <p>J'ai intégré les <strong>10 champs prioritaires</strong> dans les trois formulaires en travaillant sur trois axes principaux.</p>
@@ -411,7 +422,7 @@ nav.menu-open .mob-footer{display:flex}
   </div>
 
   <div class="case-section" id="atelier">
-    <p class="sec-label">05 — Atelier matching</p>
+    <div class="sec-label"><span class="sec-label-num">05</span><span class="sec-label-step">Atelier matching</span></div>
     <div class="sec-body">
       <h2>Comprendre les règles de matching</h2>
       <p>Avant de concevoir le matching, j'avais besoin de comprendre comment les recruteurs font correspondre un candidat à une offre au quotidien. Ce savoir-faire était implicite, non formalisé, variable d'un recruteur à l'autre.</p>
@@ -426,7 +437,7 @@ nav.menu-open .mob-footer{display:flex}
   </div>
 
   <div class="case-section" id="scoring">
-    <p class="sec-label">06 — Scoring</p>
+    <div class="sec-label"><span class="sec-label-num">06</span><span class="sec-label-step">Scoring</span></div>
     <div class="sec-body">
       <h2>Co-créer un système de notation</h2>
       <p>À partir des critères identifiés en atelier, j'ai formalisé une <strong>grille de scoring</strong> en trois catégories : critères Classiques (socle du matching), Bonus (différenciation) et Malus (pénalisants ou bloquants). Chaque critère est pondéré selon son poids dans la décision finale.</p>
@@ -440,7 +451,7 @@ nav.menu-open .mob-footer{display:flex}
   </div>
 
   <div class="case-section" id="parcours">
-    <p class="sec-label">07 — Parcours UX</p>
+    <div class="sec-label"><span class="sec-label-num">07</span><span class="sec-label-step">Parcours UX</span></div>
     <div class="sec-body">
       <h2>Concevoir un parcours orienté action</h2>
       <p>Les règles de matching formalisées, j'ai conçu le parcours utilisateur autour d'un principe simple : le recruteur ne doit pas avoir à interpréter — il doit pouvoir décider rapidement.</p>
@@ -463,7 +474,7 @@ nav.menu-open .mob-footer{display:flex}
   </div>
 
   <div class="case-section" id="tests">
-    <p class="sec-label">08 — Tests & itérations</p>
+    <div class="sec-label"><span class="sec-label-num">08</span><span class="sec-label-step">Tests & itérations</span></div>
     <div class="sec-body">
       <h2>Valider et affiner avec les utilisateurs</h2>
       <p>Le parcours et les règles ont été testés avec les recruteurs puis ajustés.</p>
@@ -519,7 +530,7 @@ nav.menu-open .mob-footer{display:flex}
   </div>
 
   <div class="case-section" id="resultats">
-    <p class="sec-label">09 — Résultats</p>
+    <div class="sec-label"><span class="sec-label-num">09</span><span class="sec-label-step">Résultats</span></div>
     <div class="sec-body">
       <h2>Impact sur le produit</h2>
       <p>La démarche a livré un matching ancré dans les usages réels. Les règles co-construites avec les recruteurs garantissent un score compris et adopté.</p>
@@ -534,7 +545,7 @@ nav.menu-open .mob-footer{display:flex}
   </div>
 
   <div class="case-section" id="recommandations">
-    <p class="sec-label">Recommandations</p>
+    <p class="sec-label sec-label-plain">Recommandations</p>
     <div class="sec-body">
       <h2></h2>
       <div class="quote">
@@ -584,7 +595,7 @@ nav.menu-open .mob-footer{display:flex}
 
 <div class="next-section" id="autres-projets">
   <div class="container">
-    <p class="section-label">Autres projets</p>
+    <p class="section-label sec-label-plain">Autres projets</p>
     <div class="projects-grid-2">
       <a class="project-card" href="case-weborama.html">
         <div class="project-thumb"><img src="images/thumb-weborama.jpg" alt="Weborama"></div>
@@ -592,7 +603,7 @@ nav.menu-open .mob-footer{display:flex}
           <div class="project-header">
             <div class="project-header-left">
               <img class="project-logo-sm" src="images/logo-weborama.svg" alt="Weborama">
-              <span class="project-role-badge">Design System Lead</span>
+              <span class="project-role-badge role-weborama">Design System Lead</span>
             </div>
             <span class="project-dur">16 mois</span>
           </div>
@@ -601,6 +612,7 @@ nav.menu-open .mob-footer{display:flex}
           <div class="project-tags">
             <span class="p-tag">Design System</span><span class="p-tag">Figma Make</span><span class="p-tag">AI Ready</span>
           </div>
+          <span class="proj-cta">Voir le projet <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
         </div>
       </a>
 
@@ -610,7 +622,7 @@ nav.menu-open .mob-footer{display:flex}
           <div class="project-header">
             <div class="project-header-left">
               <img class="project-logo-sm" src="images/logo-nectar.svg" alt="Nectar">
-              <span class="project-role-badge">Founding Designer</span>
+              <span class="project-role-badge role-nectar">Founding Designer</span>
             </div>
             <span class="project-dur">En cours</span>
           </div>
@@ -619,6 +631,7 @@ nav.menu-open .mob-footer{display:flex}
           <div class="project-tags">
             <span class="p-tag">UX Research</span><span class="p-tag">Figma Make</span><span class="p-tag">Claude</span>
           </div>
+          <span class="proj-cta">Voir le projet <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
         </div>
       </a>
     </div>
