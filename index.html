@@ -167,17 +167,39 @@ button.exp-tag-secondary.is-active:active{background:#85B7EB!important;color:#0C
 .contact-inner h2{margin-bottom:12px}
 .contact-sub{color:var(--muted);font-size:16px;margin-bottom:32px;font-weight:300}
 .contact-links{display:flex;flex-direction:column;gap:12px}
-.testimonials-grid{display:grid;grid-template-columns:1fr;gap:16px}
-.testimonial-card{background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:36px;position:relative;overflow:hidden}
-.testimonial-card::before{content:'\201C';position:absolute;top:-10px;right:28px;font-size:120px;line-height:1;color:var(--blue);opacity:0.08;font-family:Georgia,serif;pointer-events:none;font-weight:700}
-.testimonial-stars{display:flex;gap:3px;margin-bottom:20px}
-.testimonial-stars span{color:#F59E0B;font-size:18px}
-.testimonial-quote{font-size:16px;line-height:1.75;color:var(--text);font-weight:300;font-style:italic;margin-bottom:28px;max-width:680px}
-.testimonial-author{display:flex;align-items:center;gap:14px;padding-top:24px;border-top:1px solid var(--border)}
-.testimonial-avatar{width:44px;height:44px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid var(--border)}
-.testimonial-avatar-initials{width:44px;height:44px;border-radius:50%;flex-shrink:0;background:var(--blue-light);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;color:var(--blue);letter-spacing:0.5px}
-.testimonial-name{font-size:14px;font-weight:600;color:var(--text);margin-bottom:2px}
-.testimonial-role{font-size:13px;color:var(--muted);font-weight:300}
+/* ── Recommandations — Option D ── */
+.rec-layout{display:flex;flex-direction:column;gap:16px}
+.rec-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:680px){.rec-row{grid-template-columns:1fr}}
+.rec-card{background:#fff;border:1px solid var(--border);border-radius:14px;display:flex;flex-direction:column;gap:14px;transition:box-shadow .2s}
+.rec-card:hover{box-shadow:0 6px 28px rgba(26,86,219,.09)}
+.rec-card.featured{padding:32px}
+.rec-card.compact{padding:24px}
+.rec-inner{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
+@media(max-width:680px){.rec-inner{grid-template-columns:1fr;gap:20px}}
+.rec-left{display:flex;flex-direction:column;gap:14px}
+.rec-right{border-left:3px solid rgba(26,86,219,.2);padding-left:20px;display:flex;align-items:center;min-height:100%}
+@media(max-width:680px){.rec-right{border-left:none;padding-left:0;border-top:1px solid var(--border);padding-top:16px}}
+.rec-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.rec-stars{display:flex;gap:2px}
+.rec-stars span{color:#F59E0B;font-size:15px}
+.rec-card.compact .rec-stars span{font-size:14px}
+.rec-logo{height:22px;width:auto;object-fit:contain;opacity:.85;flex-shrink:0}
+.rec-card.compact .rec-logo{height:20px}
+.rec-keyquote{font-size:17px;font-weight:700;color:var(--text);line-height:1.45;letter-spacing:-.015em}
+.rec-card.compact .rec-keyquote{font-size:15px}
+.rec-quote{font-size:14px;color:var(--muted);line-height:1.75;font-weight:300;font-style:italic}
+.rec-card.compact .rec-quote{font-size:13px}
+.rec-sep{border:none;border-top:1px solid var(--border)}
+.rec-author{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.rec-author-left{display:flex;align-items:center;gap:10px}
+.rec-avatar{width:44px;height:44px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid var(--border)}
+.rec-card.compact .rec-avatar{width:38px;height:38px}
+.rec-name{font-size:14px;font-weight:600;color:var(--text);line-height:1.2}
+.rec-role{font-size:11px;color:var(--muted);font-weight:300;margin-top:2px;line-height:1.3}
+.rec-linkedin{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:#0A66C2;background:#EBF3FB;border:1px solid #C0DCF5;border-radius:20px;padding:5px 10px;text-decoration:none;white-space:nowrap;flex-shrink:0;transition:opacity .15s;font-family:'Outfit',sans-serif}
+.rec-linkedin:hover{opacity:.8}
+.rec-linkedin svg{width:11px;height:11px;fill:#0A66C2;flex-shrink:0}
 .contact-link{display:flex;align-items:center;gap:12px;color:var(--text);text-decoration:none;font-size:15px;padding:14px 18px;border:1px solid var(--border);border-radius:8px;background:var(--bg);transition:border-color 0.15s,background 0.15s,color 0.15s;font-weight:400}
 .contact-link:hover{border-color:var(--blue);background:var(--blue-light);color:var(--blue)}
 .contact-link svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;flex-shrink:0}
@@ -497,51 +519,91 @@ nav.menu-open .mob-footer{display:flex}
 <section id="recommandations">
   <div class="container">
     <p class="section-label">Recommandations</p>
-    <h2>Mes collaborations</h2>
-    <div class="testimonials-grid">
+    <h2>Ils ont travaillé avec Thomas</h2>
+    <div class="rec-layout">
 
-      <div class="testimonial-card">
-        <div class="testimonial-stars">
-          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-        </div>
-        <p class="testimonial-quote">« Thomas a grandement amélioré notre plateforme de recrutement. Il a su comprendre les besoins des utilisateurs. Il a également collaboré efficacement avec notre équipe de développement. Nous avons obtenu une augmentation importante de la satisfaction des utilisateurs clients et de l'efficacité des processus de recrutement. »</p>
-        <div class="testimonial-author">
-          <img class="testimonial-avatar" src="images/avatar-alexis.png" alt="Alexis Vaysse">
-          <div>
-            <p class="testimonial-name">Alexis Vaysse</p>
-            <p class="testimonial-role">Co-CEO & Co-Founder · Pepyte</p>
+      <!-- Carte featured — pleine largeur -->
+      <div class="rec-card featured">
+        <div class="rec-inner">
+          <!-- Gauche -->
+          <div class="rec-left">
+            <div class="rec-top">
+              <div class="rec-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+              <img class="rec-logo" src="images/logo-pepyte.svg" alt="Pepyte">
+            </div>
+            <p class="rec-keyquote">« Une augmentation importante de la satisfaction des utilisateurs et de l'efficacité des processus de recrutement. »</p>
+            <hr class="rec-sep">
+            <div class="rec-author">
+              <div class="rec-author-left">
+                <img class="rec-avatar" src="images/avatar-alexis.png" alt="Alexis Vaysse">
+                <div>
+                  <p class="rec-name">Alexis Vaysse</p>
+                  <p class="rec-role">Co-CEO & Co-Founder · Pepyte</p>
+                </div>
+              </div>
+              <a class="rec-linkedin" href="https://fr.linkedin.com/in/alexis-vaysse" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                LinkedIn
+              </a>
+            </div>
+          </div>
+          <!-- Droite -->
+          <div class="rec-right">
+            <p class="rec-quote">Thomas a grandement amélioré notre plateforme de recrutement. Il a su comprendre les besoins des utilisateurs. Il a également collaboré efficacement avec notre équipe de développement. Nous avons obtenu une augmentation importante de la satisfaction des utilisateurs clients et de l'efficacité des processus de recrutement.</p>
           </div>
         </div>
       </div>
 
-      <div class="testimonial-card">
-        <div class="testimonial-stars">
-          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-        </div>
-        <p class="testimonial-quote">« Thomas est un Product Designer motivé, combinant une capacité de travail impressionnante à une positivité contagieuse. Son dévouement et son optimisme inspirent toute l'équipe, rendant chaque projet non seulement réalisable, mais aussi agréable. Fortement recommandé ! »</p>
-        <div class="testimonial-author">
-          <img class="testimonial-avatar" src="images/avatar-antoine.png" alt="Antoine Girard">
-          <div>
-            <p class="testimonial-name">Antoine Girard</p>
-            <p class="testimonial-role">Co-CEO & Co-Founder · Pepyte</p>
+      <!-- 2 cartes compactes côte à côte -->
+      <div class="rec-row">
+
+        <div class="rec-card compact">
+          <div class="rec-top">
+            <div class="rec-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+            <img class="rec-logo" src="images/logo-pepyte.svg" alt="Pepyte">
+          </div>
+          <p class="rec-keyquote">« Une capacité de travail impressionnante à une positivité contagieuse. »</p>
+          <p class="rec-quote">Thomas est un Product Designer motivé, combinant une capacité de travail impressionnante à une positivité contagieuse. Son dévouement et son optimisme inspirent toute l'équipe. Fortement recommandé !</p>
+          <hr class="rec-sep">
+          <div class="rec-author">
+            <div class="rec-author-left">
+              <img class="rec-avatar" src="images/avatar-antoine.png" alt="Antoine Girard">
+              <div>
+                <p class="rec-name">Antoine Girard</p>
+                <p class="rec-role">Co-CEO & Co-Founder · Pepyte</p>
+              </div>
+            </div>
+            <a class="rec-linkedin" href="https://www.linkedin.com/in/antoine-girard-202561143/" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              LinkedIn
+            </a>
           </div>
         </div>
-      </div>
 
-      <div class="testimonial-card">
-        <div class="testimonial-stars">
-          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-        </div>
-        <p class="testimonial-quote">« En tant que Product Designer, Thomas a su faire de l'IA un véritable allié stratégique, l'intégrant avec maîtrise dans ses méthodes de conception pour créer des produits plus intelligents, optimiser les parcours utilisateurs et renforcer durablement la performance des produits Weborama. »</p>
-        <div class="testimonial-author">
-          <img class="testimonial-avatar" src="images/avatar-donia.png" alt="Donia Ben Ghorbal">
-          <div>
-            <p class="testimonial-name">Donia Ben Ghorbal</p>
-            <p class="testimonial-role">Lead Product Designer · Weborama</p>
+        <div class="rec-card compact">
+          <div class="rec-top">
+            <div class="rec-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+            <img class="rec-logo" src="images/logo-weborama.svg" alt="Weborama">
+          </div>
+          <p class="rec-keyquote">« Faire de l'IA un véritable allié stratégique. »</p>
+          <p class="rec-quote">Thomas a su faire de l'IA un véritable allié stratégique, l'intégrant avec maîtrise dans ses méthodes de conception pour créer des produits plus intelligents et optimiser les parcours utilisateurs.</p>
+          <hr class="rec-sep">
+          <div class="rec-author">
+            <div class="rec-author-left">
+              <img class="rec-avatar" src="images/avatar-donia.png" alt="Donia Ben Ghorbal">
+              <div>
+                <p class="rec-name">Donia Ben Ghorbal</p>
+                <p class="rec-role">Lead Product Designer · Weborama</p>
+              </div>
+            </div>
+            <a class="rec-linkedin" href="https://www.linkedin.com/in/donia-benghorbal-750ba1143/" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              LinkedIn
+            </a>
           </div>
         </div>
-      </div>
 
+      </div>
     </div>
   </div>
 </section>

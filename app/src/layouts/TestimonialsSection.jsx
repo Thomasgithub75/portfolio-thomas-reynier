@@ -13,7 +13,7 @@ const TESTIMONIALS = [
     name: 'Alexis Vaysse',
     role: 'Co-CEO & Co-Founder · Pepyte',
     avatar: '/images/avatar-alexis.png',
-    linkedinUrl: 'https://www.linkedin.com/in/thomas-reynier-product-design/',
+    linkedinUrl: 'https://fr.linkedin.com/in/alexis-vaysse',
   },
   {
     featured: false,
@@ -24,7 +24,7 @@ const TESTIMONIALS = [
     name: 'Antoine Girard',
     role: 'Co-CEO & Co-Founder · Pepyte',
     avatar: '/images/avatar-antoine.png',
-    linkedinUrl: 'https://www.linkedin.com/in/thomas-reynier-product-design/',
+    linkedinUrl: 'https://www.linkedin.com/in/antoine-girard-202561143/',
   },
   {
     featured: false,
@@ -35,7 +35,7 @@ const TESTIMONIALS = [
     name: 'Donia Ben Ghorbal',
     role: 'Lead Product Designer · Weborama',
     avatar: '/images/avatar-donia.png',
-    linkedinUrl: 'https://www.linkedin.com/in/thomas-reynier-product-design/',
+    linkedinUrl: 'https://www.linkedin.com/in/donia-benghorbal-750ba1143/',
   },
 ];
 
