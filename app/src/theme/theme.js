@@ -14,22 +14,38 @@ const primary = {
   900: '#030F2D',
 };
 
-// ── Tokens sémantiques → mappés sur la scale ─────────────────────────────────
+// ── Palette Gray (scale 50–900) ───────────────────────────────────────────────
+const gray = {
+  50:  '#EEF3FD',
+  100: '#D7E5FB',
+  200: '#9DB8F2',
+  300: '#6191E9',
+  400: '#3B70E1',
+  500: '#5B6A8A',
+  600: '#405070',
+  700: '#3A4864',
+  800: '#1E2E4A',
+  900: '#1A2540',
+};
+
+// ── Tokens sémantiques → mappés sur les scales ───────────────────────────────
 const tokens = {
   // Primary brand
-  blue:       primary[500],  // action principale
-  blueMid:    primary[400],  // interactif secondaire
-  blueLight:  primary[50],   // fonds, surfaces
-  blueDeep:   primary[600],  // hover, focus
-  blueDarker: primary[700],  // états actifs foncés
-  blueBorder: primary[200],  // bordures bleues
-  bgBlue:     primary[100],  // panels, badges
+  blue:       primary[500],
+  blueMid:    primary[400],
+  blueLight:  primary[50],
+  blueDeep:   primary[600],
+  blueDarker: primary[700],
+  blueBorder: primary[200],
+  bgBlue:     primary[100],
 
-  // Exposer la scale complète
+  // Scales complètes
   primary,
+  gray,
 
-  text:       '#111827',
-  muted:      '#6B7280',
+  // Texte & neutres → mappés sur gray
+  text:       gray[900],   // #1A2540
+  muted:      gray[500],   // #5B6A8A
   border:     '#E5E7EB',
   borderSoft: '#E5E9F5',
 

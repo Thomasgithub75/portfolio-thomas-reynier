@@ -76,6 +76,37 @@ function ColorSwatch({ name, value }) {
   );
 }
 
+function ColorScale({ label, scale, semantic = {}, baseStep = null }) {
+  const steps = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900];
+  return (
+    <Box sx={{ mb: 3 }}>
+      <Typography variant="caption" sx={{ display: 'block', mb: 1.5, color: tokens.muted, fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', fontSize: 11 }}>
+        {label}
+      </Typography>
+      <Box sx={{ display: 'flex', gap: 0, borderRadius: '10px', overflow: 'hidden', border: `1px solid ${tokens.border}` }}>
+        {steps.map((step) => {
+          const hex = scale[step];
+          const finalText = step <= 200 ? tokens.gray[600] : (step <= 400 ? '#fff' : '#fff');
+          return (
+            <Box key={step} sx={{ flex: 1, background: hex, pt: 8, pb: 1.5, px: 1, display: 'flex', flexDirection: 'column', gap: '2px', position: 'relative' }}>
+              {step === baseStep && (
+                <Box sx={{ position: 'absolute', top: 8, left: '50%', transform: 'translateX(-50%)', fontSize: 9, fontWeight: 700, color: '#fff', background: 'rgba(255,255,255,0.25)', borderRadius: '4px', px: '5px', py: '1px', whiteSpace: 'nowrap' }}>
+                  Base
+                </Box>
+              )}
+              <Typography sx={{ fontSize: 11, fontWeight: 700, color: finalText, lineHeight: 1 }}>{step}</Typography>
+              <Typography sx={{ fontSize: 9.5, color: finalText, opacity: 0.75, lineHeight: 1, fontFamily: 'monospace' }}>{hex}</Typography>
+              {semantic[step] && (
+                <Typography sx={{ fontSize: 9, color: finalText, opacity: 0.6, lineHeight: 1, mt: '2px' }}>{semantic[step]}</Typography>
+              )}
+            </Box>
+          );
+        })}
+      </Box>
+    </Box>
+  );
+}
+
 function PrimaryScale() {
   const steps = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900];
   const semantic = { 50: 'blueLight', 100: 'bgBlue', 200: 'blueBorder', 400: 'blueMid', 500: 'blue ★', 600: 'blueDeep', 700: 'blueDarker' };
@@ -172,6 +203,14 @@ export default function DesignSystem() {
         {/* Scale primaire */}
         <PrimaryScale />
 
+        {/* Scale gray */}
+        <ColorScale
+          label="Gray — scale complète"
+          scale={tokens.gray}
+          baseStep={500}
+          semantic={{ 500: 'muted ★', 900: 'text ★' }}
+        />
+
         {/* Tokens sémantiques */}
         <Group label="Tokens sémantiques — Primary">
           <ColorSwatch name="blue (500)" value={tokens.blue} />
@@ -183,9 +222,15 @@ export default function DesignSystem() {
           <ColorSwatch name="blueBorder (200)" value={tokens.blueBorder} />
         </Group>
 
-        <Group label="Neutres">
-          <ColorSwatch name="text" value={tokens.text} />
-          <ColorSwatch name="muted" value={tokens.muted} />
+        <Group label="Tokens sémantiques — Gray">
+          <ColorSwatch name="text (900)" value={tokens.gray[900]} />
+          <ColorSwatch name="muted (500)" value={tokens.gray[500]} />
+          <ColorSwatch name="gray 600" value={tokens.gray[600]} />
+          <ColorSwatch name="gray 700" value={tokens.gray[700]} />
+          <ColorSwatch name="gray 800" value={tokens.gray[800]} />
+        </Group>
+
+        <Group label="Surfaces & bordures">
           <ColorSwatch name="border" value={tokens.border} />
           <ColorSwatch name="bgSoft" value={tokens.bgSoft} />
           <ColorSwatch name="bgPanel" value={tokens.bgPanel} />
