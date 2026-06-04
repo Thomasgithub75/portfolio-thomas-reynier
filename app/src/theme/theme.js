@@ -1,13 +1,32 @@
 import { createTheme } from '@mui/material/styles';
 
-// ── Tokens extraits du site actuel ────────────────────────────────────────────
+// ── Palette Primary (brand scale 50–900) ─────────────────────────────────────
+const primary = {
+  50:  '#EEF3FD',
+  100: '#D7E5FB',
+  200: '#9DB8F2',
+  300: '#6191E9',
+  400: '#3B70E1',
+  500: '#1956DB',
+  600: '#1141A8',
+  700: '#0C2E7A',
+  800: '#061F52',
+  900: '#030F2D',
+};
+
+// ── Tokens sémantiques → mappés sur la scale ─────────────────────────────────
 const tokens = {
-  blue:       '#1A56DB',
-  blueMid:    '#3B82F6',
-  blueLight:  '#EEF4FF',
-  blueDeep:   '#175CD3',
-  blueDarker: '#0C447C',
-  blueBorder: '#B5D4F4',
+  // Primary brand
+  blue:       primary[500],  // action principale
+  blueMid:    primary[400],  // interactif secondaire
+  blueLight:  primary[50],   // fonds, surfaces
+  blueDeep:   primary[600],  // hover, focus
+  blueDarker: primary[700],  // états actifs foncés
+  blueBorder: primary[200],  // bordures bleues
+  bgBlue:     primary[100],  // panels, badges
+
+  // Exposer la scale complète
+  primary,
 
   text:       '#111827',
   muted:      '#6B7280',
@@ -17,7 +36,6 @@ const tokens = {
   bg:         '#FFFFFF',
   bgSoft:     '#F9FAFB',
   bgPanel:    '#F4F8FE',
-  bgBlue:     '#E8EFFD',
 
   green:      '#22C55E',
   amber:      '#F59E0B',

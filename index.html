@@ -9,7 +9,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--blue:#1A56DB;--blue-light:#EEF4FF;--blue-mid:#3B82F6;--text:#111827;--muted:#6B7280;--border:#E5E7EB;--bg:#FFFFFF;--bg-soft:#F9FAFB}
+:root{
+  --p50:#EEF3FD;--p100:#D7E5FB;--p200:#9DB8F2;--p300:#6191E9;--p400:#3B70E1;
+  --p500:#1956DB;--p600:#1141A8;--p700:#0C2E7A;--p800:#061F52;--p900:#030F2D;
+  --blue:var(--p500);--blue-light:var(--p50);--blue-mid:var(--p400);
+  --blue-deep:var(--p600);--blue-border:var(--p200);--blue-bg:var(--p100);
+  --text:#111827;--muted:#6B7280;--border:#E5E7EB;--bg:#FFFFFF;--bg-soft:#F9FAFB
+}
 html{scroll-behavior:smooth}
 body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
 nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0;height:60px;display:flex;align-items:center;justify-content:center}
