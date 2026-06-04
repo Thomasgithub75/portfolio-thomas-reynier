@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proposals — Illustrations & décors graphiques</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --p50:#EEF3FD;--p100:#D7E5FB;--p200:#9DB8F2;--p300:#6191E9;--p400:#3B70E1;
+  --p500:#1956DB;--p600:#1141A8;--p700:#0C2E7A;
+  --g50:#F6F8FB;--g100:#EBF0F8;--g200:#D0DAEC;--g500:#5B6A8A;--g900:#1A2540;
+  --text:#1A2540;--muted:#5B6A8A;--border:#E5E7EB;--bg:#fff;
+}
+body{font-family:'Outfit',sans-serif;background:#EDEEF0;color:var(--text);-webkit-font-smoothing:antialiased}
+
+/* ── Page header ── */
+.page-meta{text-align:center;padding:56px 24px 48px}
+.page-kicker{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--p500);margin-bottom:10px}
+.page-h1{font-size:30px;font-weight:700;letter-spacing:-.025em;margin-bottom:10px}
+.page-sub{font-size:14px;color:var(--muted);font-weight:300;line-height:1.6}
+
+/* ── Layout ── */
+.bloc{max-width:1000px;margin:0 auto 80px;padding:0 24px}
+.bloc-header{margin-bottom:24px}
+.bloc-label{display:inline-flex;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--p500);background:var(--p50);border:1px solid var(--p200);border-radius:20px;padding:4px 12px;margin-bottom:10px}
+.bloc-title{font-size:22px;font-weight:700;letter-spacing:-.02em;margin-bottom:6px}
+.bloc-zone{font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+.bloc-desc{font-size:13px;color:var(--muted);font-weight:300;line-height:1.65;max-width:620px}
+
+.options-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.options-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.option-label{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.panel{background:#fff;border-radius:14px;border:1px solid var(--border);overflow:hidden}
+hr.sep{border:none;border-top:2px dashed #D1D5DB;max-width:1000px;margin:0 auto 80px}
+
+/* ── Option badges ── */
+.opt-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:var(--p500);background:var(--p50);border:1px solid var(--p100);border-radius:20px;padding:3px 10px;margin-bottom:8px}
+.opt-badge-green{color:#0E7A56;background:#E3F7EE;border-color:#A7E3CA}
+.opt-desc{font-size:12px;color:var(--muted);font-weight:300;line-height:1.5;margin-top:8px}
+
+
+/* ══════════════════════════════════════════════════════════════
+   1 — HERO : panneau décoratif droit
+══════════════════════════════════════════════════════════════ */
+.hero-mock{padding:32px;background:linear-gradient(145deg,var(--p50) 0%,#fff 60%);min-height:280px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+
+/* Option A — Floating process cards */
+.float-cards{display:flex;flex-direction:column;gap:10px;width:200px}
+.fcard{background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:10px;box-shadow:0 2px 10px rgba(25,86,219,.06)}
+.fcard-icon{width:32px;height:32px;border-radius:8px;background:var(--p50);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.fcard-text{font-size:12px;font-weight:500;color:var(--text);line-height:1.3}
+.fcard-sub{font-size:10px;color:var(--muted);font-weight:300;margin-top:1px}
+.fcard:nth-child(1){transform:translateX(-8px)}
+.fcard:nth-child(2){transform:translateX(0)}
+.fcard:nth-child(3){transform:translateX(8px)}
+.fcard-connector{width:1px;height:12px;background:var(--border);margin:0 auto}
+
+/* Option B — Rings abstract */
+.rings-wrap{position:relative;width:180px;height:180px;display:flex;align-items:center;justify-content:center}
+.ring{position:absolute;border-radius:50%;border:1.5px solid}
+.ring-1{width:180px;height:180px;border-color:rgba(25,86,219,.08)}
+.ring-2{width:130px;height:130px;border-color:rgba(25,86,219,.14)}
+.ring-3{width:80px;height:80px;border-color:rgba(25,86,219,.22)}
+.ring-center{width:36px;height:36px;border-radius:50%;background:var(--p500);display:flex;align-items:center;justify-content:center}
+.ring-dot{width:6px;height:6px;border-radius:50%;background:#fff}
+.ring-node{position:absolute;width:8px;height:8px;border-radius:50%;background:var(--p300);border:2px solid #fff}
+
+/* Option C — Dot matrix */
+.dotgrid-wrap{width:200px;height:180px;position:relative;overflow:hidden;opacity:.7}
+
+/* ══════════════════════════════════════════════════════════════
+   2 — VIGNETTES PROJETS
+══════════════════════════════════════════════════════════════ */
+.thumb-mock{height:160px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+
+/* Option A — Gradient + initiales */
+.thumb-a-nectar{background:linear-gradient(135deg,#FEF3E2 0%,#FDE8C0 100%)}
+.thumb-a-pepyte{background:linear-gradient(135deg,#F0EDFE 0%,#DDD5FC 100%)}
+.thumb-a-weborama{background:linear-gradient(135deg,#E3F7EE 0%,#C0EDD7 100%)}
+.thumb-initial{font-size:64px;font-weight:800;letter-spacing:-.05em;opacity:.18;line-height:1;user-select:none;font-family:'Outfit',sans-serif}
+.thumb-logo-wrap{position:absolute;bottom:16px;left:16px;display:flex;align-items:center;gap:8px}
+.thumb-logo-box{width:28px;height:28px;border-radius:6px;background:#fff;border:1px solid rgba(0,0,0,.08);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.thumb-logo-box img{width:18px;height:18px;object-fit:contain}
+.thumb-proj-name{font-size:13px;font-weight:600;color:var(--text)}
+
+/* Option B — Grille géométrique */
+.thumb-b-bg{background:var(--g50)}
+.geo-grid{width:100%;height:100%;position:relative}
+
+/* Option C — Bande + screenshot stylisé */
+.thumb-c-nectar{background:#FFF8F0}
+.thumb-c-pepyte{background:#F8F6FF}
+.thumb-c-weborama{background:#F2FCF7}
+.thumb-c-bar{position:absolute;top:0;left:0;right:0;height:4px}
+.thumb-c-card{background:#fff;border:1px solid var(--border);border-radius:8px;width:72%;height:68%;display:grid;grid-template-columns:1fr;gap:6px;padding:10px;box-shadow:0 4px 16px rgba(0,0,0,.07)}
+.thumb-c-line{height:6px;border-radius:3px;background:var(--g100)}
+.thumb-c-line-sm{height:6px;border-radius:3px;background:var(--g100);width:60%}
+.thumb-c-rect{height:32px;border-radius:4px;background:var(--g50);border:1px solid var(--border)}
+
+.project-card-mock{border-radius:10px;border:1px solid var(--border);overflow:hidden;background:#fff}
+.project-body-mock{padding:16px;display:flex;flex-direction:column;gap:8px}
+.proj-header-mock{display:flex;align-items:center;gap:8px}
+.proj-badge-mock{font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px}
+.proj-name-mock{font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--text)}
+.proj-desc-mock{font-size:12px;color:var(--muted);font-weight:300;line-height:1.5}
+.proj-tags-mock{display:flex;gap:6px;flex-wrap:wrap}
+.ptag{font-size:11px;padding:2px 8px;border-radius:20px;background:var(--p50);color:var(--p500);font-weight:500}
+
+/* ══════════════════════════════════════════════════════════════
+   3 — MÉTRIQUES / STATS
+══════════════════════════════════════════════════════════════ */
+.stats-before-mock{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.stat-b{background:#fff;padding:20px}
+.stat-val-b{font-size:26px;font-weight:600;color:var(--p500);letter-spacing:-.03em;line-height:1;margin-bottom:4px}
+.stat-label-b{font-size:11px;color:var(--muted);font-weight:300;line-height:1.4}
+
+.stats-after-mock{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.stat-a{background:var(--g50);border-radius:10px;padding:18px 16px;border-left:3px solid var(--p500);position:relative}
+.stat-val-a{font-size:26px;font-weight:700;color:var(--p500);letter-spacing:-.03em;line-height:1;margin-bottom:4px}
+.stat-label-a{font-size:11px;color:var(--muted);font-weight:300;line-height:1.4}
+.stat-a-icon{position:absolute;top:12px;right:12px;opacity:.25}
+
+/* ══════════════════════════════════════════════════════════════
+   4 — SECTION CONTACT
+══════════════════════════════════════════════════════════════ */
+.contact-mock{padding:40px;min-height:220px;position:relative;overflow:hidden;display:flex;gap:40px;align-items:center}
+
+/* Option A — Réseau de noeuds */
+.contact-a{background:var(--p50)}
+
+/* Option B — Illustration profil stylisée */
+.contact-b{background:linear-gradient(135deg,var(--g900) 0%,#0f1e3d 100%)}
+.contact-b-text h3{color:#fff;font-size:20px;font-weight:700;letter-spacing:-.02em;margin-bottom:6px}
+.contact-b-text p{color:rgba(255,255,255,.5);font-size:13px;font-weight:300;margin-bottom:20px}
+.contact-b-btn{display:inline-flex;align-items:center;gap:8px;background:var(--p500);color:#fff;padding:10px 20px;border-radius:8px;font-size:13px;font-weight:500}
+
+/* Option C — Split couleur */
+.contact-c{background:#fff;display:grid;grid-template-columns:1fr 1fr;gap:0;padding:0}
+.contact-c-left{padding:32px;background:var(--p50);border-right:1px solid var(--p100)}
+.contact-c-right{padding:32px;background:#fff}
+.contact-c-title{font-size:18px;font-weight:700;letter-spacing:-.02em;margin-bottom:8px}
+.contact-c-sub{font-size:13px;color:var(--muted);font-weight:300;margin-bottom:20px;line-height:1.55}
+.contact-link-mock{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid var(--border);border-radius:8px;margin-bottom:8px;font-size:13px;font-weight:400;background:#fff}
+.contact-icon-mock{width:32px;height:32px;border-radius:8px;background:var(--p50);display:flex;align-items:center;justify-content:center;color:var(--p500);flex-shrink:0}
+.contact-stat-row{display:flex;flex-direction:column;gap:16px;padding-top:8px}
+.contact-stat{display:flex;flex-direction:column;gap:2px}
+.contact-stat-val{font-size:28px;font-weight:700;color:var(--p500);letter-spacing:-.03em;line-height:1}
+.contact-stat-label{font-size:12px;color:var(--muted);font-weight:300}
+
+/* ══════════════════════════════════════════════════════════════
+   5 — TEXTURE DE FOND
+══════════════════════════════════════════════════════════════ */
+.texture-mock{height:180px;position:relative;overflow:hidden;border-radius:10px}
+.texture-content{position:relative;z-index:1;padding:28px 32px}
+.texture-h2{font-size:18px;font-weight:700;letter-spacing:-.02em;margin-bottom:6px}
+.texture-p{font-size:13px;color:var(--muted);font-weight:300;line-height:1.55}
+
+/* Dot grid */
+.texture-dots{background-image:radial-gradient(circle,rgba(25,86,219,.18) 1px,transparent 1px);background-size:20px 20px;background-color:#fff}
+/* Line grid */
+.texture-grid{background-image:linear-gradient(var(--p100) 1px,transparent 1px),linear-gradient(90deg,var(--p100) 1px,transparent 1px);background-size:24px 24px;background-color:#fff}
+/* Diagonal */
+.texture-diag{background-color:#fff;background-image:repeating-linear-gradient(45deg,transparent,transparent 10px,rgba(25,86,219,.06) 10px,rgba(25,86,219,.06) 11px)}
+/* Cross */
+.texture-cross{background-color:#fff;background-image:radial-gradient(circle,rgba(25,86,219,.15) 1px,transparent 1px),radial-gradient(circle,rgba(25,86,219,.08) 1px,transparent 1px);background-size:20px 20px,10px 10px;background-position:0 0,10px 10px}
+/* Topography */
+.texture-topo{background-color:var(--p50);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%231956DB' fill-opacity='0.06'/%3E%3C/svg%3E")}
+
+/* ══════════════════════════════════════════════════════════════
+   6 — ÉTUDES DE CAS : fond de section hero
+══════════════════════════════════════════════════════════════ */
+.case-header-mock{padding:40px;position:relative;overflow:hidden;min-height:200px}
+.case-h-content{position:relative;z-index:1}
+.case-h-tag{display:inline-flex;font-size:11px;font-weight:600;padding:3px 10px;border-radius:5px;margin-bottom:12px;margin-right:6px;background:var(--p50);color:var(--p500);border:1px solid var(--p100)}
+.case-h-title{font-size:clamp(22px,3vw,32px);font-weight:700;letter-spacing:-.03em;line-height:1.1;margin-bottom:12px}
+.case-h-intro{font-size:14px;color:var(--muted);font-weight:300;line-height:1.65;border-left:3px solid var(--p500);padding-left:14px;max-width:520px}
+
+/* Option A : actuel */
+.case-h-current{background:linear-gradient(145deg,var(--p50) 0%,#fff 55%)}
+.case-h-current::before{content:'';position:absolute;top:-80px;right:-80px;width:320px;height:320px;background:radial-gradient(circle,rgba(25,86,219,.06) 0%,transparent 70%);pointer-events:none}
+
+/* Option B : blob décoratif */
+.case-h-blob{background:#fff}
+.blob-svg{position:absolute;top:-40px;right:-40px;opacity:.07;pointer-events:none}
+
+/* Option C : bande latérale */
+.case-h-stripe{background:#fff}
+.stripe-bar{position:absolute;top:0;right:0;bottom:0;width:220px;background:linear-gradient(180deg,var(--p50) 0%,var(--p100) 100%);border-left:1px solid var(--p100)}
+.stripe-num{position:absolute;top:0;right:0;bottom:0;width:220px;display:flex;align-items:center;justify-content:center;font-size:120px;font-weight:800;color:var(--p100);letter-spacing:-.05em;line-height:1;user-select:none;z-index:1}
+</style>
+</head>
+<body>
+
+<div class="page-meta">
+  <p class="page-kicker">Proposals UI</p>
+  <h1 class="page-h1">Illustrations & décors graphiques</h1>
+  <p class="page-sub">6 zones · Options comparées · 100% CSS + SVG inline — aucune image externe</p>
+</div>
+
+
+<!-- ══ 1. HERO : panneau décoratif droit ══════════════════════ -->
+<div class="bloc">
+  <div class="bloc-header">
+    <span class="bloc-label">Zone 1</span>
+    <p class="bloc-zone">index.html — Section Hero</p>
+    <h2 class="bloc-title">Élément graphique décoratif (colonne droite)</h2>
+    <p class="bloc-desc">Actuellement : photo ronde uniquement. Ces options proposent un élément visuel complémentaire — à droite de la photo ou à sa place selon le choix.</p>
+  </div>
+  <div class="options-3">
+
+    <!-- Option A -->
+    <div>
+      <p class="option-label">Option A — Cartes process</p>
+      <div class="panel">
+        <div class="hero-mock">
+          <div class="float-cards">
+            <div class="fcard">
+              <div class="fcard-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1956DB" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              </div>
+              <div>
+                <p class="fcard-text">UX Research</p>
+                <p class="fcard-sub">Entretiens · Benchmark</p>
+              </div>
+            </div>
+            <div class="fcard-connector"></div>
+            <div class="fcard">
+              <div class="fcard-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1956DB" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 9h3M15 15h3"/></svg>
+              </div>
+              <div>
+                <p class="fcard-text">Design System</p>
+                <p class="fcard-sub">Atomic · Figma</p>
+              </div>
+            </div>
+            <div class="fcard-connector"></div>
+            <div class="fcard">
+              <div class="fcard-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1956DB" stroke-width="1.8" stroke-linecap="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              </div>
+              <div>
+                <p class="fcard-text">Livraison</p>
+                <p class="fcard-sub">Dev-ready · Vercel</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="opt-desc">Cards flottantes qui matérialisent le process en 3 étapes. Donne du concret et du rythme à l'hero.</p>
+    </div>
+
+    <!-- Option B -->
+    <div>
+      <p class="option-label">Option B — Anneaux abstraits</p>
+      <div class="panel">
+        <div class="hero-mock">
+          <div class="rings-wrap">
+            <div class="ring ring-1"></div>
+            <div class="ring ring-2"></div>
+            <div class="ring ring-3"></div>
+            <div class="ring-center"><div class="ring-dot"></div></div>
+            <!-- Noeuds orbitaux -->
+            <div class="ring-node" style="top:0px;left:50%;transform:translateX(-50%)"></div>
+            <div class="ring-node" style="bottom:0px;left:50%;transform:translateX(-50%)"></div>
+            <div class="ring-node" style="top:50%;right:-4px;transform:translateY(-50%);background:#9DB8F2"></div>
+            <div class="ring-node" style="top:50%;left:-4px;transform:translateY(-50%);background:#9DB8F2"></div>
+            <div class="ring-node" style="top:14px;right:14px;background:#3B70E1;width:6px;height:6px"></div>
+            <div class="ring-node" style="bottom:14px;left:14px;background:#3B70E1;width:6px;height:6px"></div>
+          </div>
+        </div>
+      </div>
+      <p class="opt-desc">Système concentrique — évoque un Design System : couches, composants, atomicité. Discret, élégant.</p>
+    </div>
+
+    <!-- Option C -->
+    <div>
+      <p class="option-label">Option C — Grille de points</p>
+      <div class="panel">
+        <div class="hero-mock" style="background:linear-gradient(145deg,var(--p50) 0%,#fff 55%)">
+          <svg width="200" height="180" viewBox="0 0 200 180" fill="none" opacity="0.5">
+            <defs>
+              <radialGradient id="fade" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#1956DB" stop-opacity="0.3"/>
+                <stop offset="100%" stop-color="#1956DB" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <rect width="200" height="180" fill="url(#fade)"/>
+            <!-- dots -->
+            <g fill="#1956DB" opacity="0.35">
+              <!-- generate 10x9 grid -->
+              <circle cx="10" cy="10" r="1.5"/><circle cx="30" cy="10" r="1.5"/><circle cx="50" cy="10" r="1.5"/><circle cx="70" cy="10" r="1.5"/><circle cx="90" cy="10" r="1.5"/><circle cx="110" cy="10" r="1.5"/><circle cx="130" cy="10" r="1.5"/><circle cx="150" cy="10" r="1.5"/><circle cx="170" cy="10" r="1.5"/><circle cx="190" cy="10" r="1.5"/>
+              <circle cx="10" cy="30" r="1.5"/><circle cx="30" cy="30" r="1.5"/><circle cx="50" cy="30" r="1.5"/><circle cx="70" cy="30" r="1.5"/><circle cx="90" cy="30" r="1.5"/><circle cx="110" cy="30" r="1.5"/><circle cx="130" cy="30" r="1.5"/><circle cx="150" cy="30" r="1.5"/><circle cx="170" cy="30" r="1.5"/><circle cx="190" cy="30" r="1.5"/>
+              <circle cx="10" cy="50" r="1.5"/><circle cx="30" cy="50" r="1.5"/><circle cx="50" cy="50" r="1.5"/><circle cx="70" cy="50" r="1.5"/><circle cx="90" cy="50" r="1.5"/><circle cx="110" cy="50" r="1.5"/><circle cx="130" cy="50" r="1.5"/><circle cx="150" cy="50" r="1.5"/><circle cx="170" cy="50" r="1.5"/><circle cx="190" cy="50" r="1.5"/>
+              <circle cx="10" cy="70" r="1.5"/><circle cx="30" cy="70" r="1.5"/><circle cx="50" cy="70" r="1.5"/><circle cx="70" cy="70" r="2"/><circle cx="90" cy="70" r="2"/><circle cx="110" cy="70" r="2"/><circle cx="130" cy="70" r="2"/><circle cx="150" cy="70" r="1.5"/><circle cx="170" cy="70" r="1.5"/><circle cx="190" cy="70" r="1.5"/>
+              <circle cx="10" cy="90" r="1.5"/><circle cx="30" cy="90" r="1.5"/><circle cx="50" cy="90" r="2"/><circle cx="70" cy="90" r="2.5"/><circle cx="90" cy="90" r="3"/><circle cx="110" cy="90" r="2.5"/><circle cx="130" cy="90" r="2"/><circle cx="150" cy="90" r="1.5"/><circle cx="170" cy="90" r="1.5"/><circle cx="190" cy="90" r="1.5"/>
+              <circle cx="10" cy="110" r="1.5"/><circle cx="30" cy="110" r="1.5"/><circle cx="50" cy="110" r="1.5"/><circle cx="70" cy="110" r="2"/><circle cx="90" cy="110" r="2"/><circle cx="110" cy="110" r="2"/><circle cx="130" cy="110" r="2"/><circle cx="150" cy="110" r="1.5"/><circle cx="170" cy="110" r="1.5"/><circle cx="190" cy="110" r="1.5"/>
+              <circle cx="10" cy="130" r="1.5"/><circle cx="30" cy="130" r="1.5"/><circle cx="50" cy="130" r="1.5"/><circle cx="70" cy="130" r="1.5"/><circle cx="90" cy="130" r="1.5"/><circle cx="110" cy="130" r="1.5"/><circle cx="130" cy="130" r="1.5"/><circle cx="150" cy="130" r="1.5"/><circle cx="170" cy="130" r="1.5"/><circle cx="190" cy="130" r="1.5"/>
+              <circle cx="10" cy="150" r="1.5"/><circle cx="30" cy="150" r="1.5"/><circle cx="50" cy="150" r="1.5"/><circle cx="70" cy="150" r="1.5"/><circle cx="90" cy="150" r="1.5"/><circle cx="110" cy="150" r="1.5"/><circle cx="130" cy="150" r="1.5"/><circle cx="150" cy="150" r="1.5"/><circle cx="170" cy="150" r="1.5"/><circle cx="190" cy="150" r="1.5"/>
+              <circle cx="10" cy="170" r="1.5"/><circle cx="30" cy="170" r="1.5"/><circle cx="50" cy="170" r="1.5"/><circle cx="70" cy="170" r="1.5"/><circle cx="90" cy="170" r="1.5"/><circle cx="110" cy="170" r="1.5"/><circle cx="130" cy="170" r="1.5"/><circle cx="150" cy="170" r="1.5"/><circle cx="170" cy="170" r="1.5"/><circle cx="190" cy="170" r="1.5"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+      <p class="opt-desc">Pattern de points avec densité variable au centre — texture subtile qui structure sans surcharger.</p>
+    </div>
+
+  </div>
+</div>
+
+<hr class="sep">
+
+
+<!-- ══ 2. VIGNETTES PROJETS ════════════════════════════════════ -->
+<div class="bloc">
+  <div class="bloc-header">
+    <span class="bloc-label">Zone 2</span>
+    <p class="bloc-zone">index.html — Cards Projets · case-*.html — Next cases</p>
+    <h2 class="bloc-title">Vignettes de projets</h2>
+    <p class="bloc-desc">Styles alternatifs pour les thumbnails. Option pour des images de remplacement ou pour choisir un style graphique cohérent.</p>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:20px">
+
+    <div>
+      <p class="option-label" style="margin-bottom:12px">Option A — Gradient couleur projet + grande initiale</p>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+
+        <!-- Nectar -->
+        <div class="project-card-mock">
+          <div class="thumb-mock thumb-a-nectar">
+            <span class="thumb-initial" style="color:#A05C0A">N</span>
+            <div class="thumb-logo-wrap">
+              <div class="thumb-logo-box"><img src="../images/logo-nectar.svg" alt="Nectar"></div>
+              <span class="thumb-proj-name">Nectar</span>
+            </div>
+          </div>
+          <div class="project-body-mock">
+            <div class="proj-header-mock">
+              <span class="proj-badge-mock" style="background:#FEF3E2;color:#A05C0A;border:1px solid #F9D5A0">Founding Designer</span>
+            </div>
+            <p class="proj-name-mock">Nectar</p>
+            <p class="proj-desc-mock">MVP SaaS piloté par IA — de la recherche au développement.</p>
+            <div class="proj-tags-mock"><span class="ptag">UX Research</span><span class="ptag">IA</span></div>
+          </div>
+        </div>
+
+        <!-- Pepyte -->
+        <div class="project-card-mock">
+          <div class="thumb-mock thumb-a-pepyte">
+            <span class="thumb-initial" style="color:#6B45D6">P</span>
+            <div class="thumb-logo-wrap">
+              <div class="thumb-logo-box"><img src="../images/logo-pepyte.svg" alt="Pepyte"></div>
+              <span class="thumb-proj-name">Pepyte</span>
+            </div>
+          </div>
+          <div class="project-body-mock">
+            <div class="proj-header-mock">
+              <span class="proj-badge-mock" style="background:#F0EDFE;color:#6B45D6;border:1px solid #D6CCFC">UX Research</span>
+            </div>
+            <p class="proj-name-mock">Pepyte</p>
+            <p class="proj-desc-mock">Audit & conception de la feature matching.</p>
+            <div class="proj-tags-mock"><span class="ptag">Entretiens</span><span class="ptag">Figma</span></div>
+          </div>
+        </div>
+
+        <!-- Weborama -->
+        <div class="project-card-mock">
+          <div class="thumb-mock thumb-a-weborama">
+            <span class="thumb-initial" style="color:#0E7A56">W</span>
+            <div class="thumb-logo-wrap">
+              <div class="thumb-logo-box"><img src="../images/logo-weborama.svg" alt="Weborama"></div>
+              <span class="thumb-proj-name">Weborama</span>
+            </div>
+          </div>
+          <div class="project-body-mock">
+            <div class="proj-header-mock">
+              <span class="proj-badge-mock" style="background:#E3F7EE;color:#0E7A56;border:1px solid #A7E3CA">Design System Lead</span>
+            </div>
+            <p class="proj-name-mock">Weborama</p>
+            <p class="proj-desc-mock">Design System unifié pour 4 produits SaaS.</p>
+            <div class="proj-tags-mock"><span class="ptag">Design System</span><span class="ptag">Audit</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div>
+      <p class="option-label" style="margin-bottom:12px">Option B — Wireframe stylisé + couleur projet</p>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+
+        <!-- Nectar -->
+        <div class="project-card-mock">
+          <div class="thumb-mock thumb-c-nectar" style="flex-direction:column;align-items:flex-start;padding:16px;gap:8px">
+            <div class="thumb-c-bar" style="background:linear-gradient(90deg,#F59E0B,#FDE8C0);border-radius:0"></div>
+            <div style="display:flex;align-items:center;gap:6px;margin-top:4px">
+              <img src="../images/logo-nectar.svg" width="16" height="16" style="opacity:.7">
+              <span style="font-size:10px;font-weight:600;color:#A05C0A;text-transform:uppercase;letter-spacing:.06em">Nectar</span>
+            </div>
+            <div class="thumb-c-card" style="width:85%;height:75%">
+              <div style="height:6px;border-radius:3px;background:#FDE8C0;width:50%"></div>
+              <div style="height:6px;border-radius:3px;background:#FAEEDA"></div>
+              <div style="height:6px;border-radius:3px;background:#FAEEDA;width:75%"></div>
+              <div style="height:28px;border-radius:4px;background:#FEF3E2;border:1px solid #FAEEDA;margin-top:4px"></div>
+            </div>
+          </div>
+          <div class="project-body-mock">
+            <p class="proj-name-mock">Nectar</p>
+            <p class="proj-desc-mock">MVP SaaS piloté par IA — recherche au dev.</p>
+          </div>
+        </div>
+
+        <!-- Pepyte -->
+        <div class="project-card-mock">
+          <div class="thumb-mock thumb-c-pepyte" style="flex-direction:column;align-items:flex-start;padding:16px;gap:8px">
+            <div class="thumb-c-bar" style="background:linear-gradient(90deg,#6B45D6,#D6CCFC);border-radius:0"></div>
+            <div style="display:flex;align-items:center;gap:6px;margin-top:4px">
+              <img src="../images/logo-pepyte.svg" width="16" height="16" style="opacity:.7">
+              <span style="font-size:10px;font-weight:600;color:#6B45D6;text-transform:uppercase;letter-spacing:.06em">Pepyte</span>
+            </div>
+            <div class="thumb-c-card" style="width:85%;height:75%">
+              <div style="height:6px;border-radius:3px;background:#D6CCFC;width:50%"></div>
+              <div style="height:6px;border-radius:3px;background:#EDE9FD"></div>
+              <div style="height:6px;border-radius:3px;background:#EDE9FD;width:75%"></div>
+              <div style="height:28px;border-radius:4px;background:#F0EDFE;border:1px solid #D6CCFC;margin-top:4px"></div>
+            </div>
+          </div>
+          <div class="project-body-mock">
+            <p class="proj-name-mock">Pepyte</p>
+            <p class="proj-desc-mock">Audit & conception du matching.</p>
+          </div>
+        </div>
+
+        <!-- Weborama -->
+        <div class="project-card-mock">
+          <div class="thumb-mock thumb-c-weborama" style="flex-direction:column;align-items:flex-start;padding:16px;gap:8px">
+            <div class="thumb-c-bar" style="background:linear-gradient(90deg,#0E7A56,#A7E3CA);border-radius:0"></div>
+            <div style="display:flex;align-items:center;gap:6px;margin-top:4px">
+              <img src="../images/logo-weborama.svg" width="16" height="16" style="opacity:.7">
+              <span style="font-size:10px;font-weight:600;color:#0E7A56;text-transform:uppercase;letter-spacing:.06em">Weborama</span>
+            </div>
+            <div class="thumb-c-card" style="width:85%;height:75%">
+              <div style="height:6px;border-radius:3px;background:#A7E3CA;width:50%"></div>
+              <div style="height:6px;border-radius:3px;background:#C8EFE0"></div>
+              <div style="height:6px;border-radius:3px;background:#C8EFE0;width:75%"></div>
+              <div style="height:28px;border-radius:4px;background:#E3F7EE;border:1px solid #A7E3CA;margin-top:4px"></div>
+            </div>
+          </div>
+          <div class="project-body-mock">
+            <p class="proj-name-mock">Weborama</p>
+            <p class="proj-desc-mock">Design System unifié pour 4 produits.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<hr class="sep">
+
+
+<!-- ══ 3. MÉTRIQUES / STATS ════════════════════════════════════ -->
+<div class="bloc">
+  <div class="bloc-header">
+    <span class="bloc-label">Zone 3</span>
+    <p class="bloc-zone">case-*.html — Bloc chiffres clés</p>
+    <h2 class="bloc-title">Métriques & chiffres clés</h2>
+    <p class="bloc-desc">Redonner de la valeur aux stats. Les cards individuelles avec accent gauche sont plus premium et lisibles que la grille cloisonnée.</p>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:20px">
+    <div>
+      <p class="option-label" style="margin-bottom:12px">Avant — grille avec séparateurs 1px</p>
+      <div class="panel" style="padding:28px">
+        <div class="stats-before-mock">
+          <div class="stat-b"><div class="stat-val-b">15</div><div class="stat-label-b">recruteurs impliqués dans la recherche</div></div>
+          <div class="stat-b"><div class="stat-val-b">62</div><div class="stat-label-b">champs audités sur 3 formulaires</div></div>
+          <div class="stat-b"><div class="stat-val-b">12</div><div class="stat-label-b">critères de matching définis</div></div>
+          <div class="stat-b"><div class="stat-val-b">1</div><div class="stat-label-b">feature conçue de A à Z</div></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <p class="option-label" style="margin-bottom:12px">Après — cards individuelles + accent gauche + icône</p>
+      <div class="panel" style="padding:28px">
+        <div class="stats-after-mock">
+          <div class="stat-a">
+            <svg class="stat-a-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1956DB" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+            <div class="stat-val-a">15</div><div class="stat-label-a">recruteurs impliqués dans la recherche</div>
+          </div>
+          <div class="stat-a">
+            <svg class="stat-a-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1956DB" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            <div class="stat-val-a">62</div><div class="stat-label-a">champs audités sur 3 formulaires</div>
+          </div>
+          <div class="stat-a">
+            <svg class="stat-a-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1956DB" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <div class="stat-val-a">12</div><div class="stat-label-a">critères de matching définis</div>
+          </div>
+          <div class="stat-a">
+            <svg class="stat-a-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1956DB" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            <div class="stat-val-a">1</div><div class="stat-label-a">feature conçue de A à Z</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="sep">
+
+
+<!-- ══ 4. SECTION CONTACT ════════════════════════════════════  -->
+<div class="bloc">
+  <div class="bloc-header">
+    <span class="bloc-label">Zone 4</span>
+    <p class="bloc-zone">index.html — Section Contact</p>
+    <h2 class="bloc-title">Fond de section Contact</h2>
+    <p class="bloc-desc">3 traitements graphiques différents pour la section contact. Du plus sobre au plus affirmé.</p>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:16px">
+
+    <!-- Option A : réseau SVG -->
+    <div>
+      <p class="option-label">Option A — Réseau de connexions (actuel amélioré)</p>
+      <div class="panel contact-mock contact-a" style="padding:0;overflow:hidden">
+        <svg style="position:absolute;top:0;left:0;width:100%;height:100%" viewBox="0 0 900 220" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="760" cy="40" r="3" fill="#1956DB" opacity=".2"/>
+          <circle cx="820" cy="90" r="5" fill="#1956DB" opacity=".12"/>
+          <circle cx="870" cy="30" r="2" fill="#1956DB" opacity=".2"/>
+          <circle cx="840" cy="150" r="4" fill="#1956DB" opacity=".1"/>
+          <circle cx="900" cy="100" r="6" fill="#1956DB" opacity=".08"/>
+          <circle cx="780" cy="180" r="3" fill="#1956DB" opacity=".15"/>
+          <circle cx="700" cy="70" r="4" fill="#1956DB" opacity=".12"/>
+          <line x1="760" y1="40" x2="820" y2="90" stroke="#1956DB" stroke-opacity=".1" stroke-width="1"/>
+          <line x1="820" y1="90" x2="870" y2="30" stroke="#1956DB" stroke-opacity=".1" stroke-width="1"/>
+          <line x1="820" y1="90" x2="840" y2="150" stroke="#1956DB" stroke-opacity=".08" stroke-width="1"/>
+          <line x1="840" y1="150" x2="780" y2="180" stroke="#1956DB" stroke-opacity=".08" stroke-width="1"/>
+          <line x1="870" y1="30" x2="900" y2="100" stroke="#1956DB" stroke-opacity=".07" stroke-width="1"/>
+          <line x1="700" y1="70" x2="760" y2="40" stroke="#1956DB" stroke-opacity=".1" stroke-width="1"/>
+          <circle cx="640" cy="160" r="80" fill="#1956DB" opacity=".04"/>
+          <circle cx="860" cy="110" r="60" fill="#1956DB" opacity=".03"/>
+        </svg>
+        <div style="position:relative;z-index:1;padding:40px">
+          <p style="font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#1956DB;margin-bottom:10px">Contact</p>
+          <h3 style="font-size:22px;font-weight:700;letter-spacing:-.02em;margin-bottom:8px">Discutons de votre projet</h3>
+          <p style="font-size:14px;color:#5B6A8A;font-weight:300;margin-bottom:24px;line-height:1.6">Disponible pour des missions freelance ou un poste en CDI.</p>
+          <a style="display:inline-flex;align-items:center;gap:8px;background:#1956DB;color:#fff;padding:11px 22px;border-radius:8px;font-size:14px;font-weight:500;text-decoration:none">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            t.reynier90@gmail.com
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Option B : dark avec stats -->
+    <div>
+      <p class="option-label">Option B — Dark premium + chiffres clés</p>
+      <div class="panel" style="overflow:hidden">
+        <div style="display:grid;grid-template-columns:1fr 1fr;min-height:200px">
+          <div style="padding:40px;background:linear-gradient(135deg,#0f1e3d 0%,#1A2540 100%);position:relative;overflow:hidden">
+            <div style="position:absolute;top:-40px;right:-40px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(25,86,219,.2),transparent);pointer-events:none"></div>
+            <p style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#3B70E1;margin-bottom:12px">Contact</p>
+            <h3 style="font-size:22px;font-weight:700;letter-spacing:-.02em;color:#fff;margin-bottom:8px">Discutons</h3>
+            <p style="font-size:13px;color:rgba(255,255,255,.45);font-weight:300;margin-bottom:24px;line-height:1.55">Disponible pour des missions freelance ou un poste.</p>
+            <div style="display:inline-flex;align-items:center;gap:8px;background:#1956DB;color:#fff;padding:10px 20px;border-radius:8px;font-size:13px;font-weight:500">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              Écrire un email
+            </div>
+          </div>
+          <div style="padding:40px;background:var(--g50);display:flex;flex-direction:column;justify-content:center;gap:24px">
+            <div><div style="font-size:32px;font-weight:800;color:#1956DB;letter-spacing:-.04em;line-height:1">5+</div><div style="font-size:12px;color:#5B6A8A;font-weight:300;margin-top:2px">ans d'expérience</div></div>
+            <div style="width:100%;height:1px;background:var(--border)"></div>
+            <div><div style="font-size:32px;font-weight:800;color:#1956DB;letter-spacing:-.04em;line-height:1">3</div><div style="font-size:12px;color:#5B6A8A;font-weight:300;margin-top:2px">études de cas publiées</div></div>
+            <div style="width:100%;height:1px;background:var(--border)"></div>
+            <div><div style="font-size:32px;font-weight:800;color:#1956DB;letter-spacing:-.04em;line-height:1">974</div><div style="font-size:12px;color:#5B6A8A;font-weight:300;margin-top:2px">composants audités</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Option C : minimaliste avec liens détaillés -->
+    <div>
+      <p class="option-label">Option C — Split avec liens enrichis</p>
+      <div class="panel" style="overflow:hidden">
+        <div style="display:grid;grid-template-columns:1fr 1fr;min-height:180px">
+          <div style="padding:36px;background:var(--p50);border-right:1px solid var(--p100)">
+            <p style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#1956DB;margin-bottom:12px">Contact</p>
+            <h3 style="font-size:20px;font-weight:700;letter-spacing:-.02em;margin-bottom:8px">Disponible</h3>
+            <p style="font-size:13px;color:#5B6A8A;font-weight:300;line-height:1.55">Freelance ou CDI · Paris / remote.<br>Réponse sous 24h.</p>
+          </div>
+          <div style="padding:32px;background:#fff;display:flex;flex-direction:column;gap:10px;justify-content:center">
+            <a style="display:flex;align-items:center;gap:12px;padding:13px 16px;border:1px solid var(--border);border-radius:8px;text-decoration:none;color:var(--text);font-size:13px;font-weight:400;transition:border-color .15s">
+              <div style="width:34px;height:34px;border-radius:8px;background:var(--p50);display:flex;align-items:center;justify-content:center;color:#1956DB;flex-shrink:0">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <div style="flex:1"><div style="font-weight:500">Email</div><div style="font-size:11px;color:#5B6A8A">t.reynier90@gmail.com</div></div>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5B6A8A" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <a style="display:flex;align-items:center;gap:12px;padding:13px 16px;border:1px solid var(--border);border-radius:8px;text-decoration:none;color:var(--text);font-size:13px;font-weight:400">
+              <div style="width:34px;height:34px;border-radius:8px;background:var(--p50);display:flex;align-items:center;justify-content:center;color:#1956DB;flex-shrink:0">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+              </div>
+              <div style="flex:1"><div style="font-weight:500">LinkedIn</div><div style="font-size:11px;color:#5B6A8A">Thomas Reynier</div></div>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5B6A8A" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<hr class="sep">
+
+
+<!-- ══ 5. TEXTURES DE FOND ════════════════════════════════════ -->
+<div class="bloc">
+  <div class="bloc-header">
+    <span class="bloc-label">Zone 5</span>
+    <p class="bloc-zone">index.html + case-*.html — Fonds de section</p>
+    <h2 class="bloc-title">Textures de fond transversales</h2>
+    <p class="bloc-desc">Appliquables à n'importe quelle section. Subtiles, légères, 100% CSS — sans impact sur la performance.</p>
+  </div>
+  <div class="options-3">
+
+    <div>
+      <p class="option-label">A — Grille de points</p>
+      <div class="panel">
+        <div class="texture-mock texture-dots">
+          <div class="texture-content">
+            <p style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#1956DB;margin-bottom:8px">Expertise</p>
+            <p class="texture-h2">UX · Design System · IA</p>
+            <p class="texture-p">Je conçois des expériences fondées sur la recherche.</p>
+          </div>
+        </div>
+      </div>
+      <p class="opt-desc">Pattern ponctuel — neutre, professionnel. Fonctionne sur hero et sections neutres.</p>
+    </div>
+
+    <div>
+      <p class="option-label">B — Grille fine</p>
+      <div class="panel">
+        <div class="texture-mock texture-grid">
+          <div class="texture-content">
+            <p style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#1956DB;margin-bottom:8px">Expertise</p>
+            <p class="texture-h2">UX · Design System · IA</p>
+            <p class="texture-p">Je conçois des expériences fondées sur la recherche.</p>
+          </div>
+        </div>
+      </div>
+      <p class="opt-desc">Grille orthogonale — évoque les wireframes et la rigueur méthodologique.</p>
+    </div>
+
+    <div>
+      <p class="option-label">C — Croisillons espacés</p>
+      <div class="panel">
+        <div class="texture-mock texture-cross">
+          <div class="texture-content">
+            <p style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#1956DB;margin-bottom:8px">Expertise</p>
+            <p class="texture-h2">UX · Design System · IA</p>
+            <p class="texture-p">Je conçois des expériences fondées sur la recherche.</p>
+          </div>
+        </div>
+      </div>
+      <p class="opt-desc">Double grille décalée — plus de profondeur, légèrement plus graphique que les points simples.</p>
+    </div>
+
+  </div>
+</div>
+
+<hr class="sep">
+
+
+<!-- ══ 6. HEADER ÉTUDES DE CAS ════════════════════════════════ -->
+<div class="bloc">
+  <div class="bloc-header">
+    <span class="bloc-label">Zone 6</span>
+    <p class="bloc-zone">case-*.html — Header de l'étude de cas</p>
+    <h2 class="bloc-title">Variantes du header étude de cas</h2>
+    <p class="bloc-desc">Le header actuel utilise un gradient + halo. Voici 2 alternatives plus affirmées graphiquement.</p>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:16px">
+
+    <!-- Actuel -->
+    <div>
+      <p class="option-label">Actuel — Gradient léger (référence)</p>
+      <div class="panel">
+        <div class="case-header-mock case-h-current">
+          <div class="case-h-content">
+            <div><span class="case-h-tag">UX Research</span><span class="case-h-tag">Design System</span></div>
+            <h2 class="case-h-title">Pepyte</h2>
+            <p class="case-h-intro">Recherche utilisateur & conception de la feature matching — de l'audit à l'interface finale.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Option B : blob SVG -->
+    <div>
+      <p class="option-label">Option B — Blob SVG décoratif</p>
+      <div class="panel">
+        <div class="case-header-mock case-h-blob">
+          <svg class="blob-svg" width="360" height="360" viewBox="0 0 360 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M180 20C250 20 340 70 340 180C340 290 280 340 180 340C80 340 20 280 20 180C20 80 110 20 180 20Z" fill="#1956DB"/>
+          </svg>
+          <div class="case-h-content" style="position:relative;z-index:1">
+            <div><span class="case-h-tag">UX Research</span><span class="case-h-tag">Design System</span></div>
+            <h2 class="case-h-title">Pepyte</h2>
+            <p class="case-h-intro">Recherche utilisateur & conception de la feature matching — de l'audit à l'interface finale.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Option C : bande latérale numérotée -->
+    <div>
+      <p class="option-label">Option C — Bande latérale avec numéro de projet</p>
+      <div class="panel">
+        <div class="case-header-mock case-h-stripe">
+          <div class="stripe-bar"></div>
+          <div class="stripe-num" style="font-family:'Outfit',sans-serif">02</div>
+          <div class="case-h-content" style="position:relative;z-index:2;max-width:calc(100% - 240px)">
+            <div><span class="case-h-tag">UX Research</span><span class="case-h-tag">Design System</span></div>
+            <h2 class="case-h-title">Pepyte</h2>
+            <p class="case-h-intro">Recherche utilisateur & conception de la feature matching — de l'audit à l'interface finale.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<div style="height:80px"></div>
+
+</body>
+</html>
