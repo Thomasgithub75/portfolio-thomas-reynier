@@ -258,9 +258,15 @@ nav.menu-open .mob-footer{display:flex}
   nav ul.open .nav-cta{display:block;text-align:center;background:var(--blue);color:#fff!important;font-weight:600!important;padding:16px!important;border-radius:10px;font-size:16px!important}
   .burger{display:flex}
 }
+/* ── Barre de lecture — mobile uniquement ── */
+.reading-progress{display:none}
+@media(max-width:900px){
+  .reading-progress{display:block;position:fixed;top:60px;left:0;right:0;height:3px;background:var(--p500);width:0%;z-index:200;transition:none}
+}
 </style>
 </head>
 <body>
+<div class="reading-progress"></div>
 
 <nav>
   <div class="nav-inner">
@@ -848,6 +854,17 @@ document.querySelectorAll('.exp-tag-clickable').forEach(tag => {
 });
 
 document.getElementById('expCloseBtn').addEventListener('click', closePanel);
+
+// ── Barre de lecture ──────────────────────────────────────────
+(function(){
+  var bar = document.querySelector('.reading-progress');
+  if(!bar) return;
+  window.addEventListener('scroll', function(){
+    var scrolled = window.scrollY;
+    var total = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (total > 0 ? (scrolled / total * 100) : 0) + '%';
+  }, {passive: true});
+})();
 </script>
 </body>
 </html>
