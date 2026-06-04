@@ -27,6 +27,31 @@ const PrimaryButton = styled(MuiButton)(() => ({
   },
 }));
 
+// ── Secondary ──────────────────────────────────────────────────────────────
+const SecondaryButton = styled(MuiButton)(() => ({
+  backgroundColor: tokens.gray[100],
+  color: tokens.primary[700],
+  boxShadow: 'none',
+  '&:hover': {
+    backgroundColor: tokens.gray[200],
+    boxShadow: 'none',
+  },
+  '&:focus-visible': {
+    backgroundColor: tokens.gray[200],
+    outline: `2px solid ${tokens.primary[500]}`,
+    outlineOffset: '2px',
+    boxShadow: 'none',
+  },
+  '&:active': {
+    backgroundColor: tokens.gray[300],
+    boxShadow: 'none',
+  },
+  '&.Mui-disabled': {
+    backgroundColor: tokens.gray[50],
+    color: tokens.gray[300],
+  },
+}));
+
 // ── Ghost ──────────────────────────────────────────────────────────────────
 const GhostButton = styled(MuiButton)(({ theme }) => ({
   color: theme.palette.text.primary,
@@ -42,7 +67,7 @@ const GhostButton = styled(MuiButton)(({ theme }) => ({
 
 /**
  * Button
- * variant : "primary" | "ghost"
+ * variant : "primary" | "secondary" | "ghost"
  * size    : "sm" | "md" (défaut md)
  */
 export default function Button({
@@ -58,34 +83,15 @@ export default function Button({
   const muiSize = size === 'sm' ? 'small' : 'medium';
   const sx = size === 'sm' ? { fontSize: '0.8125rem', padding: '6px 14px' } : {};
 
-  if (variant === 'ghost') {
-    return (
-      <GhostButton
-        size={muiSize}
-        startIcon={startIcon}
-        endIcon={endIcon}
-        disabled={disabled}
-        onClick={onClick}
-        href={href}
-        sx={sx}
-      >
-        {children}
-      </GhostButton>
-    );
+  const commonProps = { size: muiSize, startIcon, endIcon, disabled, onClick, href, sx };
+
+  if (variant === 'secondary') {
+    return <SecondaryButton variant="contained" {...commonProps}>{children}</SecondaryButton>;
   }
 
-  return (
-    <PrimaryButton
-      variant="contained"
-      size={muiSize}
-      startIcon={startIcon}
-      endIcon={endIcon}
-      disabled={disabled}
-      onClick={onClick}
-      href={href}
-      sx={sx}
-    >
-      {children}
-    </PrimaryButton>
-  );
+  if (variant === 'ghost') {
+    return <GhostButton {...commonProps}>{children}</GhostButton>;
+  }
+
+  return <PrimaryButton variant="contained" {...commonProps}>{children}</PrimaryButton>;
 }

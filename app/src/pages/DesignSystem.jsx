@@ -267,18 +267,21 @@ export default function DesignSystem() {
       <Divider sx={{ mb: 7 }} />
 
       {/* ── BUTTON ────────────────────────────────────────── */}
-      <Section title="Button" subtitle="Deux variantes : Primary (CTA) et Ghost (secondaire).">
-        <Group label="Variantes">
+      <Section title="Button" subtitle="3 variantes : Primary · Secondary · Ghost">
+        <Group label="Variantes — taille md">
           <Button variant="primary">Voir le projet</Button>
-          <Button variant="ghost">Me contacter</Button>
+          <Button variant="secondary">Me contacter</Button>
+          <Button variant="ghost">En savoir plus</Button>
         </Group>
         <Group label="Taille sm">
           <Button variant="primary" size="sm">Voir le projet</Button>
-          <Button variant="ghost" size="sm">Me contacter</Button>
+          <Button variant="secondary" size="sm">Me contacter</Button>
+          <Button variant="ghost" size="sm">En savoir plus</Button>
         </Group>
         <Group label="État disabled">
           <Button variant="primary" disabled>Voir le projet</Button>
-          <Button variant="ghost" disabled>Me contacter</Button>
+          <Button variant="secondary" disabled>Me contacter</Button>
+          <Button variant="ghost" disabled>En savoir plus</Button>
         </Group>
       </Section>
 
