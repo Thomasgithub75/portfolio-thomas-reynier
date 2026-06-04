@@ -41,8 +41,8 @@ nav ul a.nav-cta::after{display:none}
 .nav-cta:hover{opacity:0.88;color:#fff!important}
 .container{max-width:960px;margin:0 auto;padding:0 2rem}
 section{padding:80px 0}
-.divider{border:none;border-top:1px solid var(--border);margin:0}
-#hero{padding-top:140px;padding-bottom:80px}
+.divider{border:none;height:1px;background:linear-gradient(to right,transparent,var(--border) 20%,var(--border) 80%,transparent);margin:0}
+#hero{padding-top:140px;padding-bottom:80px;background:linear-gradient(145deg,var(--p50) 0%,#fff 55%)}
 .hero-label{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--text);margin-bottom:20px}
 .hero-label::before{content:'';width:28px;height:2px;background:var(--blue);border-radius:2px;flex-shrink:0}
 h1{font-size:clamp(36px,5vw,52px);line-height:1.1;letter-spacing:-0.03em;font-weight:600;margin-bottom:20px}
@@ -67,7 +67,10 @@ h1 em{font-style:normal;color:var(--blue)}
 .hero-image{width:100%;aspect-ratio:1/1;border-radius:50%;overflow:hidden;box-shadow:0 0 0 4px #fff,0 0 0 6px rgba(26,86,219,0.2),0 10px 40px rgba(26,86,219,0.12)}
 .hero-image img{width:100%;height:100%;object-fit:cover;object-position:center top}
 .hero-badge{position:absolute;bottom:24px;right:-4px;background:#fff;border:1px solid var(--border);border-radius:20px;padding:6px 14px;display:flex;align-items:center;gap:7px;font-size:13px;font-weight:500;color:var(--text);box-shadow:0 2px 12px rgba(0,0,0,0.08);white-space:nowrap}
-.hero-badge-dot{width:8px;height:8px;background:#22C55E;border-radius:50%;flex-shrink:0}
+.hero-badge-dot{position:relative;width:10px;height:10px;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center}
+.hero-badge-dot::before{content:'';position:absolute;inset:0;background:#22C55E;border-radius:50%;animation:dot-pulse 2s ease-out infinite}
+.hero-badge-dot::after{content:'';position:absolute;width:8px;height:8px;background:#22C55E;border-radius:50%;z-index:1}
+@keyframes dot-pulse{0%{transform:scale(1);opacity:.6}50%{transform:scale(2.4);opacity:0}100%{transform:scale(1);opacity:0}}
 .hero-actions{display:flex;gap:12px;align-items:center}
 .btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--p500);color:#fff;padding:11px 22px;border-radius:7px;font-size:15px;font-weight:500;text-decoration:none;transition:background 0.15s,outline 0.1s;font-family:'Outfit',sans-serif;white-space:nowrap;outline:2px solid transparent;outline-offset:2px}
 .btn-primary:hover{background:var(--p600)}
@@ -173,7 +176,10 @@ button.exp-tag-secondary.is-active:active{background:#85B7EB!important;color:#0C
 .project-header{display:flex;justify-content:space-between;align-items:center;gap:8px}
 .project-header-left{display:flex;align-items:center;gap:8px;flex:1;min-width:0}
 .project-logo{width:22px;height:22px;border-radius:5px;object-fit:contain;flex-shrink:0}
-.project-role{font-size:11px;font-weight:600;color:var(--blue);background:var(--blue-light);padding:3px 10px;border-radius:20px;white-space:nowrap;border:1px solid rgba(26,86,219,0.12)}
+.project-role{font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;white-space:nowrap}
+.project-role-pepyte{background:#F0EDFE;color:#6B45D6;border:1px solid #D6CCFC}
+.project-role-weborama{background:#E3F7EE;color:#0E7A56;border:1px solid #A7E3CA}
+.project-role-nectar{background:#FEF3E2;color:#A05C0A;border:1px solid #F9D5A0}
 .project-duration{font-size:12px;color:var(--muted);font-weight:400;white-space:nowrap;flex-shrink:0}
 .project-name{font-size:18px;font-weight:600;color:var(--text);letter-spacing:-0.025em;line-height:1.2}
 .project-desc{font-size:13px;color:var(--muted);line-height:1.6;font-weight:300}
@@ -181,7 +187,8 @@ button.exp-tag-secondary.is-active:active{background:#85B7EB!important;color:#0C
 .proj-tag{font-size:12px;padding:4px 10px;border-radius:20px;background:var(--blue-light);color:var(--blue);font-weight:500}
 .tag-more{font-size:12px;color:var(--blue);background:none;border:none;cursor:pointer;font-family:'Outfit',sans-serif;font-weight:500;padding:3px 0;text-decoration:underline;text-underline-offset:2px}
 .tag-more:hover{opacity:0.75}
-#contact{background:var(--bg-soft);border-top:1px solid var(--border)}
+#contact{background:var(--p50);border-top:1px solid var(--p100);position:relative;overflow:hidden}
+#contact::before{content:'';position:absolute;top:-60px;right:-60px;width:280px;height:280px;background:radial-gradient(circle,var(--p100) 0%,transparent 70%);pointer-events:none}
 .contact-inner{max-width:480px}
 .contact-inner h2{margin-bottom:12px}
 .contact-sub{color:var(--muted);font-size:16px;margin-bottom:32px;font-weight:300}
@@ -469,7 +476,7 @@ nav.menu-open .mob-footer{display:flex}
           <div class="project-header">
             <div class="project-header-left">
               <img class="project-logo" src="images/logo-pepyte.svg" alt="Pepyte">
-              <span class="badge project-role">UX Research & Design</span>
+              <span class="project-role project-role-pepyte">UX Research & Design</span>
             </div>
             <span class="project-duration">26 mois</span>
           </div>
@@ -495,7 +502,7 @@ nav.menu-open .mob-footer{display:flex}
           <div class="project-header">
             <div class="project-header-left">
               <img class="project-logo" src="images/logo-weborama.svg" alt="Weborama">
-              <span class="badge project-role">Design System Lead</span>
+              <span class="project-role project-role-weborama">Design System Lead</span>
             </div>
             <span class="project-duration">16 mois</span>
           </div>
@@ -521,7 +528,7 @@ nav.menu-open .mob-footer{display:flex}
           <div class="project-header">
             <div class="project-header-left">
               <img class="project-logo" src="images/logo-nectar.svg" alt="Nectar">
-              <span class="badge project-role">Founding Designer</span>
+              <span class="project-role project-role-nectar">Founding Designer</span>
             </div>
             <span class="project-duration">En cours</span>
           </div>

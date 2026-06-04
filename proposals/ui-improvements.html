@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proposals — UI Improvements</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --p50:#EEF3FD;--p100:#D7E5FB;--p200:#9DB8F2;--p300:#6191E9;--p400:#3B70E1;
+  --p500:#1956DB;--p600:#1141A8;--p700:#0C2E7A;--p800:#061F52;
+  --g50:#F6F8FB;--g100:#EBF0F8;--g200:#C7D2E8;--g500:#5B6A8A;--g900:#1A2540;
+  --text:#1A2540;--muted:#5B6A8A;--border:#E5E7EB;--bg:#fff;
+  --amber:#F59E0B;
+}
+body{font-family:'Outfit',sans-serif;background:#EDEEF0;color:var(--text);-webkit-font-smoothing:antialiased}
+
+/* ── Meta header ── */
+.meta{text-align:center;padding:48px 24px 40px}
+.meta-kicker{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--p500);margin-bottom:8px}
+.meta-h1{font-size:28px;font-weight:700;letter-spacing:-.025em;margin-bottom:8px}
+.meta-sub{font-size:14px;color:var(--muted);font-weight:300}
+
+/* ── Bloc ── */
+.bloc{max-width:960px;margin:0 auto 64px;padding:0 24px}
+.bloc-label{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--p500);background:var(--p50);border:1px solid var(--p200);border-radius:20px;padding:4px 12px;margin-bottom:12px}
+.bloc-title{font-size:20px;font-weight:700;letter-spacing:-.02em;margin-bottom:4px}
+.bloc-desc{font-size:13px;color:var(--muted);font-weight:300;margin-bottom:24px;max-width:560px}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.compare-label{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.panel{background:#fff;border-radius:14px;border:1px solid var(--border);overflow:hidden}
+hr.divider{border:none;border-top:2px dashed #D1D5DB;max-width:960px;margin:0 auto 64px}
+
+
+/* ══════════════════════════════════════════════════════════════
+   1. DOT PULSANT
+══════════════════════════════════════════════════════════════ */
+@keyframes pulse{
+  0%{transform:scale(1);opacity:.6}
+  50%{transform:scale(2.2);opacity:0}
+  100%{transform:scale(1);opacity:0}
+}
+.dot-wrap{position:relative;display:inline-flex;align-items:center;justify-content:center;width:10px;height:10px;flex-shrink:0}
+.dot-core{width:8px;height:8px;background:#22C55E;border-radius:50%;position:relative;z-index:1}
+.dot-pulse{position:absolute;inset:0;background:#22C55E;border-radius:50%;animation:pulse 2s ease-out infinite}
+
+.hero-badge-before{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500;color:var(--text);background:#fff;border:1px solid var(--border);border-radius:20px;padding:6px 14px;box-shadow:0 2px 12px rgba(0,0,0,0.08)}
+.dot-static{width:8px;height:8px;background:#22C55E;border-radius:50%;flex-shrink:0}
+
+
+/* ══════════════════════════════════════════════════════════════
+   2. GRADIENT HERO
+══════════════════════════════════════════════════════════════ */
+.hero-before{background:#fff;padding:40px 32px;border-radius:14px}
+.hero-after{background:linear-gradient(160deg,var(--p50) 0%,#fff 55%);padding:40px 32px;border-radius:14px}
+.hero-label-tag{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.hero-label-tag::before{content:'';width:24px;height:2px;background:var(--p500);border-radius:2px}
+.hero-h1{font-size:clamp(22px,4vw,38px);font-weight:700;color:var(--p500);letter-spacing:-.03em;line-height:1.08;margin-bottom:12px}
+.hero-intro{font-size:15px;color:var(--muted);line-height:1.7;font-weight:300;max-width:420px}
+
+
+/* ══════════════════════════════════════════════════════════════
+   3. STATS
+══════════════════════════════════════════════════════════════ */
+.stats-before{display:flex;align-items:flex-start;padding:24px 32px;gap:0}
+.stat-before{padding:0 24px;border-right:1px solid var(--border)}
+.stat-before:first-child{padding-left:0}
+.stat-before:last-child{border-right:none}
+.stat-num-before{display:block;font-size:26px;font-weight:600;color:var(--p500);letter-spacing:-.03em;line-height:1.1}
+.stat-label-before{display:block;font-size:12px;color:var(--muted);font-weight:400;margin-top:4px}
+
+.stats-after{display:flex;align-items:stretch;gap:12px;padding:24px 32px}
+.stat-after{display:flex;flex-direction:column;gap:4px;padding:16px 20px;background:var(--g50);border-radius:10px;border-left:3px solid var(--p500);flex:1}
+.stat-num-after{font-size:28px;font-weight:700;color:var(--p500);letter-spacing:-.04em;line-height:1}
+.stat-label-after{font-size:11px;color:var(--muted);font-weight:400}
+
+
+/* ══════════════════════════════════════════════════════════════
+   4. HOVER THUMBNAIL
+══════════════════════════════════════════════════════════════ */
+.thumb-wrap{width:100%;height:200px;overflow:hidden;background:var(--g50);border-bottom:1px solid var(--border)}
+.thumb-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease;display:block}
+.thumb-wrap:hover img{transform:scale(1.06)}
+.thumb-label{padding:16px;font-size:12px;color:var(--muted);font-weight:400;text-align:center}
+
+
+/* ══════════════════════════════════════════════════════════════
+   5. CONTACT FOND COLORÉ
+══════════════════════════════════════════════════════════════ */
+.contact-before{background:#F9FAFB;padding:48px 40px;border-radius:14px}
+.contact-after{background:var(--p50);border:1px solid var(--p100);padding:48px 40px;border-radius:14px;position:relative;overflow:hidden}
+.contact-after::before{content:'';position:absolute;top:-40px;right:-40px;width:200px;height:200px;background:radial-gradient(circle,var(--p100) 0%,transparent 70%);pointer-events:none}
+.contact-kicker{font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
+.contact-before .contact-kicker{color:var(--p500)}
+.contact-after .contact-kicker{color:var(--p600)}
+.contact-title{font-size:26px;font-weight:700;letter-spacing:-.025em;margin-bottom:8px}
+.contact-sub{font-size:14px;font-weight:300;line-height:1.6;margin-bottom:24px}
+.contact-before .contact-sub{color:var(--muted)}
+.contact-after .contact-sub{color:var(--p700)}
+.contact-link{display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:8px;font-size:14px;font-weight:400;text-decoration:none;margin-bottom:10px}
+.contact-before .contact-link{background:#fff;border:1px solid var(--border);color:var(--text)}
+.contact-after .contact-link{background:#fff;border:1px solid var(--p200);color:var(--text)}
+.contact-after .contact-link:hover{border-color:var(--p500);background:var(--p50)}
+.contact-link svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;flex-shrink:0}
+
+
+/* ══════════════════════════════════════════════════════════════
+   6. SÉPARATEUR DÉGRADÉ
+══════════════════════════════════════════════════════════════ */
+.sep-before{border:none;border-top:1px solid var(--border);margin:0}
+.sep-after{border:none;height:1px;background:linear-gradient(to right,transparent,var(--border) 20%,var(--border) 80%,transparent);margin:0}
+
+
+/* ══════════════════════════════════════════════════════════════
+   7. BADGE COULEUR PAR PROJET
+══════════════════════════════════════════════════════════════ */
+.cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.mini-card{border-radius:10px;border:1px solid var(--border);overflow:hidden;background:#fff}
+.mini-thumb{height:120px;overflow:hidden;background:var(--g50)}
+.mini-thumb img{width:100%;height:100%;object-fit:cover}
+.mini-body{padding:12px}
+.mini-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.mini-logo{width:18px;height:18px;object-fit:contain}
+.mini-name{font-size:14px;font-weight:700;letter-spacing:-.01em;margin-bottom:4px}
+.mini-desc{font-size:11px;color:var(--muted);line-height:1.5;font-weight:300}
+
+/* Badges avant — tous bleus */
+.badge-before{font-size:10px;font-weight:600;padding:3px 8px;border-radius:20px;background:var(--p50);color:var(--p500);border:1px solid rgba(25,86,219,.12)}
+
+/* Badges après — couleur par projet */
+.badge-pepyte{font-size:10px;font-weight:600;padding:3px 8px;border-radius:20px;background:#F0EDFE;color:#6B45D6;border:1px solid #D6CCFC}
+.badge-weborama{font-size:10px;font-weight:600;padding:3px 8px;border-radius:20px;background:#E3F7EE;color:#0E7A56;border:1px solid #A7E3CA}
+.badge-nectar{font-size:10px;font-weight:600;padding:3px 8px;border-radius:20px;background:#FEF3E2;color:#A05C0A;border:1px solid #F9D5A0}
+</style>
+</head>
+<body>
+
+<div class="meta">
+  <p class="meta-kicker">Proposals UI</p>
+  <h1 class="meta-h1">Améliorations UI — Portfolio</h1>
+  <p class="meta-sub">7 pistes visuelles · comparaison Avant / Après</p>
+</div>
+
+
+<!-- ══ 1. DOT PULSANT ══════════════════════════════════════════ -->
+<div class="bloc">
+  <span class="bloc-label">1</span>
+  <h2 class="bloc-title">Dot "À l'écoute" animé</h2>
+  <p class="bloc-desc">Le point vert devient pulsant — renforce l'impression de disponibilité en temps réel.</p>
+  <div class="compare">
+    <div>
+      <p class="compare-label">Avant</p>
+      <div style="padding:32px;background:#fff;border-radius:14px;border:1px solid var(--border);display:flex;align-items:center">
+        <div class="hero-badge-before">
+          <span class="dot-static"></span>
+          À l'écoute
+        </div>
+      </div>
+    </div>
+    <div>
+      <p class="compare-label">Après</p>
+      <div style="padding:32px;background:#fff;border-radius:14px;border:1px solid var(--border);display:flex;align-items:center">
+        <div class="hero-badge-before">
+          <div class="dot-wrap">
+            <span class="dot-pulse"></span>
+            <span class="dot-core"></span>
+          </div>
+          À l'écoute
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ══ 2. GRADIENT HERO ════════════════════════════════════════ -->
+<div class="bloc">
+  <span class="bloc-label">2</span>
+  <h2 class="bloc-title">Fond hero avec gradient subtil</h2>
+  <p class="bloc-desc">Léger gradient brand 50 → blanc en haut à gauche. Donne de la profondeur sans surcharger.</p>
+  <div class="compare">
+    <div>
+      <p class="compare-label">Avant</p>
+      <div class="hero-before">
+        <p class="hero-label-tag">PRODUCT DESIGNER</p>
+        <h1 class="hero-h1">UX · Design System · IA</h1>
+        <p class="hero-intro">Je conçois des expériences fondées sur la recherche, structurées en systèmes et accélérées par l'IA.</p>
+      </div>
+    </div>
+    <div>
+      <p class="compare-label">Après</p>
+      <div class="hero-after">
+        <p class="hero-label-tag">PRODUCT DESIGNER</p>
+        <h1 class="hero-h1">UX · Design System · IA</h1>
+        <p class="hero-intro">Je conçois des expériences fondées sur la recherche, structurées en systèmes et accélérées par l'IA.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ══ 3. STATS ════════════════════════════════════════════════ -->
+<div class="bloc">
+  <span class="bloc-label">3</span>
+  <h2 class="bloc-title">Chiffres clés plus impactants</h2>
+  <p class="bloc-desc">Fond gris très léger + bordure gauche brand sur chaque stat. Plus lisible, plus premium.</p>
+  <div class="compare" style="grid-template-columns:1fr">
+    <div>
+      <p class="compare-label">Avant</p>
+      <div class="panel">
+        <div class="stats-before">
+          <div class="stat-before"><span class="stat-num-before">5</span><span class="stat-label-before">ans d'expérience</span></div>
+          <div class="stat-before"><span class="stat-num-before">+10</span><span class="stat-label-before">produits SaaS</span></div>
+          <div class="stat-before"><span class="stat-num-before">+100</span><span class="stat-label-before">features</span></div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:16px">
+      <p class="compare-label">Après</p>
+      <div class="panel">
+        <div class="stats-after">
+          <div class="stat-after"><span class="stat-num-after">5</span><span class="stat-label-after">ans d'expérience</span></div>
+          <div class="stat-after"><span class="stat-num-after">+10</span><span class="stat-label-after">produits SaaS</span></div>
+          <div class="stat-after"><span class="stat-num-after">+100</span><span class="stat-label-after">features</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ══ 4. HOVER THUMBNAIL ══════════════════════════════════════ -->
+<div class="bloc">
+  <span class="bloc-label">4</span>
+  <h2 class="bloc-title">Hover sur les thumbnails</h2>
+  <p class="bloc-desc">Scale(1.06) sur l'image au survol. Survole la carte pour voir l'effet.</p>
+  <div class="compare">
+    <div>
+      <p class="compare-label">Avant — pas d'effet</p>
+      <div class="panel">
+        <div style="width:100%;height:200px;overflow:hidden;border-bottom:1px solid var(--border)">
+          <img src="../images/thumb-pepyte.jpg" style="width:100%;height:100%;object-fit:cover;display:block">
+        </div>
+        <div style="padding:12px;font-size:12px;color:var(--muted);text-align:center">Aucun effet au hover</div>
+      </div>
+    </div>
+    <div>
+      <p class="compare-label">Après — scale au hover</p>
+      <div class="panel">
+        <div class="thumb-wrap">
+          <img src="../images/thumb-pepyte.jpg">
+        </div>
+        <div class="thumb-label">Survole l'image ↑</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ══ 5. CONTACT FOND ═════════════════════════════════════════ -->
+<div class="bloc">
+  <span class="bloc-label">5</span>
+  <h2 class="bloc-title">Section contact avec fond brand 50</h2>
+  <p class="bloc-desc">Fond #EEF3FD avec léger halo radial. Attire l'œil vers le CTA final, différencie clairement la section.</p>
+  <div class="compare">
+    <div>
+      <p class="compare-label">Avant</p>
+      <div class="contact-before">
+        <p class="contact-kicker">Contact</p>
+        <h2 class="contact-title">Travaillons ensemble</h2>
+        <p class="contact-sub">Disponible pour des missions freelance, des opportunités CDI ou des collaborations à Paris.</p>
+        <a class="contact-link" href="#">
+          <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+          reynier.design@gmail.com
+        </a>
+        <a class="contact-link" href="#">
+          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+    <div>
+      <p class="compare-label">Après</p>
+      <div class="contact-after">
+        <p class="contact-kicker">Contact</p>
+        <h2 class="contact-title">Travaillons ensemble</h2>
+        <p class="contact-sub">Disponible pour des missions freelance, des opportunités CDI ou des collaborations à Paris.</p>
+        <a class="contact-link" href="#">
+          <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+          reynier.design@gmail.com
+        </a>
+        <a class="contact-link" href="#">
+          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ══ 6. SÉPARATEUR ══════════════════════════════════════════ -->
+<div class="bloc">
+  <span class="bloc-label">6</span>
+  <h2 class="bloc-title">Séparateur de sections avec dégradé</h2>
+  <p class="bloc-desc">La ligne pleine devient un dégradé transparent → border → transparent. Plus aéré, plus raffiné.</p>
+  <div style="display:flex;flex-direction:column;gap:32px">
+    <div>
+      <p class="compare-label" style="margin-bottom:12px">Avant — ligne pleine</p>
+      <div style="background:#fff;padding:32px;border-radius:14px;border:1px solid var(--border)">
+        <p style="font-size:13px;color:var(--muted);margin-bottom:20px">Fin de section A</p>
+        <hr class="sep-before">
+        <p style="font-size:13px;color:var(--muted);margin-top:20px">Début de section B</p>
+      </div>
+    </div>
+    <div>
+      <p class="compare-label" style="margin-bottom:12px">Après — dégradé</p>
+      <div style="background:#fff;padding:32px;border-radius:14px;border:1px solid var(--border)">
+        <p style="font-size:13px;color:var(--muted);margin-bottom:20px">Fin de section A</p>
+        <hr class="sep-after">
+        <p style="font-size:13px;color:var(--muted);margin-top:20px">Début de section B</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ══ 7. BADGE COULEUR PAR PROJET ════════════════════════════ -->
+<div class="bloc">
+  <span class="bloc-label">7</span>
+  <h2 class="bloc-title">Badge de rôle — couleur par projet</h2>
+  <p class="bloc-desc">Pepyte = violet · Weborama = vert · Nectar = orange. Chaque projet a une identité visuelle distincte.</p>
+  <div>
+    <p class="compare-label" style="margin-bottom:12px">Avant — tous bleus</p>
+    <div class="cards-grid" style="margin-bottom:24px">
+      <div class="mini-card">
+        <div class="mini-thumb"><img src="../images/thumb-pepyte.jpg" alt=""></div>
+        <div class="mini-body">
+          <div class="mini-header"><img class="mini-logo" src="../images/logo-pepyte.svg" alt=""><span class="badge-before">UX Research & Design</span></div>
+          <p class="mini-name">Pepyte</p>
+          <p class="mini-desc">Audit de 62 champs, 10 entretiens recruteurs...</p>
+        </div>
+      </div>
+      <div class="mini-card">
+        <div class="mini-thumb"><img src="../images/thumb-weborama.jpg" alt=""></div>
+        <div class="mini-body">
+          <div class="mini-header"><img class="mini-logo" src="../images/logo-weborama.svg" alt=""><span class="badge-before">Design System Lead</span></div>
+          <p class="mini-name">Weborama</p>
+          <p class="mini-desc">Audit de 974 composants...</p>
+        </div>
+      </div>
+      <div class="mini-card">
+        <div class="mini-thumb"><img src="../images/thumb-nectar.jpg" alt=""></div>
+        <div class="mini-body">
+          <div class="mini-header"><img class="mini-logo" src="../images/logo-nectar.svg" alt=""><span class="badge-before">Founding Designer</span></div>
+          <p class="mini-name">Nectar</p>
+          <p class="mini-desc">MVP B2B mobile-first piloté par IA...</p>
+        </div>
+      </div>
+    </div>
+    <p class="compare-label" style="margin-bottom:12px">Après — couleur par projet</p>
+    <div class="cards-grid">
+      <div class="mini-card">
+        <div class="mini-thumb"><img src="../images/thumb-pepyte.jpg" alt=""></div>
+        <div class="mini-body">
+          <div class="mini-header"><img class="mini-logo" src="../images/logo-pepyte.svg" alt=""><span class="badge-pepyte">UX Research & Design</span></div>
+          <p class="mini-name">Pepyte</p>
+          <p class="mini-desc">Audit de 62 champs, 10 entretiens recruteurs...</p>
+        </div>
+      </div>
+      <div class="mini-card">
+        <div class="mini-thumb"><img src="../images/thumb-weborama.jpg" alt=""></div>
+        <div class="mini-body">
+          <div class="mini-header"><img class="mini-logo" src="../images/logo-weborama.svg" alt=""><span class="badge-weborama">Design System Lead</span></div>
+          <p class="mini-name">Weborama</p>
+          <p class="mini-desc">Audit de 974 composants...</p>
+        </div>
+      </div>
+      <div class="mini-card">
+        <div class="mini-thumb"><img src="../images/thumb-nectar.jpg" alt=""></div>
+        <div class="mini-body">
+          <div class="mini-header"><img class="mini-logo" src="../images/logo-nectar.svg" alt=""><span class="badge-nectar">Founding Designer</span></div>
+          <p class="mini-name">Nectar</p>
+          <p class="mini-desc">MVP B2B mobile-first piloté par IA...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
