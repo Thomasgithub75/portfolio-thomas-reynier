@@ -35,7 +35,8 @@ section{padding:80px 0}
 .hero-label{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--text);margin-bottom:20px}
 .hero-label::before{content:'';width:28px;height:2px;background:var(--blue);border-radius:2px;flex-shrink:0}
 h1{font-size:clamp(36px,5vw,52px);line-height:1.1;letter-spacing:-0.03em;font-weight:600;margin-bottom:20px}
-#hero h1{font-size:clamp(48px,8vw,76px);font-weight:700;color:var(--blue);line-height:1.05;letter-spacing:-0.03em;margin-bottom:20px}
+#hero h1{font-size:clamp(38px,5.5vw,56px);font-weight:700;color:var(--blue);line-height:1.08;letter-spacing:-0.03em;margin-bottom:20px}
+#hero h1 .sep{color:var(--text)}
 h1 em{font-style:normal;color:var(--blue)}
 .hero-intro{font-size:17px;color:var(--muted);line-height:1.7;max-width:580px;margin-bottom:16px;font-weight:300}
 .hero-cards{display:flex;flex-direction:column;gap:12px;margin-bottom:28px}
@@ -178,19 +179,19 @@ nav.menu-open .mob-footer{display:flex}
     <div class="hero-content">
       <div class="hero-text">
         <p class="hero-label fade-up">PRODUCT DESIGNER</p>
-        <h1 class="fade-up d1">UX · Design<br>System<br>· IA</h1>
+        <h1 class="fade-up d1">UX <span class="sep">·</span> Design<br>System<br><span class="sep">·</span> IA</h1>
         <p class="hero-intro fade-up d2">Je conçois des expériences fondées sur la recherche, structurées en systèmes et accélérées par l'IA.</p>
         <div class="hero-cards fade-up d3">
           <div class="hero-card">
-            <div class="hero-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></div>
+            <div class="hero-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c0 5.523-4.477 10-10 10 5.523 0 10 4.477 10 10 0-5.523 4.477-10 10-10-5.523 0-10-4.477-10-10z"/></svg></div>
             <p class="hero-card-text"><strong>Design Systems</strong> — création, audit et gouvernance, de zéro ou sur l'existant</p>
           </div>
           <div class="hero-card">
-            <div class="hero-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6" r="2"/><circle cx="19" cy="18" r="2"/><path d="M7 6h5a5 5 0 015 5v1a5 5 0 01-5 5H7"/></svg></div>
+            <div class="hero-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 000-7h-11a3.5 3.5 0 010-7H15"/><circle cx="18" cy="5" r="3"/></svg></div>
             <p class="hero-card-text"><strong>Parcours & interfaces</strong> — de la recherche utilisateur au design to code</p>
           </div>
           <div class="hero-card">
-            <div class="hero-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M16.9 16.9l1.5 1.5M5.6 18.4l1.4-1.4M16.9 7.1l1.5-1.5"/><circle cx="12" cy="12" r="4"/></svg></div>
+            <div class="hero-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 008.5 14.063l-6.135-1.582a.5.5 0 010-.962L8.5 9.936A2 2 0 009.937 8.5l1.582-6.135a.5.5 0 01.963 0L14.063 8.5A2 2 0 0015.5 9.937l6.135 1.581a.5.5 0 010 .964L15.5 14.063a2 2 0 00-1.437 1.437l-1.582 6.135a.5.5 0 01-.963 0z"/><path d="M20 3v4M22 5h-4M4 17v2M5 18H3"/></svg></div>
             <p class="hero-card-text"><strong>IA & automatisation</strong> — Figma Make, MCP Claude, process réplicables</p>
           </div>
         </div>
@@ -200,11 +201,11 @@ nav.menu-open .mob-footer{display:flex}
             <span class="stat-label">ans d'expérience</span>
           </div>
           <div class="hero-stat">
-            <span class="stat-num">8</span>
-            <span class="stat-label">produits SaaS</span>
+            <span class="stat-num"><span style="color:var(--text)">+</span>10</span>
+            <span class="stat-label">produit SaaS</span>
           </div>
           <div class="hero-stat">
-            <span class="stat-num">+100</span>
+            <span class="stat-num"><span style="color:var(--text)">+</span>100</span>
             <span class="stat-label">features</span>
           </div>
         </div>
