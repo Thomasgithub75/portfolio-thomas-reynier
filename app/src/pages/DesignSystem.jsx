@@ -66,11 +66,76 @@ function Group({ label, children }) {
 }
 
 function ColorSwatch({ name, value }) {
+  const isLight = ['#EEF3FD','#D7E5FB','#FFFFFF','#F9FAFB','#F4F8FE','#E5E7EB','#E5E9F5'].includes(value);
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, minWidth: 80 }}>
-      <Box sx={{ width: 64, height: 64, borderRadius: 2, background: value, border: `1px solid ${tokens.border}` }} />
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, minWidth: 72 }}>
+      <Box sx={{ width: 64, height: 64, borderRadius: 2, background: value, border: isLight ? `1px solid ${tokens.border}` : 'none' }} />
       <Typography variant="caption" sx={{ color: tokens.text, fontWeight: 600, fontSize: 11 }}>{name}</Typography>
       <Typography variant="caption" sx={{ color: tokens.muted, fontSize: 10 }}>{value}</Typography>
+    </Box>
+  );
+}
+
+function PrimaryScale() {
+  const steps = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900];
+  const semantic = { 50: 'blueLight', 100: 'bgBlue', 200: 'blueBorder', 400: 'blueMid', 500: 'blue ★', 600: 'blueDeep', 700: 'blueDarker' };
+  return (
+    <Box sx={{ mb: 3 }}>
+      <Typography variant="caption" sx={{ display: 'block', mb: 1.5, color: tokens.muted, fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', fontSize: 11 }}>
+        Primary — scale complète
+      </Typography>
+      <Box sx={{ display: 'flex', gap: 0, borderRadius: '10px', overflow: 'hidden', border: `1px solid ${tokens.border}` }}>
+        {steps.map((step) => {
+          const hex = tokens.primary[step];
+          const isLight = step <= 100;
+          const textColor = isLight ? tokens.text : '#fff';
+          const isMid = step === 400 || step === 300;
+          const textColorMid = isMid ? tokens.text : textColor;
+          const finalText = step <= 200 ? tokens.muted : (step <= 400 ? tokens.text : '#fff');
+          return (
+            <Box
+              key={step}
+              sx={{
+                flex: 1,
+                background: hex,
+                pt: 8,
+                pb: 1.5,
+                px: 1,
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '2px',
+                position: 'relative',
+              }}
+            >
+              {step === 500 && (
+                <Box sx={{
+                  position: 'absolute',
+                  top: 8,
+                  left: '50%',
+                  transform: 'translateX(-50%)',
+                  fontSize: 9,
+                  fontWeight: 700,
+                  color: '#fff',
+                  background: 'rgba(255,255,255,0.25)',
+                  borderRadius: '4px',
+                  px: '5px',
+                  py: '1px',
+                  whiteSpace: 'nowrap',
+                }}>
+                  Base
+                </Box>
+              )}
+              <Typography sx={{ fontSize: 11, fontWeight: 700, color: finalText, lineHeight: 1 }}>{step}</Typography>
+              <Typography sx={{ fontSize: 9.5, color: finalText, opacity: 0.75, lineHeight: 1, fontFamily: 'monospace' }}>{hex}</Typography>
+              {semantic[step] && (
+                <Typography sx={{ fontSize: 9, color: finalText, opacity: 0.6, lineHeight: 1, mt: '2px' }}>
+                  {semantic[step]}
+                </Typography>
+              )}
+            </Box>
+          );
+        })}
+      </Box>
     </Box>
   );
 }
@@ -102,29 +167,35 @@ export default function DesignSystem() {
       <Divider sx={{ mb: 7 }} />
 
       {/* ── COULEURS ─────────────────────────────────────── */}
-      <Section title="Couleurs" subtitle="Tokens de couleur extraits du site.">
-        <Group label="Primaires">
-          <ColorSwatch name="blue" value={tokens.blue} />
-          <ColorSwatch name="blueMid" value={tokens.blueMid} />
-          <ColorSwatch name="blueDeep" value={tokens.blueDeep} />
-          <ColorSwatch name="blueDarker" value={tokens.blueDarker} />
+      <Section title="Couleurs" subtitle="Palette Primary brand + tokens sémantiques + neutres.">
+
+        {/* Scale primaire */}
+        <PrimaryScale />
+
+        {/* Tokens sémantiques */}
+        <Group label="Tokens sémantiques — Primary">
+          <ColorSwatch name="blue (500)" value={tokens.blue} />
+          <ColorSwatch name="blueMid (400)" value={tokens.blueMid} />
+          <ColorSwatch name="blueDeep (600)" value={tokens.blueDeep} />
+          <ColorSwatch name="blueDarker (700)" value={tokens.blueDarker} />
+          <ColorSwatch name="blueLight (50)" value={tokens.blueLight} />
+          <ColorSwatch name="bgBlue (100)" value={tokens.bgBlue} />
+          <ColorSwatch name="blueBorder (200)" value={tokens.blueBorder} />
         </Group>
-        <Group label="Surfaces">
-          <ColorSwatch name="blueLight" value={tokens.blueLight} />
-          <ColorSwatch name="bgBlue" value={tokens.bgBlue} />
-          <ColorSwatch name="bgPanel" value={tokens.bgPanel} />
-          <ColorSwatch name="bgSoft" value={tokens.bgSoft} />
-        </Group>
+
         <Group label="Neutres">
           <ColorSwatch name="text" value={tokens.text} />
           <ColorSwatch name="muted" value={tokens.muted} />
           <ColorSwatch name="border" value={tokens.border} />
-          <ColorSwatch name="borderSoft" value={tokens.borderSoft} />
+          <ColorSwatch name="bgSoft" value={tokens.bgSoft} />
+          <ColorSwatch name="bgPanel" value={tokens.bgPanel} />
         </Group>
+
         <Group label="Sémantiques">
           <ColorSwatch name="green" value={tokens.green} />
           <ColorSwatch name="amber" value={tokens.amber} />
         </Group>
+
       </Section>
 
       <Divider sx={{ mb: 7 }} />
