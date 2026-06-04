@@ -79,17 +79,21 @@
 ### ✅ TestimonialCard
 **Fichier :** `app/src/components/TestimonialCard/TestimonialCard.jsx`
 **Layout associé :** `app/src/layouts/TestimonialsSection.jsx`
-**Variantes :** `featured` (grande carte) · compact (défaut)
+**Variantes :** `featured` (pleine largeur, 2 colonnes internes) · compact (verticale)
 **Props :**
 - `quote` — texte complet de la recommandation
-- `keyQuote` — phrase clé mise en avant (bold, grande)
+- `keyQuote` — phrase clé mise en avant (bold noir)
 - `name` — prénom + nom
 - `role` — poste · entreprise
-- `avatar` — chemin image (null → initiales auto)
+- `avatar` — chemin image
 - `stars` — 1 à 5 (défaut 5)
-- `project` — label badge projet (ex : "Pepyte")
-- `linkedinUrl` — URL profil LinkedIn
-- `featured` — `true` = grande carte colonne gauche, `false` = carte compacte
+- `companyLogo` — chemin logo entreprise (affiché en haut à droite)
+- `linkedinUrl` — URL profil LinkedIn (badge bleu en bas)
+- `featured` — `true` = pleine largeur layout 2 colonnes, `false` = carte compacte verticale
+
+**Layout section :**
+- 1 carte featured full width en haut
+- 2 cartes compactes côte à côte en dessous
 
 ---
 

@@ -2,23 +2,28 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import StarIcon from '@mui/icons-material/Star';
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { tokens } from '../../theme/theme';
 
+const LinkedInIcon = () => (
+  <svg width="10" height="10" viewBox="0 0 24 24" fill="#0A66C2">
+    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+  </svg>
+);
+
 /**
- * TestimonialCard
+ * TestimonialCard — Option D
  *
- * featured : true  → grande carte (colonne gauche)
- * featured : false → carte compacte (colonne droite empilée)
+ * featured : true  → pleine largeur, layout interne 2 colonnes
+ * featured : false → carte compacte, layout vertical
  *
  * Props :
- *   quote       — texte complet de la recommandation
- *   keyQuote    — phrase clé mise en avant
+ *   quote       — texte complet
+ *   keyQuote    — phrase clé (bold, mise en avant)
  *   name        — prénom + nom
  *   role        — poste · entreprise
- *   avatar      — chemin image (ou null pour initiales)
+ *   avatar      — chemin image
  *   stars       — 1-5 (défaut 5)
- *   project     — label badge projet (ex : "Pepyte")
+ *   companyLogo — chemin logo entreprise
  *   linkedinUrl — URL profil LinkedIn
  *   featured    — booléen (défaut false)
  */
@@ -29,189 +34,186 @@ export default function TestimonialCard({
   role,
   avatar,
   stars = 5,
-  project,
+  companyLogo,
   linkedinUrl,
   featured = false,
 }) {
-  const initials = name
-    ? name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase()
-    : '?';
+  const avatarSize = featured ? 44 : 38;
 
+  const cardSx = {
+    background: '#fff',
+    border: `1px solid ${tokens.border}`,
+    borderRadius: '14px',
+    p: featured ? '32px' : '24px',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 2,
+    transition: 'box-shadow 0.2s',
+    height: '100%',
+    '&:hover': {
+      boxShadow: '0 6px 28px rgba(26,86,219,0.09)',
+    },
+  };
+
+  // Auteur — partagé entre les deux variantes
+  const Author = (
+    <Stack direction="row" alignItems="center" justifyContent="space-between" gap={1}>
+      <Stack direction="row" alignItems="center" spacing={1.25}>
+        {avatar && (
+          <Box
+            component="img"
+            src={avatar}
+            alt={name}
+            sx={{
+              width: avatarSize,
+              height: avatarSize,
+              borderRadius: '50%',
+              objectFit: 'cover',
+              border: `2px solid ${tokens.border}`,
+              flexShrink: 0,
+            }}
+          />
+        )}
+        <Box>
+          <Typography sx={{ fontSize: '14px', fontWeight: 600, color: tokens.text, lineHeight: 1.2 }}>
+            {name}
+          </Typography>
+          <Typography sx={{ fontSize: '11px', color: tokens.muted, fontWeight: 300, mt: '2px' }}>
+            {role}
+          </Typography>
+        </Box>
+      </Stack>
+
+      {linkedinUrl && (
+        <Box
+          component="a"
+          href={linkedinUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          sx={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '4px',
+            fontSize: '11px',
+            fontWeight: 600,
+            color: '#0A66C2',
+            background: '#EBF3FB',
+            border: '1px solid #C0DCF5',
+            borderRadius: '20px',
+            px: '10px',
+            py: '4px',
+            textDecoration: 'none',
+            flexShrink: 0,
+            transition: 'opacity 0.15s',
+            fontFamily: "'Outfit', sans-serif",
+            '&:hover': { opacity: 0.8 },
+          }}
+        >
+          <LinkedInIcon />
+          LinkedIn
+        </Box>
+      )}
+    </Stack>
+  );
+
+  // ── Carte featured — pleine largeur, 2 colonnes internes ──
+  if (featured) {
+    return (
+      <Box sx={cardSx}>
+        {/* Colonne gauche + droite */}
+        <Box sx={{
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr',
+          gap: '32px',
+          alignItems: 'start',
+        }}>
+          {/* Gauche : étoiles, logo, phrase clé, auteur */}
+          <Stack gap={2}>
+            <Stack direction="row" alignItems="center" justifyContent="space-between">
+              <Stack direction="row" spacing={0.25}>
+                {Array.from({ length: stars }).map((_, i) => (
+                  <StarIcon key={i} sx={{ fontSize: 15, color: tokens.amber }} />
+                ))}
+              </Stack>
+              {companyLogo && (
+                <Box component="img" src={companyLogo} alt="" sx={{ height: '22px', width: 'auto', objectFit: 'contain', opacity: 0.85 }} />
+              )}
+            </Stack>
+
+            <Typography sx={{
+              fontSize: '17px',
+              fontWeight: 700,
+              color: tokens.text,
+              lineHeight: 1.45,
+              letterSpacing: '-0.015em',
+            }}>
+              « {keyQuote} »
+            </Typography>
+
+            <Box sx={{ borderTop: `1px solid ${tokens.border}` }} />
+            {Author}
+          </Stack>
+
+          {/* Droite : citation complète */}
+          <Box sx={{
+            borderLeft: `3px solid rgba(26,86,219,0.15)`,
+            pl: 3,
+            display: 'flex',
+            alignItems: 'center',
+            height: '100%',
+          }}>
+            <Typography sx={{
+              fontSize: '14px',
+              color: tokens.muted,
+              lineHeight: 1.75,
+              fontWeight: 300,
+              fontStyle: 'italic',
+            }}>
+              {quote}
+            </Typography>
+          </Box>
+        </Box>
+      </Box>
+    );
+  }
+
+  // ── Carte compacte — layout vertical ──
   return (
-    <Box
-      sx={{
-        border: `1px solid ${tokens.border}`,
-        borderRadius: '14px',
-        p: featured ? '36px' : '24px',
-        background: tokens.bg,
-        display: 'flex',
-        flexDirection: 'column',
-        gap: featured ? 2.5 : 2,
-        height: '100%',
-        position: 'relative',
-        overflow: 'hidden',
-        transition: 'border-color 0.2s, box-shadow 0.2s',
-        '&:hover': {
-          borderColor: tokens.blueBorder,
-          boxShadow: '0 4px 24px rgba(26,86,219,0.08)',
-        },
-        // Guillemet décoratif
-        '&::before': {
-          content: '"“"',
-          position: 'absolute',
-          top: '-10px',
-          right: '24px',
-          fontSize: '120px',
-          lineHeight: 1,
-          color: tokens.blue,
-          opacity: 0.06,
-          fontFamily: 'Georgia, serif',
-          fontWeight: 700,
-          pointerEvents: 'none',
-        },
-      }}
-    >
-      {/* En-tête : étoiles + badge projet */}
+    <Box sx={cardSx}>
       <Stack direction="row" alignItems="center" justifyContent="space-between">
         <Stack direction="row" spacing={0.25}>
           {Array.from({ length: stars }).map((_, i) => (
-            <StarIcon key={i} sx={{ fontSize: 16, color: tokens.amber }} />
+            <StarIcon key={i} sx={{ fontSize: 14, color: tokens.amber }} />
           ))}
         </Stack>
-        {project && (
-          <Box sx={{
-            fontSize: '11px',
-            fontWeight: 600,
-            color: tokens.blue,
-            background: tokens.blueLight,
-            border: `1px solid ${tokens.blueBorder}`,
-            borderRadius: '20px',
-            px: 1.25,
-            py: '2px',
-            fontFamily: "'Outfit', sans-serif",
-          }}>
-            {project}
-          </Box>
+        {companyLogo && (
+          <Box component="img" src={companyLogo} alt="" sx={{ height: '20px', width: 'auto', objectFit: 'contain', opacity: 0.85 }} />
         )}
       </Stack>
 
-      {/* Phrase clé mise en avant */}
-      {keyQuote && (
-        <Typography sx={{
-          fontSize: featured ? '17px' : '14px',
-          fontWeight: 600,
-          color: tokens.text,
-          lineHeight: 1.45,
-          letterSpacing: '-0.01em',
-          fontStyle: 'italic',
-        }}>
-          « {keyQuote} »
-        </Typography>
-      )}
-
-      {/* Séparateur */}
-      <Box sx={{ borderTop: `1px solid ${tokens.border}` }} />
-
-      {/* Citation complète */}
       <Typography sx={{
-        fontSize: featured ? '15px' : '13px',
+        fontSize: '15px',
+        fontWeight: 700,
+        color: tokens.text,
+        lineHeight: 1.45,
+        letterSpacing: '-0.01em',
+      }}>
+        « {keyQuote} »
+      </Typography>
+
+      <Typography sx={{
+        fontSize: '13px',
         color: tokens.muted,
         lineHeight: 1.75,
         fontWeight: 300,
+        fontStyle: 'italic',
         flex: 1,
       }}>
         {quote}
       </Typography>
 
-      {/* Auteur */}
-      <Stack
-        direction="row"
-        alignItems="center"
-        justifyContent="space-between"
-        sx={{ pt: 2, borderTop: `1px solid ${tokens.border}`, mt: 'auto' }}
-      >
-        <Stack direction="row" alignItems="center" spacing={1.5}>
-          {/* Avatar */}
-          {avatar ? (
-            <Box
-              component="img"
-              src={avatar}
-              alt={name}
-              sx={{
-                width: featured ? 44 : 36,
-                height: featured ? 44 : 36,
-                borderRadius: '50%',
-                objectFit: 'cover',
-                border: `2px solid ${tokens.border}`,
-                flexShrink: 0,
-              }}
-            />
-          ) : (
-            <Box sx={{
-              width: featured ? 44 : 36,
-              height: featured ? 44 : 36,
-              borderRadius: '50%',
-              background: tokens.blueLight,
-              border: `2px solid ${tokens.border}`,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: featured ? '14px' : '12px',
-              fontWeight: 600,
-              color: tokens.blue,
-              flexShrink: 0,
-            }}>
-              {initials}
-            </Box>
-          )}
-          <Box>
-            <Typography sx={{
-              fontSize: featured ? '14px' : '13px',
-              fontWeight: 600,
-              color: tokens.text,
-              lineHeight: 1.2,
-            }}>
-              {name}
-            </Typography>
-            <Typography sx={{
-              fontSize: featured ? '13px' : '11px',
-              color: tokens.muted,
-              fontWeight: 300,
-              lineHeight: 1.3,
-              mt: '2px',
-            }}>
-              {role}
-            </Typography>
-          </Box>
-        </Stack>
-
-        {/* Lien LinkedIn */}
-        {linkedinUrl && (
-          <Box
-            component="a"
-            href={linkedinUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            sx={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '4px',
-              fontSize: '12px',
-              color: tokens.blue,
-              textDecoration: 'none',
-              fontWeight: 500,
-              fontFamily: "'Outfit', sans-serif",
-              opacity: 0.75,
-              transition: 'opacity 0.15s',
-              '&:hover': { opacity: 1 },
-              flexShrink: 0,
-            }}
-          >
-            LinkedIn
-            <OpenInNewIcon sx={{ fontSize: 12 }} />
-          </Box>
-        )}
-      </Stack>
+      <Box sx={{ borderTop: `1px solid ${tokens.border}` }} />
+      {Author}
     </Box>
   );
 }

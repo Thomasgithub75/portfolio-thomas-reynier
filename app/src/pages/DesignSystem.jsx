@@ -267,42 +267,39 @@ export default function DesignSystem() {
       <Divider sx={{ mb: 7 }} />
 
       {/* ── TESTIMONIAL CARD ──────────────────────────────── */}
-      <Section title="TestimonialCard" subtitle="Deux variantes : featured (grande, colonne gauche) et compact (empilée, colonne droite).">
-        <Group label="Layout asymétrique — Option A">
-          <Box sx={{
-            display: 'grid',
-            gridTemplateColumns: { xs: '1fr', md: '1fr 300px' },
-            gap: 2,
-            alignItems: 'start',
-            width: '100%',
-          }}>
+      <Section title="TestimonialCard" subtitle="Featured (pleine largeur, 2 colonnes internes) + 2 cartes compactes côte à côte.">
+        <Group label="Layout Option D — featured full width + 2 en dessous">
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, width: '100%' }}>
             <TestimonialCard
               featured
-              project="Pepyte"
+              companyLogo="/images/logo-pepyte.svg"
               stars={5}
               keyQuote="Une augmentation importante de la satisfaction des utilisateurs et de l'efficacité des processus de recrutement."
-              quote="« Thomas a grandement amélioré notre plateforme de recrutement. Il a su comprendre les besoins des utilisateurs. Il a également collaboré efficacement avec notre équipe de développement. »"
+              quote="Thomas a grandement amélioré notre plateforme de recrutement. Il a su comprendre les besoins des utilisateurs. Il a également collaboré efficacement avec notre équipe de développement."
               name="Alexis Vaysse"
               role="Co-CEO & Co-Founder · Pepyte"
+              avatar="/images/avatar-alexis.png"
               linkedinUrl="#"
             />
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+            <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
               <TestimonialCard
-                project="Pepyte"
+                companyLogo="/images/logo-pepyte.svg"
                 stars={5}
                 keyQuote="Une capacité de travail impressionnante à une positivité contagieuse."
-                quote="« Thomas est un Product Designer motivé, combinant une capacité de travail impressionnante à une positivité contagieuse. Fortement recommandé ! »"
+                quote="Thomas est un Product Designer motivé, combinant une capacité de travail impressionnante à une positivité contagieuse. Fortement recommandé !"
                 name="Antoine Girard"
                 role="Co-CEO & Co-Founder · Pepyte"
+                avatar="/images/avatar-antoine.png"
                 linkedinUrl="#"
               />
               <TestimonialCard
-                project="Weborama"
+                companyLogo="/images/logo-weborama.svg"
                 stars={5}
                 keyQuote="Faire de l'IA un véritable allié stratégique."
-                quote="« Thomas a su faire de l'IA un véritable allié stratégique, l'intégrant avec maîtrise dans ses méthodes de conception. »"
+                quote="Thomas a su faire de l'IA un véritable allié stratégique, l'intégrant avec maîtrise dans ses méthodes de conception pour créer des produits plus intelligents."
                 name="Donia Ben Ghorbal"
                 role="Lead Product Designer · Weborama"
+                avatar="/images/avatar-donia.png"
                 linkedinUrl="#"
               />
             </Box>
