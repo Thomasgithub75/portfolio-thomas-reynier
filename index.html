@@ -64,12 +64,27 @@ h1 em{font-style:normal;color:var(--blue)}
 .btn-ghost:hover{border-color:#ccc;background:var(--bg-soft)}
 .section-label{font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--blue);margin-bottom:12px}
 h2{font-size:clamp(24px,3.5vw,32px);font-weight:600;letter-spacing:-0.025em;line-height:1.2;margin-bottom:40px;color:var(--text)}
-.skill-tool{font-size:12px;padding:4px 10px;border-radius:20px;background:var(--blue-light);color:var(--blue);font-weight:500}
-.expertise-rows{display:flex;flex-direction:column;gap:16px}
-.expertise-row{display:flex;align-items:flex-start;gap:32px;padding:16px 0;border-bottom:1px solid var(--border)}
+.expertise-rows{display:flex;flex-direction:column}
+.expertise-row{display:flex;align-items:flex-start;gap:40px;padding:28px 0;border-bottom:1px solid var(--border)}
 .expertise-row:last-child{border-bottom:none}
-.expertise-row-label{font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);min-width:110px;padding-top:5px;flex-shrink:0}
-.expertise-row-tags{display:flex;flex-wrap:wrap;gap:6px}
+.expertise-row-label-wrap{display:flex;flex-direction:column;gap:4px;min-width:150px;flex-shrink:0;padding-top:6px}
+.expertise-row-label{font-size:12px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--text)}
+.expertise-row-sublabel{font-size:12px;color:var(--muted);font-weight:400}
+.expertise-row-right{display:flex;flex-direction:column;gap:12px}
+.expertise-row-tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag-core{font-size:13px;padding:7px 16px;border-radius:20px;background:var(--blue);color:#fff;font-weight:500}
+.tag-secondary{font-size:13px;padding:7px 16px;border-radius:20px;background:var(--blue-light);color:var(--blue);font-weight:400;border:1px solid rgba(26,86,219,0.2)}
+.tag-design{font-size:13px;padding:7px 16px;border-radius:20px;background:#F5F3FF;color:#6D28D9;font-weight:400;border:1px solid rgba(109,40,217,0.2)}
+.tag-dev{font-size:13px;padding:7px 16px;border-radius:20px;background:#F0FDF4;color:#15803D;font-weight:400;border:1px solid rgba(21,128,61,0.2)}
+.tag-pm{font-size:13px;padding:7px 16px;border-radius:20px;background:#FEFCE8;color:#A16207;font-weight:400;border:1px solid rgba(161,98,7,0.2)}
+.expertise-legend{display:flex;align-items:center;gap:16px}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);font-weight:400}
+.legend-dot{width:14px;height:14px;border-radius:4px;flex-shrink:0}
+.legend-dot-core{background:var(--blue)}
+.legend-dot-secondary{background:var(--blue-light);border:1px solid rgba(26,86,219,0.3)}
+.legend-dot-design{background:#F5F3FF;border:1px solid rgba(109,40,217,0.3)}
+.legend-dot-dev{background:#F0FDF4;border:1px solid rgba(21,128,61,0.3)}
+.legend-dot-pm{background:#FEFCE8;border:1px solid rgba(161,98,7,0.3)}
 .projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .project-card{background:var(--bg);display:flex;flex-direction:column;transition:border-color 0.2s,box-shadow 0.2s,background 0.2s,transform 0.2s;text-decoration:none;color:inherit;border-radius:10px;border:2px solid var(--border);overflow:hidden}
 .project-card:hover{border-color:var(--blue);box-shadow:0 8px 32px rgba(26,86,219,0.12);background:var(--bg);transform:translateY(-4px)}
@@ -239,40 +254,62 @@ nav.menu-open .mob-footer{display:flex}
     <h2>Mes expertises</h2>
     <div class="expertise-rows">
       <div class="expertise-row">
-        <span class="expertise-row-label">Compétences</span>
-        <div class="expertise-row-tags">
-          <span class="skill-tool">UX Research</span>
-          <span class="skill-tool">Product Design</span>
-          <span class="skill-tool">Prototypage haute fidélité</span>
-          <span class="skill-tool">Design System</span>
-          <span class="skill-tool">Atomic Design</span>
-          <span class="skill-tool">Design to Code</span>
-          <span class="skill-tool">IA générative</span>
+        <div class="expertise-row-label-wrap">
+          <span class="expertise-row-label">Compétences</span>
+          <span class="expertise-row-sublabel">Core · Secondaires</span>
+        </div>
+        <div class="expertise-row-right">
+          <div class="expertise-row-tags">
+            <span class="tag-core">UX Research</span>
+            <span class="tag-core">Product Design</span>
+            <span class="tag-core">Design System</span>
+            <span class="tag-secondary">Prototypage haute fidélité</span>
+            <span class="tag-secondary">Atomic Design</span>
+            <span class="tag-secondary">Design to Code</span>
+            <span class="tag-secondary">IA générative</span>
+          </div>
+          <div class="expertise-legend">
+            <div class="legend-item"><span class="legend-dot legend-dot-core"></span>Core</div>
+            <div class="legend-item"><span class="legend-dot legend-dot-secondary"></span>Secondaire</div>
+          </div>
         </div>
       </div>
       <div class="expertise-row">
-        <span class="expertise-row-label">Outils</span>
-        <div class="expertise-row-tags">
-          <span class="skill-tool">Figma</span>
-          <span class="skill-tool">Figma Make</span>
-          <span class="skill-tool">Lovable</span>
-          <span class="skill-tool">Replit</span>
-          <span class="skill-tool">Zeroheight</span>
-          <span class="skill-tool">Supernova</span>
-          <span class="skill-tool">Storybook</span>
-          <span class="skill-tool">VSCode</span>
-          <span class="skill-tool">Jira</span>
-          <span class="skill-tool">Notion</span>
-          <span class="skill-tool">Supabase</span>
-          <span class="skill-tool">Vercel</span>
-          <span class="skill-tool">Mobbin</span>
+        <div class="expertise-row-label-wrap">
+          <span class="expertise-row-label">Outils</span>
+          <span class="expertise-row-sublabel">Design · Dev · PM</span>
+        </div>
+        <div class="expertise-row-right">
+          <div class="expertise-row-tags">
+            <span class="tag-design">Figma</span>
+            <span class="tag-design">Figma Make</span>
+            <span class="tag-design">Lovable</span>
+            <span class="tag-design">Zeroheight</span>
+            <span class="tag-design">Supernova</span>
+            <span class="tag-design">Storybook</span>
+            <span class="tag-dev">Mobbin</span>
+            <span class="tag-dev">Replit</span>
+            <span class="tag-dev">VSCode</span>
+            <span class="tag-dev">Supabase</span>
+            <span class="tag-dev">Vercel</span>
+            <span class="tag-pm">Jira</span>
+            <span class="tag-pm">Notion</span>
+          </div>
+          <div class="expertise-legend">
+            <div class="legend-item"><span class="legend-dot legend-dot-design"></span>Design</div>
+            <div class="legend-item"><span class="legend-dot legend-dot-dev"></span>Dev</div>
+            <div class="legend-item"><span class="legend-dot legend-dot-pm"></span>PM</div>
+          </div>
         </div>
       </div>
       <div class="expertise-row">
-        <span class="expertise-row-label">Langues</span>
+        <div class="expertise-row-label-wrap">
+          <span class="expertise-row-label">Langues</span>
+          <span class="expertise-row-sublabel">Natif · Professionnel</span>
+        </div>
         <div class="expertise-row-tags">
-          <span class="skill-tool">Français — Natif</span>
-          <span class="skill-tool">Anglais — Professionnel</span>
+          <span class="tag-core">Français — Natif</span>
+          <span class="tag-secondary">Anglais — Professionnel</span>
         </div>
       </div>
     </div>
