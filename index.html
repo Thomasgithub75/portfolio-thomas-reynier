@@ -698,18 +698,18 @@ function closePanel() {
       document.getElementById('expPanelEmpty').style.display = '';
     }
   }, 200);
-  document.querySelectorAll('.exp-tag-clickable').forEach(t => t.classList.remove('active','dimmed'));
+  document.querySelectorAll('.exp-tag-clickable').forEach(t => t.classList.remove('is-active','is-dimmed'));
 }
 
 document.querySelectorAll('.exp-tag-clickable').forEach(tag => {
   tag.addEventListener('click', () => {
-    const isActive = tag.classList.contains('active');
-    document.querySelectorAll('.exp-tag-clickable').forEach(t => t.classList.remove('active','dimmed'));
+    const isActive = tag.classList.contains('is-active');
+    document.querySelectorAll('.exp-tag-clickable').forEach(t => t.classList.remove('is-active','is-dimmed'));
     if (isActive) {
       closePanel();
     } else {
-      tag.classList.add('active');
-      document.querySelectorAll('.exp-tag-clickable').forEach(t => { if (t !== tag) t.classList.add('dimmed'); });
+      tag.classList.add('is-active');
+      document.querySelectorAll('.exp-tag-clickable').forEach(t => { if (t !== tag) t.classList.add('is-dimmed'); });
       updatePanel(tag.dataset.skill);
     }
   });
