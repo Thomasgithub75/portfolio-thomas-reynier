@@ -30,20 +30,23 @@ const PrimaryButton = styled(MuiButton)(() => ({
 // ── Secondary ──────────────────────────────────────────────────────────────
 const SecondaryButton = styled(MuiButton)(() => ({
   backgroundColor: tokens.gray[100],
-  color: tokens.primary[700],
+  color: tokens.gray[600],
   boxShadow: 'none',
   '&:hover': {
     backgroundColor: tokens.gray[200],
+    color: tokens.gray[700],
     boxShadow: 'none',
   },
   '&:focus-visible': {
     backgroundColor: tokens.gray[200],
+    color: tokens.gray[700],
     outline: `2px solid ${tokens.primary[500]}`,
     outlineOffset: '2px',
     boxShadow: 'none',
   },
   '&:active': {
     backgroundColor: tokens.gray[300],
+    color: tokens.gray[800],
     boxShadow: 'none',
   },
   '&.Mui-disabled': {
