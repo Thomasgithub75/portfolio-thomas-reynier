@@ -84,6 +84,7 @@ h2{font-size:clamp(24px,3.5vw,32px);font-weight:600;letter-spacing:-0.025em;line
 .exp-tag-design{background:#EEEDFE;color:#534AB7;border-color:#AFA9EC}
 .exp-tag-dev{background:#E1F5EE;color:#0F6E56;border-color:#5DCAA5}
 .exp-tag-pm{background:#FAEEDA;color:#854F0B;border-color:#EF9F27}
+.exp-tag-sm{font-size:12px;padding:3px 10px}
 .exp-panel{width:260px;flex-shrink:0;position:sticky;top:80px;background:#F4F8FE;border:1px solid #B5D4F4;border-radius:12px;overflow:hidden}
 .exp-panel-empty{padding:28px 20px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
 .exp-panel-empty svg{color:#B5D4F4}
@@ -98,7 +99,8 @@ h2{font-size:clamp(24px,3.5vw,32px);font-weight:600;letter-spacing:-0.025em;line
 .exp-panel-projects{display:flex;flex-direction:column}
 .exp-proj-item{display:flex;align-items:flex-start;gap:10px;padding:10px 16px;transition:background 0.15s;text-decoration:none;color:inherit}
 .exp-proj-item:hover{background:rgba(26,86,219,0.05)}
-.exp-proj-logo{width:38px;height:38px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;letter-spacing:0.02em}
+.exp-proj-logo{width:38px;height:38px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;letter-spacing:0.02em;overflow:hidden;border:1px solid var(--border)}
+.exp-proj-logo img{width:100%;height:100%;object-fit:contain;padding:6px}
 .exp-proj-info{flex:1;min-width:0}
 .exp-proj-name{font-size:13px;font-weight:600;color:var(--text);line-height:1.2;margin-bottom:2px}
 .exp-proj-desc{font-size:12px;color:var(--muted);line-height:1.4;margin-bottom:5px}
@@ -336,8 +338,8 @@ nav.menu-open .mob-footer{display:flex}
             </div>
           </div>
           <div class="exp-tags">
-            <span class="exp-tag exp-tag-core">Français — Natif</span>
-            <span class="exp-tag exp-tag-secondary">Anglais — Professionnel</span>
+            <span class="exp-tag exp-tag-core exp-tag-sm">Français — Natif</span>
+            <span class="exp-tag exp-tag-secondary exp-tag-sm">Anglais — Professionnel</span>
           </div>
         </div>
 
@@ -593,33 +595,33 @@ function toggleTags(btn, e) {
 // Expertise panel
 const skillProjects = {
   'UX Research': [
-    { initials:'PE', color:'#7C3AED', name:'Pepyte', desc:'Refonte UX d\'une plateforme RH', type:'Case study', url:'case-pepyte.html' },
-    { initials:'WB', color:'#0EA5E9', name:'Weborama', desc:'Design System & UX AdTech', type:'Case study', url:'case-weborama.html' },
-    { initials:'NC', color:'#F59E0B', name:'Nectar', desc:'App de collecte d\'insights', type:'Side project', url:'case-nectar.html' }
+    { logo:'images/logo-pepyte.svg', bg:'#F5F3FF', name:'Pepyte', desc:'Refonte UX d\'une plateforme RH', type:'Case study', url:'case-pepyte.html' },
+    { logo:'images/logo-weborama.svg', bg:'#EFF8FF', name:'Weborama', desc:'Design System & UX AdTech', type:'Case study', url:'case-weborama.html' },
+    { logo:'images/logo-nectar.svg', bg:'#FFFBEB', name:'Nectar', desc:'App de collecte d\'insights', type:'Side project', url:'case-nectar.html' }
   ],
   'Product Design': [
-    { initials:'PE', color:'#7C3AED', name:'Pepyte', desc:'Refonte UX d\'une plateforme RH', type:'Case study', url:'case-pepyte.html' },
-    { initials:'WB', color:'#0EA5E9', name:'Weborama', desc:'Design System & UX AdTech', type:'Case study', url:'case-weborama.html' },
-    { initials:'NC', color:'#F59E0B', name:'Nectar', desc:'App de collecte d\'insights', type:'Side project', url:'case-nectar.html' }
+    { logo:'images/logo-pepyte.svg', bg:'#F5F3FF', name:'Pepyte', desc:'Refonte UX d\'une plateforme RH', type:'Case study', url:'case-pepyte.html' },
+    { logo:'images/logo-weborama.svg', bg:'#EFF8FF', name:'Weborama', desc:'Design System & UX AdTech', type:'Case study', url:'case-weborama.html' },
+    { logo:'images/logo-nectar.svg', bg:'#FFFBEB', name:'Nectar', desc:'App de collecte d\'insights', type:'Side project', url:'case-nectar.html' }
   ],
   'Design System': [
-    { initials:'WB', color:'#0EA5E9', name:'Weborama', desc:'Design System & UX AdTech', type:'Case study', url:'case-weborama.html' },
-    { initials:'PE', color:'#7C3AED', name:'Pepyte', desc:'Refonte UX d\'une plateforme RH', type:'Case study', url:'case-pepyte.html' }
+    { logo:'images/logo-weborama.svg', bg:'#EFF8FF', name:'Weborama', desc:'Design System & UX AdTech', type:'Case study', url:'case-weborama.html' },
+    { logo:'images/logo-pepyte.svg', bg:'#F5F3FF', name:'Pepyte', desc:'Refonte UX d\'une plateforme RH', type:'Case study', url:'case-pepyte.html' }
   ],
   'Prototypage haute fidélité': [
-    { initials:'PE', color:'#7C3AED', name:'Pepyte', desc:'Refonte UX d\'une plateforme RH', type:'Case study', url:'case-pepyte.html' },
-    { initials:'NC', color:'#F59E0B', name:'Nectar', desc:'App de collecte d\'insights', type:'Side project', url:'case-nectar.html' }
+    { logo:'images/logo-pepyte.svg', bg:'#F5F3FF', name:'Pepyte', desc:'Refonte UX d\'une plateforme RH', type:'Case study', url:'case-pepyte.html' },
+    { logo:'images/logo-nectar.svg', bg:'#FFFBEB', name:'Nectar', desc:'App de collecte d\'insights', type:'Side project', url:'case-nectar.html' }
   ],
   'Atomic Design': [
-    { initials:'WB', color:'#0EA5E9', name:'Weborama', desc:'Design System & UX AdTech', type:'Case study', url:'case-weborama.html' }
+    { logo:'images/logo-weborama.svg', bg:'#EFF8FF', name:'Weborama', desc:'Design System & UX AdTech', type:'Case study', url:'case-weborama.html' }
   ],
   'Design to Code': [
-    { initials:'NC', color:'#F59E0B', name:'Nectar', desc:'App de collecte d\'insights', type:'Side project', url:'case-nectar.html' },
+    { logo:'images/logo-nectar.svg', bg:'#FFFBEB', name:'Nectar', desc:'App de collecte d\'insights', type:'Side project', url:'case-nectar.html' },
     { initials:'PF', color:'#1A56DB', name:'Portfolio', desc:'Design & développement du site', type:'Personnel', url:'index.html' }
   ],
   'IA générative': [
-    { initials:'NC', color:'#F59E0B', name:'Nectar', desc:'App de collecte d\'insights', type:'Side project', url:'case-nectar.html' },
-    { initials:'PE', color:'#7C3AED', name:'Pepyte', desc:'Refonte UX d\'une plateforme RH', type:'Case study', url:'case-pepyte.html' }
+    { logo:'images/logo-nectar.svg', bg:'#FFFBEB', name:'Nectar', desc:'App de collecte d\'insights', type:'Side project', url:'case-nectar.html' },
+    { logo:'images/logo-pepyte.svg', bg:'#F5F3FF', name:'Pepyte', desc:'Refonte UX d\'une plateforme RH', type:'Case study', url:'case-pepyte.html' }
   ]
 };
 const badgeClass = { 'Case study':'badge-case', 'Side project':'badge-side', 'Personnel':'badge-perso' };
@@ -629,7 +631,7 @@ function renderPanel(skill) {
   document.getElementById('expPanelSkillName').textContent = skill;
   document.getElementById('expPanelProjects').innerHTML = projs.map(p =>
     `<a href="${p.url}" class="exp-proj-item">
-      <div class="exp-proj-logo" style="background:${p.color}">${p.initials}</div>
+      <div class="exp-proj-logo" style="background:${p.logo ? p.bg : p.color}">${p.logo ? `<img src="${p.logo}" alt="${p.name}">` : p.initials}</div>
       <div class="exp-proj-info">
         <div class="exp-proj-name">${p.name}</div>
         <div class="exp-proj-desc">${p.desc}</div>
