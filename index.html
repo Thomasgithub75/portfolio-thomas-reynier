@@ -187,28 +187,12 @@ button.exp-tag-secondary.is-active:active{background:#85B7EB!important;color:#0C
 .proj-tag{font-size:12px;padding:4px 10px;border-radius:20px;background:var(--blue-light);color:var(--blue);font-weight:500}
 .tag-more{font-size:12px;color:var(--blue);background:none;border:none;cursor:pointer;font-family:'Outfit',sans-serif;font-weight:500;padding:3px 0;text-decoration:underline;text-underline-offset:2px}
 .tag-more:hover{opacity:0.75}
-#contact{background:transparent;border-top:none;position:relative;overflow:hidden;padding:0}
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;min-height:320px}
-.contact-dark{padding:56px 48px;background:linear-gradient(145deg,#0e1c38 0%,#1A2540 100%);position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between}
-.contact-dark::before{content:'';position:absolute;top:-60px;right:-60px;width:240px;height:240px;background:radial-gradient(circle,rgba(25,86,219,.25) 0%,transparent 70%);pointer-events:none}
-.contact-kicker{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--p400);margin-bottom:14px;position:relative}
-.contact-title{font-size:26px;font-weight:700;letter-spacing:-.03em;color:#fff;line-height:1.15;margin-bottom:10px;position:relative}
-.contact-sub{font-size:13px;color:rgba(255,255,255,.42);font-weight:300;line-height:1.6;margin-bottom:32px;position:relative}
-.contact-btns{display:flex;flex-direction:column;gap:10px;position:relative}
-.contact-btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--p500);color:#fff;padding:13px 20px;border-radius:8px;font-size:14px;font-weight:500;text-decoration:none;transition:background .15s;font-family:'Outfit',sans-serif}
-.contact-btn-primary:hover{background:#1141A8}
-.contact-btn-ghost{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.75);padding:13px 20px;border-radius:8px;font-size:14px;font-weight:400;text-decoration:none;border:1px solid rgba(255,255,255,.12);transition:background .15s;font-family:'Outfit',sans-serif}
-.contact-btn-ghost:hover{background:rgba(255,255,255,.12)}
-.contact-btn{width:18px;height:18px;flex-shrink:0}
-.contact-light{padding:56px 48px;background:var(--g50);display:flex;flex-direction:column;justify-content:center}
-.contact-kpi-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:24px}
-.contact-kpis{display:flex;flex-direction:column}
-.contact-kpi{padding:20px 0;display:flex;align-items:baseline;gap:14px;border-bottom:1px solid var(--border)}
-.contact-kpi:last-child{border-bottom:none}
-.contact-kpi-num{font-size:40px;font-weight:800;color:var(--p500);letter-spacing:-.04em;line-height:1;flex-shrink:0}
-.contact-kpi-text{font-size:13px;color:var(--muted);font-weight:300;line-height:1.4}
+#contact{background:var(--p50);border-top:1px solid var(--p100);position:relative;overflow:hidden}
+#contact::before{content:'';position:absolute;top:-60px;right:-60px;width:280px;height:280px;background:radial-gradient(circle,var(--p100) 0%,transparent 70%);pointer-events:none}
+.contact-inner{max-width:480px}
+.contact-inner h2{margin-bottom:12px}
+.contact-sub{color:var(--muted);font-size:16px;margin-bottom:32px;font-weight:300}
 .contact-links{display:flex;flex-direction:column;gap:12px}
-@media(max-width:700px){.contact-grid{grid-template-columns:1fr}.contact-dark,.contact-light{padding:40px 28px}}
 /* ── Recommandations — Option D ── */
 .rec-layout{display:flex;flex-direction:column;gap:16px}
 .rec-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
@@ -664,39 +648,22 @@ nav.menu-open .mob-footer{display:flex}
 <hr class="divider">
 
 <section id="contact">
-  <div class="contact-grid">
-    <div class="contact-dark">
-      <div>
-        <p class="contact-kicker">Contact</p>
-        <h2 class="contact-title">Disponible pour<br>votre projet</h2>
-        <p class="contact-sub">Freelance ou CDI · Paris & remote.</p>
-      </div>
-      <div class="contact-btns">
-        <a href="https://mail.google.com/mail/?view=cm&to=reynier.design@gmail.com" target="_blank" rel="noopener" class="contact-btn-primary">
-          <svg class="contact-btn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          Écrire un email
+  <div class="container">
+    <div class="contact-inner">
+      <p class="section-label">Contact</p>
+      <h2>Travaillons ensemble</h2>
+      <p class="contact-sub">Disponible pour des missions freelance, des opportunités CDI ou des collaborations ponctuelles à Paris.</p>
+      <div class="contact-links">
+        <a href="https://mail.google.com/mail/?view=cm&to=reynier.design@gmail.com" target="_blank" rel="noopener" class="contact-link">
+          <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+          <span>reynier.design@gmail.com</span>
+          <small>Email</small>
         </a>
-        <a href="https://www.linkedin.com/in/thomas-reynier-product-design/" target="_blank" rel="noopener" class="contact-btn-ghost">
-          <svg class="contact-btn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-          Voir mon LinkedIn
+<a href="https://www.linkedin.com/in/thomas-reynier-product-design/" target="_blank" rel="noopener" class="contact-link">
+          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          <span>LinkedIn</span>
+          <small>Réseau professionnel</small>
         </a>
-      </div>
-    </div>
-    <div class="contact-light">
-      <p class="contact-kpi-label">En chiffres</p>
-      <div class="contact-kpis">
-        <div class="contact-kpi">
-          <span class="contact-kpi-num">5</span>
-          <span class="contact-kpi-text">ans d'expérience Product Design</span>
-        </div>
-        <div class="contact-kpi">
-          <span class="contact-kpi-num">+10</span>
-          <span class="contact-kpi-text">produits SaaS conçus</span>
-        </div>
-        <div class="contact-kpi">
-          <span class="contact-kpi-num">+100</span>
-          <span class="contact-kpi-text">features livrées en production</span>
-        </div>
       </div>
     </div>
   </div>
