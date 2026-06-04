@@ -124,8 +124,8 @@
 
 | Élément | Texte |
 |---------|-------|
-| Kicker | `Recommandations` |
-| Titre H2 | `Mes collaborations` |
+| Kicker | `Références` |
+| Titre H2 | `Témoignages de mes collaborateurs` |
 
 ### Alexis Vaysse — Co-CEO & Co-Founder · Pepyte
 > « Thomas a grandement amélioré notre plateforme de recrutement. Il a su comprendre les besoins des utilisateurs. Il a également collaboré efficacement avec notre équipe de développement. Nous avons obtenu une augmentation importante de la satisfaction des utilisateurs clients et de l'efficacité des processus de recrutement. »

@@ -55,10 +55,10 @@ export default function TestimonialsSection() {
           letterSpacing: '0.08em',
           mb: 1,
         }}>
-          Recommandations
+          Références
         </Typography>
         <Typography variant="h2" sx={{ mb: 5 }}>
-          Ils ont travaillé avec Thomas
+          Témoignages de mes collaborateurs
         </Typography>
 
         {/* Layout : featured full width + 2 cartes en dessous */}
