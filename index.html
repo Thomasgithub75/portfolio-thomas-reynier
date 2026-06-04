@@ -667,10 +667,21 @@ const BADGE = {'Case study':'badge-case','Side project':'badge-side','Personnel'
 const arrowSvg = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
 let panelOpen = false;
 
-function updatePanel(skill) {
-  const projs = SKILL_PROJS[skill] || [];
-  document.getElementById('expPanelSkill').textContent = skill;
-  document.getElementById('expProjList').innerHTML = projs.map(p =>
+function getActiveTags() {
+  return [...document.querySelectorAll('.exp-tag-clickable.is-active')];
+}
+
+function getUniqueProjects(skills) {
+  const seen = new Set();
+  return skills.flatMap(s => SKILL_PROJS[s] || []).filter(p => {
+    if (seen.has(p.name)) return false;
+    seen.add(p.name);
+    return true;
+  });
+}
+
+function renderProjects(projs) {
+  return projs.map(p =>
     `<a href="${p.url}" class="exp-proj-item">
       <div class="exp-proj-logo" style="background:${p.logo ? p.bg : p.color}">${p.logo ? `<img src="${p.logo}" alt="${p.name}">` : p.initials}</div>
       <div class="exp-proj-info">
@@ -681,8 +692,28 @@ function updatePanel(skill) {
       <span class="exp-proj-arrow">${arrowSvg}</span>
     </a>`
   ).join('');
+}
+
+function syncPanel() {
+  const activeTags = getActiveTags();
+  const anyActive = activeTags.length > 0;
+
+  // Dimming
+  document.querySelectorAll('.exp-tag-clickable').forEach(t => {
+    t.classList.toggle('is-dimmed', anyActive && !t.classList.contains('is-active'));
+  });
+
+  if (!anyActive) { closePanel(); return; }
+
+  const skills = activeTags.map(t => t.dataset.skill);
+  const label = skills.length === 1 ? skills[0] : skills.length + ' compétences';
+  const projs = getUniqueProjects(skills);
   const n = projs.length;
+
+  document.getElementById('expPanelSkill').textContent = label;
+  document.getElementById('expProjList').innerHTML = renderProjects(projs);
   document.getElementById('expProjCount').textContent = n + ' projet' + (n > 1 ? 's' : '') + ' trouvé' + (n > 1 ? 's' : '');
+
   if (!panelOpen) {
     const panel = document.getElementById('expPanelActive');
     document.getElementById('expPanelEmpty').style.display = 'none';
@@ -702,20 +733,13 @@ function closePanel() {
       document.getElementById('expPanelEmpty').style.display = '';
     }
   }, 200);
-  document.querySelectorAll('.exp-tag-clickable').forEach(t => t.classList.remove('is-active','is-dimmed'));
+  document.querySelectorAll('.exp-tag-clickable').forEach(t => t.classList.remove('is-active', 'is-dimmed'));
 }
 
 document.querySelectorAll('.exp-tag-clickable').forEach(tag => {
   tag.addEventListener('click', () => {
-    const isActive = tag.classList.contains('is-active');
-    document.querySelectorAll('.exp-tag-clickable').forEach(t => t.classList.remove('is-active','is-dimmed'));
-    if (isActive) {
-      closePanel();
-    } else {
-      tag.classList.add('is-active');
-      document.querySelectorAll('.exp-tag-clickable').forEach(t => { if (t !== tag) t.classList.add('is-dimmed'); });
-      updatePanel(tag.dataset.skill);
-    }
+    tag.classList.toggle('is-active');
+    syncPanel();
   });
 });
 
