@@ -5,9 +5,10 @@ export { default as Button }        from './Button/Button';
 export { default as Badge }         from './Badge/Badge';
 export { default as Tag }           from './Tag/Tag';
 
+export { default as TestimonialCard } from './TestimonialCard/TestimonialCard';
+
 // À décommenter au fur et à mesure de la création des composants :
 // export { default as ProjectCard }   from './ProjectCard/ProjectCard';
-// export { default as TestimonialCard } from './TestimonialCard/TestimonialCard';
 // export { default as ContactLink }   from './ContactLink/ContactLink';
 // export { default as StatBlock }     from './StatBlock/StatBlock';
 // export { default as HeroBadge }     from './HeroBadge/HeroBadge';

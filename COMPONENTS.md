@@ -76,15 +76,20 @@
 
 ---
 
-### ⬜ TestimonialCard
+### ✅ TestimonialCard
 **Fichier :** `app/src/components/TestimonialCard/TestimonialCard.jsx`
-**Usage :** Section témoignages
-**Props prévues :**
-- `quote` — citation
-- `name` — nom de l'auteur
-- `role` — poste + entreprise
-- `avatar` — image ou initiales
-- `stars` — nombre d'étoiles (1-5, défaut 5)
+**Layout associé :** `app/src/layouts/TestimonialsSection.jsx`
+**Variantes :** `featured` (grande carte) · compact (défaut)
+**Props :**
+- `quote` — texte complet de la recommandation
+- `keyQuote` — phrase clé mise en avant (bold, grande)
+- `name` — prénom + nom
+- `role` — poste · entreprise
+- `avatar` — chemin image (null → initiales auto)
+- `stars` — 1 à 5 (défaut 5)
+- `project` — label badge projet (ex : "Pepyte")
+- `linkedinUrl` — URL profil LinkedIn
+- `featured` — `true` = grande carte colonne gauche, `false` = carte compacte
 
 ---
 

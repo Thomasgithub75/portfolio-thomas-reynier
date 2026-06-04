@@ -6,6 +6,7 @@ import Tooltip from '@mui/material/Tooltip';
 import Button from '../components/Button/Button';
 import Badge from '../components/Badge/Badge';
 import Tag from '../components/Tag/Tag';
+import TestimonialCard from '../components/TestimonialCard/TestimonialCard';
 import { tokens } from '../theme/theme';
 import { useState } from 'react';
 
@@ -261,6 +262,52 @@ export default function DesignSystem() {
             ))}
           </Group>
         ))}
+      </Section>
+
+      <Divider sx={{ mb: 7 }} />
+
+      {/* ── TESTIMONIAL CARD ──────────────────────────────── */}
+      <Section title="TestimonialCard" subtitle="Deux variantes : featured (grande, colonne gauche) et compact (empilée, colonne droite).">
+        <Group label="Layout asymétrique — Option A">
+          <Box sx={{
+            display: 'grid',
+            gridTemplateColumns: { xs: '1fr', md: '1fr 300px' },
+            gap: 2,
+            alignItems: 'start',
+            width: '100%',
+          }}>
+            <TestimonialCard
+              featured
+              project="Pepyte"
+              stars={5}
+              keyQuote="Une augmentation importante de la satisfaction des utilisateurs et de l'efficacité des processus de recrutement."
+              quote="« Thomas a grandement amélioré notre plateforme de recrutement. Il a su comprendre les besoins des utilisateurs. Il a également collaboré efficacement avec notre équipe de développement. »"
+              name="Alexis Vaysse"
+              role="Co-CEO & Co-Founder · Pepyte"
+              linkedinUrl="#"
+            />
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+              <TestimonialCard
+                project="Pepyte"
+                stars={5}
+                keyQuote="Une capacité de travail impressionnante à une positivité contagieuse."
+                quote="« Thomas est un Product Designer motivé, combinant une capacité de travail impressionnante à une positivité contagieuse. Fortement recommandé ! »"
+                name="Antoine Girard"
+                role="Co-CEO & Co-Founder · Pepyte"
+                linkedinUrl="#"
+              />
+              <TestimonialCard
+                project="Weborama"
+                stars={5}
+                keyQuote="Faire de l'IA un véritable allié stratégique."
+                quote="« Thomas a su faire de l'IA un véritable allié stratégique, l'intégrant avec maîtrise dans ses méthodes de conception. »"
+                name="Donia Ben Ghorbal"
+                role="Lead Product Designer · Weborama"
+                linkedinUrl="#"
+              />
+            </Box>
+          </Box>
+        </Group>
       </Section>
 
       <Divider sx={{ mb: 4 }} />
