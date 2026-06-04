@@ -52,8 +52,11 @@ h1 em{font-style:normal;color:var(--blue)}
 .stat-label{display:block;font-size:12px;color:var(--muted);font-weight:400;margin-top:4px}
 .hero-content{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
 .hero-text{flex:1}
-.hero-image{width:100%;max-width:320px;justify-self:center;aspect-ratio:1/1;border-radius:50%;overflow:hidden;box-shadow:0 10px 40px rgba(26,86,219,0.15)}
+.hero-image-wrap{position:relative;width:100%;max-width:320px;justify-self:center}
+.hero-image{width:100%;aspect-ratio:1/1;border-radius:50%;overflow:hidden;box-shadow:0 0 0 3px var(--blue),0 10px 40px rgba(26,86,219,0.15)}
 .hero-image img{width:100%;height:100%;object-fit:cover;object-position:center top}
+.hero-badge{position:absolute;bottom:24px;right:-4px;background:#fff;border:1px solid var(--border);border-radius:20px;padding:6px 14px;display:flex;align-items:center;gap:7px;font-size:13px;font-weight:500;color:var(--text);box-shadow:0 2px 12px rgba(0,0,0,0.08);white-space:nowrap}
+.hero-badge-dot{width:8px;height:8px;background:#22C55E;border-radius:50%;flex-shrink:0}
 .hero-actions{display:flex;gap:12px;align-items:center}
 .btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#fff;padding:11px 22px;border-radius:7px;font-size:15px;font-weight:500;text-decoration:none;transition:opacity 0.2s;font-family:'Outfit',sans-serif;white-space:nowrap}
 .btn-primary:hover{opacity:0.88}
@@ -131,7 +134,7 @@ nav.menu-open .mob-footer{display:flex}
 .mob-footer-icon{width:36px;height:36px;border-radius:8px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--muted);text-decoration:none}
 .mob-footer-icon svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.8}
 @media(max-width:600px){
-  .hero-content{grid-template-columns:1fr}.hero-image{max-width:220px;order:-1}.project-body{grid-template-columns:1fr}.project-arrow{display:none}
+  .hero-content{grid-template-columns:1fr}.hero-image-wrap{max-width:220px;order:-1}.project-body{grid-template-columns:1fr}.project-arrow{display:none}
   nav ul{display:none}
   nav ul.open{display:flex;flex-direction:column;position:fixed;top:60px;left:0;right:0;bottom:72px;background:#ffffff;z-index:200;padding:8px 0 0;border-top:1px solid var(--border);align-items:stretch;animation:menuSlide .22s ease;overflow-y:auto}
   nav ul.open li{border-bottom:1px solid var(--border);width:100%}
@@ -215,8 +218,14 @@ nav.menu-open .mob-footer{display:flex}
           <a href="https://www.linkedin.com/in/thomas-reynier-product-design/" target="_blank" class="btn-ghost"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>LinkedIn</a>
         </div>
       </div>
-      <div class="hero-image fade-up d2">
-        <img src="images/profile.png" alt="Thomas Reynier">
+      <div class="hero-image-wrap fade-up d2">
+        <div class="hero-image">
+          <img src="images/profile.png" alt="Thomas Reynier">
+        </div>
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          Disponible
+        </div>
       </div>
     </div>
   </div>
