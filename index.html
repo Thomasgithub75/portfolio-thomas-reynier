@@ -335,6 +335,10 @@ nav.menu-open .mob-footer{display:flex}
             <button class="exp-tag tag tag--selection exp-tag-secondary exp-tag-clickable" data-skill="Atomic Design"><span class="tag-add"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 1v10M1 6h10"/></svg></span>Atomic Design<span class="tag-remove"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 1l10 10M11 1L1 11"/></svg></span></button>
             <button class="exp-tag tag tag--selection exp-tag-secondary exp-tag-clickable" data-skill="Design to Code"><span class="tag-add"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 1v10M1 6h10"/></svg></span>Design to Code<span class="tag-remove"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 1l10 10M11 1L1 11"/></svg></span></button>
             <button class="exp-tag tag tag--selection exp-tag-secondary exp-tag-clickable" data-skill="IA générative"><span class="tag-add"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 1v10M1 6h10"/></svg></span>IA générative<span class="tag-remove"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 1l10 10M11 1L1 11"/></svg></span></button>
+            <button class="exp-tag tag tag--selection exp-tag-secondary exp-tag-clickable" data-skill="Entretiens utilisateurs"><span class="tag-add"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 1v10M1 6h10"/></svg></span>Entretiens utilisateurs<span class="tag-remove"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 1l10 10M11 1L1 11"/></svg></span></button>
+            <button class="exp-tag tag tag--selection exp-tag-secondary exp-tag-clickable" data-skill="Audit UX"><span class="tag-add"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 1v10M1 6h10"/></svg></span>Audit UX<span class="tag-remove"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 1l10 10M11 1L1 11"/></svg></span></button>
+            <button class="exp-tag tag tag--selection exp-tag-secondary exp-tag-clickable" data-skill="Tests utilisateurs"><span class="tag-add"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 1v10M1 6h10"/></svg></span>Tests utilisateurs<span class="tag-remove"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 1l10 10M11 1L1 11"/></svg></span></button>
+            <button class="exp-tag tag tag--selection exp-tag-secondary exp-tag-clickable" data-skill="User flows & zoning"><span class="tag-add"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 1v10M1 6h10"/></svg></span>User flows & zoning<span class="tag-remove"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 1l10 10M11 1L1 11"/></svg></span></button>
           </div>
         </div>
 
@@ -661,6 +665,23 @@ const SKILL_PROJS = {
   'IA générative': [
     { logo:'images/logo-nectar.svg', bg:'#FFFBEB', name:'Nectar', desc:'Claude Code · MCP · Figma Make', type:'Side project', url:'case-nectar.html' },
     { logo:'images/logo-pepyte.svg', bg:'#F5F3FF', name:'Pepyte', desc:'Synthèse entretiens · research IA', type:'Case study', url:'case-pepyte.html' }
+  ],
+  'Entretiens utilisateurs': [
+    { logo:'images/logo-pepyte.svg', bg:'#F5F3FF', name:'Pepyte', desc:'12 entretiens · JTBD · pain points', type:'Case study', url:'case-pepyte.html' },
+    { logo:'images/logo-weborama.svg', bg:'#EFF8FF', name:'Weborama', desc:'Entretiens équipes produit & sales', type:'Case study', url:'case-weborama.html' },
+    { logo:'images/logo-nectar.svg', bg:'#FFFBEB', name:'Nectar', desc:'Discovery · interviews commerciaux & PM', type:'Side project', url:'case-nectar.html' }
+  ],
+  'Audit UX': [
+    { logo:'images/logo-weborama.svg', bg:'#EFF8FF', name:'Weborama', desc:'Audit UX · heatmaps · tests utilisateurs', type:'Case study', url:'case-weborama.html' },
+    { logo:'images/logo-pepyte.svg', bg:'#F5F3FF', name:'Pepyte', desc:'Audit interface existante · quick wins', type:'Case study', url:'case-pepyte.html' }
+  ],
+  'Tests utilisateurs': [
+    { logo:'images/logo-pepyte.svg', bg:'#F5F3FF', name:'Pepyte', desc:'Tests modérés · validation hypothèses', type:'Case study', url:'case-pepyte.html' },
+    { logo:'images/logo-weborama.svg', bg:'#EFF8FF', name:'Weborama', desc:'Tests prototypes · itérations UX', type:'Case study', url:'case-weborama.html' }
+  ],
+  'User flows & zoning': [
+    { logo:'images/logo-nectar.svg', bg:'#FFFBEB', name:'Nectar', desc:'Flow saisie → validation · 15 edge cases', type:'Side project', url:'case-nectar.html' },
+    { logo:'images/logo-pepyte.svg', bg:'#F5F3FF', name:'Pepyte', desc:'Parcours onboarding complet · zoning', type:'Case study', url:'case-pepyte.html' }
   ]
 };
 const BADGE = {'Case study':'badge-case','Side project':'badge-side','Personnel':'badge-perso'};
