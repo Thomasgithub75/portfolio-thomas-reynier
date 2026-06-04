@@ -1,0 +1,139 @@
+import Box from '@mui/material/Box';
+import { tokens } from '../../theme/theme';
+
+// Palette de couleurs par catégorie
+const categoryStyles = {
+  primary: {
+    bg:         tokens.blue,
+    color:      '#ffffff',
+    border:     tokens.blue,
+    hoverBg:    '#185FA5',
+    activeBg:   tokens.blueDeep,
+    activeColor:'#ffffff',
+    activeBorder: '#1570EF',
+  },
+  secondary: {
+    bg:         tokens.bgBlue,
+    color:      '#185FA5',
+    border:     tokens.blueBorder,
+    hoverBg:    tokens.blueBorder,
+    hoverColor: tokens.blueDarker,
+    activeBg:   '#B2DDFF',
+    activeColor: tokens.blueDeep,
+    activeBorder:'#1570EF',
+  },
+  design: {
+    bg:    tokens.tagDesignBg,
+    color: tokens.tagDesignFg,
+    border: tokens.tagDesignBg,
+  },
+  dev: {
+    bg:    tokens.tagDevBg,
+    color: tokens.tagDevFg,
+    border: tokens.tagDevBg,
+  },
+  pm: {
+    bg:    tokens.tagPmBg,
+    color: tokens.tagPmFg,
+    border: tokens.tagPmBg,
+  },
+  langNatif: {
+    bg:     tokens.blue,
+    color:  '#fff',
+    border: tokens.blue,
+  },
+  langPro: {
+    bg:     tokens.bgBlue,
+    color:  '#185FA5',
+    border: tokens.blueBorder,
+  },
+};
+
+/**
+ * Tag
+ * category : "primary" | "secondary" | "design" | "dev" | "pm" | "langNatif" | "langPro"
+ * clickable : true/false — si true, se comporte comme un bouton avec état actif
+ * isActive  : état actif contrôlé de l'extérieur
+ * isDimmed  : opacité réduite (filtre actif ailleurs)
+ * onClick   : handler
+ */
+export default function Tag({
+  children,
+  category = 'secondary',
+  clickable = false,
+  isActive = false,
+  isDimmed = false,
+  onClick,
+  icon,
+  sx = {},
+}) {
+  const s = categoryStyles[category] ?? categoryStyles.secondary;
+
+  const base = {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '4px',
+    px: '8px',
+    py: '3px',
+    borderRadius: '6px',
+    fontFamily: "'Outfit', sans-serif",
+    fontSize: '13px',
+    fontWeight: 500,
+    lineHeight: 1.4,
+    whiteSpace: 'nowrap',
+    border: `1.5px solid ${s.border ?? s.bg}`,
+    backgroundColor: s.bg,
+    color: s.color,
+    userSelect: 'none',
+    opacity: isDimmed ? 0.3 : 1,
+    transition: 'background 0.15s, color 0.15s, opacity 0.15s, transform 0.1s, border-color 0.15s',
+  };
+
+  if (!clickable) {
+    return (
+      <Box component="span" sx={{ ...base, cursor: 'default', ...sx }}>
+        {icon && <span style={{ fontSize: 12 }}>{icon}</span>}
+        {children}
+      </Box>
+    );
+  }
+
+  // État actif
+  const activeOverride = isActive
+    ? {
+        backgroundColor: s.activeBg ?? s.bg,
+        color: s.activeColor ?? s.color,
+        border: `2px solid ${s.activeBorder ?? s.border ?? s.bg}`,
+        outline: 'none',
+      }
+    : {};
+
+  return (
+    <Box
+      component="button"
+      onClick={onClick}
+      sx={{
+        ...base,
+        cursor: 'pointer',
+        background: 'none',
+        fontFamily: "'Outfit', sans-serif",
+        '&:hover': {
+          backgroundColor: s.hoverBg ?? s.bg,
+          color: s.hoverColor ?? s.color,
+        },
+        '&:active': {
+          transform: 'scale(0.97)',
+        },
+        '&:focus-visible': {
+          outline: `2px solid ${tokens.blue}`,
+          outlineOffset: 2,
+        },
+        ...activeOverride,
+        ...sx,
+      }}
+    >
+      {icon && <span style={{ fontSize: 12 }}>{icon}</span>}
+      {children}
+    </Box>
+  );
+}
