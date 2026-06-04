@@ -64,27 +64,51 @@ h1 em{font-style:normal;color:var(--blue)}
 .btn-ghost:hover{border-color:#ccc;background:var(--bg-soft)}
 .section-label{font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--blue);margin-bottom:12px}
 h2{font-size:clamp(24px,3.5vw,32px);font-weight:600;letter-spacing:-0.025em;line-height:1.2;margin-bottom:40px;color:var(--text)}
-.expertise-rows{display:flex;flex-direction:column}
-.expertise-row{display:flex;align-items:flex-start;gap:40px;padding:28px 0;border-bottom:1px solid var(--border)}
-.expertise-row:last-child{border-bottom:none}
-.expertise-row-label-wrap{display:flex;flex-direction:column;gap:4px;min-width:150px;flex-shrink:0;padding-top:6px}
-.expertise-row-label{font-size:12px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--text)}
-.expertise-row-sublabel{font-size:12px;color:var(--muted);font-weight:400}
-.expertise-row-right{display:flex;flex-direction:column;gap:12px}
-.expertise-row-tags{display:flex;flex-wrap:wrap;gap:8px}
-.tag-core{font-size:13px;padding:7px 16px;border-radius:20px;background:var(--blue);color:#fff;font-weight:500}
-.tag-secondary{font-size:13px;padding:7px 16px;border-radius:20px;background:var(--blue-light);color:var(--blue);font-weight:400;border:1px solid rgba(26,86,219,0.2)}
-.tag-design{font-size:13px;padding:7px 16px;border-radius:20px;background:#F5F3FF;color:#6D28D9;font-weight:400;border:1px solid rgba(109,40,217,0.2)}
-.tag-dev{font-size:13px;padding:7px 16px;border-radius:20px;background:#F0FDF4;color:#15803D;font-weight:400;border:1px solid rgba(21,128,61,0.2)}
-.tag-pm{font-size:13px;padding:7px 16px;border-radius:20px;background:#FEFCE8;color:#A16207;font-weight:400;border:1px solid rgba(161,98,7,0.2)}
-.expertise-legend{display:flex;align-items:center;gap:16px}
-.legend-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);font-weight:400}
-.legend-dot{width:14px;height:14px;border-radius:4px;flex-shrink:0}
-.legend-dot-core{background:var(--blue)}
-.legend-dot-secondary{background:var(--blue-light);border:1px solid rgba(26,86,219,0.3)}
-.legend-dot-design{background:#F5F3FF;border:1px solid rgba(109,40,217,0.3)}
-.legend-dot-dev{background:#F0FDF4;border:1px solid rgba(21,128,61,0.3)}
-.legend-dot-pm{background:#FEFCE8;border:1px solid rgba(161,98,7,0.3)}
+.exp-wrap{display:flex;gap:32px;align-items:flex-start}
+.exp-main{flex:1;min-width:0}
+.exp-section{display:grid;grid-template-columns:160px 1fr;gap:32px;padding:24px 0;border-bottom:0.5px solid #E5E9F5}
+.exp-section:last-child{border-bottom:none}
+.exp-label-col{display:flex;flex-direction:column;gap:10px;padding-top:4px}
+.exp-label{font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text)}
+.exp-legend{display:flex;flex-direction:column;gap:5px}
+.exp-legend-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted)}
+.exp-swatch{width:12px;height:12px;border-radius:3px;flex-shrink:0;display:inline-block}
+.exp-tags{display:flex;flex-wrap:wrap;gap:8px}
+.exp-tag{font-size:13px;padding:5px 12px;border-radius:8px;border:0.5px solid transparent;line-height:1.4;font-family:'Outfit',sans-serif;cursor:default;transition:transform 0.1s,opacity 0.1s;display:inline-flex;align-items:center;background:none}
+.exp-tag[data-skill]{cursor:pointer}
+.exp-tag[data-skill]:hover{transform:translateY(-1px);opacity:0.85}
+.exp-tag[data-skill]:active{transform:scale(0.97)}
+.exp-tag.active{outline:2px solid #1A56DB;outline-offset:2px}
+.exp-tag-core{background:#1A56DB;color:#fff;font-weight:500;border-color:#1A56DB}
+.exp-tag-secondary{background:#E8EFFD;color:#185FA5;border-color:#B5D4F4}
+.exp-tag-design{background:#EEEDFE;color:#534AB7;border-color:#AFA9EC}
+.exp-tag-dev{background:#E1F5EE;color:#0F6E56;border-color:#5DCAA5}
+.exp-tag-pm{background:#FAEEDA;color:#854F0B;border-color:#EF9F27}
+.exp-panel{width:260px;flex-shrink:0;position:sticky;top:80px;background:#F4F8FE;border:1px solid #B5D4F4;border-radius:12px;overflow:hidden}
+.exp-panel-empty{padding:28px 20px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
+.exp-panel-empty svg{color:#B5D4F4}
+.exp-panel-empty p{font-size:13px;color:var(--muted);line-height:1.5}
+.exp-panel-empty span{font-size:11px;color:#B5D4F4}
+.exp-panel-content{display:none}
+.exp-panel-header{padding:16px 16px 12px;border-bottom:0.5px solid #B5D4F4;position:relative}
+.exp-panel-kicker{font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--blue);display:block;margin-bottom:4px}
+.exp-panel-skill-name{font-size:15px;font-weight:600;color:var(--text);line-height:1.2;padding-right:28px}
+.exp-panel-close{position:absolute;top:14px;right:14px;background:none;border:none;cursor:pointer;color:var(--muted);font-size:20px;line-height:1;padding:0;font-family:'Outfit',sans-serif}
+.exp-panel-close:hover{color:var(--text)}
+.exp-panel-projects{display:flex;flex-direction:column}
+.exp-proj-item{display:flex;align-items:flex-start;gap:10px;padding:10px 16px;transition:background 0.15s;text-decoration:none;color:inherit}
+.exp-proj-item:hover{background:rgba(26,86,219,0.05)}
+.exp-proj-logo{width:38px;height:38px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;letter-spacing:0.02em}
+.exp-proj-info{flex:1;min-width:0}
+.exp-proj-name{font-size:13px;font-weight:600;color:var(--text);line-height:1.2;margin-bottom:2px}
+.exp-proj-desc{font-size:12px;color:var(--muted);line-height:1.4;margin-bottom:5px}
+.exp-proj-badge{font-size:11px;padding:2px 8px;border-radius:4px;font-weight:500;display:inline-block}
+.badge-case{background:#E8EFFD;color:#185FA5}
+.badge-side{background:#FAEEDA;color:#854F0B}
+.badge-perso{background:#EAF3DE;color:#3B6D11}
+.exp-panel-footer{padding:10px 16px;border-top:0.5px solid #B5D4F4;font-size:11px;color:var(--muted)}
+@media(max-width:768px){.exp-wrap{flex-direction:column}.exp-panel{width:100%;position:static}}
+@media(max-width:600px){.exp-section{grid-template-columns:1fr;gap:12px}}
 .projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .project-card{background:var(--bg);display:flex;flex-direction:column;transition:border-color 0.2s,box-shadow 0.2s,background 0.2s,transform 0.2s;text-decoration:none;color:inherit;border-radius:10px;border:2px solid var(--border);overflow:hidden}
 .project-card:hover{border-color:var(--blue);box-shadow:0 8px 32px rgba(26,86,219,0.12);background:var(--bg);transform:translateY(-4px)}
@@ -252,66 +276,91 @@ nav.menu-open .mob-footer{display:flex}
   <div class="container">
     <p class="section-label">Expertise</p>
     <h2>Mes expertises</h2>
-    <div class="expertise-rows">
-      <div class="expertise-row">
-        <div class="expertise-row-label-wrap">
-          <span class="expertise-row-label">Compétences</span>
-          <span class="expertise-row-sublabel">Core · Secondaires</span>
+    <div class="exp-wrap">
+      <div class="exp-main">
+
+        <!-- COMPÉTENCES -->
+        <div class="exp-section">
+          <div class="exp-label-col">
+            <span class="exp-label">Compétences</span>
+            <div class="exp-legend">
+              <div class="exp-legend-item"><span class="exp-swatch" style="background:#1A56DB"></span>Core</div>
+              <div class="exp-legend-item"><span class="exp-swatch" style="background:#E8EFFD;border:0.5px solid #B5D4F4"></span>Secondaire</div>
+            </div>
+          </div>
+          <div class="exp-tags">
+            <button class="exp-tag exp-tag-core" data-skill="UX Research">UX Research</button>
+            <button class="exp-tag exp-tag-core" data-skill="Product Design">Product Design</button>
+            <button class="exp-tag exp-tag-core" data-skill="Design System">Design System</button>
+            <button class="exp-tag exp-tag-secondary" data-skill="Prototypage haute fidélité">Prototypage haute fidélité</button>
+            <button class="exp-tag exp-tag-secondary" data-skill="Atomic Design">Atomic Design</button>
+            <button class="exp-tag exp-tag-secondary" data-skill="Design to Code">Design to Code</button>
+            <button class="exp-tag exp-tag-secondary" data-skill="IA générative">IA générative</button>
+          </div>
         </div>
-        <div class="expertise-row-right">
-          <div class="expertise-row-tags">
-            <span class="tag-core">UX Research</span>
-            <span class="tag-core">Product Design</span>
-            <span class="tag-core">Design System</span>
-            <span class="tag-secondary">Prototypage haute fidélité</span>
-            <span class="tag-secondary">Atomic Design</span>
-            <span class="tag-secondary">Design to Code</span>
-            <span class="tag-secondary">IA générative</span>
+
+        <!-- OUTILS -->
+        <div class="exp-section">
+          <div class="exp-label-col">
+            <span class="exp-label">Outils</span>
+            <div class="exp-legend">
+              <div class="exp-legend-item"><span class="exp-swatch" style="background:#EEEDFE;border:0.5px solid #AFA9EC"></span>Design</div>
+              <div class="exp-legend-item"><span class="exp-swatch" style="background:#E1F5EE;border:0.5px solid #5DCAA5"></span>Dev</div>
+              <div class="exp-legend-item"><span class="exp-swatch" style="background:#FAEEDA;border:0.5px solid #EF9F27"></span>PM</div>
+            </div>
           </div>
-          <div class="expertise-legend">
-            <div class="legend-item"><span class="legend-dot legend-dot-core"></span>Core</div>
-            <div class="legend-item"><span class="legend-dot legend-dot-secondary"></span>Secondaire</div>
+          <div class="exp-tags">
+            <span class="exp-tag exp-tag-design">Figma</span>
+            <span class="exp-tag exp-tag-design">Figma Make</span>
+            <span class="exp-tag exp-tag-design">Lovable</span>
+            <span class="exp-tag exp-tag-design">Zeroheight</span>
+            <span class="exp-tag exp-tag-design">Supernova</span>
+            <span class="exp-tag exp-tag-design">Storybook</span>
+            <span class="exp-tag exp-tag-design">Mobbin</span>
+            <span class="exp-tag exp-tag-dev">Replit</span>
+            <span class="exp-tag exp-tag-dev">VSCode</span>
+            <span class="exp-tag exp-tag-dev">Supabase</span>
+            <span class="exp-tag exp-tag-dev">Vercel</span>
+            <span class="exp-tag exp-tag-pm">Jira</span>
+            <span class="exp-tag exp-tag-pm">Notion</span>
           </div>
+        </div>
+
+        <!-- LANGUES -->
+        <div class="exp-section">
+          <div class="exp-label-col">
+            <span class="exp-label">Langues</span>
+            <div class="exp-legend">
+              <div class="exp-legend-item"><span class="exp-swatch" style="background:#1A56DB"></span>Natif</div>
+              <div class="exp-legend-item"><span class="exp-swatch" style="background:#E8EFFD;border:0.5px solid #B5D4F4"></span>Professionnel</div>
+            </div>
+          </div>
+          <div class="exp-tags">
+            <span class="exp-tag exp-tag-core">Français — Natif</span>
+            <span class="exp-tag exp-tag-secondary">Anglais — Professionnel</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- PANEL PROJETS -->
+      <div class="exp-panel" id="expPanel">
+        <div class="exp-panel-empty" id="expPanelEmpty">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 11V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2h5"/><path d="M14 20l2 2 4-4"/></svg>
+          <p>Clique sur une compétence pour voir les projets associés</p>
+          <span>7 compétences · 4 projets</span>
+        </div>
+        <div class="exp-panel-content" id="expPanelContent">
+          <div class="exp-panel-header">
+            <span class="exp-panel-kicker">Projets associés</span>
+            <p class="exp-panel-skill-name" id="expPanelSkillName"></p>
+            <button class="exp-panel-close" id="expPanelClose" aria-label="Fermer">×</button>
+          </div>
+          <div class="exp-panel-projects" id="expPanelProjects"></div>
+          <div class="exp-panel-footer" id="expPanelFooter"></div>
         </div>
       </div>
-      <div class="expertise-row">
-        <div class="expertise-row-label-wrap">
-          <span class="expertise-row-label">Outils</span>
-          <span class="expertise-row-sublabel">Design · Dev · PM</span>
-        </div>
-        <div class="expertise-row-right">
-          <div class="expertise-row-tags">
-            <span class="tag-design">Figma</span>
-            <span class="tag-design">Figma Make</span>
-            <span class="tag-design">Lovable</span>
-            <span class="tag-design">Zeroheight</span>
-            <span class="tag-design">Supernova</span>
-            <span class="tag-design">Storybook</span>
-            <span class="tag-dev">Mobbin</span>
-            <span class="tag-dev">Replit</span>
-            <span class="tag-dev">VSCode</span>
-            <span class="tag-dev">Supabase</span>
-            <span class="tag-dev">Vercel</span>
-            <span class="tag-pm">Jira</span>
-            <span class="tag-pm">Notion</span>
-          </div>
-          <div class="expertise-legend">
-            <div class="legend-item"><span class="legend-dot legend-dot-design"></span>Design</div>
-            <div class="legend-item"><span class="legend-dot legend-dot-dev"></span>Dev</div>
-            <div class="legend-item"><span class="legend-dot legend-dot-pm"></span>PM</div>
-          </div>
-        </div>
-      </div>
-      <div class="expertise-row">
-        <div class="expertise-row-label-wrap">
-          <span class="expertise-row-label">Langues</span>
-          <span class="expertise-row-sublabel">Natif · Professionnel</span>
-        </div>
-        <div class="expertise-row-tags">
-          <span class="tag-core">Français — Natif</span>
-          <span class="tag-secondary">Anglais — Professionnel</span>
-        </div>
-      </div>
+
     </div>
   </div>
 </section>
@@ -540,6 +589,79 @@ function toggleTags(btn, e) {
   btn.dataset.expanded = !expanded;
   btn.textContent = expanded ? '+' + hidden.length : 'Voir moins';
 }
+
+// Expertise panel
+const skillProjects = {
+  'UX Research': [
+    { initials:'PE', color:'#7C3AED', name:'Pepyte', desc:'Refonte UX d\'une plateforme RH', type:'Case study', url:'case-pepyte.html' },
+    { initials:'WB', color:'#0EA5E9', name:'Weborama', desc:'Design System & UX AdTech', type:'Case study', url:'case-weborama.html' },
+    { initials:'NC', color:'#F59E0B', name:'Nectar', desc:'App de collecte d\'insights', type:'Side project', url:'case-nectar.html' }
+  ],
+  'Product Design': [
+    { initials:'PE', color:'#7C3AED', name:'Pepyte', desc:'Refonte UX d\'une plateforme RH', type:'Case study', url:'case-pepyte.html' },
+    { initials:'WB', color:'#0EA5E9', name:'Weborama', desc:'Design System & UX AdTech', type:'Case study', url:'case-weborama.html' },
+    { initials:'NC', color:'#F59E0B', name:'Nectar', desc:'App de collecte d\'insights', type:'Side project', url:'case-nectar.html' }
+  ],
+  'Design System': [
+    { initials:'WB', color:'#0EA5E9', name:'Weborama', desc:'Design System & UX AdTech', type:'Case study', url:'case-weborama.html' },
+    { initials:'PE', color:'#7C3AED', name:'Pepyte', desc:'Refonte UX d\'une plateforme RH', type:'Case study', url:'case-pepyte.html' }
+  ],
+  'Prototypage haute fidélité': [
+    { initials:'PE', color:'#7C3AED', name:'Pepyte', desc:'Refonte UX d\'une plateforme RH', type:'Case study', url:'case-pepyte.html' },
+    { initials:'NC', color:'#F59E0B', name:'Nectar', desc:'App de collecte d\'insights', type:'Side project', url:'case-nectar.html' }
+  ],
+  'Atomic Design': [
+    { initials:'WB', color:'#0EA5E9', name:'Weborama', desc:'Design System & UX AdTech', type:'Case study', url:'case-weborama.html' }
+  ],
+  'Design to Code': [
+    { initials:'NC', color:'#F59E0B', name:'Nectar', desc:'App de collecte d\'insights', type:'Side project', url:'case-nectar.html' },
+    { initials:'PF', color:'#1A56DB', name:'Portfolio', desc:'Design & développement du site', type:'Personnel', url:'index.html' }
+  ],
+  'IA générative': [
+    { initials:'NC', color:'#F59E0B', name:'Nectar', desc:'App de collecte d\'insights', type:'Side project', url:'case-nectar.html' },
+    { initials:'PE', color:'#7C3AED', name:'Pepyte', desc:'Refonte UX d\'une plateforme RH', type:'Case study', url:'case-pepyte.html' }
+  ]
+};
+const badgeClass = { 'Case study':'badge-case', 'Side project':'badge-side', 'Personnel':'badge-perso' };
+
+function renderPanel(skill) {
+  const projs = skillProjects[skill] || [];
+  document.getElementById('expPanelSkillName').textContent = skill;
+  document.getElementById('expPanelProjects').innerHTML = projs.map(p =>
+    `<a href="${p.url}" class="exp-proj-item">
+      <div class="exp-proj-logo" style="background:${p.color}">${p.initials}</div>
+      <div class="exp-proj-info">
+        <div class="exp-proj-name">${p.name}</div>
+        <div class="exp-proj-desc">${p.desc}</div>
+        <span class="exp-proj-badge ${badgeClass[p.type]}">${p.type}</span>
+      </div>
+    </a>`
+  ).join('');
+  const n = projs.length;
+  document.getElementById('expPanelFooter').textContent = n + ' projet' + (n > 1 ? 's' : '') + ' trouvé' + (n > 1 ? 's' : '');
+  document.getElementById('expPanelEmpty').style.display = 'none';
+  document.getElementById('expPanelContent').style.display = 'block';
+}
+
+function closePanel() {
+  document.getElementById('expPanelEmpty').style.display = '';
+  document.getElementById('expPanelContent').style.display = 'none';
+  document.querySelectorAll('.exp-tag').forEach(t => { t.classList.remove('active'); t.style.opacity = ''; });
+}
+
+document.querySelectorAll('.exp-tag[data-skill]').forEach(tag => {
+  tag.addEventListener('click', () => {
+    const isActive = tag.classList.contains('active');
+    closePanel();
+    if (!isActive) {
+      tag.classList.add('active');
+      document.querySelectorAll('.exp-tag[data-skill]').forEach(t => { if (!t.classList.contains('active')) t.style.opacity = '0.35'; });
+      renderPanel(tag.dataset.skill);
+    }
+  });
+});
+
+document.getElementById('expPanelClose').addEventListener('click', closePanel);
 </script>
 </body>
 </html>
