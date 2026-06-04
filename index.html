@@ -68,11 +68,17 @@ h2{font-size:clamp(24px,3.5vw,32px);font-weight:600;letter-spacing:-0.025em;line
 .badge{display:inline-flex;align-items:center;justify-content:center;gap:4px;padding:2px 6px;border-radius:9999px;font-family:'Outfit',sans-serif;font-size:12px;font-weight:500;line-height:1.4;white-space:nowrap;cursor:default;user-select:none;background:#D1E9FF;color:#1570EF}
 .tag{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:6px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;line-height:1.4;white-space:nowrap;background:#1570EF;color:#FFFFFF}
 .tag--display{cursor:default;user-select:none}
-.tag--selection{cursor:pointer;border-width:1.5px;background:transparent;transition:background 0.15s ease,transform 0.1s ease,opacity 0.15s ease}
-.tag--selection:hover{opacity:0.85}
-.tag--selection:active{transform:scale(0.97)}
-.tag--selection:focus-visible{outline:2px solid currentColor;outline-offset:2px}
-.tag--selection.is-active{outline:2px solid currentColor;outline-offset:2px}
+.tag--selection{cursor:pointer;border-width:1.5px;background:transparent;transition:background 0.15s ease,filter 0.15s ease,transform 0.1s ease,outline-offset 0.1s ease,opacity 0.15s ease}
+/* État repos : outlined */
+.tag--selection:not(.is-active):hover{background:var(--tag-hover-bg,#E8EFFD)}
+.tag--selection:not(.is-active):focus-visible{outline:2px solid currentColor;outline-offset:2px}
+.tag--selection:not(.is-active):active{filter:brightness(0.95);transform:scale(0.97)}
+/* État actif : filled */
+.tag--selection.is-active{outline:none}
+.tag--selection.is-active:hover{filter:brightness(0.9)}
+.tag--selection.is-active:focus-visible{outline:2px solid currentColor;outline-offset:2px;filter:none}
+.tag--selection.is-active:active{filter:brightness(0.8);transform:scale(0.97)}
+/* Dimmed */
 .tag--selection.is-dimmed{opacity:0.3;pointer-events:none}
 .tag__icon{font-size:12px;flex-shrink:0}
 .tag__remove{font-size:12px;flex-shrink:0;cursor:pointer;opacity:0.6;transition:opacity 0.15s;background:none;border:none;padding:0;display:inline-flex;align-items:center;color:inherit}
