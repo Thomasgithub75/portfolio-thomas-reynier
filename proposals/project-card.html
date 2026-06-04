@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proposals — Project Card</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#1A56DB;--blue-light:#EEF4FF;--blue-deep:#175CD3;--blue-darker:#0C447C;
+  --blue-border:#B5D4F4;--blue-bg:#E8EFFD;
+  --text:#111827;--muted:#6B7280;--border:#E5E7EB;--bg:#FFFFFF;--bg-soft:#F9FAFB;
+  --amber:#F59E0B;
+}
+body{font-family:'Outfit',sans-serif;background:#EDEEF0;color:var(--text);-webkit-font-smoothing:antialiased;padding:48px 24px 80px}
+.page-title{text-align:center;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:8px}
+.page-h1{text-align:center;font-size:28px;font-weight:700;letter-spacing:-.025em;margin-bottom:8px}
+.page-sub{text-align:center;font-size:14px;color:var(--muted);font-weight:300;margin-bottom:56px}
+
+.proposal{max-width:960px;margin:0 auto 72px}
+.proposal-label{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);background:var(--blue-light);border:1px solid var(--blue-border);border-radius:20px;padding:4px 12px;margin-bottom:12px}
+.proposal-title{font-size:20px;font-weight:700;letter-spacing:-.02em;margin-bottom:4px}
+.proposal-desc{font-size:13px;color:var(--muted);font-weight:300;margin-bottom:24px;max-width:580px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.divider{border:none;border-top:2px dashed #D1D5DB;margin:0 0 72px}
+
+/* ── COMMUN ── */
+.badge{display:inline-flex;align-items:center;padding:3px 8px;border-radius:20px;font-size:11px;font-weight:600;white-space:nowrap;font-family:'Outfit',sans-serif}
+.badge-role{background:var(--blue-light);color:var(--blue);border:1px solid rgba(26,86,219,.12)}
+.badge-tag{background:var(--blue-light);color:var(--blue)}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+
+
+/* ══════════════════════════════════════════════════════════════
+   PROPOSITION 1 — Actuelle améliorée
+   Thumbnail top · hover overlay · impact chiffré
+══════════════════════════════════════════════════════════════ */
+.p1-card{background:#fff;border-radius:12px;border:2px solid var(--border);overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:border-color .2s,box-shadow .2s,transform .2s;cursor:pointer}
+.p1-card:hover{border-color:var(--blue);box-shadow:0 8px 32px rgba(26,86,219,.12);transform:translateY(-4px)}
+.p1-thumb{position:relative;width:100%;height:180px;overflow:hidden;background:var(--bg-soft)}
+.p1-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+.p1-card:hover .p1-thumb img{transform:scale(1.04)}
+.p1-overlay{position:absolute;inset:0;background:rgba(26,86,219,.85);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .25s}
+.p1-card:hover .p1-overlay{opacity:1}
+.p1-overlay span{color:#fff;font-size:14px;font-weight:600;display:flex;align-items:center;gap:6px}
+.p1-overlay svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.p1-body{padding:18px;display:flex;flex-direction:column;gap:10px;flex:1}
+.p1-header{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.p1-header-left{display:flex;align-items:center;gap:7px;min-width:0}
+.p1-logo{width:20px;height:20px;object-fit:contain;flex-shrink:0}
+.p1-duration{font-size:11px;color:var(--muted);font-weight:400;flex-shrink:0}
+.p1-name{font-size:17px;font-weight:700;color:var(--text);letter-spacing:-.02em;line-height:1.2}
+.p1-desc{font-size:13px;color:var(--muted);line-height:1.6;font-weight:300}
+.p1-impact{display:flex;align-items:center;gap:6px;background:var(--blue-light);border-radius:8px;padding:7px 10px;font-size:12px;color:var(--blue-deep);font-weight:500}
+.p1-impact strong{font-weight:700}
+
+
+/* ══════════════════════════════════════════════════════════════
+   PROPOSITION 2 — Horizontal (image gauche, contenu droite)
+══════════════════════════════════════════════════════════════ */
+.p2-grid{display:flex;flex-direction:column;gap:16px}
+.p2-card{background:#fff;border-radius:12px;border:1px solid var(--border);overflow:hidden;display:flex;text-decoration:none;color:inherit;transition:border-color .2s,box-shadow .2s;cursor:pointer;min-height:180px}
+.p2-card:hover{border-color:var(--blue);box-shadow:0 6px 24px rgba(26,86,219,.1)}
+.p2-thumb{width:280px;flex-shrink:0;overflow:hidden;position:relative}
+.p2-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.p2-card:hover .p2-thumb img{transform:scale(1.04)}
+.p2-body{flex:1;padding:24px;display:flex;flex-direction:column;gap:12px;justify-content:center}
+.p2-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.p2-brand{display:flex;align-items:center;gap:8px}
+.p2-logo{width:22px;height:22px;object-fit:contain;flex-shrink:0}
+.p2-name{font-size:20px;font-weight:700;color:var(--text);letter-spacing:-.02em}
+.p2-meta{display:flex;align-items:center;gap:8px}
+.p2-duration{font-size:12px;color:var(--muted)}
+.p2-desc{font-size:14px;color:var(--muted);line-height:1.65;font-weight:300}
+.p2-arrow{display:inline-flex;align-items:center;gap:4px;font-size:13px;font-weight:600;color:var(--blue);opacity:0;transition:opacity .2s,gap .2s}
+.p2-card:hover .p2-arrow{opacity:1;gap:8px}
+.p2-arrow svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+
+/* ══════════════════════════════════════════════════════════════
+   PROPOSITION 3 — No thumbnail, focus contenu + chiffre clé
+══════════════════════════════════════════════════════════════ */
+.p3-card{background:#fff;border-radius:12px;border:1px solid var(--border);padding:24px;display:flex;flex-direction:column;gap:14px;text-decoration:none;color:inherit;transition:border-color .2s,box-shadow .2s,transform .2s;cursor:pointer;position:relative;overflow:hidden}
+.p3-card:hover{border-color:var(--blue);box-shadow:0 6px 24px rgba(26,86,219,.1);transform:translateY(-3px)}
+.p3-num{position:absolute;top:-8px;right:16px;font-size:80px;font-weight:800;color:var(--blue);opacity:.05;line-height:1;letter-spacing:-.04em;pointer-events:none;font-family:'Outfit',sans-serif}
+.p3-top{display:flex;align-items:center;justify-content:space-between}
+.p3-brand{display:flex;align-items:center;gap:8px}
+.p3-logo{width:24px;height:24px;object-fit:contain}
+.p3-company{font-size:13px;font-weight:600;color:var(--text)}
+.p3-name{font-size:20px;font-weight:700;color:var(--text);letter-spacing:-.025em;line-height:1.2}
+.p3-desc{font-size:13px;color:var(--muted);line-height:1.65;font-weight:300;flex:1}
+.p3-stat{background:var(--blue-light);border-radius:8px;padding:10px 14px;display:flex;align-items:center;gap:10px}
+.p3-stat-num{font-size:22px;font-weight:700;color:var(--blue);letter-spacing:-.03em;line-height:1}
+.p3-stat-label{font-size:11px;color:var(--blue-deep);font-weight:500;line-height:1.3}
+.p3-footer{display:flex;align-items:center;justify-content:space-between}
+.p3-cta{font-size:12px;font-weight:600;color:var(--blue);opacity:0;transition:opacity .2s;display:flex;align-items:center;gap:4px}
+.p3-card:hover .p3-cta{opacity:1}
+.p3-cta svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+
+/* ══════════════════════════════════════════════════════════════
+   PROPOSITION 4 — Thumbnail avec gradient + contenu superposé
+══════════════════════════════════════════════════════════════ */
+.p4-card{border-radius:14px;overflow:hidden;position:relative;text-decoration:none;color:inherit;cursor:pointer;display:block;aspect-ratio:4/3;transition:transform .2s,box-shadow .2s}
+.p4-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,.2)}
+.p4-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+.p4-card:hover .p4-img{transform:scale(1.06)}
+.p4-gradient{position:absolute;inset:0;background:linear-gradient(to top,rgba(255,255,255,.96) 0%,rgba(255,255,255,.7) 45%,transparent 100%)}
+.p4-content{position:absolute;bottom:0;left:0;right:0;padding:20px}
+.p4-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.p4-logo{width:24px;height:24px;object-fit:contain}
+.p4-duration{font-size:11px;color:var(--muted);font-weight:400}
+.p4-name{font-size:18px;font-weight:700;color:var(--blue);letter-spacing:-.02em;margin-bottom:4px}
+.p4-role{font-size:11px;font-weight:600;color:var(--muted);margin-bottom:10px}
+.p4-tags-wrap{display:flex;flex-wrap:wrap;gap:5px}
+.p4-tag{font-size:10px;font-weight:600;color:var(--blue);background:var(--blue-light);border:1px solid var(--blue-border);border-radius:20px;padding:2px 8px}
+.p4-cta{position:absolute;top:14px;right:14px;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.85);backdrop-filter:blur(8px);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s}
+.p4-card:hover .p4-cta{opacity:1}
+.p4-cta svg{width:14px;height:14px;stroke:var(--blue);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+</style>
+</head>
+<body>
+
+<p class="page-title">Proposals UI</p>
+<h1 class="page-h1">Project Card</h1>
+<p class="page-sub">4 directions visuelles · Ouvre via http://localhost:8080/proposals/project-card.html</p>
+
+
+<!-- ══ PROPOSITION 1 — Actuelle améliorée ══════════════════════ -->
+<div class="proposal">
+  <span class="proposal-label">Proposition 1</span>
+  <h2 class="proposal-title">Actuelle améliorée — Thumbnail + overlay hover + impact</h2>
+  <p class="proposal-desc">Garde la structure actuelle (thumbnail en haut), ajoute un overlay bleu au hover avec "Voir l'étude de cas", et un bloc d'impact chiffré en bas de carte.</p>
+
+  <div class="grid3">
+
+    <a class="p1-card" href="#">
+      <div class="p1-thumb">
+        <img src="../images/thumb-pepyte.jpg" alt="Pepyte">
+        <div class="p1-overlay">
+          <span><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>Voir l'étude de cas</span>
+        </div>
+      </div>
+      <div class="p1-body">
+        <div class="p1-header">
+          <div class="p1-header-left">
+            <img class="p1-logo" src="../images/logo-pepyte.svg" alt="Pepyte">
+            <span class="badge badge-role">UX Research & Design</span>
+          </div>
+          <span class="p1-duration">26 mois</span>
+        </div>
+        <p class="p1-name">Pepyte</p>
+        <p class="p1-desc">Audit de 62 champs, 10 entretiens recruteurs et conception de la fonctionnalité de matching.</p>
+        <div class="p1-impact">
+          <span>📋</span>
+          <span><strong>62 champs audités</strong> · 10 entretiens · 1 feature livrée</span>
+        </div>
+        <div class="tags">
+          <span class="badge badge-tag">UX Research</span>
+          <span class="badge badge-tag">User Flows</span>
+          <span class="badge badge-tag">Figma</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="p1-card" href="#">
+      <div class="p1-thumb">
+        <img src="../images/thumb-weborama.jpg" alt="Weborama">
+        <div class="p1-overlay">
+          <span><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>Voir l'étude de cas</span>
+        </div>
+      </div>
+      <div class="p1-body">
+        <div class="p1-header">
+          <div class="p1-header-left">
+            <img class="p1-logo" src="../images/logo-weborama.svg" alt="Weborama">
+            <span class="badge badge-role">Design System Lead</span>
+          </div>
+          <span class="p1-duration">16 mois</span>
+        </div>
+        <p class="p1-name">Weborama</p>
+        <p class="p1-desc">Audit de 974 composants et création d'un Design System de zéro — 80% de composants en moins.</p>
+        <div class="p1-impact">
+          <span>⚡</span>
+          <span><strong>−80%</strong> de composants · 974 audités</span>
+        </div>
+        <div class="tags">
+          <span class="badge badge-tag">Design System</span>
+          <span class="badge badge-tag">Atomic Design</span>
+          <span class="badge badge-tag">Figma</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="p1-card" href="#">
+      <div class="p1-thumb">
+        <img src="../images/thumb-nectar.jpg" alt="Nectar">
+        <div class="p1-overlay">
+          <span><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>Voir l'étude de cas</span>
+        </div>
+      </div>
+      <div class="p1-body">
+        <div class="p1-header">
+          <div class="p1-header-left">
+            <img class="p1-logo" src="../images/logo-nectar.svg" alt="Nectar">
+            <span class="badge badge-role">Founding Designer</span>
+          </div>
+          <span class="p1-duration">En cours</span>
+        </div>
+        <p class="p1-name">Nectar</p>
+        <p class="p1-desc">MVP B2B mobile-first piloté par IA — de la recherche utilisateur aux 8 écrans livrés.</p>
+        <div class="p1-impact">
+          <span>🤖</span>
+          <span><strong>8 écrans</strong> livrés · Process IA documenté</span>
+        </div>
+        <div class="tags">
+          <span class="badge badge-tag">Figma Make</span>
+          <span class="badge badge-tag">Claude MCP</span>
+          <span class="badge badge-tag">UX Research</span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ══ PROPOSITION 2 — Horizontale ════════════════════════════ -->
+<div class="proposal">
+  <span class="proposal-label">Proposition 2</span>
+  <h2 class="proposal-title">Layout horizontal — Image gauche, contenu droite</h2>
+  <p class="proposal-desc">Image sur 30% à gauche, contenu structuré à droite. Plus de place pour le texte, meilleure lisibilité. CTA "Voir →" apparaît au hover.</p>
+
+  <div class="p2-grid">
+
+    <a class="p2-card" href="#">
+      <div class="p2-thumb">
+        <img src="../images/thumb-pepyte.jpg" alt="Pepyte">
+      </div>
+      <div class="p2-body">
+        <div class="p2-top">
+          <div class="p2-brand">
+            <img class="p2-logo" src="../images/logo-pepyte.svg" alt="Pepyte">
+            <p class="p2-name">Pepyte</p>
+          </div>
+          <div class="p2-meta">
+            <span class="badge badge-role">UX Research & Design</span>
+            <span class="p2-duration">26 mois</span>
+          </div>
+        </div>
+        <p class="p2-desc">Audit de 62 champs, 10 entretiens recruteurs et conception de la fonctionnalité de matching — de la recherche à l'interface.</p>
+        <div class="tags">
+          <span class="badge badge-tag">UX Research</span>
+          <span class="badge badge-tag">Entretiens</span>
+          <span class="badge badge-tag">User Flows</span>
+          <span class="badge badge-tag">Figma</span>
+        </div>
+        <span class="p2-arrow">Voir l'étude de cas <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </div>
+    </a>
+
+    <a class="p2-card" href="#">
+      <div class="p2-thumb">
+        <img src="../images/thumb-weborama.jpg" alt="Weborama">
+      </div>
+      <div class="p2-body">
+        <div class="p2-top">
+          <div class="p2-brand">
+            <img class="p2-logo" src="../images/logo-weborama.svg" alt="Weborama">
+            <p class="p2-name">Weborama</p>
+          </div>
+          <div class="p2-meta">
+            <span class="badge badge-role">Design System Lead</span>
+            <span class="p2-duration">16 mois</span>
+          </div>
+        </div>
+        <p class="p2-desc">Audit de 974 composants, ateliers de co-construction et création d'un Design System de zéro — 80% de composants en moins.</p>
+        <div class="tags">
+          <span class="badge badge-tag">Design System</span>
+          <span class="badge badge-tag">Atomic Design</span>
+          <span class="badge badge-tag">Figma Make</span>
+        </div>
+        <span class="p2-arrow">Voir l'étude de cas <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </div>
+    </a>
+
+    <a class="p2-card" href="#">
+      <div class="p2-thumb">
+        <img src="../images/thumb-nectar.jpg" alt="Nectar">
+      </div>
+      <div class="p2-body">
+        <div class="p2-top">
+          <div class="p2-brand">
+            <img class="p2-logo" src="../images/logo-nectar.svg" alt="Nectar">
+            <p class="p2-name">Nectar</p>
+          </div>
+          <div class="p2-meta">
+            <span class="badge badge-role">Founding Designer</span>
+            <span class="p2-duration">En cours</span>
+          </div>
+        </div>
+        <p class="p2-desc">MVP B2B mobile-first piloté par IA — de la recherche utilisateur aux 8 écrans livrés, avec un process documenté et réplicable.</p>
+        <div class="tags">
+          <span class="badge badge-tag">Figma Make</span>
+          <span class="badge badge-tag">Claude MCP</span>
+          <span class="badge badge-tag">Design System</span>
+        </div>
+        <span class="p2-arrow">Voir l'étude de cas <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ══ PROPOSITION 3 — Sans thumbnail, focus chiffres ═════════ -->
+<div class="proposal">
+  <span class="proposal-label">Proposition 3</span>
+  <h2 class="proposal-title">Sans thumbnail — Focus contenu & chiffre clé</h2>
+  <p class="proposal-desc">Pas d'image. Grand numéro de projet en fond. Un bloc chiffre clé en bas de chaque carte. Très lisible, très scannable.</p>
+
+  <div class="grid3">
+
+    <a class="p3-card" href="#">
+      <div class="p3-num">01</div>
+      <div class="p3-top">
+        <div class="p3-brand">
+          <img class="p3-logo" src="../images/logo-pepyte.svg" alt="Pepyte">
+          <span class="p3-company">Pepyte</span>
+        </div>
+        <span class="badge badge-role">UX Research & Design</span>
+      </div>
+      <p class="p3-name">Matching recruteurs · candidats</p>
+      <p class="p3-desc">Audit de 62 champs, 10 entretiens recruteurs et conception de la fonctionnalité de matching — de la recherche à l'interface.</p>
+      <div class="p3-stat">
+        <div class="p3-stat-num">62</div>
+        <div class="p3-stat-label">champs audités<br>10 entretiens menés</div>
+      </div>
+      <div class="p3-footer">
+        <div class="tags">
+          <span class="badge badge-tag">UX Research</span>
+          <span class="badge badge-tag">User Flows</span>
+        </div>
+        <span class="p3-cta">Voir <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </div>
+    </a>
+
+    <a class="p3-card" href="#">
+      <div class="p3-num">02</div>
+      <div class="p3-top">
+        <div class="p3-brand">
+          <img class="p3-logo" src="../images/logo-weborama.svg" alt="Weborama">
+          <span class="p3-company">Weborama</span>
+        </div>
+        <span class="badge badge-role">Design System Lead</span>
+      </div>
+      <p class="p3-name">Design System unifié</p>
+      <p class="p3-desc">Audit de 974 composants, ateliers de co-construction et création d'un Design System de zéro.</p>
+      <div class="p3-stat">
+        <div class="p3-stat-num">−80%</div>
+        <div class="p3-stat-label">de composants<br>974 audités</div>
+      </div>
+      <div class="p3-footer">
+        <div class="tags">
+          <span class="badge badge-tag">Design System</span>
+          <span class="badge badge-tag">Atomic Design</span>
+        </div>
+        <span class="p3-cta">Voir <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </div>
+    </a>
+
+    <a class="p3-card" href="#">
+      <div class="p3-num">03</div>
+      <div class="p3-top">
+        <div class="p3-brand">
+          <img class="p3-logo" src="../images/logo-nectar.svg" alt="Nectar">
+          <span class="p3-company">Nectar</span>
+        </div>
+        <span class="badge badge-role">Founding Designer</span>
+      </div>
+      <p class="p3-name">MVP B2B mobile-first IA</p>
+      <p class="p3-desc">De la recherche utilisateur aux 8 écrans livrés, avec un process documenté et réplicable par IA.</p>
+      <div class="p3-stat">
+        <div class="p3-stat-num">8</div>
+        <div class="p3-stat-label">écrans livrés<br>Process IA documenté</div>
+      </div>
+      <div class="p3-footer">
+        <div class="tags">
+          <span class="badge badge-tag">Figma Make</span>
+          <span class="badge badge-tag">Claude MCP</span>
+        </div>
+        <span class="p3-cta">Voir <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ══ PROPOSITION 4 — Thumbnail full avec gradient overlay ═══ -->
+<div class="proposal">
+  <span class="proposal-label">Proposition 4</span>
+  <h2 class="proposal-title">Thumbnail immersif — Contenu superposé avec gradient</h2>
+  <p class="proposal-desc">Image pleine carte avec gradient sombre en bas. Nom, rôle et tags sur l'image. Très visuel, très portfolio. CTA en haut à droite au hover.</p>
+
+  <div class="grid3">
+
+    <a class="p4-card" href="#">
+      <img class="p4-img" src="../images/thumb-pepyte.jpg" alt="Pepyte">
+      <div class="p4-gradient"></div>
+      <div class="p4-cta"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      <div class="p4-content">
+        <div class="p4-top">
+          <img class="p4-logo" src="../images/logo-pepyte.svg" alt="Pepyte">
+          <span class="p4-duration">26 mois</span>
+        </div>
+        <p class="p4-name">Pepyte</p>
+        <p class="p4-role">UX Research & Design</p>
+        <div class="p4-tags-wrap">
+          <span class="p4-tag">UX Research</span>
+          <span class="p4-tag">User Flows</span>
+          <span class="p4-tag">Figma</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="p4-card" href="#">
+      <img class="p4-img" src="../images/thumb-weborama.jpg" alt="Weborama">
+      <div class="p4-gradient"></div>
+      <div class="p4-cta"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      <div class="p4-content">
+        <div class="p4-top">
+          <img class="p4-logo" src="../images/logo-weborama.svg" alt="Weborama">
+          <span class="p4-duration">16 mois</span>
+        </div>
+        <p class="p4-name">Weborama</p>
+        <p class="p4-role">Design System Lead</p>
+        <div class="p4-tags-wrap">
+          <span class="p4-tag">Design System</span>
+          <span class="p4-tag">Atomic Design</span>
+          <span class="p4-tag">Figma Make</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="p4-card" href="#">
+      <img class="p4-img" src="../images/thumb-nectar.jpg" alt="Nectar">
+      <div class="p4-gradient"></div>
+      <div class="p4-cta"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      <div class="p4-content">
+        <div class="p4-top">
+          <img class="p4-logo" src="../images/logo-nectar.svg" alt="Nectar">
+          <span class="p4-duration">En cours</span>
+        </div>
+        <p class="p4-name">Nectar</p>
+        <p class="p4-role">Founding Designer</p>
+        <div class="p4-tags-wrap">
+          <span class="p4-tag">Figma Make</span>
+          <span class="p4-tag">Claude MCP</span>
+          <span class="p4-tag">Design System</span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+<style>
+/* ── Secondary button ─────────────────────────────────────── */
+:root{
+  --g50:#F6F8FB;--g100:#EBF0F8;--g200:#C7D2E8;--g300:#A0AFCF;--g400:#8B9BB8;
+  --g500:#5B6A8A;--g600:#405070;--g700:#3A4864;--g800:#1E2E4A;--g900:#1A2540;
+  --p500:#1956DB;--p600:#1141A8;--p700:#0C2E7A;
+}
+.btn-secondary{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:var(--g100);color:var(--g600);padding:11px 20px;border-radius:8px;font-size:14px;font-weight:500;text-decoration:none;transition:background .15s,color .15s;font-family:'Outfit',sans-serif;border:none;cursor:pointer}
+.btn-secondary:hover{background:var(--g200);color:var(--g700)}
+.btn-secondary:active{background:var(--g300);color:var(--g800)}
+.btn-secondary svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+
+/* ── Cards avec bouton ────────────────────────────────────── */
+.pb-section{background:#F3F4F6;padding:72px 0 80px}
+.pb-inner{max-width:960px;margin:0 auto;padding:0 32px}
+.pb-header{margin-bottom:40px}
+.pb-kicker{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#1956DB;background:#EEF3FD;border:1px solid #9DB8F2;border-radius:20px;padding:4px 12px;display:inline-flex;margin-bottom:12px}
+.pb-title{font-size:20px;font-weight:700;letter-spacing:-.02em;margin-bottom:4px}
+.pb-desc{font-size:13px;color:#6B7280;font-weight:300;margin-bottom:0;max-width:560px}
+.pb-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.pb-divider{border:none;border-top:1px dashed #D1D5DB;margin:40px 0}
+
+/* Card avec thumbnail + bouton */
+.pbc-card{background:#fff;border-radius:12px;border:1px solid #E5E7EB;overflow:hidden;display:flex;flex-direction:column;transition:border-color .2s,box-shadow .2s,transform .2s}
+.pbc-card:hover{border-color:#1956DB;box-shadow:0 8px 32px rgba(25,86,219,.1);transform:translateY(-3px)}
+.pbc-thumb{width:100%;height:170px;overflow:hidden;background:#F9FAFB;flex-shrink:0}
+.pbc-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.pbc-card:hover .pbc-thumb img{transform:scale(1.04)}
+.pbc-body{padding:16px;display:flex;flex-direction:column;gap:9px;flex:1}
+.pbc-header{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.pbc-brand{display:flex;align-items:center;gap:6px}
+.pbc-logo{width:18px;height:18px;object-fit:contain;flex-shrink:0}
+.pbc-role{font-size:11px;font-weight:600;color:#1956DB;background:#EEF3FD;border:1px solid rgba(25,86,219,.12);border-radius:20px;padding:2px 8px;white-space:nowrap}
+.pbc-duration{font-size:11px;color:#6B7280}
+.pbc-name{font-size:16px;font-weight:700;color:#1A2540;letter-spacing:-.02em;line-height:1.2}
+.pbc-desc{font-size:12px;color:#5B6A8A;line-height:1.6;font-weight:300;flex:1}
+.pbc-tags{display:flex;flex-wrap:wrap;gap:5px}
+.pbc-tag{font-size:11px;font-weight:500;color:#1956DB;background:#EEF3FD;border-radius:20px;padding:2px 8px}
+.pbc-footer{padding:0 16px 16px}
+</style>
+
+<hr class="divider">
+
+<!-- ══ AVEC BOUTON SECONDARY — 4 variantes de libellé ══════════ -->
+<div class="pb-section">
+  <div class="pb-inner">
+    <div class="pb-header">
+      <span class="pb-kicker">Nouveau</span>
+      <h2 class="pb-title">Card + bouton secondary full width — 4 libellés</h2>
+      <p class="pb-desc">La card garde sa structure actuelle. Le bouton secondary s'ajoute en bas, pleine largeur. Survole pour voir les états.</p>
+    </div>
+
+    <!-- Libellé A -->
+    <p style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#5B6A8A;margin-bottom:12px">A — "Voir le projet"</p>
+    <div class="pb-grid" style="margin-bottom:40px">
+      <div class="pbc-card">
+        <div class="pbc-thumb"><img src="../images/thumb-pepyte.jpg" alt="Pepyte"></div>
+        <div class="pbc-body">
+          <div class="pbc-header">
+            <div class="pbc-brand"><img class="pbc-logo" src="../images/logo-pepyte.svg" alt=""><span class="pbc-role">UX Research & Design</span></div>
+            <span class="pbc-duration">26 mois</span>
+          </div>
+          <p class="pbc-name">Pepyte</p>
+          <p class="pbc-desc">Audit de 62 champs, 10 entretiens recruteurs et conception de la fonctionnalité de matching.</p>
+          <div class="pbc-tags"><span class="pbc-tag">UX Research</span><span class="pbc-tag">User Flows</span><span class="pbc-tag">Figma</span></div>
+        </div>
+        <div class="pbc-footer"><a class="btn-secondary" href="#">Voir le projet <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+      <div class="pbc-card">
+        <div class="pbc-thumb"><img src="../images/thumb-weborama.jpg" alt="Weborama"></div>
+        <div class="pbc-body">
+          <div class="pbc-header">
+            <div class="pbc-brand"><img class="pbc-logo" src="../images/logo-weborama.svg" alt=""><span class="pbc-role">Design System Lead</span></div>
+            <span class="pbc-duration">16 mois</span>
+          </div>
+          <p class="pbc-name">Weborama</p>
+          <p class="pbc-desc">Audit de 974 composants et création d'un Design System de zéro — 80% de composants en moins.</p>
+          <div class="pbc-tags"><span class="pbc-tag">Design System</span><span class="pbc-tag">Atomic Design</span></div>
+        </div>
+        <div class="pbc-footer"><a class="btn-secondary" href="#">Voir le projet <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+      <div class="pbc-card">
+        <div class="pbc-thumb"><img src="../images/thumb-nectar.jpg" alt="Nectar"></div>
+        <div class="pbc-body">
+          <div class="pbc-header">
+            <div class="pbc-brand"><img class="pbc-logo" src="../images/logo-nectar.svg" alt=""><span class="pbc-role">Founding Designer</span></div>
+            <span class="pbc-duration">En cours</span>
+          </div>
+          <p class="pbc-name">Nectar</p>
+          <p class="pbc-desc">MVP B2B mobile-first piloté par IA — de la recherche aux 8 écrans livrés.</p>
+          <div class="pbc-tags"><span class="pbc-tag">Figma Make</span><span class="pbc-tag">Claude MCP</span></div>
+        </div>
+        <div class="pbc-footer"><a class="btn-secondary" href="#">Voir le projet <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+    </div>
+
+    <hr class="pb-divider">
+
+    <!-- Libellé B -->
+    <p style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#5B6A8A;margin-bottom:12px">B — "Consulter l'étude de cas"</p>
+    <div class="pb-grid" style="margin-bottom:40px">
+      <div class="pbc-card">
+        <div class="pbc-thumb"><img src="../images/thumb-pepyte.jpg" alt="Pepyte"></div>
+        <div class="pbc-body">
+          <div class="pbc-header"><div class="pbc-brand"><img class="pbc-logo" src="../images/logo-pepyte.svg" alt=""><span class="pbc-role">UX Research & Design</span></div><span class="pbc-duration">26 mois</span></div>
+          <p class="pbc-name">Pepyte</p>
+          <p class="pbc-desc">Audit de 62 champs, 10 entretiens recruteurs et conception de la fonctionnalité de matching.</p>
+          <div class="pbc-tags"><span class="pbc-tag">UX Research</span><span class="pbc-tag">User Flows</span></div>
+        </div>
+        <div class="pbc-footer"><a class="btn-secondary" href="#">Consulter l'étude de cas <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+      <div class="pbc-card">
+        <div class="pbc-thumb"><img src="../images/thumb-weborama.jpg" alt="Weborama"></div>
+        <div class="pbc-body">
+          <div class="pbc-header"><div class="pbc-brand"><img class="pbc-logo" src="../images/logo-weborama.svg" alt=""><span class="pbc-role">Design System Lead</span></div><span class="pbc-duration">16 mois</span></div>
+          <p class="pbc-name">Weborama</p>
+          <p class="pbc-desc">Audit de 974 composants et création d'un Design System de zéro — 80% de composants en moins.</p>
+          <div class="pbc-tags"><span class="pbc-tag">Design System</span><span class="pbc-tag">Atomic Design</span></div>
+        </div>
+        <div class="pbc-footer"><a class="btn-secondary" href="#">Consulter l'étude de cas <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+      <div class="pbc-card">
+        <div class="pbc-thumb"><img src="../images/thumb-nectar.jpg" alt="Nectar"></div>
+        <div class="pbc-body">
+          <div class="pbc-header"><div class="pbc-brand"><img class="pbc-logo" src="../images/logo-nectar.svg" alt=""><span class="pbc-role">Founding Designer</span></div><span class="pbc-duration">En cours</span></div>
+          <p class="pbc-name">Nectar</p>
+          <p class="pbc-desc">MVP B2B mobile-first piloté par IA — de la recherche aux 8 écrans livrés.</p>
+          <div class="pbc-tags"><span class="pbc-tag">Figma Make</span><span class="pbc-tag">Claude MCP</span></div>
+        </div>
+        <div class="pbc-footer"><a class="btn-secondary" href="#">Consulter l'étude de cas <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+    </div>
+
+    <hr class="pb-divider">
+
+    <!-- Libellé C -->
+    <p style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#5B6A8A;margin-bottom:12px">C — "Lire l'étude de cas"</p>
+    <div class="pb-grid" style="margin-bottom:40px">
+      <div class="pbc-card">
+        <div class="pbc-thumb"><img src="../images/thumb-pepyte.jpg" alt="Pepyte"></div>
+        <div class="pbc-body">
+          <div class="pbc-header"><div class="pbc-brand"><img class="pbc-logo" src="../images/logo-pepyte.svg" alt=""><span class="pbc-role">UX Research & Design</span></div><span class="pbc-duration">26 mois</span></div>
+          <p class="pbc-name">Pepyte</p>
+          <p class="pbc-desc">Audit de 62 champs, 10 entretiens recruteurs et conception de la fonctionnalité de matching.</p>
+          <div class="pbc-tags"><span class="pbc-tag">UX Research</span><span class="pbc-tag">User Flows</span></div>
+        </div>
+        <div class="pbc-footer"><a class="btn-secondary" href="#">Lire l'étude de cas <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+      <div class="pbc-card">
+        <div class="pbc-thumb"><img src="../images/thumb-weborama.jpg" alt="Weborama"></div>
+        <div class="pbc-body">
+          <div class="pbc-header"><div class="pbc-brand"><img class="pbc-logo" src="../images/logo-weborama.svg" alt=""><span class="pbc-role">Design System Lead</span></div><span class="pbc-duration">16 mois</span></div>
+          <p class="pbc-name">Weborama</p>
+          <p class="pbc-desc">Audit de 974 composants et création d'un Design System de zéro — 80% de composants en moins.</p>
+          <div class="pbc-tags"><span class="pbc-tag">Design System</span><span class="pbc-tag">Atomic Design</span></div>
+        </div>
+        <div class="pbc-footer"><a class="btn-secondary" href="#">Lire l'étude de cas <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+      <div class="pbc-card">
+        <div class="pbc-thumb"><img src="../images/thumb-nectar.jpg" alt="Nectar"></div>
+        <div class="pbc-body">
+          <div class="pbc-header"><div class="pbc-brand"><img class="pbc-logo" src="../images/logo-nectar.svg" alt=""><span class="pbc-role">Founding Designer</span></div><span class="pbc-duration">En cours</span></div>
+          <p class="pbc-name">Nectar</p>
+          <p class="pbc-desc">MVP B2B mobile-first piloté par IA — de la recherche aux 8 écrans livrés.</p>
+          <div class="pbc-tags"><span class="pbc-tag">Figma Make</span><span class="pbc-tag">Claude MCP</span></div>
+        </div>
+        <div class="pbc-footer"><a class="btn-secondary" href="#">Lire l'étude de cas <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+    </div>
+
+    <hr class="pb-divider">
+
+    <!-- Libellé D -->
+    <p style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#5B6A8A;margin-bottom:12px">D — "Découvrir le projet"</p>
+    <div class="pb-grid">
+      <div class="pbc-card">
+        <div class="pbc-thumb"><img src="../images/thumb-pepyte.jpg" alt="Pepyte"></div>
+        <div class="pbc-body">
+          <div class="pbc-header"><div class="pbc-brand"><img class="pbc-logo" src="../images/logo-pepyte.svg" alt=""><span class="pbc-role">UX Research & Design</span></div><span class="pbc-duration">26 mois</span></div>
+          <p class="pbc-name">Pepyte</p>
+          <p class="pbc-desc">Audit de 62 champs, 10 entretiens recruteurs et conception de la fonctionnalité de matching.</p>
+          <div class="pbc-tags"><span class="pbc-tag">UX Research</span><span class="pbc-tag">User Flows</span></div>
+        </div>
+        <div class="pbc-footer"><a class="btn-secondary" href="#">Découvrir le projet <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+      <div class="pbc-card">
+        <div class="pbc-thumb"><img src="../images/thumb-weborama.jpg" alt="Weborama"></div>
+        <div class="pbc-body">
+          <div class="pbc-header"><div class="pbc-brand"><img class="pbc-logo" src="../images/logo-weborama.svg" alt=""><span class="pbc-role">Design System Lead</span></div><span class="pbc-duration">16 mois</span></div>
+          <p class="pbc-name">Weborama</p>
+          <p class="pbc-desc">Audit de 974 composants et création d'un Design System de zéro — 80% de composants en moins.</p>
+          <div class="pbc-tags"><span class="pbc-tag">Design System</span><span class="pbc-tag">Atomic Design</span></div>
+        </div>
+        <div class="pbc-footer"><a class="btn-secondary" href="#">Découvrir le projet <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+      <div class="pbc-card">
+        <div class="pbc-thumb"><img src="../images/thumb-nectar.jpg" alt="Nectar"></div>
+        <div class="pbc-body">
+          <div class="pbc-header"><div class="pbc-brand"><img class="pbc-logo" src="../images/logo-nectar.svg" alt=""><span class="pbc-role">Founding Designer</span></div><span class="pbc-duration">En cours</span></div>
+          <p class="pbc-name">Nectar</p>
+          <p class="pbc-desc">MVP B2B mobile-first piloté par IA — de la recherche aux 8 écrans livrés.</p>
+          <div class="pbc-tags"><span class="pbc-tag">Figma Make</span><span class="pbc-tag">Claude MCP</span></div>
+        </div>
+        <div class="pbc-footer"><a class="btn-secondary" href="#">Découvrir le projet <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
