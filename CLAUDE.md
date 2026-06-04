@@ -25,6 +25,7 @@
 - Démontrer une approche UX structurée et orientée résultats
 - Prouver la capacité à travailler sur des projets complexes de A à Z
 - Montrer une sensibilité produit au-delà du design pur (recherche, stratégie, dev)
+- Montrer ma capacité à faire une belle UI
 
 ---
 
@@ -123,3 +124,4 @@
 - Respecter les tokens de couleur définis dans `app/src/theme/theme.js`
 - Chaque nouveau composant doit apparaître dans la page `/design-system`
 - Commits en anglais, courts et descriptifs
+- **Icônes : utiliser exclusivement Material Design Icons (`@mui/icons-material`) sur tout le site — aucune autre bibliothèque d'icônes autorisée**

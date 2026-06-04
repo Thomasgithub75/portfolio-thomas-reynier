@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proposals — Icône Design System (Material Design)</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--blue:#1956DB;--blue-light:#EEF3FD;--text:#1A2540;--muted:#5B6A8A;--border:#E5E7EB}
+body{font-family:'Outfit',sans-serif;background:#F3F4F6;color:var(--text);-webkit-font-smoothing:antialiased;padding:48px 24px 80px}
+h1{text-align:center;font-size:26px;font-weight:700;letter-spacing:-.025em;margin-bottom:6px}
+.sub{text-align:center;font-size:14px;color:var(--muted);font-weight:300;margin-bottom:48px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:900px;margin:0 auto 48px}
+.section-label{max-width:900px;margin:0 auto 12px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.card{background:#fff;border-radius:12px;border:1px solid var(--border);padding:20px;display:flex;flex-direction:column;gap:12px;position:relative}
+.card-label{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.current-badge{position:absolute;top:-10px;right:-10px;font-size:10px;font-weight:700;background:#F59E0B;color:#fff;border-radius:20px;padding:2px 8px}
+.hero-card{display:flex;align-items:flex-start;gap:12px}
+.icon-wrap{width:40px;height:40px;min-width:40px;background:var(--blue-light);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--blue);flex-shrink:0}
+.icon-wrap svg{width:20px;height:20px;fill:currentColor}
+.hero-card-text{font-size:14px;color:var(--muted);line-height:1.55;padding-top:10px}
+.hero-card-text strong{color:var(--text);font-weight:500}
+hr{border:none;border-top:2px dashed #D1D5DB;max-width:900px;margin:0 auto 40px}
+</style>
+</head>
+<body>
+
+<h1>Icône Design System — Material Design Icons</h1>
+<p class="sub">Toutes issues de @mui/icons-material · contexte exact du hero</p>
+
+<!-- Groupe 1 -->
+<p class="section-label">Structure & layout</p>
+<div class="grid">
+
+  <div class="card">
+    <p class="card-label">Actuelle — Sparkle</p>
+    <div class="hero-card">
+      <div class="icon-wrap">
+        <!-- AutoAwesome -->
+        <svg viewBox="0 0 24 24"><path d="M19 9l1.25-2.75L23 5l-2.75-1.25L19 1l-1.25 2.75L15 5l2.75 1.25L19 9zm-7.5.5L9 4 6.5 9.5 1 12l5.5 2.5L9 20l2.5-5.5L17 12l-5.5-2.5zM19 15l-1.25 2.75L15 19l2.75 1.25L19 23l1.25-2.75L23 19l-2.75-1.25L19 15z"/></svg>
+      </div>
+      <p class="hero-card-text"><strong>Design Systems</strong> — création, audit et gouvernance</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="card-label">GridView</p>
+    <div class="hero-card">
+      <div class="icon-wrap">
+        <!-- GridView -->
+        <svg viewBox="0 0 24 24"><path d="M3 3v8h8V3H3zm6 6H5V5h4v4zm-6 4v8h8v-8H3zm6 6H5v-4h4v4zm4-16v8h8V3h-8zm6 6h-4V5h4v4zm-6 4v8h8v-8h-8zm6 6h-4v-4h4v4z"/></svg>
+      </div>
+      <p class="hero-card-text"><strong>Design Systems</strong> — création, audit et gouvernance</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="card-label">Dashboard</p>
+    <div class="hero-card">
+      <div class="icon-wrap">
+        <!-- Dashboard -->
+        <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+      </div>
+      <p class="hero-card-text"><strong>Design Systems</strong> — création, audit et gouvernance</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="card-label">ViewQuilt</p>
+    <div class="hero-card">
+      <div class="icon-wrap">
+        <!-- ViewQuilt -->
+        <svg viewBox="0 0 24 24"><path d="M3 3v8h8V3H3zm0 18h8v-6H3v6zm10 0h8V11h-8v10zm5-18h-5v4h5V3zm0 6h-5v2h5V9zm-5 4h5v2h-5v-2z"/></svg>
+      </div>
+      <p class="hero-card-text"><strong>Design Systems</strong> — création, audit et gouvernance</p>
+    </div>
+  </div>
+
+</div>
+
+<hr>
+
+<!-- Groupe 2 -->
+<p class="section-label">Hiérarchie & architecture</p>
+<div class="grid">
+
+  <div class="card">
+    <p class="card-label">AccountTree</p>
+    <div class="hero-card">
+      <div class="icon-wrap">
+        <!-- AccountTree -->
+        <svg viewBox="0 0 24 24"><path d="M22 11V3h-7v3H9V3H2v8h7V8h2v10h4v3h7v-8h-7v3h-2V8h2v3h7zM7 9H4V5h3v4zm10 6h3v4h-3v-4zm0-12h3v4h-3V3z"/></svg>
+      </div>
+      <p class="hero-card-text"><strong>Design Systems</strong> — création, audit et gouvernance</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="card-label">Hub</p>
+    <div class="hero-card">
+      <div class="icon-wrap">
+        <!-- Hub -->
+        <svg viewBox="0 0 24 24"><path d="M12 2a4 4 0 014 4 4 4 0 01-4 4 4 4 0 01-4-4 4 4 0 014-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4m-5.5-3A2.5 2.5 0 004 11.5 2.5 2.5 0 006.5 14a2.5 2.5 0 002.5-2.5A2.5 2.5 0 006.5 9m11 0A2.5 2.5 0 0015 11.5a2.5 2.5 0 002.5 2.5 2.5 2.5 0 002.5-2.5A2.5 2.5 0 0017.5 9M2 18v2h20v-2H2z"/></svg>
+      </div>
+      <p class="hero-card-text"><strong>Design Systems</strong> — création, audit et gouvernance</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="card-label">Schema</p>
+    <div class="hero-card">
+      <div class="icon-wrap">
+        <!-- Schema -->
+        <svg viewBox="0 0 24 24"><path d="M14 9h-4V5h4v4zM4 19h4v-4H4v4zm8 0h4v-4h-4v4zm-4-6h4v-4H8v4zm4 0h4v-4h-4v4zM4 9h4V5H4v4zm10 4h4v-4h-4v4zM4 13h4v-4H4v4zm16 6h-4v-4h4v4zm0-10h-4v4h4V9zm0-4h-4v4h4V5z"/></svg>
+      </div>
+      <p class="hero-card-text"><strong>Design Systems</strong> — création, audit et gouvernance</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="card-label">Layers</p>
+    <div class="hero-card">
+      <div class="icon-wrap">
+        <!-- Layers -->
+        <svg viewBox="0 0 24 24"><path d="M11.99 18.54l-7.37-5.73L3 14.07l9 7 9-7-1.63-1.27-7.38 5.74zm.01-2.7l7.36-5.73L21 8.93l-9-7-9 7 1.63 1.18 7.37 5.73z"/></svg>
+      </div>
+      <p class="hero-card-text"><strong>Design Systems</strong> — création, audit et gouvernance</p>
+    </div>
+  </div>
+
+</div>
+
+<hr>
+
+<!-- Groupe 3 -->
+<p class="section-label">Design & tokens</p>
+<div class="grid">
+
+  <div class="card">
+    <p class="card-label">Palette</p>
+    <div class="hero-card">
+      <div class="icon-wrap">
+        <!-- Palette -->
+        <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+      </div>
+      <p class="hero-card-text"><strong>Design Systems</strong> — création, audit et gouvernance</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="card-label">DesignServices</p>
+    <div class="hero-card">
+      <div class="icon-wrap">
+        <!-- DesignServices -->
+        <svg viewBox="0 0 24 24"><path d="M19.94 11.4l-1.34-1.34-1.41 1.41 1.34 1.34c.1.1.15.23.15.37s-.05.27-.15.37l-5.59 5.59c-.1.1-.23.15-.37.15s-.27-.05-.37-.15L5.85 12.5C5.32 12 5 11.28 5 10.56V9h1.56c.72 0 1.44.32 1.94.85l.86.87 1.41-1.41-.87-.87C9.06 7.34 7.85 6.7 6.56 7H5V5.5C5 4.12 6.12 3 7.5 3c.94 0 1.75.51 2.19 1.26L11.1 5.7l1.42-1.42-1.43-1.44C10.14 1.71 8.9 1 7.5 1 5.01 1 3 3.01 3 5.5V7H2v3.56c0 1.29.52 2.56 1.44 3.47l6.35 6.35c.46.46 1.08.72 1.71.72s1.25-.26 1.71-.72l5.59-5.59c.47-.47.73-1.08.73-1.72s-.26-1.25-.73-1.72l-1.13-1.13 1.41-1.41 1.13 1.13c.47.47.73 1.08.73 1.72s-.26 1.25-.73 1.72l-1.41 1.41 1.41 1.41 1.41-1.41c.94-.94.94-2.47 0-3.41l-1.74-1.74z"/></svg>
+      </div>
+      <p class="hero-card-text"><strong>Design Systems</strong> — création, audit et gouvernance</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="card-label">Category</p>
+    <div class="hero-card">
+      <div class="icon-wrap">
+        <!-- Category -->
+        <svg viewBox="0 0 24 24"><path d="M12 2l-5.5 9h11L12 2zm0 3.84L13.93 9h-3.87L12 5.84zM17.5 13c-2.49 0-4.5 2.01-4.5 4.5S15.01 22 17.5 22s4.5-2.01 4.5-4.5S19.99 13 17.5 13zm0 7c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5zM3 21.5h8v-8H3v8zm2-6h4v4H5v-4z"/></svg>
+      </div>
+      <p class="hero-card-text"><strong>Design Systems</strong> — création, audit et gouvernance</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="card-label">Widgets</p>
+    <div class="hero-card">
+      <div class="icon-wrap">
+        <!-- Widgets -->
+        <svg viewBox="0 0 24 24"><path d="M13 13v8h8v-8h-8zM3 21h8v-8H3v8zM3 3v8h8V3H3zm13.66-1.31L11 7.34 16.66 13l5.66-5.66-5.66-5.65z"/></svg>
+      </div>
+      <p class="hero-card-text"><strong>Design Systems</strong> — création, audit et gouvernance</p>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
