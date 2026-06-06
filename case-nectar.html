@@ -207,6 +207,9 @@ nav.menu-open .mob-footer{display:flex}
 /* ── READING TIME ── */
 .reading-time{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--muted);font-weight:300;margin-top:8px;padding-bottom:32px;border-bottom:1px solid var(--border)}
 .reading-time svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.8;flex-shrink:0}
+.case-hdr-tools{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.tool-chip{display:inline-flex;align-items:center;gap:5px;font-size:11px;padding:3px 9px;border-radius:5px;background:var(--bg-soft);color:var(--muted);border:1px solid var(--border);font-weight:400;white-space:nowrap}
+.tool-chip img{width:12px;height:12px;object-fit:contain;opacity:.8}
 
 /* ── RESPONSIVE ── */
 @media(max-width:640px){
@@ -286,8 +289,15 @@ nav.menu-open .mob-footer{display:flex}
     <img class="case-logo" src="images/logo-nectar.svg" alt="Nectar">
     <h1>Nectar</h1>
   </div>
-  <p class="meta-row">AI Product Designer · Projet personnel — B2B SaaS · En cours · Figma ·  Figma Make· Claude ·  Supabase ·  Vercel</p>
+  <p class="meta-row">AI Product Designer · Projet personnel — B2B SaaS · En cours</p>
   <p class="reading-time"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Lecture · ~5 min</p>
+  <div class="case-hdr-tools">
+    <span class="tool-chip"><img src="images/icon-figma.svg" alt="">Figma</span>
+    <span class="tool-chip"><img src="images/icon-figma-make.svg" alt="">Figma Make</span>
+    <span class="tool-chip"><img src="images/icon-claude.svg" alt="">Claude</span>
+    <span class="tool-chip"><img src="images/icon-supabase.svg" alt="">Supabase</span>
+    <span class="tool-chip">Vercel</span>
+  </div>
   <p class="case-intro">70 à 80% des insights terrain des commerciaux ne parviennent jamais aux Product Managers. J'ai conçu Nectar pour résoudre ce problème — et pour formaliser un process de conception entièrement piloté par IA, de la recherche utilisateur au développement.</p>
   <div class="stats-row">
     <div class="stat"><div class="stat-val">1</div><div class="stat-label">designer-développeur — de la recherche au produit</div></div>

@@ -219,6 +219,9 @@ nav.menu-open .mob-footer{display:flex}
 /* ── READING TIME ── */
 .reading-time{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--muted);font-weight:300;margin-top:8px;padding-bottom:32px;border-bottom:1px solid var(--border)}
 .reading-time svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.8;flex-shrink:0}
+.case-hdr-tools{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.tool-chip{display:inline-flex;align-items:center;gap:5px;font-size:11px;padding:3px 9px;border-radius:5px;background:var(--bg-soft);color:var(--muted);border:1px solid var(--border);font-weight:400;white-space:nowrap}
+.tool-chip img{width:12px;height:12px;object-fit:contain;opacity:.8}
 
 /* ── RESPONSIVE ── */
 @media(max-width:640px){
@@ -300,8 +303,14 @@ nav.menu-open .mob-footer{display:flex}
     <img class="case-logo" src="images/logo-weborama.svg" alt="Weborama">
     <h1>Weborama</h1>
   </div>
-  <p class="meta-row">Product Designer · Weborama — AdTech SaaS · 16 mois · Figma ·  Zeroheight ·  Storybook ·  Figma Make</p>
+  <p class="meta-row">Product Designer · Weborama — AdTech SaaS · 16 mois</p>
   <p class="reading-time"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Lecture · ~6 min</p>
+  <div class="case-hdr-tools">
+    <span class="tool-chip"><img src="images/icon-figma.svg" alt="">Figma</span>
+    <span class="tool-chip">Zeroheight</span>
+    <span class="tool-chip">Storybook</span>
+    <span class="tool-chip"><img src="images/icon-figma-make.svg" alt="">Figma Make</span>
+  </div>
   <p class="case-intro">Weborama est une AdTech spécialisée dans la data et l'IA sémantique. Ma mission couvre deux axes : rationaliser le Design System des 4 applications existantes, puis concevoir une nouvelle application SaaS avec un process « AI Ready » permettant de générer des prototypes haute-fidélité via Figma Make.</p>
   <div class="stats-row">
     <div class="stat"><div class="stat-val">2</div><div class="stat-label">Design Systems livrés</div></div>
