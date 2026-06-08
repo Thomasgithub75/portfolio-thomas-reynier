@@ -455,13 +455,15 @@ function HeroBtn({ onClick, primary, href, target, rel, children }) {
 function ProjectCard({ p }) {
   const [hovered, setHovered] = useState(false);
   const [pressed, setPressed] = useState(false);
+  const [btnHovered, setBtnHovered] = useState(false);
+  const [btnPressed, setBtnPressed] = useState(false);
   return (
     <Link
       to={p.href}
       className="home-project-card"
       onClick={() => trackEvent.caseStudyOpen(p.name)}
       onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => { setHovered(false); setPressed(false); }}
+      onMouseLeave={() => { setHovered(false); setPressed(false); setBtnHovered(false); setBtnPressed(false); }}
       onMouseDown={() => setPressed(true)}
       onMouseUp={() => setPressed(false)}
       style={{
@@ -492,14 +494,21 @@ function ProjectCard({ p }) {
         </div>
       </div>
       <div style={{padding:'0 16px 16px'}}>
-        <span style={{
-          display:'flex', width:'100%', borderRadius:8, fontSize:14,
-          padding:'10px 16px', justifyContent:'center',
-          background: hovered ? '#C7D2E8' : '#EBF0F8',
-          color: hovered ? '#3A4864' : '#405070',
-          fontWeight:500, alignItems:'center', gap:8,
-          transition:'background 0.15s,color 0.15s',
-        }}>
+        <span
+          style={{
+            display:'flex', width:'100%', borderRadius:8, fontSize:14,
+            padding:'10px 16px', justifyContent:'center',
+            background: btnPressed ? '#A0AFCF' : btnHovered ? '#C7D2E8' : '#EBF0F8',
+            color: btnPressed ? '#1E2E4A' : btnHovered ? '#3A4864' : '#405070',
+            fontWeight:500, alignItems:'center', gap:8,
+            transition:'background 0.15s,color 0.15s,transform 0.1s',
+            transform: btnPressed ? 'scale(0.97)' : 'scale(1)',
+          }}
+          onMouseEnter={() => setBtnHovered(true)}
+          onMouseLeave={() => { setBtnHovered(false); setBtnPressed(false); }}
+          onMouseDown={e => { e.preventDefault(); setBtnPressed(true); }}
+          onMouseUp={() => setBtnPressed(false)}
+        >
           Voir le projet <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </span>
       </div>
