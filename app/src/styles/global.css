@@ -236,6 +236,10 @@ h1.case-h1{font-size:clamp(28px,4vw,44px);font-weight:600;letter-spacing:-0.03em
 .contact-link-item{display:flex;align-items:center;gap:12px;color:var(--text);text-decoration:none;font-size:15px;padding:14px 18px;border:1px solid var(--border);border-radius:8px;background:var(--bg);transition:border-color 0.15s,background 0.15s,color 0.15s;font-weight:400}
 .contact-link-item:hover{border-color:var(--blue);background:var(--blue-light);color:var(--blue)}
 
+/* ── HOME READING PROGRESS (mobile only) ── */
+.home-reading-progress{display:none;position:fixed;top:60px;left:0;right:0;height:3px;background:var(--blue);z-index:200;transition:none}
+@media(max-width:900px){.home-reading-progress{display:block}}
+
 /* ── MOBILE MENU PORTAL ── */
 .mob-overlay{position:fixed;top:60px;left:0;right:0;bottom:0;background:#fff;z-index:9990;display:flex;flex-direction:column;animation:menuSlide .22s ease}
 .mob-menu{flex:1;list-style:none;display:flex;flex-direction:column;overflow-y:auto;border-top:1px solid var(--border);padding:8px 0 0}

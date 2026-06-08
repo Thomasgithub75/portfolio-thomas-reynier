@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../layouts/Navbar';
 import Footer from '../layouts/Footer';
@@ -79,9 +79,23 @@ function getUniqueProjects(skills) {
   });
 }
 
+function useScrollProgress() {
+  const [w, setW] = useState(0);
+  const fn = useCallback(() => {
+    const t = document.documentElement.scrollHeight - window.innerHeight;
+    setW(t > 0 ? (window.scrollY / t) * 100 : 0);
+  }, []);
+  useEffect(() => {
+    window.addEventListener('scroll', fn, { passive: true });
+    return () => window.removeEventListener('scroll', fn);
+  }, [fn]);
+  return w;
+}
+
 export default function Home() {
   const [activeSkills, setActiveSkills] = useState([]);
   const [panelOpen, setPanelOpen] = useState(false);
+  const scrollProgress = useScrollProgress();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -114,6 +128,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
+      <div className="home-reading-progress" style={{width:`${scrollProgress}%`}}/>
 
       {/* HERO */}
       <section id="hero" style={{paddingTop:140,paddingBottom:80,background:'linear-gradient(145deg,var(--p50) 0%,#fff 55%)'}}>
