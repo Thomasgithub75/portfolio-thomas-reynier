@@ -222,12 +222,30 @@ h1.case-h1{font-size:clamp(28px,4vw,44px);font-weight:600;letter-spacing:-0.03em
 }
 @keyframes menuSlide{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
 
+/* ── HOME GRID CLASSES ── */
+.home-hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.home-hero-image{position:relative;width:100%;max-width:320px;justify-self:center}
+.home-projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.home-exp-grid{display:grid;grid-template-columns:1fr 260px;gap:32px;align-items:start}
+.home-exp-row{display:grid;grid-template-columns:160px 1fr;gap:32px}
+.home-rec-featured-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
+.home-rec-right{border-left:3px solid rgba(26,86,219,.2);padding-left:20px;display:flex;align-items:center;min-height:100%}
+.home-rec-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
 /* ── HOME SPECIFIC ── */
 .contact-link-item{display:flex;align-items:center;gap:12px;color:var(--text);text-decoration:none;font-size:15px;padding:14px 18px;border:1px solid var(--border);border-radius:8px;background:var(--bg);transition:border-color 0.15s,background 0.15s,color 0.15s;font-weight:400}
 .contact-link-item:hover{border-color:var(--blue);background:var(--blue-light);color:var(--blue)}
+
 @media(max-width:900px){
-  .home-projects-grid{grid-template-columns:1fr !important}
-  .home-hero-grid{grid-template-columns:1fr !important}
-  .home-hero-image{max-width:220px;order:-1}
-  .home-rec-row{grid-template-columns:1fr !important}
+  .home-hero-grid{grid-template-columns:1fr;gap:32px}
+  .home-hero-image{max-width:220px;order:-1;justify-self:start}
+  .home-projects-grid{grid-template-columns:1fr}
+  .home-exp-grid{grid-template-columns:1fr}
+  .home-rec-featured-grid{grid-template-columns:1fr}
+  .home-rec-right{border-left:none;padding-left:0;border-top:1px solid var(--border);padding-top:16px}
+  .home-rec-row{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  .home-exp-row{grid-template-columns:1fr;gap:12px}
+  .illustrations-grid-2{grid-template-columns:1fr}
 }

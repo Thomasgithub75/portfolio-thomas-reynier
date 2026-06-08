@@ -118,7 +118,7 @@ export default function Home() {
       {/* HERO */}
       <section id="hero" style={{paddingTop:140,paddingBottom:80,background:'linear-gradient(145deg,var(--p50) 0%,#fff 55%)'}}>
         <div className="container">
-          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:60,alignItems:'center'}}>
+          <div className="home-hero-grid">
             <div>
               <p style={{display:'flex',alignItems:'center',gap:10,fontSize:12,fontWeight:600,letterSpacing:'0.1em',textTransform:'uppercase',color:'var(--text)',marginBottom:20}}>
                 <span style={{width:28,height:2,background:'var(--blue)',borderRadius:2,flexShrink:0,display:'inline-block'}}/>
@@ -161,7 +161,7 @@ export default function Home() {
                 </a>
               </div>
             </div>
-            <div style={{position:'relative',width:'100%',maxWidth:320,justifySelf:'center'}}>
+            <div className="home-hero-image">
               <div style={{width:'100%',aspectRatio:'1/1',borderRadius:'50%',overflow:'hidden',boxShadow:'0 0 0 4px #fff,0 0 0 6px rgba(26,86,219,0.2),0 10px 40px rgba(26,86,219,0.12)'}}>
                 <img src="/images/profile.png" alt="Thomas Reynier" style={{width:'100%',height:'100%',objectFit:'cover',objectPosition:'center top'}}/>
               </div>
@@ -186,10 +186,10 @@ export default function Home() {
           <p className="section-label">Expertise</p>
           <h2>Mes expertises</h2>
           <p style={{fontSize:14,color:'var(--muted)',fontWeight:300,marginBottom:32,marginTop:-24}}>Sélectionnez une compétence pour voir les projets associés.</p>
-          <div style={{display:'grid',gridTemplateColumns:'1fr 260px',gap:32,alignItems:'start'}}>
+          <div className="home-exp-grid">
             <div>
               {/* COMPÉTENCES */}
-              <div style={{display:'grid',gridTemplateColumns:'160px 1fr',gap:32,padding:'24px 0',borderBottom:'0.5px solid #E5E9F5'}}>
+              <div className="home-exp-row" style={{padding:'24px 0',borderBottom:'0.5px solid #E5E9F5'}}>
                 <div style={{display:'flex',flexDirection:'column',gap:10,paddingTop:4}}>
                   <span style={{fontSize:12,fontWeight:700,letterSpacing:'0.08em',textTransform:'uppercase',color:'var(--text)'}}>Compétences</span>
                   <div style={{display:'flex',flexDirection:'column',gap:5}}>
@@ -216,7 +216,7 @@ export default function Home() {
               </div>
 
               {/* OUTILS */}
-              <div style={{display:'grid',gridTemplateColumns:'160px 1fr',gap:32,padding:'24px 0',borderBottom:'0.5px solid #E5E9F5'}}>
+              <div className="home-exp-row" style={{padding:'24px 0',borderBottom:'0.5px solid #E5E9F5'}}>
                 <div style={{display:'flex',flexDirection:'column',gap:10,paddingTop:4}}>
                   <span style={{fontSize:12,fontWeight:700,letterSpacing:'0.08em',textTransform:'uppercase',color:'var(--text)'}}>Outils</span>
                   <div style={{display:'flex',flexDirection:'column',gap:5}}>
@@ -236,7 +236,7 @@ export default function Home() {
               </div>
 
               {/* LANGUES */}
-              <div style={{display:'grid',gridTemplateColumns:'160px 1fr',gap:32,padding:'24px 0'}}>
+              <div className="home-exp-row" style={{padding:'24px 0'}}>
                 <span style={{fontSize:12,fontWeight:700,letterSpacing:'0.08em',textTransform:'uppercase',color:'var(--text)',paddingTop:4}}>Langues</span>
                 <div style={{display:'flex',flexWrap:'wrap',gap:8}}>
                   <span className="badge" style={{background:'#1A56DB',color:'#fff',fontWeight:500}}>Français — Natif</span>
@@ -295,7 +295,7 @@ export default function Home() {
         <div className="container">
           <p className="section-label">Études de cas</p>
           <h2>Mes derniers projets</h2>
-          <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:16}}>
+          <div className="home-projects-grid">
             {[
               { href:'/case/pepyte', thumb:'/images/thumb-pepyte.jpg', logo:'/images/logo-pepyte.svg', role:'UX Research & Design', roleClass:'project-role-pepyte', duration:'26 mois', name:'Pepyte', desc:"Audit de 62 champs, 10 entretiens recruteurs et conception de la fonctionnalité de matching — de la recherche à l'interface.", tags:['UX Research','Entretiens','User Flows','Figma'] },
               { href:'/case/weborama', thumb:'/images/thumb-weborama.jpg', logo:'/images/logo-weborama.svg', role:'Design System Lead', roleClass:'project-role-weborama', duration:'16 mois', name:'Weborama', desc:"Audit de 974 composants, ateliers de co-construction et création d'un Design System de zéro — 80% de composants en moins.", tags:['Design System','Atomic Design','Figma Make','Zeroheight'] },
@@ -340,7 +340,7 @@ export default function Home() {
           <div style={{display:'flex',flexDirection:'column',gap:16}}>
             {/* Featured */}
             <div style={{background:'#fff',border:'1px solid var(--border)',borderRadius:14,padding:32}}>
-              <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:32,alignItems:'start'}}>
+              <div className="home-rec-featured-grid">
                 <div style={{display:'flex',flexDirection:'column',gap:14}}>
                   <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',gap:8}}>
                     <div style={{display:'flex',gap:2}}>{[0,1,2,3,4].map(i=><span key={i} style={{color:'#F59E0B',fontSize:15}}>★</span>)}</div>
@@ -362,13 +362,13 @@ export default function Home() {
                     </a>
                   </div>
                 </div>
-                <div style={{borderLeft:'3px solid rgba(26,86,219,.2)',paddingLeft:20,display:'flex',alignItems:'center',minHeight:'100%'}}>
+                <div className="home-rec-right">
                   <p style={{fontSize:14,color:'var(--muted)',lineHeight:1.75,fontWeight:300,fontStyle:'italic'}}>Thomas a grandement amélioré notre plateforme de recrutement. Il a su comprendre les besoins des utilisateurs. Il a également collaboré efficacement avec notre équipe de développement. Nous avons obtenu une augmentation importante de la satisfaction des utilisateurs clients et de l'efficacité des processus de recrutement.</p>
                 </div>
               </div>
             </div>
             {/* Compact row */}
-            <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:16}}>
+            <div className="home-rec-row">
               {[
                 { logo:'/images/logo-pepyte.svg', logoAlt:'Pepyte', keyquote:'« Une capacité de travail impressionnante à une positivité contagieuse. »', quote:"Thomas est un Product Designer motivé, combinant une capacité de travail impressionnante à une positivité contagieuse. Son dévouement et son optimisme inspirent toute l'équipe. Fortement recommandé !", avatar:'/images/avatar-antoine.png', name:'Antoine Girard', role:'Co-CEO & Co-Founder · Pepyte', li:'https://www.linkedin.com/in/antoine-girard-202561143/' },
                 { logo:'/images/logo-weborama.svg', logoAlt:'Weborama', keyquote:'« Faire de l\'IA un véritable allié stratégique. »', quote:"Thomas a su faire de l'IA un véritable allié stratégique, l'intégrant avec maîtrise dans ses méthodes de conception pour créer des produits plus intelligents et optimiser les parcours utilisateurs.", avatar:'/images/avatar-donia.png', name:'Donia Ben Ghorbal', role:'Lead Product Designer · Weborama', li:'https://www.linkedin.com/in/donia-benghorbal-750ba1143/' },
