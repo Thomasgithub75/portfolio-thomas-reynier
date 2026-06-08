@@ -47,8 +47,8 @@ export default function Navbar() {
             <li><button onClick={() => handleAnchor('hero')}>Accueil</button></li>
             <li><button onClick={() => handleAnchor('competences')}>Expertises</button></li>
             <li><button onClick={() => handleAnchor('projets')}>Projets</button></li>
-            <li className="mob-menu-cta-li">
-              <button onClick={() => handleAnchor('contact')}>Contact</button>
+            <li style={{borderBottom:'none',padding:'20px 2rem 24px'}}>
+              <button onClick={() => handleAnchor('contact')} style={{display:'block',width:'100%',textAlign:'center',background:'var(--blue)',color:'#fff',fontWeight:600,padding:'16px',borderRadius:10,fontSize:16,border:'none',cursor:'pointer',fontFamily:"'Outfit',sans-serif"}}>Contact</button>
             </li>
           </ul>
           <div className="mob-footer-inner">
