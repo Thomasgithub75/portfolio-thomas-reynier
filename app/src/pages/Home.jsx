@@ -28,7 +28,7 @@ const SKILL_PROJS = {
   ],
   'Design to Code': [
     { logo:'/images/logo-nectar.svg', bg:'#FFFBEB', name:'Nectar', desc:'Next.js · Tailwind · Supabase · Vercel', type:'Side project', url:'/case/nectar' },
-    { initials:'PF', color:'#1A56DB', name:'Portfolio', desc:'React · MUI · Design System', type:'Personnel', url:'/' }
+    { initials:'PF', color:'#1956DB', name:'Portfolio', desc:'React · MUI · Design System', type:'Personnel', url:'/' }
   ],
   'IA générative': [
     { logo:'/images/logo-nectar.svg', bg:'#FFFBEB', name:'Nectar', desc:'Claude Code · MCP · Figma Make', type:'Side project', url:'/case/nectar' },
@@ -177,7 +177,7 @@ export default function Home() {
               </div>
             </div>
             <div className="home-hero-image">
-              <div style={{width:'100%',aspectRatio:'1/1',borderRadius:'50%',overflow:'hidden',boxShadow:'0 0 0 4px #fff,0 0 0 6px rgba(26,86,219,0.2),0 10px 40px rgba(26,86,219,0.12)'}}>
+              <div style={{width:'100%',aspectRatio:'1/1',borderRadius:'50%',overflow:'hidden',boxShadow:'0 0 0 4px #fff,0 0 0 6px rgba(25,86,219,0.2),0 10px 40px rgba(25,86,219,0.12)'}}>
                 <img src="/images/profile.png" alt="Thomas Reynier" style={{width:'100%',height:'100%',objectFit:'cover',objectPosition:'center top'}}/>
               </div>
               <div style={{position:'absolute',bottom:24,right:-4,background:'#fff',border:'1px solid var(--border)',borderRadius:20,padding:'6px 14px',display:'flex',alignItems:'center',gap:7,fontSize:13,fontWeight:500,color:'var(--text)',boxShadow:'0 2px 12px rgba(0,0,0,0.08)',whiteSpace:'nowrap'}}>
@@ -208,14 +208,14 @@ export default function Home() {
                 <div style={{display:'flex',flexDirection:'column',gap:10,paddingTop:4}}>
                   <span style={{fontSize:12,fontWeight:700,letterSpacing:'0.08em',textTransform:'uppercase',color:'var(--text)'}}>Compétences</span>
                   <div style={{display:'flex',flexDirection:'column',gap:5}}>
-                    {[{bg:'#1A56DB',label:'Core'},{bg:'#E8EFFD',label:'Secondaire'}].map(s=>(
+                    {[{bg:'#1956DB',label:'Core'},{bg:'#EEF3FD',label:'Secondaire'}].map(s=>(
                       <div key={s.label} style={{display:'flex',alignItems:'center',gap:6,fontSize:11,color:'var(--muted)'}}>
                         <span style={{width:12,height:12,borderRadius:3,flexShrink:0,background:s.bg,display:'inline-block'}}/>
                         {s.label}
                       </div>
                     ))}
                   </div>
-                  <div style={{display:'inline-flex',alignItems:'center',gap:4,fontSize:11,background:'#E8EFFD',color:'#1A56DB',borderRadius:6,padding:'3px 7px',marginTop:2,width:'fit-content'}}>
+                  <div style={{display:'inline-flex',alignItems:'center',gap:4,fontSize:11,background:'#EEF3FD',color:'#1956DB',borderRadius:6,padding:'3px 7px',marginTop:2,width:'fit-content'}}>
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M9 12V6.5a1.5 1.5 0 013 0V12"/><path d="M12 12a1.5 1.5 0 013 0v1.5a1.5 1.5 0 013 0V17a5 5 0 01-5 5H9a5 5 0 01-5-5v-1a1.5 1.5 0 013 0"/></svg>
                     Cliquable
                   </div>
@@ -254,8 +254,8 @@ export default function Home() {
               <div className="home-exp-row" style={{padding:'24px 0'}}>
                 <span style={{fontSize:12,fontWeight:700,letterSpacing:'0.08em',textTransform:'uppercase',color:'var(--text)',paddingTop:4}}>Langues</span>
                 <div style={{display:'flex',flexWrap:'wrap',gap:8}}>
-                  <span className="badge" style={{background:'#1A56DB',color:'#fff',fontWeight:500}}>Français — Natif</span>
-                  <span className="badge" style={{background:'#E8EFFD',color:'#185FA5'}}>Anglais — Professionnel</span>
+                  <span className="badge" style={{background:'#1956DB',color:'#fff',fontWeight:500}}>Français — Natif</span>
+                  <span className="badge" style={{background:'#EEF3FD',color:'#1141A8'}}>Anglais — Professionnel</span>
                 </div>
               </div>
             </div>
@@ -263,17 +263,17 @@ export default function Home() {
             {/* PANEL */}
             <div style={{position:'sticky',top:16}}>
               {!panelOpen && (
-                <div style={{border:'0.5px dashed #B5D4F4',borderRadius:12,padding:'28px 20px',display:'flex',flexDirection:'column',alignItems:'center',gap:10,textAlign:'center'}}>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B5D4F4" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg>
+                <div style={{border:'0.5px dashed #9DB8F2',borderRadius:12,padding:'28px 20px',display:'flex',flexDirection:'column',alignItems:'center',gap:10,textAlign:'center'}}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#9DB8F2" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg>
                   <p style={{fontSize:12,color:'var(--muted)',lineHeight:1.5,maxWidth:190}}>Sélectionner une compétence pour voir les projets associés</p>
                 </div>
               )}
               {panelOpen && (
-                <div style={{border:'0.5px solid #B5D4F4',borderRadius:12,overflow:'hidden'}}>
+                <div style={{border:'0.5px solid #9DB8F2',borderRadius:12,overflow:'hidden'}}>
                   <div style={{padding:'14px 16px 12px',borderBottom:'0.5px solid #E5E9F5',position:'relative'}}>
-                    <span style={{fontSize:10,fontWeight:700,letterSpacing:'0.08em',textTransform:'uppercase',color:'#1A56DB',display:'block',marginBottom:4}}>Projets associés</span>
+                    <span style={{fontSize:10,fontWeight:700,letterSpacing:'0.08em',textTransform:'uppercase',color:'#1956DB',display:'block',marginBottom:4}}>Projets associés</span>
                     <p style={{fontSize:14,fontWeight:700,color:'var(--text)',lineHeight:1.3,paddingRight:32}}>{panelLabel}</p>
-                    <button onClick={closePanel} style={{position:'absolute',top:12,right:12,width:24,height:24,borderRadius:6,background:'#E8EFFD',border:'none',cursor:'pointer',display:'flex',alignItems:'center',justifyContent:'center',color:'#1A56DB',fontSize:16,fontFamily:'inherit'}}>×</button>
+                    <button onClick={closePanel} style={{position:'absolute',top:12,right:12,width:24,height:24,borderRadius:6,background:'#EEF3FD',border:'none',cursor:'pointer',display:'flex',alignItems:'center',justifyContent:'center',color:'#1956DB',fontSize:16,fontFamily:'inherit'}}>×</button>
                   </div>
                   <div>
                     {panelProjects.map(p => (
@@ -284,15 +284,15 @@ export default function Home() {
                         <div style={{flex:1,minWidth:0,paddingRight:20}}>
                           <div style={{fontSize:13,fontWeight:500,color:'var(--text)',lineHeight:1.2,marginBottom:2}}>{p.name}</div>
                           <div style={{fontSize:11,color:'var(--muted)',lineHeight:1.4,marginBottom:4,whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{p.desc}</div>
-                          <span style={{fontSize:10,padding:'2px 7px',borderRadius:5,fontWeight:500,display:'inline-block',background:p.type==='Case study'?'#E8EFFD':p.type==='Side project'?'#FAEEDA':'#EAF3DE',color:p.type==='Case study'?'#185FA5':p.type==='Side project'?'#854F0B':'#3B6D11'}}>{p.type}</span>
+                          <span style={{fontSize:10,padding:'2px 7px',borderRadius:5,fontWeight:500,display:'inline-block',background:p.type==='Case study'?'#EEF3FD':p.type==='Side project'?'#FAEEDA':'#EAF3DE',color:p.type==='Case study'?'#1141A8':p.type==='Side project'?'#854F0B':'#3B6D11'}}>{p.type}</span>
                         </div>
-                        <span style={{position:'absolute',right:14,top:'50%',transform:'translateY(-50%)',color:'#1A56DB',display:'flex',alignItems:'center'}}>
+                        <span style={{position:'absolute',right:14,top:'50%',transform:'translateY(-50%)',color:'#1956DB',display:'flex',alignItems:'center'}}>
                           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
                         </span>
                       </Link>
                     ))}
                   </div>
-                  <div style={{background:'#F4F8FE',borderTop:'0.5px solid #B5D4F4',padding:'9px 16px',display:'flex',alignItems:'center',gap:5,fontSize:11,color:'#185FA5'}}>
+                  <div style={{background:'#F4F8FE',borderTop:'0.5px solid #9DB8F2',padding:'9px 16px',display:'flex',alignItems:'center',gap:5,fontSize:11,color:'#1141A8'}}>
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
                     {panelProjects.length} projet{panelProjects.length>1?'s':''} trouvé{panelProjects.length>1?'s':''}
                   </div>
@@ -316,7 +316,7 @@ export default function Home() {
               { href:'/case/weborama', thumb:'/images/thumb-weborama.jpg', logo:'/images/logo-weborama.svg', role:'Design System Lead', roleClass:'project-role-weborama', duration:'16 mois', name:'Weborama', desc:"Audit de 974 composants, ateliers de co-construction et création d'un Design System de zéro — 80% de composants en moins.", tags:['Design System','Atomic Design','Figma Make','Zeroheight'] },
               { href:'/case/nectar', thumb:'/images/thumb-nectar.jpg', logo:'/images/logo-nectar.svg', role:'Founding Designer', roleClass:'project-role-nectar', duration:'En cours', name:'Nectar', desc:"MVP B2B mobile-first piloté par IA — de la recherche utilisateur aux 8 écrans livrés, avec un process documenté et réplicable.", tags:['Figma Make','Claude MCP','Design System','UX Research'] },
             ].map(p => (
-              <Link key={p.name} to={p.href} className="home-project-card" style={{background:'var(--bg)',display:'flex',flexDirection:'column',borderRadius:10,border:'1px solid var(--border)',overflow:'hidden',textDecoration:'none',color:'inherit',transition:'border-color 0.2s,box-shadow 0.2s,transform 0.2s'}} onClick={() => trackEvent.caseStudyOpen(p.name)} onMouseEnter={e=>{e.currentTarget.style.borderColor='var(--blue)';e.currentTarget.style.boxShadow='0 8px 32px rgba(26,86,219,0.12)';e.currentTarget.style.transform='translateY(-4px)'}} onMouseLeave={e=>{e.currentTarget.style.borderColor='var(--border)';e.currentTarget.style.boxShadow='';e.currentTarget.style.transform=''}}>
+              <Link key={p.name} to={p.href} className="home-project-card" style={{background:'var(--bg)',display:'flex',flexDirection:'column',borderRadius:10,border:'1px solid var(--border)',overflow:'hidden',textDecoration:'none',color:'inherit',transition:'border-color 0.2s,box-shadow 0.2s,transform 0.2s'}} onClick={() => trackEvent.caseStudyOpen(p.name)} onMouseEnter={e=>{e.currentTarget.style.borderColor='var(--blue)';e.currentTarget.style.boxShadow='0 8px 32px rgba(25,86,219,0.12)';e.currentTarget.style.transform='translateY(-4px)'}} onMouseLeave={e=>{e.currentTarget.style.borderColor='var(--border)';e.currentTarget.style.boxShadow='';e.currentTarget.style.transform=''}}>
                 <div style={{width:'100%',height:200,background:'var(--bg-soft)',borderBottom:'1px solid var(--border)',overflow:'hidden',flexShrink:0}}>
                   <img src={p.thumb} alt={p.name} style={{width:'100%',height:'100%',objectFit:'cover',objectPosition:'center',display:'block'}}/>
                 </div>

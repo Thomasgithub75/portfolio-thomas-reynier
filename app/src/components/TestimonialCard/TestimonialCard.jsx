@@ -146,7 +146,7 @@ export default function TestimonialCard({
 
           {/* Droite */}
           <Box sx={{
-            borderLeft: '3px solid rgba(26,86,219,0.2)',
+            borderLeft: '3px solid rgba(25,86,219,0.2)',
             pl: '20px',
             display: 'flex',
             alignItems: 'center',

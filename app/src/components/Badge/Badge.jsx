@@ -4,12 +4,12 @@ import { tokens } from '../../theme/theme';
 // Palette par variant
 const variantStyles = {
   default: {
-    background: '#D1E9FF',
-    color: '#1570EF',
+    background: tokens.bgBlue,
+    color: tokens.blue,
   },
   case: {
     background: tokens.bgBlue,
-    color: '#185FA5',
+    color: tokens.blueDeep,
   },
   side: {
     background: tokens.tagPmBg,

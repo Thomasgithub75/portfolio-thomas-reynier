@@ -56,8 +56,8 @@ section{padding:80px 0}
 .footer-icon svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.8}
 
 /* ── BADGES & TAGS ── */
-.badge{display:inline-flex;align-items:center;justify-content:center;gap:4px;padding:2px 6px;border-radius:9999px;font-family:'Outfit',sans-serif;font-size:12px;font-weight:500;line-height:1.4;white-space:nowrap;cursor:default;user-select:none;background:#D1E9FF;color:#1570EF}
-.tag{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:6px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;line-height:1.4;white-space:nowrap;background:#1570EF;color:#FFFFFF}
+.badge{display:inline-flex;align-items:center;justify-content:center;gap:4px;padding:2px 6px;border-radius:9999px;font-family:'Outfit',sans-serif;font-size:12px;font-weight:500;line-height:1.4;white-space:nowrap;cursor:default;user-select:none;background:#D7E5FB;color:#1956DB}
+.tag{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:6px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;line-height:1.4;white-space:nowrap;background:#1956DB;color:#FFFFFF}
 .tag--display{cursor:default;user-select:none}
 
 /* ── READING PROGRESS ── */
@@ -129,7 +129,7 @@ h1.case-h1{font-size:clamp(28px,4vw,44px);font-weight:600;letter-spacing:-0.03em
 .step:last-child .step-line{display:none}
 .step-content{flex:1;padding-top:2px;padding-bottom:44px}
 .step:last-child .step-content{padding-bottom:0}
-.step-num{font-size:11px;font-weight:600;color:#1A56DB;letter-spacing:.08em;text-transform:uppercase;display:block;line-height:1;margin-bottom:-2px}
+.step-num{font-size:11px;font-weight:600;color:#1956DB;letter-spacing:.08em;text-transform:uppercase;display:block;line-height:1;margin-bottom:-2px}
 .step-title{font-size:18px;font-weight:700;color:#111827;letter-spacing:-0.01em;line-height:1.2;margin-bottom:4px}
 .step-body{font-size:14px;color:#6B7280;line-height:1.5;font-weight:400}
 
@@ -193,7 +193,7 @@ h1.case-h1{font-size:clamp(28px,4vw,44px);font-weight:600;letter-spacing:-0.03em
 .project-header{display:flex;justify-content:space-between;align-items:center;gap:8px}
 .project-header-left{display:flex;align-items:center;gap:8px;flex:1;min-width:0}
 .project-logo-sm{width:20px;height:20px;border-radius:4px;object-fit:contain;flex-shrink:0}
-.project-role-badge{font-size:11px;font-weight:600;color:var(--blue);background:var(--blue-light);padding:3px 10px;border-radius:20px;white-space:nowrap;border:1px solid rgba(26,86,219,0.12)}
+.project-role-badge{font-size:11px;font-weight:600;color:var(--blue);background:var(--blue-light);padding:3px 10px;border-radius:20px;white-space:nowrap;border:1px solid rgba(25,86,219,0.12)}
 .project-dur{font-size:12px;color:var(--muted);font-weight:400;white-space:nowrap;flex-shrink:0}
 .project-name-sm{font-size:17px;font-weight:600;color:var(--text);letter-spacing:-0.02em;line-height:1}
 .project-desc-sm{font-size:13px;color:var(--muted);line-height:1.6;font-weight:300}
@@ -229,7 +229,7 @@ h1.case-h1{font-size:clamp(28px,4vw,44px);font-weight:600;letter-spacing:-0.03em
 .home-exp-grid{display:grid;grid-template-columns:1fr 260px;gap:32px;align-items:start}
 .home-exp-row{display:grid;grid-template-columns:160px 1fr;gap:32px}
 .home-rec-featured-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
-.home-rec-right{border-left:3px solid rgba(26,86,219,.2);padding-left:20px;display:flex;align-items:center;min-height:100%}
+.home-rec-right{border-left:3px solid rgba(25,86,219,.2);padding-left:20px;display:flex;align-items:center;min-height:100%}
 .home-rec-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 
 /* ── HOME SPECIFIC ── */
