@@ -454,15 +454,28 @@ const ROLE_STYLES = {
 };
 
 function SkillTag({ skill, active, isCore, onToggle }) {
-  const base = { fontFamily:'inherit', fontSize:13, fontWeight:500, padding:'3px 8px', borderRadius:6, cursor:'pointer', lineHeight:1.4, whiteSpace:'nowrap', display:'inline-flex', alignItems:'center', gap:6, transition:'background 0.15s,color 0.15s,transform 0.1s', border:'1.5px solid' };
-  const core = active
-    ? { ...base, background:'#175CD3', color:'#fff', borderColor:'#1570EF' }
-    : { ...base, background:'#1A56DB', color:'#fff', borderColor:'#1A56DB' };
-  const sec = active
-    ? { ...base, background:'#B2DDFF', color:'#175CD3', borderColor:'#1570EF' }
-    : { ...base, background:'#E8EFFD', color:'#185FA5', borderColor:'#B5D4F4' };
+  const [hovered, setHovered] = useState(false);
+  const [pressed, setPressed] = useState(false);
+
+  const base = { fontFamily:'inherit', fontSize:13, fontWeight:500, padding:'3px 8px', borderRadius:6, cursor:'pointer', lineHeight:1.4, whiteSpace:'nowrap', display:'inline-flex', alignItems:'center', gap:6, transition:'background 0.15s,color 0.15s,transform 0.1s', border:'1.5px solid', transform: pressed ? 'scale(0.97)' : 'scale(1)' };
+
+  const coreStyle = active
+    ? { ...base, background: pressed ? '#0C447C' : hovered ? '#185FA5' : '#175CD3', color:'#fff', borderColor:'#1570EF' }
+    : { ...base, background: pressed ? '#0C447C' : hovered ? '#185FA5' : '#1A56DB', color:'#fff', borderColor:'#1A56DB' };
+
+  const secStyle = active
+    ? { ...base, background: pressed ? '#85B7EB' : hovered ? '#B5D4F4' : '#B2DDFF', color: pressed ? '#0C447C' : '#175CD3', borderColor:'#1570EF' }
+    : { ...base, background: pressed ? '#85B7EB' : hovered ? '#B5D4F4' : '#E8EFFD', color: pressed || hovered ? '#0C447C' : '#185FA5', borderColor:'#B5D4F4' };
+
   return (
-    <button style={isCore ? core : sec} onClick={() => onToggle(skill)}>
+    <button
+      style={isCore ? coreStyle : secStyle}
+      onClick={() => onToggle(skill)}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => { setHovered(false); setPressed(false); }}
+      onMouseDown={() => setPressed(true)}
+      onMouseUp={() => setPressed(false)}
+    >
       <span style={{fontSize:10,width:10,height:10,display:'inline-flex',alignItems:'center',justifyContent:'center'}}>
         {active
           ? <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M1 1l10 10M11 1L1 11"/></svg>
