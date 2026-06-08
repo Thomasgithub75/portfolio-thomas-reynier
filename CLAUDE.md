@@ -8,12 +8,15 @@
 
 ## Qui est Thomas ?
 
-- **Rôle :** Product Designer
-- **Spécialité :** UX Research, Design System, Product Design
-- **Profil :** Designer capable de travailler avec des équipes dev (Next.js, Figma, Notion…)
-- **Contact :** t.reynier90@gmail.com
-- **LinkedIn :** _(à compléter)_
-- **Disponibilité :** _(ex : Disponible dès [date] · Freelance / CDI)_
+- **Rôle :** Product Designer IA
+- **Spécialité :** UX Research, Design System, Product Design, IA générative
+- **Profil :** Designer capable de piloter l'intégralité du process design (recherche → livraison), dev-aware, intègre l'IA à chaque étape
+- **Email pro :** reynier.design@gmail.com
+- **Téléphone :** 06 26 53 21 29
+- **Portfolio :** thomas-reynier.fr
+- **LinkedIn :** linkedin.com/in/thomas-reynier-product-design
+- **Localisation :** Paris
+- **Disponibilité :** À l'écoute · Freelance & CDI
 
 ---
 
@@ -54,23 +57,29 @@
 
 ## Études de cas (projets)
 
+### Weborama
+- **Secteur :** Adtech SaaS · Intelligence Artificielle Sémantique
+- **Période :** Janvier 2025 – Présent (13 mois)
+- **Rôle :** Product Designer IA
+- **Mission :** Design System pour 4 outils SaaS + UX Research (benchmark, entretiens POs & BUs, tests) + Founding Designer IA sur un nouveau produit SaaS B2B
+- **Impact :** Design System déployé sur 4 applications · Design System IA opérationnel sur une nouvelle app
+- **Compétences mobilisées :** Design System, Atomic Design, UX Research, Figma Make, Zeroheight, Storybook
+
 ### Nectar
-- **Secteur :** _(à compléter)_
-- **Mission :** _(ex : Refonte de l'expérience onboarding)_
-- **Impact :** _(ex : +40% de taux de complétion)_
-- **Compétences mobilisées :** UX Research, Prototypage, Tests utilisateurs
+- **Secteur :** SaaS B2B · Outil mobile-first d'insights terrain
+- **Période :** Avril 2026 (projet personnel)
+- **Rôle :** Founding Product Designer IA
+- **Mission :** Process design complet de A à Z piloté par IA — recherche utilisateur, définition, idéation, maquettage, Design System token-based, développement via Claude Code
+- **Impact :** MVP complet Discovery → Développement · Design System IA connecté opérationnel
+- **Compétences mobilisées :** UX Research, JTBD, Figma Make, Atomic Design, Claude Code, Supabase, Vercel
 
 ### Pepyte
-- **Secteur :** _(à compléter)_
-- **Mission :** _(ex : Création d'un système de matching)_
-- **Impact :** _(à compléter)_
-- **Compétences mobilisées :** Audit UX, Design System, User Flows
-
-### Weborama
-- **Secteur :** Adtech / Marketing digital
-- **Mission :** Création et déploiement d'un Design System unifié
-- **Impact :** _(à compléter)_
-- **Compétences mobilisées :** Design System, Audit, Figma, Documentation
+- **Secteur :** HR Tech SaaS · Recrutement en startups et entreprises tech
+- **Période :** Décembre 2022 – Janvier 2025 (2 ans)
+- **Rôle :** Product Designer
+- **Mission :** Création du Design System + conception de parcours utilisateurs + UX Research (entretiens, ateliers, benchmark)
+- **Impact :** Design System livré · Nouvelles fonctionnalités déployées · Ateliers et tests utilisateurs animés
+- **Compétences mobilisées :** Design System, Atomic Design, UX Research, Figma, Supernova, Jira
 
 ---
 
@@ -114,6 +123,24 @@
 - Design surchargé ou trop coloré
 - Navigation ambiguë ou profondeur excessive
 - Cacher les études de cas derrière trop de clics
+
+---
+
+## Formation de Thomas
+
+| Diplôme | École | Année |
+|---------|-------|-------|
+| Formation Product Design IA (UX Design, UI Design, HTML/CSS, Web Design) | Marcorel | 2022 |
+| Licence Marketing | ISIFA | 2013 |
+
+---
+
+## CV
+
+- **HTML (itération) :** `proposals/cv-v1.html`
+- **PDF export :** `proposals/cv-thomas-reynier.pdf`
+- **Format :** ATS pur · une colonne · français · A4
+- **Commande export PDF :** `chrome --headless=new --no-pdf-header-footer --paper-width=8.27 --paper-height=11.69 --print-to-pdf="proposals/cv-thomas-reynier.pdf" "file:///.../cv-v1.html"`
 
 ---
 
