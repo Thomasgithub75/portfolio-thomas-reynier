@@ -158,22 +158,29 @@ export default function Home() {
                 ))}
               </div>
               <div style={{display:'flex',alignItems:'stretch',marginBottom:32}}>
-                {[['5','ans d\'expérience'],['+10','produit SaaS'],['+100','features']].map(([num,lbl],i) => (
-                  <div key={lbl} style={{paddingTop:4,paddingBottom:4,paddingRight:24,paddingLeft:i===0?0:24,borderRight:i<2?'1px solid var(--g200)':'none'}}>
-                    <span style={{display:'block',fontSize:26,fontWeight:600,color:'var(--blue)',letterSpacing:'-0.03em',lineHeight:1.1}}>{num}</span>
-                    <span style={{display:'block',fontSize:12,color:'var(--muted)',fontWeight:400,marginTop:4}}>{lbl}</span>
-                  </div>
-                ))}
+                {[['5',"ans d'expérience"],['+10','produit SaaS'],['+100','features']].map(([num,lbl],i) => {
+                  const hasPlus = num[0]==='+';
+                  const digits = hasPlus ? num.slice(1) : num;
+                  return (
+                    <div key={lbl} style={{paddingTop:4,paddingBottom:4,paddingRight:24,paddingLeft:i===0?0:24,borderRight:i<2?'1px solid var(--g200)':'none'}}>
+                      <span style={{display:'block',fontSize:26,fontWeight:600,letterSpacing:'-0.03em',lineHeight:1.1}}>
+                        {hasPlus && <span style={{color:'var(--text)'}}>+</span>}
+                        <span style={{color:'var(--blue)'}}>{digits}</span>
+                      </span>
+                      <span style={{display:'block',fontSize:12,color:'var(--muted)',fontWeight:400,marginTop:4}}>{lbl}</span>
+                    </div>
+                  );
+                })}
               </div>
               <div style={{display:'flex',gap:12,alignItems:'center'}}>
-                <button onClick={() => { const el=document.getElementById('projets'); if(el) el.scrollIntoView({behavior:'smooth'}); }} style={{display:'inline-flex',alignItems:'center',gap:8,background:'var(--p500)',color:'#fff',padding:'11px 22px',borderRadius:7,fontSize:15,fontWeight:500,border:'none',cursor:'pointer',fontFamily:'inherit'}}>
+                <HeroBtn primary onClick={() => { const el=document.getElementById('projets'); if(el) el.scrollIntoView({behavior:'smooth'}); }}>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
                   Voir mes projets
-                </button>
-                <a href="https://www.linkedin.com/in/thomas-reynier-product-design/" target="_blank" rel="noopener" onClick={() => trackEvent.linkedinClick('hero')} style={{display:'inline-flex',alignItems:'center',gap:8,background:'var(--g100)',color:'var(--g600)',padding:'11px 22px',borderRadius:7,fontSize:15,fontWeight:500,textDecoration:'none'}}>
+                </HeroBtn>
+                <HeroBtn href="https://www.linkedin.com/in/thomas-reynier-product-design/" target="_blank" rel="noopener" onClick={() => trackEvent.linkedinClick('hero')}>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
                   LinkedIn
-                </a>
+                </HeroBtn>
               </div>
             </div>
             <div className="home-hero-image">
@@ -315,32 +322,7 @@ export default function Home() {
               { href:'/case/pepyte', thumb:'/images/thumb-pepyte.jpg', logo:'/images/logo-pepyte.svg', role:'UX Research & Design', roleClass:'project-role-pepyte', duration:'26 mois', name:'Pepyte', desc:"Audit de 62 champs, 10 entretiens recruteurs et conception de la fonctionnalité de matching — de la recherche à l'interface.", tags:['UX Research','Entretiens','User Flows','Figma'] },
               { href:'/case/weborama', thumb:'/images/thumb-weborama.jpg', logo:'/images/logo-weborama.svg', role:'Design System Lead', roleClass:'project-role-weborama', duration:'16 mois', name:'Weborama', desc:"Audit de 974 composants, ateliers de co-construction et création d'un Design System de zéro — 80% de composants en moins.", tags:['Design System','Atomic Design','Figma Make','Zeroheight'] },
               { href:'/case/nectar', thumb:'/images/thumb-nectar.jpg', logo:'/images/logo-nectar.svg', role:'Founding Designer', roleClass:'project-role-nectar', duration:'En cours', name:'Nectar', desc:"MVP B2B mobile-first piloté par IA — de la recherche utilisateur aux 8 écrans livrés, avec un process documenté et réplicable.", tags:['Figma Make','Claude MCP','Design System','UX Research'] },
-            ].map(p => (
-              <Link key={p.name} to={p.href} className="home-project-card" style={{background:'var(--bg)',display:'flex',flexDirection:'column',borderRadius:10,border:'1px solid var(--border)',overflow:'hidden',textDecoration:'none',color:'inherit',transition:'border-color 0.2s,box-shadow 0.2s,transform 0.2s'}} onClick={() => trackEvent.caseStudyOpen(p.name)} onMouseEnter={e=>{e.currentTarget.style.borderColor='var(--blue)';e.currentTarget.style.boxShadow='0 8px 32px rgba(25,86,219,0.12)';e.currentTarget.style.transform='translateY(-4px)'}} onMouseLeave={e=>{e.currentTarget.style.borderColor='var(--border)';e.currentTarget.style.boxShadow='';e.currentTarget.style.transform=''}}>
-                <div style={{width:'100%',height:200,background:'var(--bg-soft)',borderBottom:'1px solid var(--border)',overflow:'hidden',flexShrink:0}}>
-                  <img src={p.thumb} alt={p.name} style={{width:'100%',height:'100%',objectFit:'cover',objectPosition:'center',display:'block'}}/>
-                </div>
-                <div style={{padding:20,display:'flex',flexDirection:'column',gap:10,flex:1}}>
-                  <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',gap:8}}>
-                    <div style={{display:'flex',alignItems:'center',gap:8,flex:1,minWidth:0}}>
-                      <img src={p.logo} alt={p.name} style={{width:22,height:22,borderRadius:5,objectFit:'contain',flexShrink:0}}/>
-                      <span style={{fontSize:11,fontWeight:600,padding:'3px 10px',borderRadius:20,whiteSpace:'nowrap',...ROLE_STYLES[p.roleClass]}}>{p.role}</span>
-                    </div>
-                    <span style={{fontSize:12,color:'var(--muted)',fontWeight:400,whiteSpace:'nowrap',flexShrink:0}}>{p.duration}</span>
-                  </div>
-                  <p style={{fontSize:18,fontWeight:600,color:'var(--text)',letterSpacing:'-0.025em',lineHeight:1.2}}>{p.name}</p>
-                  <p style={{fontSize:13,color:'var(--muted)',lineHeight:1.6,fontWeight:300}}>{p.desc}</p>
-                  <div style={{display:'flex',flexWrap:'wrap',gap:6,marginTop:4}}>
-                    {p.tags.map(t => <span key={t} className="badge" style={{background:'var(--blue-light)',color:'var(--blue)'}}>{t}</span>)}
-                  </div>
-                </div>
-                <div style={{padding:'0 16px 16px'}}>
-                  <span style={{display:'flex',width:'100%',borderRadius:8,fontSize:14,padding:'10px 16px',justifyContent:'center',background:'var(--g100)',color:'var(--g600)',fontWeight:500,alignItems:'center',gap:8}}>
-                    Voir le projet <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                  </span>
-                </div>
-              </Link>
-            ))}
+            ].map(p => <ProjectCard key={p.name} p={p}/>)}
           </div>
         </div>
       </section>
@@ -452,6 +434,78 @@ const ROLE_STYLES = {
   'project-role-weborama': { background:'#E3F7EE', color:'#0E7A56', border:'1px solid #A7E3CA' },
   'project-role-nectar': { background:'#FEF3E2', color:'#A05C0A', border:'1px solid #F9D5A0' },
 };
+
+function HeroBtn({ onClick, primary, href, target, rel, children }) {
+  const [hovered, setHovered] = useState(false);
+  const [pressed, setPressed] = useState(false);
+  const base = { display:'inline-flex', alignItems:'center', gap:8, padding:'11px 22px', borderRadius:7, fontSize:15, fontWeight:500, border:'none', cursor:'pointer', fontFamily:'inherit', textDecoration:'none', transition:'background 0.15s,color 0.15s,transform 0.1s', transform: pressed ? 'scale(0.97)' : 'scale(1)' };
+  const style = primary
+    ? { ...base, background: pressed ? '#0C2E7A' : hovered ? '#1141A8' : '#1956DB', color:'#fff' }
+    : { ...base, background: pressed ? '#A0AFCF' : hovered ? '#C7D2E8' : '#EBF0F8', color: pressed ? '#1E2E4A' : hovered ? '#3A4864' : '#405070' };
+  const handlers = {
+    onMouseEnter:() => setHovered(true),
+    onMouseLeave:() => { setHovered(false); setPressed(false); },
+    onMouseDown:() => setPressed(true),
+    onMouseUp:() => setPressed(false),
+  };
+  if (href) return <a href={href} target={target} rel={rel} onClick={onClick} style={style} {...handlers}>{children}</a>;
+  return <button onClick={onClick} style={style} {...handlers}>{children}</button>;
+}
+
+function ProjectCard({ p }) {
+  const [hovered, setHovered] = useState(false);
+  const [pressed, setPressed] = useState(false);
+  return (
+    <Link
+      to={p.href}
+      className="home-project-card"
+      onClick={() => trackEvent.caseStudyOpen(p.name)}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => { setHovered(false); setPressed(false); }}
+      onMouseDown={() => setPressed(true)}
+      onMouseUp={() => setPressed(false)}
+      style={{
+        background:'var(--bg)', display:'flex', flexDirection:'column',
+        borderRadius:10,
+        border: hovered ? '1px solid var(--blue)' : '1px solid var(--border)',
+        overflow:'hidden', textDecoration:'none', color:'inherit',
+        transition:'border-color 0.2s,box-shadow 0.2s,transform 0.2s',
+        boxShadow: hovered ? '0 8px 32px rgba(25,86,219,0.12)' : 'none',
+        transform: pressed ? 'scale(0.98)' : hovered ? 'translateY(-4px)' : 'none',
+      }}
+    >
+      <div style={{width:'100%',height:200,background:'var(--bg-soft)',borderBottom:'1px solid var(--border)',overflow:'hidden',flexShrink:0}}>
+        <img src={p.thumb} alt={p.name} style={{width:'100%',height:'100%',objectFit:'cover',objectPosition:'center',display:'block',transition:'transform 0.4s ease',transform:hovered?'scale(1.04)':'scale(1)'}}/>
+      </div>
+      <div style={{padding:20,display:'flex',flexDirection:'column',gap:10,flex:1}}>
+        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',gap:8}}>
+          <div style={{display:'flex',alignItems:'center',gap:8,flex:1,minWidth:0}}>
+            <img src={p.logo} alt={p.name} style={{width:22,height:22,borderRadius:5,objectFit:'contain',flexShrink:0}}/>
+            <span style={{fontSize:11,fontWeight:600,padding:'3px 10px',borderRadius:20,whiteSpace:'nowrap',...ROLE_STYLES[p.roleClass]}}>{p.role}</span>
+          </div>
+          <span style={{fontSize:12,color:'var(--muted)',fontWeight:400,whiteSpace:'nowrap',flexShrink:0}}>{p.duration}</span>
+        </div>
+        <p style={{fontSize:18,fontWeight:600,color:'var(--text)',letterSpacing:'-0.025em',lineHeight:1.2}}>{p.name}</p>
+        <p style={{fontSize:13,color:'var(--muted)',lineHeight:1.6,fontWeight:300}}>{p.desc}</p>
+        <div style={{display:'flex',flexWrap:'wrap',gap:6,marginTop:4}}>
+          {p.tags.map(t => <span key={t} className="badge" style={{background:'var(--blue-light)',color:'var(--blue)'}}>{t}</span>)}
+        </div>
+      </div>
+      <div style={{padding:'0 16px 16px'}}>
+        <span style={{
+          display:'flex', width:'100%', borderRadius:8, fontSize:14,
+          padding:'10px 16px', justifyContent:'center',
+          background: hovered ? '#C7D2E8' : '#EBF0F8',
+          color: hovered ? '#3A4864' : '#405070',
+          fontWeight:500, alignItems:'center', gap:8,
+          transition:'background 0.15s,color 0.15s',
+        }}>
+          Voir le projet <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </div>
+    </Link>
+  );
+}
 
 function SkillTag({ skill, active, isCore, onToggle }) {
   const [hovered, setHovered] = useState(false);
