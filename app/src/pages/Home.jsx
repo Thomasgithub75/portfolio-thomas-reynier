@@ -459,13 +459,14 @@ function SkillTag({ skill, active, isCore, onToggle }) {
 
   const base = { fontFamily:'inherit', fontSize:13, fontWeight:500, padding:'3px 8px', borderRadius:6, cursor:'pointer', lineHeight:1.4, whiteSpace:'nowrap', display:'inline-flex', alignItems:'center', gap:6, transition:'background 0.15s,color 0.15s,transform 0.1s', border:'1.5px solid', transform: pressed ? 'scale(0.97)' : 'scale(1)' };
 
+  // Tokens: p500=#1956DB · p600=#1141A8 · p700=#0C2E7A · p50=#EEF3FD · p100=#D7E5FB · p200=#9DB8F2
   const coreStyle = active
-    ? { ...base, background: pressed ? '#0C447C' : hovered ? '#185FA5' : '#175CD3', color:'#fff', borderColor:'#1570EF' }
-    : { ...base, background: pressed ? '#0C447C' : hovered ? '#185FA5' : '#1A56DB', color:'#fff', borderColor:'#1A56DB' };
+    ? { ...base, background: pressed ? '#0C2E7A' : hovered ? '#1141A8' : '#1141A8', color:'#fff', borderColor:'#1956DB' }
+    : { ...base, background: pressed ? '#0C2E7A' : hovered ? '#1141A8' : '#1956DB', color:'#fff', borderColor:'#1956DB' };
 
   const secStyle = active
-    ? { ...base, background: pressed ? '#85B7EB' : hovered ? '#B5D4F4' : '#B2DDFF', color: pressed ? '#0C447C' : '#175CD3', borderColor:'#1570EF' }
-    : { ...base, background: pressed ? '#85B7EB' : hovered ? '#B5D4F4' : '#E8EFFD', color: pressed || hovered ? '#0C447C' : '#185FA5', borderColor:'#B5D4F4' };
+    ? { ...base, background: pressed ? '#9DB8F2' : hovered ? '#D7E5FB' : '#D7E5FB', color: pressed ? '#0C2E7A' : '#1141A8', borderColor:'#9DB8F2' }
+    : { ...base, background: pressed ? '#9DB8F2' : hovered ? '#D7E5FB' : '#EEF3FD', color: pressed || hovered ? '#0C2E7A' : '#1141A8', borderColor:'#9DB8F2' };
 
   return (
     <button
