@@ -216,7 +216,7 @@ h1.case-h1{font-size:clamp(28px,4vw,44px);font-weight:600;letter-spacing:-0.03em
   .nav-links.open{display:flex;flex-direction:column;position:fixed;top:60px;left:0;right:0;bottom:72px;background:#ffffff;z-index:200;padding:8px 0 0;border-top:1px solid var(--border);align-items:stretch;animation:menuSlide .22s ease;overflow-y:auto}
   .nav-links.open li{border-bottom:1px solid var(--border);width:100%}
   .nav-links.open li:last-child{border-bottom:none;padding:20px 2rem 0}
-  .nav-links.open .nav-link{display:block;padding:22px 2rem;font-size:20px;font-weight:500;color:var(--text);text-align:left}
+  .nav-links.open .nav-link{display:block;padding:22px 2rem;font-size:20px;font-weight:500;color:var(--text);text-align:left;width:100%}
   .nav-links.open .nav-cta{display:block;text-align:center;background:var(--blue);color:#fff !important;font-weight:600 !important;padding:16px !important;border-radius:10px;font-size:16px !important;margin:0 2rem}
   .burger{display:flex}
 }

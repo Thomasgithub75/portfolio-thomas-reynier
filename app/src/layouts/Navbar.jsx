@@ -7,13 +7,8 @@ export default function Navbar() {
   const navigate = useNavigate();
   const isHome = location.pathname === '/';
 
-  function close() { setOpen(false); document.body.style.overflow = ''; }
-
-  function toggle() {
-    const next = !open;
-    setOpen(next);
-    document.body.style.overflow = next ? 'hidden' : '';
-  }
+  function close() { setOpen(false); }
+  function toggle() { setOpen(prev => !prev); }
 
   function handleAnchor(anchor) {
     close();

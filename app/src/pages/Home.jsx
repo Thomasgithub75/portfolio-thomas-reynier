@@ -142,9 +142,9 @@ export default function Home() {
                   </div>
                 ))}
               </div>
-              <div style={{display:'flex',alignItems:'flex-start',marginBottom:32}}>
+              <div style={{display:'flex',alignItems:'stretch',marginBottom:32}}>
                 {[['5','ans d\'expérience'],['+10','produit SaaS'],['+100','features']].map(([num,lbl],i) => (
-                  <div key={lbl} style={{padding:'0 20px',borderRight:i<2?'1px solid var(--border)':'none',paddingLeft:i===0?0:undefined}}>
+                  <div key={lbl} style={{paddingTop:4,paddingBottom:4,paddingRight:24,paddingLeft:i===0?0:24,borderRight:i<2?'1px solid var(--g200)':'none'}}>
                     <span style={{display:'block',fontSize:26,fontWeight:600,color:'var(--blue)',letterSpacing:'-0.03em',lineHeight:1.1}}>{num}</span>
                     <span style={{display:'block',fontSize:12,color:'var(--muted)',fontWeight:400,marginTop:4}}>{lbl}</span>
                   </div>

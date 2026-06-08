@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
@@ -61,13 +62,14 @@ function Lightbox({ src, onClose }) {
     document.addEventListener('keydown', fn);
     return () => document.removeEventListener('keydown', fn);
   }, [onClose]);
-  return (
+  return createPortal(
     <div className="lightbox-overlay" onClick={e => { if (e.target === e.currentTarget) onClose(); }}>
       <div className="lightbox-frame" onClick={e => e.stopPropagation()}>
         <img src={src} alt=""/>
       </div>
       <button className="lightbox-close" onClick={onClose}>✕</button>
-    </div>
+    </div>,
+    document.body
   );
 }
 
