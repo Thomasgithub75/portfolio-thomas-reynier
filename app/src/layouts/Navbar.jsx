@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 export default function Navbar() {
@@ -28,7 +29,7 @@ export default function Navbar() {
             <div className="nav-logo-placeholder">TR</div>
             <span className="nav-logo-text">Thomas Reynier</span>
           </Link>
-          <ul className={`nav-links${open ? ' open' : ''}`}>
+          <ul className="nav-links">
             <li><button className="nav-link" style={{background:'none',border:'none',cursor:'pointer',fontFamily:'inherit'}} onClick={() => handleAnchor('hero')}>Accueil</button></li>
             <li><button className="nav-link" style={{background:'none',border:'none',cursor:'pointer',fontFamily:'inherit'}} onClick={() => handleAnchor('competences')}>Expertises</button></li>
             <li><button className="nav-link" style={{background:'none',border:'none',cursor:'pointer',fontFamily:'inherit'}} onClick={() => handleAnchor('projets')}>Projets</button></li>
@@ -39,17 +40,31 @@ export default function Navbar() {
           </button>
         </div>
       </nav>
-      <div className={`mob-footer${open ? ' open' : ''}`}>
-        <span className="mob-footer-email">reynier.design@gmail.com</span>
-        <div className="mob-footer-icons">
-          <a href="https://mail.google.com/mail/?view=cm&to=reynier.design@gmail.com" target="_blank" rel="noopener" className="mob-footer-icon">
-            <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
-          </a>
-          <a href="https://www.linkedin.com/in/thomas-reynier-product-design/" target="_blank" rel="noopener" className="mob-footer-icon">
-            <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-          </a>
-        </div>
-      </div>
+
+      {open && createPortal(
+        <div className="mob-overlay">
+          <ul className="mob-menu">
+            <li><button onClick={() => handleAnchor('hero')}>Accueil</button></li>
+            <li><button onClick={() => handleAnchor('competences')}>Expertises</button></li>
+            <li><button onClick={() => handleAnchor('projets')}>Projets</button></li>
+            <li className="mob-menu-cta-li">
+              <button onClick={() => handleAnchor('contact')}>Contact</button>
+            </li>
+          </ul>
+          <div className="mob-footer-inner">
+            <span className="mob-footer-email">reynier.design@gmail.com</span>
+            <div className="mob-footer-icons">
+              <a href="https://mail.google.com/mail/?view=cm&to=reynier.design@gmail.com" target="_blank" rel="noopener" className="mob-footer-icon">
+                <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+              </a>
+              <a href="https://www.linkedin.com/in/thomas-reynier-product-design/" target="_blank" rel="noopener" className="mob-footer-icon">
+                <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>,
+        document.body
+      )}
     </>
   );
 }

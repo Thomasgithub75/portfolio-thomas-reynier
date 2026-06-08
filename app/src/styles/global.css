@@ -236,9 +236,18 @@ h1.case-h1{font-size:clamp(28px,4vw,44px);font-weight:600;letter-spacing:-0.03em
 .contact-link-item{display:flex;align-items:center;gap:12px;color:var(--text);text-decoration:none;font-size:15px;padding:14px 18px;border:1px solid var(--border);border-radius:8px;background:var(--bg);transition:border-color 0.15s,background 0.15s,color 0.15s;font-weight:400}
 .contact-link-item:hover{border-color:var(--blue);background:var(--blue-light);color:var(--blue)}
 
+/* ── MOBILE MENU PORTAL ── */
+.mob-overlay{position:fixed;top:60px;left:0;right:0;bottom:0;background:#fff;z-index:9990;display:flex;flex-direction:column;animation:menuSlide .22s ease}
+.mob-menu{flex:1;list-style:none;display:flex;flex-direction:column;overflow-y:auto;border-top:1px solid var(--border);padding:8px 0 0}
+.mob-menu li{border-bottom:1px solid var(--border);width:100%}
+.mob-menu li button{display:block;width:100%;padding:22px 2rem;font-size:20px;font-weight:500;color:var(--text);text-align:left;background:none;border:none;cursor:pointer;font-family:'Outfit',sans-serif}
+.mob-menu-cta-li{border-bottom:none !important;padding:20px 2rem}
+.mob-menu-cta-li button{display:block;width:100%;text-align:center;background:var(--blue);color:#fff;font-weight:600;padding:16px;border-radius:10px;font-size:16px;border:none;cursor:pointer;font-family:'Outfit',sans-serif}
+.mob-footer-inner{height:72px;background:#fff;border-top:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+
 @media(max-width:900px){
   .home-hero-grid{grid-template-columns:1fr;gap:32px}
-  .home-hero-image{max-width:220px;order:-1;justify-self:start}
+  .home-hero-image{max-width:220px;order:-1;justify-self:center}
   .home-projects-grid{grid-template-columns:1fr}
   .home-exp-grid{grid-template-columns:1fr}
   .home-rec-featured-grid{grid-template-columns:1fr}
