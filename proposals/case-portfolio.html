@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Study — Portfolio Design × IA × Code</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --p50:#EEF3FD;--p100:#D7E5FB;--p200:#9DB8F2;--p300:#6191E9;--p400:#3B70E1;
+  --p500:#1956DB;--p600:#1141A8;--p700:#0C2E7A;
+  --g50:#F6F8FB;--g100:#EBF0F8;--g200:#C7D2E8;--g500:#5B6A8A;--g900:#1A2540;
+  --text:#1A2540;--muted:#5B6A8A;--border:#E5E7EB;--bg:#fff;
+  --port-bg:#F0F4FF;--port-fg:#2145A8;--port-border:#C4D0F5;
+}
+body{font-family:'Outfit',sans-serif;background:#EDEEF0;color:var(--text);-webkit-font-smoothing:antialiased}
+
+/* ── Navbar ── */
+nav{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
+.nav-inner{max-width:880px;margin:0 auto;padding:0 32px;height:52px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-size:14px;font-weight:600;letter-spacing:-.02em;color:var(--text);text-decoration:none}
+.nav-links{display:flex;gap:24px}
+.nav-links a{font-size:13px;color:var(--muted);text-decoration:none}
+
+/* ── Layout ── */
+.container{max-width:880px;margin:0 auto;padding:0 32px}
+
+/* ── Case Header ── */
+.case-header{background:#fff;border-bottom:1px solid var(--border);padding:52px 0 44px}
+.back-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);text-decoration:none;margin-bottom:28px}
+.back-link svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.header-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px}
+.htag{font-size:11px;padding:3px 10px;border-radius:5px;font-weight:500;white-space:nowrap;background:var(--port-bg);color:var(--port-fg);border:1px solid var(--port-border)}
+.title-row{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.case-logo{width:36px;height:36px;border-radius:9px;background:#0F172A;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;letter-spacing:-.03em}
+.case-h1{font-size:clamp(24px,3.2vw,38px);font-weight:700;letter-spacing:-.03em;line-height:1.1}
+.meta-line{font-size:13px;color:var(--muted);font-weight:300;margin-bottom:10px}
+.reading-time{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--muted);margin-bottom:22px}
+.reading-time svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.8}
+.case-intro{font-size:15px;color:var(--muted);line-height:1.75;font-weight:300;border-left:3px solid var(--p500);padding-left:16px;margin-bottom:32px}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.stat{background:#fff;padding:20px 16px}
+.stat-val{font-size:28px;font-weight:700;color:var(--p500);letter-spacing:-.04em;line-height:1;margin-bottom:5px}
+.stat-label{font-size:11px;color:var(--muted);font-weight:300;line-height:1.4}
+
+/* ── Content ── */
+.content{padding:64px 0}
+
+/* ── Aperçu ── */
+.illus-label{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+.illus-g1{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:56px}
+.illus-g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
+.illus-item{background:var(--g50);border-radius:10px;border:1px solid var(--border);overflow:hidden}
+.illus-item img{width:100%;display:block;aspect-ratio:16/9;object-fit:cover}
+.illus-placeholder{width:100%;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;gap:8px;background:var(--g100);color:var(--muted);font-size:12px}
+.illus-placeholder-43{aspect-ratio:4/3}
+.illus-caption{padding:10px 14px;font-size:11px;color:var(--muted);border-top:1px solid var(--border)}
+
+/* ── Section ── */
+.case-section{padding-top:48px;margin-top:48px;border-top:1px solid var(--border);display:grid;grid-template-columns:180px 1fr;gap:40px;align-items:start}
+.case-section.no-border{border-top:none;margin-top:0;padding-top:0}
+.sec-label-plain{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding-top:4px}
+.sec-num{font-size:13px;font-weight:700;color:var(--p500);letter-spacing:.04em;display:block;margin-bottom:2px}
+.sec-step{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:block}
+.sec-body h2{font-size:19px;font-weight:700;letter-spacing:-.02em;margin-bottom:12px}
+.sec-body p{font-size:14px;color:var(--muted);line-height:1.75;font-weight:300;margin-bottom:12px}
+.sec-body strong{font-weight:600;color:var(--text)}
+.sec-body code{font-size:12px;background:var(--g100);color:var(--p600);padding:2px 6px;border-radius:4px;font-family:monospace}
+
+/* ── Result list ── */
+.result-list{list-style:none;margin-top:16px;display:flex;flex-direction:column;gap:8px}
+.result-list li{font-size:13px;color:var(--muted);font-weight:400;padding-left:18px;position:relative;line-height:1.55}
+.result-list li::before{content:'';position:absolute;left:0;top:7px;width:6px;height:6px;border-radius:50%;background:var(--p500)}
+
+/* ── Mission Banner ── */
+.mission-banner{margin:48px 0 0;background:linear-gradient(135deg,var(--g900) 0%,#223060 100%);border-radius:12px;padding:28px 32px;display:flex;align-items:flex-start;gap:20px}
+.mission-accent{width:3px;height:52px;border-radius:2px;background:var(--p400);flex-shrink:0;margin-top:2px}
+.mission-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:6px}
+.mission-title{font-size:17px;font-weight:700;color:#fff;letter-spacing:-.02em;margin-bottom:4px}
+.mission-desc{font-size:13px;color:rgba(255,255,255,.5);font-weight:300;line-height:1.6}
+
+/* ── Steps ── */
+.steps{display:flex;flex-direction:column;gap:0;margin-top:20px}
+.step{display:flex;gap:14px;position:relative}
+.step:not(.last)::after{content:'';position:absolute;left:15px;top:32px;bottom:-4px;width:1px;background:var(--border)}
+.step-icon{width:32px;height:32px;border-radius:8px;background:var(--g50);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;font-weight:700;color:var(--p500)}
+.step-body-wrap{padding-bottom:20px;flex:1}
+.step-num{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+.step-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px}
+.step-desc{font-size:13px;color:var(--muted);font-weight:300;line-height:1.6}
+
+/* ── CTA ── */
+.case-cta{background:var(--g900);padding:64px 0;text-align:center;margin-top:80px}
+.case-cta h2{font-size:24px;font-weight:700;color:#fff;letter-spacing:-.02em;margin-bottom:10px}
+.case-cta p{font-size:14px;color:rgba(255,255,255,.45);font-weight:300;margin-bottom:28px}
+.cta-btns{display:flex;justify-content:center;gap:12px}
+.btn-p{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border-radius:7px;background:var(--p500);color:#fff;font-size:14px;font-weight:500;text-decoration:none;font-family:inherit}
+.btn-g{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:7px;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.65);font-size:14px;font-weight:400;text-decoration:none;font-family:inherit}
+
+/* ── Other projects ── */
+.other-projects{padding:64px 0;background:#fff;border-top:1px solid var(--border)}
+.other-projects-title{font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-bottom:24px;text-align:center}
+.other-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.other-card{background:var(--g50);border:1px solid var(--border);border-radius:12px;overflow:hidden;text-decoration:none;display:block}
+.other-thumb{width:100%;aspect-ratio:16/7;background:var(--g100);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--muted)}
+.other-info{padding:16px}
+.other-meta{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.role-chip{font-size:11px;font-weight:600;padding:2px 8px;border-radius:4px}
+.role-nectar{background:#FEF3E2;color:#A05C0A}
+.role-weborama{background:#E3F7EE;color:#0E7A56}
+.other-dur{font-size:11px;color:var(--muted)}
+.other-name{font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px}
+.other-desc{font-size:12px;color:var(--muted);font-weight:300;line-height:1.55;margin-bottom:10px}
+.other-tags{display:flex;flex-wrap:wrap;gap:5px}
+.other-tag{font-size:10px;padding:2px 7px;border-radius:4px;background:var(--p50);color:var(--p500);font-weight:500}
+
+/* ── Footer ── */
+footer{background:var(--g900);padding:32px 0;text-align:center}
+footer p{font-size:12px;color:rgba(255,255,255,.28);font-weight:300}
+
+@media(max-width:640px){
+  .stats-row{grid-template-columns:1fr 1fr}
+  .case-section{grid-template-columns:1fr;gap:16px}
+  .other-grid{grid-template-columns:1fr}
+  .illus-g2{grid-template-columns:1fr}
+  .cta-btns{flex-direction:column;align-items:center}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#">Thomas Reynier</a>
+    <div class="nav-links">
+      <a href="#">Projets</a>
+      <a href="#">À propos</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+</nav>
+
+
+<!-- ── HEADER ── -->
+<div class="case-header">
+  <div class="container">
+
+    <a class="back-link" href="#">
+      <svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Retour aux projets
+    </a>
+
+    <div class="header-tags">
+      <span class="htag">UX Design</span>
+      <span class="htag">Documentation</span>
+      <span class="htag">Benchmark</span>
+      <span class="htag">Idéation</span>
+      <span class="htag">Design System</span>
+      <span class="htag">Itération</span>
+      <span class="htag">Tests</span>
+      <span class="htag">Claude Code</span>
+    </div>
+
+    <div class="title-row">
+      <div class="case-logo">TR</div>
+      <h1 class="case-h1">Portfolio — Design&nbsp;×&nbsp;IA&nbsp;×&nbsp;Code</h1>
+    </div>
+
+    <p class="meta-line">Product Designer · Projet personnel · 2026 · Figma · Claude Code · React · Vercel</p>
+
+    <p class="reading-time">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      Lecture · ~5 min
+    </p>
+
+    <p class="case-intro">Ce portfolio est un projet design à part entière — brief, benchmark, idéation, design system, itérations et tests. Chaque décision est la mienne. L'IA a été l'outil d'exécution, pas le décideur.</p>
+
+    <div class="stats-row">
+      <div class="stat">
+        <div class="stat-val">6</div>
+        <div class="stat-label">étapes design — du brief au produit livré</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">10</div>
+        <div class="stat-label">jours du premier brief au déploiement</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">155</div>
+        <div class="stat-label">itérations — feedback visuel continu</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">100%</div>
+        <div class="stat-label">focus sur les décisions design — implémentation déléguée à l'IA</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ── CONTENT ── -->
+<div class="content">
+  <div class="container">
+
+    <!-- Aperçu -->
+    <p class="illus-label">Aperçu du portfolio</p>
+    <div class="illus-g1">
+      <div class="illus-item">
+        <div class="illus-placeholder">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          Aperçu — Design System, composants et pages
+        </div>
+        <div class="illus-caption">De la documentation au produit — process design complet piloté par IA</div>
+      </div>
+    </div>
+
+
+    <!-- CONTEXTE -->
+    <div class="case-section no-border">
+      <span class="sec-label-plain">Contexte</span>
+      <div class="sec-body">
+        <p>Un portfolio de Product Designer doit prouver ce qu'il prétend. Le mien devait démontrer ma capacité à <strong>conduire un process design de A à Z</strong> — de la définition du brief à la livraison d'un produit fonctionnel.</p>
+        <p>J'ai mené ce projet seul, en intégrant l'IA à chaque étape de la conception. Le développement React a été entièrement piloté via Claude Code — sans écrire de code — pour rester concentré sur les décisions design et produit.</p>
+        <ul class="result-list">
+          <li>Cible définie — recruteurs, directeurs produit, fondateurs · visite &lt; 3 min · desktop prioritaire</li>
+          <li>Objectif de conversion — chaque section conçue pour amener au contact</li>
+          <li>Process documenté et réplicable à d'autres projets</li>
+        </ul>
+      </div>
+    </div>
+
+
+    <!-- PHASE 01 -->
+    <div class="mission-banner">
+      <div class="mission-accent"></div>
+      <div>
+        <div class="mission-label">Phase 01</div>
+        <div class="mission-title">Conception — décisions humaines, exécution IA</div>
+        <div class="mission-desc">Brief, benchmark, idéation, design system et tests — chaque étape pilotée par mes décisions de conception, accélérée par l'IA.</div>
+      </div>
+    </div>
+
+
+    <!-- 01 Documentation -->
+    <div class="case-section" id="documentation">
+      <div>
+        <span class="sec-num">01</span>
+        <span class="sec-step">Documentation</span>
+      </div>
+      <div class="sec-body">
+        <h2>Le CLAUDE.md comme brief de design</h2>
+        <p>Avant toute conception, j'ai rédigé un document de référence structuré comme un vrai brief de design : qui est Thomas, quelle est la cible, quel ton adopter, quels principes UX/UI respecter, ce qu'il ne faut pas faire.</p>
+        <p>Ce brief cadre chaque session de travail. Il garantit la cohérence entre les décisions de conception et les comportements attendus du produit final — la même logique qu'un brief agence ou un document de stratégie design.</p>
+
+        <div class="steps">
+          <div class="step">
+            <div class="step-icon">AI</div>
+            <div class="step-body-wrap">
+              <div class="step-num">Contenu</div>
+              <div class="step-title">Profil, cible et objectifs</div>
+              <div class="step-desc">Qui est Thomas, quel poste il vise, quel message le portfolio doit transmettre — définis avant la première maquette.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-icon">AI</div>
+            <div class="step-body-wrap">
+              <div class="step-num">Principes</div>
+              <div class="step-title">Règles UX/UI et ton de voix</div>
+              <div class="step-desc">Clarté, hiérarchie visuelle, responsive, accessibilité, registre sobre et direct — les garde-fous de toutes les décisions de conception.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-icon">AI</div>
+            <div class="step-body-wrap">
+              <div class="step-num">Contraintes</div>
+              <div class="step-title">Ce qu'il ne faut pas faire</div>
+              <div class="step-desc">Animations lourdes, textes trop longs, navigation ambiguë, design surchargé — documentés explicitement pour ne jamais y dériver.</div>
+            </div>
+          </div>
+          <div class="step last">
+            <div class="step-icon">AI</div>
+            <div class="step-body-wrap">
+              <div class="step-num">Méthodologie</div>
+              <div class="step-title">Un process nommé et réplicable</div>
+              <div class="step-desc">CLAUDE.md + 6 étapes design + Claude Code = une méthodologie structurée, documentée et transférable. Applicable à n'importe quel projet produit ou client.</div>
+            </div>
+          </div>
+        </div>
+
+        <ul class="result-list">
+          <li>Brief complet rédigé avant le premier composant — la conception ne commence pas sans cadre</li>
+          <li>Tone of voice défini — sobre, direct, résultats en premier, sans superlatifs</li>
+          <li>Document versionné sur GitHub — chaque évolution est traçable, chaque session repart avec un contexte complet</li>
+          <li>Méthodologie réplicable — applicable à tout projet produit ou client dès la première session</li>
+        </ul>
+
+        <div class="illus-g1" style="margin-top:24px">
+          <div class="illus-item">
+            <div class="illus-placeholder">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+              Capture CLAUDE.md
+            </div>
+            <div class="illus-caption">CLAUDE.md — brief de design structuré : cible, principes UX/UI, contraintes</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- 02 Benchmark -->
+    <div class="case-section" id="benchmark">
+      <div>
+        <span class="sec-num">02</span>
+        <span class="sec-step">Benchmark</span>
+      </div>
+      <div class="sec-body">
+        <h2>Patterns UX retenus et décisions structurantes</h2>
+        <p>J'ai analysé des portfolios de Product Designers reconnus dans le produit SaaS B2B et la recherche utilisateur pour identifier les patterns qui fonctionnent pour une cible recruteur — et ceux qui la ralentissent.</p>
+        <p>L'enjeu n'était pas de copier un format existant mais d'identifier les <strong>décisions UX qui servent le parcours recruteur</strong> — un visiteur qui scanne en moins de 3 minutes et doit comprendre l'expertise sans effort.</p>
+
+        <div class="steps">
+          <div class="step">
+            <div class="step-icon">AI</div>
+            <div class="step-body-wrap">
+              <div class="step-num">PATTERN RETENU</div>
+              <div class="step-title">Stats en header — résultats avant le détail</div>
+              <div class="step-desc">Les recruteurs portent leur attention sur les chiffres dans les 30 premières secondes. Décision : 4 KPIs mesurables en header de chaque étude de cas.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-icon">AI</div>
+            <div class="step-body-wrap">
+              <div class="step-num">PATTERN RETENU</div>
+              <div class="step-title">Structure en phases numérotées</div>
+              <div class="step-desc">Un parcours de lecture lisible en diagonale. Décision : découper chaque case study en phases avec label visible — le recruteur pressé peut sauter à ce qui l'intéresse.</div>
+            </div>
+          </div>
+          <div class="step last">
+            <div class="step-icon">AI</div>
+            <div class="step-body-wrap">
+              <div class="step-num">ÉCARTÉ</div>
+              <div class="step-title">Portfolios visuels lourds</div>
+              <div class="step-desc">Portfolios très graphiques avec animations et effets de scroll — contre-productifs pour un profil Product Designer SaaS B2B lu par des recruteurs tech.</div>
+            </div>
+          </div>
+        </div>
+
+        <ul class="result-list">
+          <li>KPIs en header — résultats visibles avant le récit, pour un lecteur pressé</li>
+          <li>Sections numérotées — lisible en diagonale, sautables selon l'intérêt du profil visiteur</li>
+          <li>Desktop prioritaire — layout, densité et typographie calibrés pour l'écran 13"–15" d'un recruteur</li>
+        </ul>
+      </div>
+    </div>
+
+
+    <!-- 03 Idéation -->
+    <div class="case-section" id="ideation">
+      <div>
+        <span class="sec-num">03</span>
+        <span class="sec-step">Idéation</span>
+      </div>
+      <div class="sec-body">
+        <h2>Structure, parcours et zoning</h2>
+        <p>À partir du brief et du benchmark, j'ai défini les contraintes et les objectifs de chaque surface — sections de la Home, anatomie des études de cas, navigation. L'IA a proposé des structures que j'ai testées, rejetées ou retravaillées selon ces critères.</p>
+        <p>La question centrale à chaque décision : <strong>est-ce que ce choix sert le parcours du recruteur, ou est-ce que ça me fait plaisir à moi ?</strong></p>
+
+        <div class="steps">
+          <div class="step">
+            <div class="step-icon">AI</div>
+            <div class="step-body-wrap">
+              <div class="step-num">Home</div>
+              <div class="step-title">5 sections orientées conversion</div>
+              <div class="step-desc">Hero · Compétences par filtre · Projets · Témoignages · Contact — chaque section a un rôle précis dans le parcours de décision du recruteur.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-icon">AI</div>
+            <div class="step-body-wrap">
+              <div class="step-num">Études de cas</div>
+              <div class="step-title">Anatomie d'une case study</div>
+              <div class="step-desc">Header avec KPIs, phases numérotées, étapes détaillées, liste de résultats, visuels — structure standardisée et lisible en diagonale.</div>
+            </div>
+          </div>
+          <div class="step last">
+            <div class="step-icon">AI</div>
+            <div class="step-body-wrap">
+              <div class="step-num">Filtres</div>
+              <div class="step-title">Parcours personnalisé par compétence</div>
+              <div class="step-desc">8 catégories de compétences filtrables — un recruteur Design System voit des projets différents d'un recruteur UX Research. Le portfolio s'adapte au profil du visiteur.</div>
+            </div>
+          </div>
+        </div>
+
+        <ul class="result-list">
+          <li>Home — 5 sections avec un objectif de conversion clair pour chacune</li>
+          <li>Case studies — structure en phases avec étapes, visuels et résultats chiffrés</li>
+          <li>Filtres de compétences — 8 catégories · projets associés dynamiquement selon le profil visiteur</li>
+          <li>TOC dynamique, scroll progress, section active en temps réel</li>
+        </ul>
+
+        <div class="illus-g2">
+          <div class="illus-item">
+            <div class="illus-placeholder illus-placeholder-43">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+              Structure Home
+            </div>
+            <div class="illus-caption">Structure de la Home — 5 sections et parcours de conversion</div>
+          </div>
+          <div class="illus-item">
+            <div class="illus-placeholder illus-placeholder-43">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+              Anatomie case study
+            </div>
+            <div class="illus-caption">Anatomie d'une étude de cas — header, phases, résultats</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- 04 Design System -->
+    <div class="case-section" id="design-system">
+      <div>
+        <span class="sec-num">04</span>
+        <span class="sec-step">Design System</span>
+      </div>
+      <div class="sec-body">
+        <h2>Tokens et composants comme fondation</h2>
+        <p>Avant le premier écran, j'ai spécifié l'intégralité du système visuel — couleurs sémantiques, typographie, espacements, border radius. Ces tokens sont la source unique de toutes les décisions visuelles du site.</p>
+        <p>J'ai ensuite conçu 4 composants custom avec leurs états complets. Chaque état — hover, pressed, disabled, focus — est défini comme une décision de design, pas comme une contrainte technique.</p>
+
+        <div class="steps">
+          <div class="step">
+            <div class="step-icon">AI</div>
+            <div class="step-body-wrap">
+              <div class="step-num">Tokens</div>
+              <div class="step-title">Système de couleurs sémantiques</div>
+              <div class="step-desc">Primaires, neutres, états, feedback — palette structurée en niveaux (50 à 700) pour couvrir tous les contextes d'usage.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-icon">AI</div>
+            <div class="step-body-wrap">
+              <div class="step-num">Composants</div>
+              <div class="step-title">4 composants avec états complets</div>
+              <div class="step-desc">Button, Tag, Badge, TestimonialCard — hover, pressed, disabled, focus visible. Chaque variante définie par une spécification visuelle.</div>
+            </div>
+          </div>
+          <div class="step last">
+            <div class="step-icon">AI</div>
+            <div class="step-body-wrap">
+              <div class="step-num">Inventaire</div>
+              <div class="step-title">Page /design-system comme argument de vente</div>
+              <div class="step-desc">Une page dédiée à l'inventaire complet des composants — conçue pour un recruteur ou un directeur design qui veut voir la rigueur du système, pas juste le résultat visuel.</div>
+            </div>
+          </div>
+        </div>
+
+        <ul class="result-list">
+          <li>Tokens — couleurs, typographie, espacements, border radius dans theme.js</li>
+          <li>4 composants custom — états interactifs définis comme des décisions design</li>
+          <li>Page /design-system — argument de démonstration pour un profil technique ou design lead</li>
+          <li>Source unique — toute dérive visuelle est détectable immédiatement</li>
+        </ul>
+
+        <div class="illus-g2">
+          <div class="illus-item">
+            <div class="illus-placeholder illus-placeholder-43">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+              Tokens theme.js
+            </div>
+            <div class="illus-caption">Tokens de couleur et typographie — palette sémantique</div>
+          </div>
+          <div class="illus-item">
+            <div class="illus-placeholder illus-placeholder-43">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+              Page /design-system
+            </div>
+            <div class="illus-caption">Composants custom avec états — page /design-system</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- 05 Itération & Tests -->
+    <div class="case-section" id="iteration">
+      <div>
+        <span class="sec-num">05</span>
+        <span class="sec-step">Itération & Tests</span>
+      </div>
+      <div class="sec-body">
+        <h2>Feedback visuel continu et boucle d'affinage</h2>
+        <p>Une fois les premières pages générées, j'ai mis en place une boucle d'itération systématique : observer dans le navigateur, identifier les écarts avec la vision design, formuler une instruction précise, vérifier le résultat.</p>
+        <p>Les 155 commits reflètent cette discipline — chaque ajustement est une décision de design documentée, pas une correction au hasard.</p>
+
+        <div class="steps">
+          <div class="step">
+            <div class="step-icon">AI</div>
+            <div class="step-body-wrap">
+              <div class="step-num">Observer</div>
+              <div class="step-title">Test visuel après chaque changement</div>
+              <div class="step-desc">Vérification systématique dans le navigateur — typographie, alignements, états interactifs, comportements au scroll, responsive.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-icon">AI</div>
+            <div class="step-body-wrap">
+              <div class="step-num">Formuler</div>
+              <div class="step-title">Instruction design précise</div>
+              <div class="step-desc">Chaque retour est formulé comme une décision de design : comportement attendu, référence visuelle, contexte. Pas de correction technique.</div>
+            </div>
+          </div>
+          <div class="step last">
+            <div class="step-icon">AI</div>
+            <div class="step-body-wrap">
+              <div class="step-num">Valider</div>
+              <div class="step-title">Cohérence avec le Design System</div>
+              <div class="step-desc">Chaque modification est vérifiée par rapport aux tokens et composants définis — le Design System est le garde-fou de la cohérence.</div>
+            </div>
+          </div>
+        </div>
+
+        <ul class="result-list">
+          <li>155 itérations — couleurs, espacements, états interactifs, animations</li>
+          <li>États hover et pressed distincts sur tous les éléments cliquables</li>
+          <li>Micro-interactions documentées — temps de lecture estimé, barre de progression, section active TOC, back-to-top · chacune répond à un besoin d'orientation identifié</li>
+          <li>20+ proposals archivés dans le repo — chaque piste de design explorée est visible et traçable dans l'historique GitHub</li>
+          <li>Comportements de scroll testés — TOC, barre de progression, retour en haut</li>
+          <li>Responsive vérifié — mobile, tablette, desktop large</li>
+        </ul>
+
+        <div class="illus-g2">
+          <div class="illus-item">
+            <div class="illus-placeholder illus-placeholder-43">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+              Session d'itération
+            </div>
+            <div class="illus-caption">Boucle d'itération — observation, instruction, vérification</div>
+          </div>
+          <div class="illus-item">
+            <div class="illus-placeholder illus-placeholder-43">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+              États interactifs
+            </div>
+            <div class="illus-caption">États interactifs — hover et pressed définis comme décisions design</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- PHASE 02 -->
+    <div class="mission-banner" style="margin-top:48px">
+      <div class="mission-accent"></div>
+      <div>
+        <div class="mission-label">Phase 02</div>
+        <div class="mission-title">Build & Livraison</div>
+        <div class="mission-desc">Développement React piloté via Claude Code et déploiement Vercel — sans écrire une ligne de code.</div>
+      </div>
+    </div>
+
+
+    <!-- 06 Développement -->
+    <div class="case-section" id="developpement">
+      <div>
+        <span class="sec-num">06</span>
+        <span class="sec-step">Développement</span>
+      </div>
+      <div class="sec-body">
+        <h2>De la conception au produit avec Claude Code</h2>
+        <p>Le développement est la traduction fidèle des décisions de conception. J'ai piloté Claude Code avec les mêmes instructions que j'aurais données à un développeur — stack, structure, comportements attendus, priorités.</p>
+        <p>Résultat en 10 jours : un site React complet, déployé, versionné. Claude Code gère également le versioning — commits, push — pour rester concentré sur les décisions produit.</p>
+
+        <div class="steps">
+          <div class="step">
+            <div class="step-icon">AI</div>
+            <div class="step-body-wrap">
+              <div class="step-num">Stack</div>
+              <div class="step-title">React · Vite · MUI · React Router · GitHub</div>
+              <div class="step-desc">15 fichiers JSX — pages, layouts et composants. Architecture propre décidée dès le départ pour rester maintenable.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-icon">AI</div>
+            <div class="step-body-wrap">
+              <div class="step-num">Livraison</div>
+              <div class="step-title">Vercel · déploiement continu</div>
+              <div class="step-desc">Chaque push sur main déclenche un build automatique. Vercel Analytics et Speed Insights intégrés pour mesurer les performances.</div>
+            </div>
+          </div>
+          <div class="step last">
+            <div class="step-icon">AI</div>
+            <div class="step-body-wrap">
+              <div class="step-num">Lettres de motivation</div>
+              <div class="step-title">Le CLAUDE.md comme base de connaissance réutilisable</div>
+              <div class="step-desc">Claude lit le CLAUDE.md sur GitHub — profil complet, tone of voice, compétences — et génère une lettre de motivation personnalisée par entreprise en quelques minutes. La connaissance accumulée dans le repo produit de la valeur au-delà du portfolio.</div>
+            </div>
+          </div>
+        </div>
+
+        <ul class="result-list">
+          <li>15 fichiers JSX — 5 pages, 2 layouts, 4 composants custom, utilitaires</li>
+          <li>CV HTML maintenu dans le même repo, même design system — exporté en PDF depuis le navigateur</li>
+          <li>3 lettres de motivation personnalisées générées depuis le même repo — format HTML + PDF</li>
+          <li>Build Vite optimisé — déploiement Vercel automatique à chaque push</li>
+          <li>Versioning complet géré par Claude Code — 155 commits propres sur GitHub</li>
+          <li>Versioning complet géré par Claude Code — 155 commits propres sur GitHub</li>
+        </ul>
+
+        <div class="illus-g2">
+          <div class="illus-item">
+            <div class="illus-placeholder illus-placeholder-43">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+              Lettre de motivation
+            </div>
+            <div class="illus-caption">Lettre de motivation — générée depuis le CLAUDE.md + brief entreprise</div>
+          </div>
+          <div class="illus-item">
+            <div class="illus-placeholder illus-placeholder-43">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+              Session Claude Code
+            </div>
+            <div class="illus-caption">Claude Code en session — instruction produit traduite en composant React</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- CTA -->
+<div class="case-cta">
+  <div class="container">
+    <h2>Un projet en tête ?</h2>
+    <p>Je suis disponible pour des missions freelance et des postes en CDI.</p>
+    <div class="cta-btns">
+      <a class="btn-p" href="mailto:reynier.design@gmail.com">Discutons-en</a>
+      <a class="btn-g" href="#">LinkedIn</a>
+    </div>
+  </div>
+</div>
+
+
+<!-- OTHER PROJECTS -->
+<div class="other-projects">
+  <div class="container">
+    <p class="other-projects-title">Autres projets</p>
+    <div class="other-grid">
+      <a class="other-card" href="#">
+        <div class="other-thumb">Aperçu Nectar</div>
+        <div class="other-info">
+          <div class="other-meta">
+            <span class="role-chip role-nectar">Founding Designer IA</span>
+            <span class="other-dur">En cours</span>
+          </div>
+          <div class="other-name">Nectar</div>
+          <div class="other-desc">MVP B2B mobile-first piloté par IA — de la recherche utilisateur aux 8 écrans livrés, avec un process documenté et réplicable.</div>
+          <div class="other-tags">
+            <span class="other-tag">Claude Code</span>
+            <span class="other-tag">Figma Make</span>
+            <span class="other-tag">Design System</span>
+            <span class="other-tag">UX Research</span>
+          </div>
+        </div>
+      </a>
+      <a class="other-card" href="#">
+        <div class="other-thumb">Aperçu Weborama</div>
+        <div class="other-info">
+          <div class="other-meta">
+            <span class="role-chip role-weborama">Design System Lead</span>
+            <span class="other-dur">16 mois</span>
+          </div>
+          <div class="other-name">Weborama</div>
+          <div class="other-desc">Audit de 974 composants, ateliers de co-construction et création d'un Design System de zéro — 80% de composants en moins.</div>
+          <div class="other-tags">
+            <span class="other-tag">Design System</span>
+            <span class="other-tag">Atomic Design</span>
+            <span class="other-tag">Figma Make</span>
+            <span class="other-tag">Zeroheight</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+
+<footer>
+  <p>Thomas Reynier · Product Designer IA · Paris · reynier.design@gmail.com</p>
+</footer>
+
+</body>
+</html>
