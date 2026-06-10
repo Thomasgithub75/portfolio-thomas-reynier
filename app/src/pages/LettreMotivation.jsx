@@ -308,7 +308,6 @@ function LettreApp() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'x-letter-secret': import.meta.env.VITE_LETTER_SECRET || '',
         },
         body: JSON.stringify({ offre, ton, entreprise, poste, contexte: contexteOn ? contexte : '' }),
         signal: abortRef.current.signal,

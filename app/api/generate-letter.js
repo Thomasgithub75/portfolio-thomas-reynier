@@ -48,24 +48,50 @@ Storybook · IA générative · Claude Code · Claude MCP · Supabase · Vercel
 const TON_INSTRUCTIONS = {
   equilibre: 'Ton équilibré, professionnel et direct. Phrases courtes. Pas de fioritures.',
   formel: 'Ton formel et structuré. Vocabulaire soutenu mais jamais pompeux.',
-  concis: 'Version très concise: 3 paragraphes maximum + 1 bloc KPI. Aller à l\'essentiel.',
-  engage: 'Ton direct et engagé. Montrer une vraie compréhension du produit ou de la mission.',
+  concis: "Version très concise: 3 paragraphes maximum + 1 bloc KPI. Aller à l'essentiel.",
+  engage: "Ton direct et engagé. Montrer une vraie compréhension du produit ou de la mission.",
 };
 
-export default async function handler(req, res) {
-  if (req.method === 'OPTIONS') {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-    return res.status(200).end();
+// ── Origin validation ─────────────────────────────────────────────────────────
+function getAllowedOrigins() {
+  return (process.env.ALLOWED_ORIGINS || '')
+    .split(',')
+    .map(o => o.trim())
+    .filter(Boolean);
+}
+
+function checkOrigin(req) {
+  const origin = req.headers.origin || req.headers.referer || '';
+  if (!origin) return { allowed: false, origin: '' };
+
+  // Always allow local development
+  if (origin.includes('localhost') || origin.includes('127.0.0.1')) {
+    return { allowed: true, origin };
   }
 
+  const allowedOrigins = getAllowedOrigins();
+
+  // If ALLOWED_ORIGINS is not configured, block non-localhost in production
+  if (allowedOrigins.length === 0) return { allowed: false, origin };
+
+  const matched = allowedOrigins.find(a => origin.startsWith(a));
+  return { allowed: !!matched, origin: matched || '' };
+}
+
+// ── Handler ───────────────────────────────────────────────────────────────────
+export default async function handler(req, res) {
+  const { allowed, origin } = checkOrigin(req);
+
+  // Set CORS headers — only for the matched origin, never wildcard
+  res.setHeader('Access-Control-Allow-Origin', origin || 'null');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Vary', 'Origin');
+
+  if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  const SECRET = process.env.LETTER_SECRET;
-  if (SECRET && req.headers['x-letter-secret'] !== SECRET) {
-    return res.status(401).json({ error: 'Unauthorized' });
-  }
+  if (!allowed) return res.status(403).json({ error: 'Forbidden' });
 
   const { offre, ton = 'equilibre', entreprise = '', poste = '', contexte = '' } = req.body;
 
@@ -128,8 +154,8 @@ RÈGLES STRICTES:
 - 5 à 6 paragraphes, doit tenir sur un A4
 - Mettre en **gras** les éléments clés (entreprises, chiffres, compétences)
 - Le bloc KPI contient: une exigence extraite de l'offre + la réponse de Thomas avec résultat chiffré
-- Dernier paragraphe: conclusion ouverte courte (1-2 phrases max)`
-      }]
+- Dernier paragraphe: conclusion ouverte courte (1-2 phrases max)`,
+      }],
     });
 
     for await (const chunk of stream) {
