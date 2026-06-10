@@ -4,6 +4,7 @@
 export { default as Button }        from './Button/Button';
 export { default as Badge }         from './Badge/Badge';
 export { default as Tag }           from './Tag/Tag';
+export { default as FormField }     from './FormField/FormField';
 
 export { default as TestimonialCard } from './TestimonialCard/TestimonialCard';
 

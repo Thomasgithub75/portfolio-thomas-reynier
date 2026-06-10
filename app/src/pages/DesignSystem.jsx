@@ -6,6 +6,7 @@ import Tooltip from '@mui/material/Tooltip';
 import Button from '../components/Button/Button';
 import Badge from '../components/Badge/Badge';
 import Tag from '../components/Tag/Tag';
+import FormField from '../components/FormField/FormField';
 import TestimonialCard from '../components/TestimonialCard/TestimonialCard';
 import { tokens } from '../theme/theme';
 import { useState } from 'react';
@@ -422,6 +423,27 @@ export default function DesignSystem() {
                 linkedinUrl="#"
               />
             </Box>
+          </Box>
+        </Group>
+      </Section>
+
+      <Divider sx={{ mb: 4 }} />
+
+      <Section title="FormField" subtitle="Input et Textarea — enabled (gray100) · hover (gray200) · focus (fond transparent, bordure brand 500).">
+        <Group label="Input">
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, maxWidth: 360 }}>
+            <FormField label="Entreprise" placeholder="Ex : Weborama" />
+            <FormField label="Poste" placeholder="Ex : Product Designer IA" />
+          </Box>
+        </Group>
+        <Group label="Textarea">
+          <Box sx={{ maxWidth: 360 }}>
+            <FormField
+              type="textarea"
+              label="Offre d'emploi"
+              placeholder="Colle ici le texte complet de l'offre…"
+              rows={4}
+            />
           </Box>
         </Group>
       </Section>
