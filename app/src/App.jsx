@@ -7,6 +7,7 @@ import CasePepyte from './pages/CasePepyte';
 import CaseNectar from './pages/CaseNectar';
 import CasePortfolio from './pages/CasePortfolio';
 import LettreMotivation from './pages/LettreMotivation';
+import DesignSystem from './pages/DesignSystem';
 import './styles/global.css';
 
 export default function App() {
@@ -19,6 +20,7 @@ export default function App() {
         <Route path="/case/nectar" element={<CaseNectar />} />
         <Route path="/case/portfolio" element={<CasePortfolio />} />
         <Route path="/lettre-motivation" element={<LettreMotivation />} />
+        <Route path="/design-system" element={<DesignSystem />} />
       </Routes>
       <Analytics />
       <SpeedInsights />
