@@ -7,6 +7,7 @@ import Button from '../components/Button/Button';
 import Badge from '../components/Badge/Badge';
 import Tag from '../components/Tag/Tag';
 import FormField from '../components/FormField/FormField';
+import Toggle from '../components/Toggle/Toggle';
 import TestimonialCard from '../components/TestimonialCard/TestimonialCard';
 import { tokens } from '../theme/theme';
 import { useState } from 'react';
@@ -170,6 +171,23 @@ function PrimaryScale() {
       </Box>
     </Box>
   );
+}
+
+// ── Toggle demos ──────────────────────────────────────────────────────────────
+
+function ToggleDemo() {
+  const [on, setOn] = useState(false);
+  return (
+    <Box sx={{ display: 'flex', alignItems: 'center', gap: 3 }}>
+      <Toggle checked={on} onChange={setOn} />
+      <Box sx={{ fontSize: '12px', color: tokens.muted }}>{on ? 'Selected' : 'Not selected'} — clique pour switcher</Box>
+    </Box>
+  );
+}
+
+function ToggleLabelDemo() {
+  const [on, setOn] = useState(true);
+  return <Toggle checked={on} onChange={setOn} label="Contexte complémentaire" />;
 }
 
 // ── Page ──────────────────────────────────────────────────────────────────────
@@ -424,6 +442,17 @@ export default function DesignSystem() {
               />
             </Box>
           </Box>
+        </Group>
+      </Section>
+
+      <Divider sx={{ mb: 4 }} />
+
+      <Section title="Toggle" subtitle="Switch on/off — selected (brand 600→700→800) · not selected (gray 400→500→600).">
+        <Group label="États">
+          <ToggleDemo />
+        </Group>
+        <Group label="Avec label">
+          <ToggleLabelDemo />
         </Group>
       </Section>
 
