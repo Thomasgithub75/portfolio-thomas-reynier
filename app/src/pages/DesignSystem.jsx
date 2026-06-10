@@ -8,6 +8,7 @@ import Badge from '../components/Badge/Badge';
 import Tag from '../components/Tag/Tag';
 import FormField from '../components/FormField/FormField';
 import Toggle from '../components/Toggle/Toggle';
+import OverflowMenu from '../components/OverflowMenu/OverflowMenu';
 import TestimonialCard from '../components/TestimonialCard/TestimonialCard';
 import { tokens } from '../theme/theme';
 import { useState } from 'react';
@@ -553,6 +554,7 @@ tokens.primary[50]    // blueLight`}
             'primary → CTA principal de l\'écran (générer, envoyer, voir le projet). Une seule occurrence recommandée par écran.',
             'secondary → action alternative ou secondaire (annuler, retour, option). Fond gris clair.',
             'ghost → action discrète, tertiaire ou navigation (télécharger, accéder, voir plus). Fond transparent + bordure.',
+            '⚠️ RÈGLE STRICTE — max 2 Button côte à côte. Si 3 actions ou plus sont nécessaires : garder les 2 principales en Button, regrouper le reste dans un <OverflowMenu>.',
             'Toujours accompagner d\'un label clair et actionnable ("Voir le projet", pas "Cliquez ici").',
             'Pour un lien externe : utiliser href — le composant se rend automatiquement en <a>.',
             'Icônes : utiliser exclusivement @mui/icons-material via startIcon/endIcon.',
@@ -696,6 +698,86 @@ const toggle = (id) => setActive(prev => prev === id ? null : id);
 // Langues
 <Tag category="langNatif">FR — Natif</Tag>
 <Tag category="langPro">EN — Pro</Tag>`}
+        />
+      </Section>
+
+      <Divider sx={{ mb: 7 }} />
+
+      {/* ── OVERFLOW MENU ─────────────────────────────────── */}
+      <Section title="OverflowMenu" subtitle="Bouton 3 points pour regrouper les actions supplémentaires. Obligatoire dès que 3 boutons ou plus seraient affichés côte à côte.">
+        <Group label="Groupe de 2 boutons + overflow (cas standard)">
+          <Stack direction="row" spacing={1.5} alignItems="center">
+            <Button variant="primary" size="md">Générer</Button>
+            <Button variant="secondary" size="md">Annuler</Button>
+            <OverflowMenu
+              size="md"
+              items={[
+                { label: 'Télécharger en PDF' },
+                { label: 'Copier le texte' },
+                { label: 'Recommencer' },
+              ]}
+            />
+          </Stack>
+        </Group>
+        <Group label="Taille sm — dans un toolbar ou une card dense">
+          <Stack direction="row" spacing={1} alignItems="center">
+            <Button variant="ghost" size="sm">Voir</Button>
+            <Button variant="secondary" size="sm">Modifier</Button>
+            <OverflowMenu
+              size="sm"
+              items={[
+                { label: 'Dupliquer' },
+                { label: 'Archiver' },
+                { label: 'Supprimer' },
+              ]}
+            />
+          </Stack>
+        </Group>
+
+        <DocBlock
+          props={[
+            ['items', '{ label, onClick, icon? }[]', '[]', 'Liste des actions du menu. label = texte affiché, onClick = handler au clic, icon = icône MUI optionnelle.'],
+            ['size', "'md' | 'sm'", "'md'", 'Taille du bouton déclencheur. Aligner avec les Button adjacents.'],
+          ]}
+          usage={[
+            'À utiliser obligatoirement dès que 3 actions ou plus seraient affichées côte à côte.',
+            'Règle : conserver les 2 actions principales en Button visible, regrouper le reste dans OverflowMenu.',
+            'Le size du OverflowMenu doit correspondre au size des Button adjacents (md avec md, sm avec sm).',
+            'Les items sont affichés dans l\'ordre du tableau — mettre les actions les plus courantes en premier.',
+            'L\'icône dans un item est optionnelle : utiliser uniquement @mui/icons-material, fontSize 16.',
+            'Pour une action destructive (supprimer, archiver) : la placer en dernier dans le tableau items.',
+          ]}
+          code={`import Button from '../components/Button/Button';
+import OverflowMenu from '../components/OverflowMenu/OverflowMenu';
+import DownloadIcon from '@mui/icons-material/Download';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+
+// Exemple : 2 boutons + overflow
+<Stack direction="row" spacing={1.5} alignItems="center">
+  <Button variant="primary" onClick={handleGenerate}>Générer</Button>
+  <Button variant="secondary" onClick={handleCancel}>Annuler</Button>
+  <OverflowMenu
+    size="md"
+    items={[
+      { label: 'Télécharger en PDF', onClick: handleDownload, icon: <DownloadIcon sx={{ fontSize: 16 }} /> },
+      { label: 'Copier le texte',    onClick: handleCopy,     icon: <ContentCopyIcon sx={{ fontSize: 16 }} /> },
+      { label: 'Recommencer',        onClick: handleReset },
+    ]}
+  />
+</Stack>
+
+// Taille sm dans une card
+<Stack direction="row" spacing={1} alignItems="center">
+  <Button variant="ghost" size="sm">Voir</Button>
+  <Button variant="secondary" size="sm">Modifier</Button>
+  <OverflowMenu
+    size="sm"
+    items={[
+      { label: 'Dupliquer',  onClick: handleDuplicate },
+      { label: 'Supprimer',  onClick: handleDelete },
+    ]}
+  />
+</Stack>`}
         />
       </Section>
 
