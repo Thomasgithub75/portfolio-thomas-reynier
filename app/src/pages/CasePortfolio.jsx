@@ -85,6 +85,7 @@ export default function CasePortfolio() {
               <li>Tone of voice défini — sobre, direct, résultats en premier, sans superlatifs</li>
               <li>Document versionné sur GitHub — chaque évolution est traçable, chaque session repart avec un contexte complet</li>
               <li>Méthodologie réplicable — applicable à tout projet produit ou client dès la première session</li>
+              <li>Base de connaissance IA persistante — zéro répétition de contexte entre sessions : le brief versionné remplace le briefing verbal</li>
             </ul>
             <div className="illustrations-grid-1" style={{marginTop:24}}>
               <IllustrationItem src="/images/portfolio-brief.png" caption="CLAUDE.md — brief de design versionné sur GitHub · source de vérité du projet"/>
@@ -139,21 +140,22 @@ export default function CasePortfolio() {
           <div className="sec-label"><span className="sec-label-num">04</span><span className="sec-label-step">Design System</span></div>
           <div className="sec-body">
             <h2>Tokens et composants comme fondation</h2>
-            <p>Avant le premier écran, j'ai spécifié l'intégralité du système visuel — couleurs sémantiques, typographie, espacements, border radius. Ces tokens sont la source unique de toutes les décisions visuelles du site.</p>
-            <p>J'ai ensuite conçu 4 composants custom avec leurs états complets. Chaque état — hover, pressed, disabled, focus — est défini comme une décision de design, pas comme une contrainte technique.</p>
+            <p>Avant le premier écran, j'ai spécifié l'intégralité du système visuel — couleurs sémantiques, typographie, espacements, border radius. Ces tokens sont la source unique de toutes les décisions visuelles du site — et la base de connaissance transmise à l'IA une fois pour toutes.</p>
+            <p>Un Design System précis se comporte comme un brief permanent pour l'IA : défini dans le CLAUDE.md, il a été appliqué automatiquement sur chaque composant et chaque page sans dérive. J'ai ensuite conçu 4 composants custom avec leurs états complets. Chaque état — hover, pressed, disabled, focus — est une décision de design documentée, pas une convention tacite.</p>
             <div className="steps">
               <Step icon={<img src="/images/icon-claude.svg" alt="Claude"/>} stepNum="TOKENS" title="Palette sémantique structurée en niveaux" body="Primaires (50→700), neutres, états, feedback — chaque couleur a un rôle. Aucune valeur ad hoc : si une couleur n'est pas dans le système, elle n'existe pas."/>
               <Step icon={<img src="/images/icon-claude.svg" alt="Claude"/>} stepNum="COMPOSANTS" title="4 composants avec états complets" body="Button, Tag, Badge, TestimonialCard — hover, pressed, disabled, focus visible. Chaque état défini comme une décision de design avec ses valeurs précises."/>
-              <Step icon={<img src="/images/icon-claude.svg" alt="Claude"/>} stepNum="INVENTAIRE" title="Page /design-system — preuve de rigueur" body="Page dédiée à l'inventaire complet des composants. Accessible publiquement — pour un directeur design ou un lead qui veut vérifier la cohérence du système, pas seulement le résultat visuel." isLast/>
+              <Step icon={<img src="/images/icon-claude.svg" alt="Claude"/>} stepNum="INVENTAIRE" title="Page /design-system — preuve de rigueur, base de référence IA" body="Page dédiée à l'inventaire complet des composants. Accessible publiquement — et base de référence pour chaque session Claude Code. Aucun token rappelé manuellement : le Design System dans le repo garantit la cohérence sur l'ensemble du projet." isLast/>
             </div>
             <ul className="result-list">
               <li>Tokens définis avant le premier composant — aucune valeur de couleur ou d'espacement hors système</li>
               <li>4 composants custom — tous les états interactifs couverts et documentés</li>
               <li>Page /design-system publique — la rigueur du système est vérifiable directement</li>
+              <li>Design System comme brief IA permanent — transmis une fois dans le CLAUDE.md, appliqué sur 15 fichiers JSX sans dérive de token ni rappel manuel</li>
             </ul>
             <div className="illustrations-grid-2" style={{marginTop:24}}>
-              <IllustrationItem src="/images/portfolio-ds-tokens.png" caption="Palette sémantique — niveaux 50 à 700, tokens couleur et typographie"/>
-              <IllustrationItem src="/images/portfolio-ds-components.png" caption="Composants avec états — page /design-system"/>
+              <IllustrationItem src="/images/portfolio-ds-tokens.png" caption="Palette sémantique — PRIMARY + GRAY scales + tokens sémantiques, chaque couleur a un rôle défini"/>
+              <IllustrationItem src="/images/portfolio-ds-components.png" caption="Button component — 3 variantes × 2 tailles × états disabled, chaque comportement documenté pour l'IA"/>
             </div>
           </div>
         </div>
@@ -162,22 +164,23 @@ export default function CasePortfolio() {
           <div className="sec-label"><span className="sec-label-num">05</span><span className="sec-label-step">Itération & Tests</span></div>
           <div className="sec-body">
             <h2>Boucle d'affinage — observer, décider, vérifier</h2>
-            <p>Une fois les premières pages générées, j'ai mis en place une boucle d'itération systématique : observer l'écart entre le rendu et la vision, formuler une décision de design précise, vérifier la cohérence avec le système.</p>
-            <p>Les 155 commits ne sont pas des corrections de bugs — ce sont 155 décisions de design documentées. Chaque ajustement part d'une observation et d'un critère, pas d'une préférence intuitive.</p>
+            <p>Une fois les premières pages générées, j'ai mis en place une boucle d'itération systématique : observer l'écart entre le rendu et la vision, formuler une décision de design précise, transmettre à Claude Code, vérifier dans le navigateur.</p>
+            <p>La vélocité de cette boucle change la nature du travail : 30 à 90 secondes de l'instruction à la vérification visuelle. Chaque hypothèse de design se teste en conditions réelles, sans simulation mentale. Les 155 commits sont 155 décisions de design exécutées à cette cadence — pas des corrections de bugs, des arbitrages documentés.</p>
             <div className="steps">
-              <Step icon={<img src="/images/icon-claude.svg" alt="Claude"/>} stepNum="OBSERVER" title="Identifier l'écart avec la vision" body="Test visuel dans le navigateur après chaque changement — typographie, alignements, états interactifs, comportements au scroll, responsive mobile et desktop."/>
-              <Step icon={<img src="/images/icon-claude.svg" alt="Claude"/>} stepNum="DÉCIDER" title="Formuler une décision, pas une correction" body="Chaque retour est une décision de design : comportement attendu, référence dans le système, raison. Exemple : pressed doit être distinct de hover car l'utilisateur doit sentir le clic, pas seulement le survol."/>
+              <Step icon={<img src="/images/icon-claude.svg" alt="Claude"/>} stepNum="OBSERVER" title="Identifier l'écart avec la vision" body="Test visuel dans le navigateur après chaque changement — typographie, alignements, états interactifs, scroll, responsive. La vitesse IA rend chaque hypothèse testable en conditions réelles : plus besoin de simuler mentalement le rendu d'une décision de design."/>
+              <Step icon={<img src="/images/icon-claude.svg" alt="Claude"/>} stepNum="DÉCIDER" title="Briefer l'IA, pas lui donner une correction" body="Chaque instruction est structurée comme un brief : contexte précis, comportement attendu, référence token, critère de validation. La qualité de l'output IA est directement proportionnelle à la précision du brief. Exemple : pressed doit être distinct de hover — l'utilisateur doit sentir le clic, pas seulement le survol."/>
               <Step icon={<img src="/images/icon-claude.svg" alt="Claude"/>} stepNum="VALIDER" title="Vérifier la cohérence système" body="Chaque modification est validée par rapport aux tokens définis. Le Design System est le référentiel — pas le résultat visuel seul." isLast/>
             </div>
             <ul className="result-list">
-              <li>155 décisions de design documentées — états interactifs, espacements, hiérarchie visuelle, animations</li>
+              <li>Vélocité × 10 — 30 à 90 secondes par décision de design : du brief à la vérification visuelle dans le navigateur</li>
+              <li>155 décisions de design documentées — états interactifs, espacements, hiérarchie visuelle, micro-interactions</li>
               <li>États hover et pressed distincts — chaque élément cliquable a un feedback visuel perceptible</li>
-              <li>Micro-interactions justifiées — temps de lecture, barre de progression, TOC actif, back-to-top · chacune répond à un besoin d'orientation identifié</li>
+              <li>Micro-interactions justifiées — barre de progression, TOC actif, back-to-top · chacune répond à un besoin d'orientation identifié</li>
               <li>20+ proposals archivés dans le repo — les pistes explorées et les arbitrages sont traçables</li>
             </ul>
             <div className="illustrations-grid-2" style={{marginTop:24}}>
-              <IllustrationItem src="/images/portfolio-iteration-1.png" caption="Boucle d'itération — observer l'écart, décider, vérifier la cohérence"/>
-              <IllustrationItem src="/images/portfolio-iteration-2.png" caption="États interactifs — hover, pressed et focus définis comme décisions design"/>
+              <IllustrationItem src="/images/portfolio-iteration-1.png" caption="Boucle d'affinage dans le cas d'étude — observer, briefer l'IA, vérifier dans le navigateur"/>
+              <IllustrationItem src="/images/portfolio-iteration-2.png" caption="Documentation composant — props, règles d'usage, exemple JSX : chaque état défini comme une décision de design transmissible à l'IA"/>
             </div>
           </div>
         </div>
