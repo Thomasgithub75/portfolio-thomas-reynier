@@ -448,7 +448,6 @@ function LettreApp() {
                   value={contexte}
                   onChange={e => setContexte(e.target.value)}
                   rows={3}
-                  sx={{ borderColor: tokens.primary[200], background: tokens.primary[50] }}
                 />
               )}
 
@@ -483,17 +482,25 @@ function LettreApp() {
                 >
                   Arrêter
                 </Button>
+              ) : status === 'done' ? (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={handleRegen}
+                  startIcon={<RefreshIcon sx={{ fontSize: 13 }} />}
+                  sx={{ width: '100%' }}
+                >
+                  Regénérer
+                </Button>
               ) : (
                 <Button
                   variant="primary"
-                  onClick={status === 'done' ? handleRegen : generate}
+                  onClick={generate}
                   disabled={!canGenerate}
-                  startIcon={status === 'done'
-                    ? <RefreshIcon sx={{ fontSize: 15 }} />
-                    : <AutoAwesomeIcon sx={{ fontSize: 15 }} />}
+                  startIcon={<AutoAwesomeIcon sx={{ fontSize: 15 }} />}
                   sx={{ width: '100%' }}
                 >
-                  {status === 'done' ? 'Regénérer' : 'Générer la lettre'}
+                  Générer la lettre
                 </Button>
               )}
               {!canGenerate && offre.length > 0 && (
@@ -512,28 +519,16 @@ function LettreApp() {
                 <div style={cardTitle}>Lettre générée</div>
                 <div style={{ ...cardSub, color: statusColor[status] }}>{statusLabel[status]}</div>
               </div>
-              {(status === 'done' || status === 'generating') && (
+              {status === 'done' && (
                 <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', justifyContent: 'flex-end' }}>
-                  {status === 'done' && (<>
-                    <Button variant="ghost" size="sm" onClick={handleCopy}
-                      startIcon={copied ? <CheckIcon sx={{ fontSize: 13, color: '#22C55E' }} /> : <ContentCopyIcon sx={{ fontSize: 13 }} />}>
-                      {copied ? 'Copié !' : 'Copier'}
-                    </Button>
-                    <Button variant="ghost" size="sm" onClick={handlePdf}
-                      startIcon={<FileDownloadIcon sx={{ fontSize: 13 }} />}>
-                      PDF A4
-                    </Button>
-                    <Button variant="ghost" size="sm" onClick={handleRegen}
-                      startIcon={<RefreshIcon sx={{ fontSize: 13 }} />}>
-                      Relancer
-                    </Button>
-                  </>)}
-                  {status === 'generating' && (
-                    <Button variant="ghost" size="sm" onClick={handleStop}
-                      startIcon={<StopIcon sx={{ fontSize: 13 }} />}>
-                      Arrêter
-                    </Button>
-                  )}
+                  <Button variant="secondary" size="sm" onClick={handleCopy}
+                    startIcon={copied ? <CheckIcon sx={{ fontSize: 13, color: '#22C55E' }} /> : <ContentCopyIcon sx={{ fontSize: 13 }} />}>
+                    {copied ? 'Copié !' : 'Copier'}
+                  </Button>
+                  <Button variant="primary" size="sm" onClick={handlePdf}
+                    startIcon={<FileDownloadIcon sx={{ fontSize: 13 }} />}>
+                    PDF A4
+                  </Button>
                 </div>
               )}
             </div>
