@@ -78,16 +78,28 @@ const PRINT_STYLE = `
     box-shadow: none !important;
     border: none !important;
   }
+  .lm-print-textarea { display: none !important; }
+  .lm-print-body { display: block !important; }
   .lm-p {
     font-size: 12pt !important;
     line-height: 1.8 !important;
     color: #1A2540 !important;
+    margin-bottom: 10pt !important;
   }
   .lm-kpi {
+    display: flex !important;
+    gap: 10pt !important;
     border-left: 3px solid #1956DB !important;
     background: #EEF3FD !important;
     padding: 10pt 14pt !important;
     margin: 12pt 0 !important;
+    font-size: 11pt !important;
+    color: #1956DB !important;
+    border-radius: 6pt !important;
+  }
+  .lm-kpi-icon {
+    font-weight: 700 !important;
+    flex-shrink: 0 !important;
   }
 }
 `;
@@ -95,6 +107,7 @@ const PRINT_STYLE = `
 // ── Sub-components ─────────────────────────────────────────────────────────────
 
 function PasswordGate({ onUnlock }) {
+
   const [pwd, setPwd] = useState('');
   const [error, setError] = useState(false);
 
@@ -138,36 +151,6 @@ function PasswordGate({ onUnlock }) {
           Accéder
         </Button>
       </div>
-    </div>
-  );
-}
-
-function FloatingToolbar({ onFormat }) {
-  return (
-    <div style={{
-      display: 'inline-flex', alignItems: 'center', gap: 1,
-      background: tokens.gray[900], borderRadius: 7,
-      padding: '4px 6px',
-      boxShadow: '0 3px 12px rgba(26,37,64,.3)',
-      fontFamily: 'Outfit, sans-serif',
-    }}>
-      {[
-        { cmd: 'bold',   label: 'G', style: { fontWeight: 700 } },
-        { cmd: 'italic', label: 'I', style: { fontStyle: 'italic' } },
-      ].map(({ cmd, label, style }) => (
-        <button key={cmd} onMouseDown={e => { e.preventDefault(); onFormat(cmd); }} style={{
-          background: 'transparent', border: 'none',
-          color: 'rgba(255,255,255,.85)', fontSize: 11,
-          fontWeight: 700, padding: '3px 9px', borderRadius: 4,
-          cursor: 'pointer', fontFamily: 'Outfit, sans-serif', ...style,
-          transition: 'background .1s',
-        }}
-        onMouseEnter={e => e.target.style.background = 'rgba(255,255,255,.15)'}
-        onMouseLeave={e => e.target.style.background = 'transparent'}
-        >
-          {label}
-        </button>
-      ))}
     </div>
   );
 }
@@ -235,13 +218,8 @@ function LettreApp() {
   const letterAccumRef = useRef(''); // source de vérité pour le texte accumulé (sync)
   const abortRef = useRef(null);
 
-  // Editing
-  const letterBodyRef = useRef(null);
-  const [editReady, setEditReady] = useState(false);
-
-  // Toolbar
-  const [toolbarPos, setToolbarPos] = useState(null);
-  const a4Ref = useRef(null);
+  // Print
+  const printBodyRef = useRef(null);
 
   // Copy
   const [copied, setCopied] = useState(false);
@@ -254,52 +232,12 @@ function LettreApp() {
     return () => document.head.removeChild(el);
   }, []);
 
-  // Render lettre quand la génération est terminée — utilise la ref (jamais le state)
+  // Reset on idle
   useEffect(() => {
-    if (status === 'done' && !editReady) {
-      const html = buildHtml(letterAccumRef.current);
-      if (!html) return;
-      setEditReady(true);
-      setTimeout(() => {
-        if (letterBodyRef.current) {
-          letterBodyRef.current.innerHTML = html;
-        }
-      }, 30);
-    }
     if (status === 'idle') {
-      setEditReady(false);
       letterAccumRef.current = '';
     }
-  }, [status, editReady]);
-
-  // Floating toolbar on selection
-  const handleSelectionChange = useCallback(() => {
-    const sel = window.getSelection();
-    if (!sel || sel.isCollapsed || !letterBodyRef.current) {
-      setToolbarPos(null); return;
-    }
-    if (!letterBodyRef.current.contains(sel.anchorNode)) {
-      setToolbarPos(null); return;
-    }
-    const range = sel.getRangeAt(0);
-    const rect = range.getBoundingClientRect();
-    const a4rect = a4Ref.current?.getBoundingClientRect();
-    if (!a4rect) return;
-    setToolbarPos({
-      top: rect.top - a4rect.top - 44 + (a4Ref.current?.scrollTop || 0),
-      left: rect.left - a4rect.left + rect.width / 2,
-    });
-  }, []);
-
-  useEffect(() => {
-    document.addEventListener('selectionchange', handleSelectionChange);
-    return () => document.removeEventListener('selectionchange', handleSelectionChange);
-  }, [handleSelectionChange]);
-
-  const applyFormat = (cmd) => {
-    document.execCommand(cmd);
-    letterBodyRef.current?.focus();
-  };
+  }, [status]);
 
   // Generate
   const generate = useCallback(async () => {
@@ -307,8 +245,6 @@ function LettreApp() {
     setStatus('generating');
     setLetterText('');
     letterAccumRef.current = '';
-    setEditReady(false);
-    setToolbarPos(null);
     abortRef.current = new AbortController();
 
     try {
@@ -359,19 +295,24 @@ function LettreApp() {
   const handleStop = () => { abortRef.current?.abort(); setStatus('idle'); };
 
   const handleCopy = () => {
-    const text = letterBodyRef.current
-      ? letterBodyRef.current.innerText
-      : letterText.replace(/\[KPI_START\]|KPI_END\]|\*\*/g, '');
+    const text = letterText
+      .replace(/\[KPI_START\]/g, '')
+      .replace(/\[KPI_END\]/g, '')
+      .replace(/\*\*/g, '');
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handlePdf = () => window.print();
+  const handlePdf = () => {
+    if (printBodyRef.current) {
+      printBodyRef.current.innerHTML = buildHtml(letterText);
+    }
+    window.print();
+  };
 
   const handleRegen = () => {
     setStatus('idle');
-    setLetterText('');
     setTimeout(generate, 50);
   };
 
@@ -549,16 +490,6 @@ function LettreApp() {
             {/* Card body */}
             <div style={{ padding: 20, background: tokens.bgPanel }}>
 
-              {/* Floating toolbar — only when done */}
-              {status === 'done' && editReady && (
-                <div style={{ marginBottom: 10, display: 'flex', alignItems: 'center', gap: 10 }}>
-                  <FloatingToolbar onFormat={applyFormat} />
-                  <span style={{ fontSize: 11, color: tokens.gray[400], fontWeight: 300 }}>
-                    Sélectionne du texte pour formater
-                  </span>
-                </div>
-              )}
-
               {/* Empty state */}
               {status === 'idle' && (
                 <div style={{
@@ -580,21 +511,7 @@ function LettreApp() {
 
               {/* A4 Document */}
               {(status === 'generating' || status === 'done') && (
-                <div ref={a4Ref} style={{ position: 'relative' }}>
-
-                  {/* Floating toolbar positioned above selection */}
-                  {toolbarPos && status === 'done' && (
-                    <div style={{
-                      position: 'absolute',
-                      top: toolbarPos.top,
-                      left: toolbarPos.left,
-                      transform: 'translateX(-50%)',
-                      zIndex: 100,
-                      pointerEvents: 'auto',
-                    }}>
-                      <FloatingToolbar onFormat={applyFormat} />
-                    </div>
-                  )}
+                <div>
 
                   {/* A4 sheet */}
                   <div className="lm-print-area" style={{
@@ -636,18 +553,19 @@ function LettreApp() {
                       <StreamingBody text={letterText} />
                     )}
 
-                    {/* Editable body (after done) */}
+                    {/* Editable body — DS FormField */}
                     {status === 'done' && (
-                      <div
-                        ref={letterBodyRef}
-                        contentEditable={editReady}
-                        suppressContentEditableWarning
-                        style={{
-                          outline: 'none',
-                          minHeight: 320,
-                          pointerEvents: editReady ? 'auto' : 'none',
-                        }}
-                      />
+                      <>
+                        <div className="lm-print-textarea">
+                          <FormField
+                            type="textarea"
+                            value={letterText}
+                            onChange={e => setLetterText(e.target.value)}
+                            rows={18}
+                          />
+                        </div>
+                        <div ref={printBodyRef} className="lm-print-body" />
+                      </>
                     )}
 
                     {/* Signature */}
@@ -666,21 +584,16 @@ function LettreApp() {
 
       <Footer />
 
-      {/* Editable body styles */}
+      {/* Print body styles — hidden in screen, shown during print via PRINT_STYLE */}
       <style>{`
+        .lm-print-body { display: none; }
         .lm-p {
           font-size: 13px;
           color: ${tokens.gray[600]};
           line-height: 1.8;
           font-weight: 300;
           margin-bottom: 13px;
-          border-radius: 5px;
-          padding: 5px 8px;
-          margin-left: -8px;
-          outline: none;
-          transition: background .12s;
         }
-        .lm-p:hover { background: ${tokens.primary[50]}; }
         .lm-kpi {
           background: ${tokens.primary[50]};
           border: 1px solid ${tokens.primary[100]};
