@@ -1,6 +1,7 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
 import Navbar from '../layouts/Navbar';
 import Footer from '../layouts/Footer';
+import Button from '../components/Button/Button';
 import FormField from '../components/FormField/FormField';
 import Toggle from '../components/Toggle/Toggle';
 import Tag from '../components/Tag/Tag';
@@ -132,14 +133,9 @@ function PasswordGate({ onUnlock }) {
           }}
         />
         {error && <div style={{ fontSize: 12, color: '#EF4444', marginBottom: 12 }}>Mot de passe incorrect</div>}
-        <button onClick={submit} style={{
-          width: '100%', padding: '11px 0',
-          background: tokens.primary[500], color: '#fff',
-          border: 'none', borderRadius: 8, fontSize: 14,
-          fontWeight: 600, cursor: 'pointer', fontFamily: 'Outfit, sans-serif',
-        }}>
+        <Button variant="primary" onClick={submit} sx={{ width: '100%' }}>
           Accéder
-        </button>
+        </Button>
       </div>
     </div>
   );
@@ -380,15 +376,6 @@ function LettreApp() {
   const cardTitle = { fontSize: 13, fontWeight: 600, color: tokens.text };
   const cardSub = { fontSize: 11.5, fontWeight: 300, marginTop: 1 };
 
-  const btnAction = {
-    display: 'inline-flex', alignItems: 'center', gap: 5,
-    padding: '6px 12px',
-    background: '#fff', border: `1.5px solid ${tokens.border}`,
-    borderRadius: 7, fontSize: 12, fontWeight: 500,
-    color: tokens.gray[600], cursor: 'pointer',
-    fontFamily: 'Outfit, sans-serif', transition: 'all .15s',
-  };
-
   const statusColor = {
     idle: tokens.muted,
     generating: tokens.primary[500],
@@ -483,37 +470,26 @@ function LettreApp() {
 
               {/* Generate button */}
               {status === 'generating' ? (
-                <button onClick={handleStop} style={{
-                  width: '100%', padding: '11px 0',
-                  background: tokens.gray[100], color: tokens.gray[600],
-                  border: `1.5px solid ${tokens.border}`, borderRadius: 8,
-                  fontSize: 13, fontWeight: 600, cursor: 'pointer',
-                  fontFamily: 'Outfit, sans-serif',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-                }}>
-                  <StopIcon sx={{ fontSize: 15 }} />
+                <Button
+                  variant="secondary"
+                  onClick={handleStop}
+                  startIcon={<StopIcon sx={{ fontSize: 15 }} />}
+                  sx={{ width: '100%' }}
+                >
                   Arrêter
-                </button>
+                </Button>
               ) : (
-                <button
+                <Button
+                  variant="primary"
                   onClick={status === 'done' ? handleRegen : generate}
                   disabled={!canGenerate}
-                  style={{
-                    width: '100%', padding: '11px 0',
-                    background: canGenerate ? tokens.primary[500] : tokens.gray[100],
-                    color: canGenerate ? '#fff' : tokens.gray[400],
-                    border: 'none', borderRadius: 8,
-                    fontSize: 13, fontWeight: 600,
-                    cursor: canGenerate ? 'pointer' : 'default',
-                    fontFamily: 'Outfit, sans-serif', transition: 'background .15s',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-                  }}
+                  startIcon={status === 'done'
+                    ? <RefreshIcon sx={{ fontSize: 15 }} />
+                    : <AutoAwesomeIcon sx={{ fontSize: 15 }} />}
+                  sx={{ width: '100%' }}
                 >
-                  {status === 'done'
-                    ? <><RefreshIcon sx={{ fontSize: 15 }} />Regénérer</>
-                    : <><AutoAwesomeIcon sx={{ fontSize: 15 }} />Générer la lettre</>
-                  }
-                </button>
+                  {status === 'done' ? 'Regénérer' : 'Générer la lettre'}
+                </Button>
               )}
               {!canGenerate && offre.length > 0 && (
                 <div style={{ fontSize: 11, color: tokens.muted, textAlign: 'center', marginTop: -6 }}>
@@ -534,24 +510,24 @@ function LettreApp() {
               {(status === 'done' || status === 'generating') && (
                 <div style={{ display: 'flex', gap: 7 }}>
                   {status === 'done' && (<>
-                    <button onClick={handleCopy} style={btnAction}>
-                      {copied ? <CheckIcon sx={{ fontSize: 13, color: '#22C55E' }} /> : <ContentCopyIcon sx={{ fontSize: 13 }} />}
+                    <Button variant="ghost" size="sm" onClick={handleCopy}
+                      startIcon={copied ? <CheckIcon sx={{ fontSize: 13, color: '#22C55E' }} /> : <ContentCopyIcon sx={{ fontSize: 13 }} />}>
                       {copied ? 'Copié !' : 'Copier'}
-                    </button>
-                    <button onClick={handlePdf} style={btnAction}>
-                      <FileDownloadIcon sx={{ fontSize: 13 }} />
+                    </Button>
+                    <Button variant="ghost" size="sm" onClick={handlePdf}
+                      startIcon={<FileDownloadIcon sx={{ fontSize: 13 }} />}>
                       PDF A4
-                    </button>
-                    <button onClick={handleRegen} style={btnAction}>
-                      <RefreshIcon sx={{ fontSize: 13 }} />
+                    </Button>
+                    <Button variant="ghost" size="sm" onClick={handleRegen}
+                      startIcon={<RefreshIcon sx={{ fontSize: 13 }} />}>
                       Relancer
-                    </button>
+                    </Button>
                   </>)}
                   {status === 'generating' && (
-                    <button onClick={handleStop} style={btnAction}>
-                      <StopIcon sx={{ fontSize: 13 }} />
+                    <Button variant="ghost" size="sm" onClick={handleStop}
+                      startIcon={<StopIcon sx={{ fontSize: 13 }} />}>
                       Arrêter
-                    </button>
+                    </Button>
                   )}
                 </div>
               )}
