@@ -10,105 +10,98 @@
  * Tailles : "md" (défaut) pour les CTA standards, "sm" pour les actions dans un toolbar ou une card dense.
  * Accepte startIcon / endIcon (MUI Icons uniquement).
  */
-import MuiButton from '@mui/material/Button';
-import { styled } from '@mui/material/styles';
+import { useState } from 'react';
 import { tokens } from '../../theme/theme';
 
-// ── Primary ────────────────────────────────────────────────────────────────
-const PrimaryButton = styled(MuiButton)(() => ({
-  backgroundColor: tokens.primary[500],
-  color: '#ffffff',
-  boxShadow: 'none',
-  '&&:hover': {
-    backgroundColor: tokens.primary[600],
-    boxShadow: 'none',
+const VARIANTS = {
+  primary: {
+    base:     { background: tokens.primary[500], color: '#fff',            border: 'none' },
+    hover:    { background: tokens.primary[600], color: '#fff',            border: 'none' },
+    pressed:  { background: tokens.primary[700], color: '#fff',            border: 'none' },
+    disabled: { background: tokens.primary[200], color: '#fff',            border: 'none' },
   },
-  '&&:focus-visible': {
-    backgroundColor: tokens.primary[600],
-    outline: `2px solid ${tokens.primary[800]}`,
-    outlineOffset: '2px',
-    boxShadow: 'none',
+  secondary: {
+    base:     { background: tokens.gray[100],    color: tokens.gray[600],  border: 'none' },
+    hover:    { background: tokens.gray[200],    color: tokens.gray[700],  border: 'none' },
+    pressed:  { background: tokens.gray[300],    color: tokens.gray[800],  border: 'none' },
+    disabled: { background: tokens.gray[50],     color: tokens.gray[300],  border: 'none' },
   },
-  '&&:active': {
-    backgroundColor: tokens.primary[700],
-    boxShadow: 'none',
+  ghost: {
+    base:     { background: 'transparent',       color: tokens.text,       border: `1.5px solid ${tokens.border}` },
+    hover:    { background: tokens.bgSoft,       color: tokens.text,       border: `1.5px solid ${tokens.gray[300]}` },
+    pressed:  { background: tokens.gray[100],    color: tokens.text,       border: `1.5px solid ${tokens.gray[300]}` },
+    disabled: { background: 'transparent',       color: tokens.gray[300],  border: `1.5px solid ${tokens.border}` },
   },
-  '&&.Mui-disabled': {
-    backgroundColor: tokens.primary[200],
-    color: '#ffffff',
-  },
-}));
+};
 
-// ── Secondary ──────────────────────────────────────────────────────────────
-const SecondaryButton = styled(MuiButton)(() => ({
-  backgroundColor: tokens.gray[100],
-  color: tokens.gray[600],
-  boxShadow: 'none',
-  '&&:hover': {
-    backgroundColor: tokens.gray[200],
-    color: tokens.gray[700],
-    boxShadow: 'none',
-  },
-  '&&:focus-visible': {
-    backgroundColor: tokens.gray[200],
-    color: tokens.gray[700],
-    outline: `2px solid ${tokens.primary[500]}`,
-    outlineOffset: '2px',
-    boxShadow: 'none',
-  },
-  '&&:active': {
-    backgroundColor: tokens.gray[300],
-    color: tokens.gray[800],
-    boxShadow: 'none',
-  },
-  '&&.Mui-disabled': {
-    backgroundColor: tokens.gray[50],
-    color: tokens.gray[300],
-  },
-}));
+const SIZES = {
+  md: { fontSize: 15, padding: '9px 20px', borderRadius: 8, gap: 8 },
+  sm: { fontSize: 13, padding: '6px 12px', borderRadius: 7, gap: 6 },
+};
 
-// ── Ghost ──────────────────────────────────────────────────────────────────
-const GhostButton = styled(MuiButton)(({ theme }) => ({
-  color: theme.palette.text.primary,
-  border: `1px solid ${theme.palette.divider}`,
-  backgroundColor: 'transparent',
-  boxShadow: 'none',
-  '&&:hover': {
-    borderColor: '#ccc',
-    backgroundColor: theme.palette.background.paper,
-    boxShadow: 'none',
-  },
-}));
-
-/**
- * Button
- * variant : "primary" | "secondary" | "ghost"
- * size    : "sm" | "md" (défaut md)
- */
 export default function Button({
   variant = 'primary',
   size = 'md',
   children,
   startIcon,
   endIcon,
-  disabled,
+  disabled = false,
   onClick,
   href,
-  sx: userSx = {},
+  sx = {},
 }) {
-  const muiSize = size === 'sm' ? 'small' : 'medium';
-  const sizeSx = size === 'sm' ? { fontSize: '0.8125rem', padding: '6px 14px' } : {};
-  const sx = { ...sizeSx, ...userSx };
+  const [hovered, setHovered] = useState(false);
+  const [pressed, setPressed] = useState(false);
 
-  const commonProps = { size: muiSize, startIcon, endIcon, disabled, onClick, href, sx };
+  const v = VARIANTS[variant] ?? VARIANTS.primary;
+  const s = SIZES[size]    ?? SIZES.md;
 
-  if (variant === 'secondary') {
-    return <SecondaryButton variant="contained" {...commonProps}>{children}</SecondaryButton>;
+  const stateStyles = disabled
+    ? v.disabled
+    : pressed  ? v.pressed
+    : hovered  ? v.hover
+    : v.base;
+
+  const style = {
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: s.gap,
+    fontSize: s.fontSize,
+    fontFamily: "'Outfit', sans-serif",
+    fontWeight: 600,
+    lineHeight: 1,
+    padding: s.padding,
+    borderRadius: s.borderRadius,
+    boxSizing: 'border-box',
+    cursor: disabled ? 'not-allowed' : 'pointer',
+    transition: 'background-color 0.15s, color 0.15s, border-color 0.15s',
+    textDecoration: 'none',
+    userSelect: 'none',
+    outline: 'none',
+    whiteSpace: 'nowrap',
+    ...stateStyles,
+    ...sx,
+  };
+
+  const events = {
+    onMouseEnter: () => !disabled && setHovered(true),
+    onMouseLeave: () => { setHovered(false); setPressed(false); },
+    onMouseDown:  () => !disabled && setPressed(true),
+    onMouseUp:    () => setPressed(false),
+  };
+
+  if (href && !disabled) {
+    return (
+      <a href={href} style={style} {...events}>
+        {startIcon}{children}{endIcon}
+      </a>
+    );
   }
 
-  if (variant === 'ghost') {
-    return <GhostButton {...commonProps}>{children}</GhostButton>;
-  }
-
-  return <PrimaryButton variant="contained" {...commonProps}>{children}</PrimaryButton>;
+  return (
+    <button type="button" style={style} disabled={disabled} onClick={onClick} {...events}>
+      {startIcon}{children}{endIcon}
+    </button>
+  );
 }
