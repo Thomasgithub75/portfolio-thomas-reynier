@@ -1,60 +1,307 @@
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 import Navbar from '../layouts/Navbar';
 import Footer from '../layouts/Footer';
+import FormField from '../components/FormField/FormField';
+import Toggle from '../components/Toggle/Toggle';
+import Tag from '../components/Tag/Tag';
+import { tokens } from '../theme/theme';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import FileDownloadIcon from '@mui/icons-material/FileDownload';
+import RefreshIcon from '@mui/icons-material/Refresh';
+import CheckIcon from '@mui/icons-material/Check';
+import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
+import StopIcon from '@mui/icons-material/Stop';
 
+// ── Auth ──────────────────────────────────────────────────────────────────────
 const PASSWORD = import.meta.env.VITE_LETTER_PASSWORD || 'thomas2026';
 
+// ── Ton options ───────────────────────────────────────────────────────────────
 const TONS = [
-  { id: 'equilibre', label: 'Équilibré', desc: 'Professionnel et direct' },
-  { id: 'formel', label: 'Formel', desc: 'Structuré et soutenu' },
-  { id: 'concis', label: 'Concis', desc: '3 paragraphes max' },
-  { id: 'enthousiaste', label: 'Engagé', desc: 'Direct et impliqué' },
+  { id: 'equilibre', label: 'Équilibré' },
+  { id: 'formel',    label: 'Formel' },
+  { id: 'concis',    label: 'Concis' },
+  { id: 'engage',    label: 'Engagé' },
 ];
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
+function frenchDate() {
+  return new Date().toLocaleDateString('fr-FR', {
+    day: 'numeric', month: 'long', year: 'numeric',
+  });
+}
 
 function parseLetter(text) {
   const kpiMatch = text.match(/\[KPI_START\]([\s\S]*?)\[KPI_END\]/);
   const kpiContent = kpiMatch ? kpiMatch[1].trim() : null;
   const bodyText = text.replace(/\[KPI_START\][\s\S]*?\[KPI_END\]/, '[KPI_BLOCK]');
-
   const paragraphs = bodyText.split(/\n\n+/).map(p => p.trim()).filter(Boolean);
-
   return { paragraphs, kpiContent };
 }
 
-function renderText(text) {
+function renderInline(text) {
   const parts = text.split(/\*\*(.*?)\*\*/g);
   return parts.map((part, i) =>
-    i % 2 === 1 ? <strong key={i} style={{ fontWeight: 600, color: 'var(--text)' }}>{part}</strong> : part
+    i % 2 === 1 ? <strong key={i} style={{ fontWeight: 600 }}>{part}</strong> : part
   );
 }
 
-export default function LettreMotivation() {
-  const [unlocked, setUnlocked] = useState(() => localStorage.getItem('lm_auth') === '1');
-  const [pwd, setPwd] = useState('');
-  const [pwdError, setPwdError] = useState(false);
+function buildHtml(text) {
+  const kpiMatch = text.match(/\[KPI_START\]([\s\S]*?)\[KPI_END\]/);
+  const kpiContent = kpiMatch ? kpiMatch[1].trim() : null;
+  const bodyText = text.replace(/\[KPI_START\][\s\S]*?\[KPI_END\]/, '[KPI_BLOCK]');
+  const paragraphs = bodyText.split(/\n\n+/).map(p => p.trim()).filter(Boolean);
 
-  const [offre, setOffre] = useState('');
-  const [ton, setTon] = useState('equilibre');
-  const [status, setStatus] = useState('idle'); // idle | generating | done | error
-  const [letterText, setLetterText] = useState('');
-  const [copied, setCopied] = useState(false);
-  const abortRef = useRef(null);
-
-  const handleUnlock = () => {
-    if (pwd === PASSWORD) {
-      localStorage.setItem('lm_auth', '1');
-      setUnlocked(true);
-    } else {
-      setPwdError(true);
-      setTimeout(() => setPwdError(false), 2000);
+  return paragraphs.map(p => {
+    if (p === '[KPI_BLOCK]' && kpiContent) {
+      const html = kpiContent.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      return `<div class="lm-kpi"><span class="lm-kpi-icon">◆</span><span>${html}</span></div>`;
     }
+    const html = p.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    return `<p class="lm-p">${html}</p>`;
+  }).join('');
+}
+
+// ── Print styles injected once ────────────────────────────────────────────────
+const PRINT_STYLE = `
+@media print {
+  @page { size: A4; margin: 0; }
+  body > * { visibility: hidden !important; }
+  .lm-print-area, .lm-print-area * { visibility: visible !important; }
+  .lm-print-area {
+    position: fixed !important;
+    top: 0 !important; left: 0 !important;
+    width: 210mm !important;
+    padding: 20mm 22mm !important;
+    background: #fff !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+  .lm-p {
+    font-size: 12pt !important;
+    line-height: 1.8 !important;
+    color: #1A2540 !important;
+  }
+  .lm-kpi {
+    border-left: 3px solid #1956DB !important;
+    background: #EEF3FD !important;
+    padding: 10pt 14pt !important;
+    margin: 12pt 0 !important;
+  }
+}
+`;
+
+// ── Sub-components ─────────────────────────────────────────────────────────────
+
+function PasswordGate({ onUnlock }) {
+  const [pwd, setPwd] = useState('');
+  const [error, setError] = useState(false);
+
+  const submit = () => {
+    if (pwd === PASSWORD) { onUnlock(); }
+    else { setError(true); setTimeout(() => setError(false), 2000); }
   };
 
+  return (
+    <div style={{
+      minHeight: '100vh', background: tokens.bgSoft,
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+    }}>
+      <div style={{
+        background: '#fff', border: `1px solid ${tokens.border}`,
+        borderRadius: 14, padding: '40px 48px', width: 380,
+        textAlign: 'center', boxShadow: '0 4px 24px rgba(0,0,0,.06)',
+      }}>
+        <div style={{ fontSize: 28, marginBottom: 16 }}>🔒</div>
+        <div style={{ fontSize: 16, fontWeight: 700, color: tokens.text, marginBottom: 6 }}>Accès privé</div>
+        <div style={{ fontSize: 13, color: tokens.muted, fontWeight: 300, marginBottom: 28 }}>
+          Cette page est réservée à Thomas.
+        </div>
+        <input
+          type="password"
+          value={pwd}
+          onChange={e => setPwd(e.target.value)}
+          onKeyDown={e => e.key === 'Enter' && submit()}
+          placeholder="Mot de passe"
+          autoFocus
+          style={{
+            width: '100%', padding: '11px 14px',
+            border: `1px solid ${error ? '#EF4444' : tokens.border}`,
+            borderRadius: 8, fontSize: 14, fontFamily: 'Outfit, sans-serif',
+            marginBottom: 12, outline: 'none', textAlign: 'center',
+            transition: 'border-color .15s',
+          }}
+        />
+        {error && <div style={{ fontSize: 12, color: '#EF4444', marginBottom: 12 }}>Mot de passe incorrect</div>}
+        <button onClick={submit} style={{
+          width: '100%', padding: '11px 0',
+          background: tokens.primary[500], color: '#fff',
+          border: 'none', borderRadius: 8, fontSize: 14,
+          fontWeight: 600, cursor: 'pointer', fontFamily: 'Outfit, sans-serif',
+        }}>
+          Accéder
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function FloatingToolbar({ onFormat }) {
+  return (
+    <div style={{
+      display: 'inline-flex', alignItems: 'center', gap: 1,
+      background: tokens.gray[900], borderRadius: 7,
+      padding: '4px 6px',
+      boxShadow: '0 3px 12px rgba(26,37,64,.3)',
+      fontFamily: 'Outfit, sans-serif',
+    }}>
+      {[
+        { cmd: 'bold',   label: 'G', style: { fontWeight: 700 } },
+        { cmd: 'italic', label: 'I', style: { fontStyle: 'italic' } },
+      ].map(({ cmd, label, style }) => (
+        <button key={cmd} onMouseDown={e => { e.preventDefault(); onFormat(cmd); }} style={{
+          background: 'transparent', border: 'none',
+          color: 'rgba(255,255,255,.85)', fontSize: 11,
+          fontWeight: 700, padding: '3px 9px', borderRadius: 4,
+          cursor: 'pointer', fontFamily: 'Outfit, sans-serif', ...style,
+          transition: 'background .1s',
+        }}
+        onMouseEnter={e => e.target.style.background = 'rgba(255,255,255,.15)'}
+        onMouseLeave={e => e.target.style.background = 'transparent'}
+        >
+          {label}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function StreamingBody({ text }) {
+  const { paragraphs, kpiContent } = parseLetter(text);
+  return (
+    <div>
+      {paragraphs.map((p, i) => {
+        if (p === '[KPI_BLOCK]' && kpiContent) {
+          return (
+            <div key={i} className="lm-kpi" style={{
+              background: tokens.primary[50], border: `1px solid ${tokens.primary[100]}`,
+              borderLeft: `3px solid ${tokens.primary[400]}`,
+              borderRadius: 8, padding: '12px 16px', margin: '14px 0',
+              fontSize: 12.5, color: tokens.primary[600], lineHeight: 1.7,
+              display: 'flex', gap: 10,
+            }}>
+              <span style={{ color: tokens.primary[400], fontWeight: 700, flexShrink: 0 }}>◆</span>
+              <span>{renderInline(kpiContent)}</span>
+            </div>
+          );
+        }
+        return (
+          <p key={i} className="lm-p" style={{
+            fontSize: 13, color: tokens.gray[600], lineHeight: 1.8,
+            fontWeight: 300, marginBottom: 13,
+          }}>
+            {renderInline(p)}
+          </p>
+        );
+      })}
+    </div>
+  );
+}
+
+// ── Main page ──────────────────────────────────────────────────────────────────
+export default function LettreMotivation() {
+  const [unlocked, setUnlocked] = useState(() => localStorage.getItem('lm_auth') === '1');
+
+  const handleUnlock = () => {
+    localStorage.setItem('lm_auth', '1');
+    setUnlocked(true);
+  };
+
+  if (!unlocked) return <PasswordGate onUnlock={handleUnlock} />;
+  return <LettreApp />;
+}
+
+function LettreApp() {
+  // Form
+  const [entreprise, setEntreprise] = useState('');
+  const [poste, setPoste] = useState('');
+  const [offre, setOffre] = useState('');
+  const [contexteOn, setContexteOn] = useState(false);
+  const [contexte, setContexte] = useState('');
+  const [ton, setTon] = useState('equilibre');
+
+  // Generation
+  const [status, setStatus] = useState('idle'); // idle | generating | done | error
+  const [letterText, setLetterText] = useState('');
+  const abortRef = useRef(null);
+
+  // Editing
+  const letterBodyRef = useRef(null);
+  const [editReady, setEditReady] = useState(false);
+
+  // Toolbar
+  const [toolbarPos, setToolbarPos] = useState(null);
+  const a4Ref = useRef(null);
+
+  // Copy
+  const [copied, setCopied] = useState(false);
+
+  // Inject print styles once
+  useEffect(() => {
+    const el = document.createElement('style');
+    el.innerHTML = PRINT_STYLE;
+    document.head.appendChild(el);
+    return () => document.head.removeChild(el);
+  }, []);
+
+  // Init contentEditable when streaming is done
+  useEffect(() => {
+    if (status === 'done' && letterText && !editReady) {
+      setEditReady(true);
+      setTimeout(() => {
+        if (letterBodyRef.current) {
+          letterBodyRef.current.innerHTML = buildHtml(letterText);
+        }
+      }, 30);
+    }
+    if (status === 'idle') setEditReady(false);
+  }, [status, letterText, editReady]);
+
+  // Floating toolbar on selection
+  const handleSelectionChange = useCallback(() => {
+    const sel = window.getSelection();
+    if (!sel || sel.isCollapsed || !letterBodyRef.current) {
+      setToolbarPos(null); return;
+    }
+    if (!letterBodyRef.current.contains(sel.anchorNode)) {
+      setToolbarPos(null); return;
+    }
+    const range = sel.getRangeAt(0);
+    const rect = range.getBoundingClientRect();
+    const a4rect = a4Ref.current?.getBoundingClientRect();
+    if (!a4rect) return;
+    setToolbarPos({
+      top: rect.top - a4rect.top - 44 + (a4Ref.current?.scrollTop || 0),
+      left: rect.left - a4rect.left + rect.width / 2,
+    });
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener('selectionchange', handleSelectionChange);
+    return () => document.removeEventListener('selectionchange', handleSelectionChange);
+  }, [handleSelectionChange]);
+
+  const applyFormat = (cmd) => {
+    document.execCommand(cmd);
+    letterBodyRef.current?.focus();
+  };
+
+  // Generate
   const generate = useCallback(async () => {
     if (!offre.trim() || offre.trim().length < 50) return;
-
     setStatus('generating');
     setLetterText('');
+    setEditReady(false);
+    setToolbarPos(null);
     abortRef.current = new AbortController();
 
     try {
@@ -64,7 +311,7 @@ export default function LettreMotivation() {
           'Content-Type': 'application/json',
           'x-letter-secret': import.meta.env.VITE_LETTER_SECRET || '',
         },
-        body: JSON.stringify({ offre, ton }),
+        body: JSON.stringify({ offre, ton, entreprise, poste, contexte: contexteOn ? contexte : '' }),
         signal: abortRef.current.signal,
       });
 
@@ -77,11 +324,9 @@ export default function LettreMotivation() {
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
-
         buffer += decoder.decode(value, { stream: true });
         const lines = buffer.split('\n');
         buffer = lines.pop();
-
         for (const line of lines) {
           if (!line.startsWith('data: ')) continue;
           const raw = line.slice(6).trim();
@@ -93,250 +338,381 @@ export default function LettreMotivation() {
           } catch {}
         }
       }
-
       setStatus('done');
     } catch (err) {
       if (err.name !== 'AbortError') setStatus('error');
     }
-  }, [offre, ton]);
+  }, [offre, ton, entreprise, poste, contexte, contexteOn]);
+
+  const handleStop = () => { abortRef.current?.abort(); setStatus('idle'); };
 
   const handleCopy = () => {
-    const { paragraphs, kpiContent } = parseLetter(letterText);
-    let plain = paragraphs
-      .map(p => p === '[KPI_BLOCK]' ? kpiContent : p)
-      .join('\n\n')
-      .replace(/\*\*(.*?)\*\*/g, '$1');
-    navigator.clipboard.writeText(plain);
+    const text = letterBodyRef.current
+      ? letterBodyRef.current.innerText
+      : letterText.replace(/\[KPI_START\]|KPI_END\]|\*\*/g, '');
+    navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
   const handlePdf = () => window.print();
 
-  const handleRegen = () => { setStatus('idle'); setLetterText(''); generate(); };
+  const handleRegen = () => {
+    setStatus('idle');
+    setLetterText('');
+    setTimeout(generate, 50);
+  };
 
-  if (!unlocked) return <PasswordGate pwd={pwd} setPwd={setPwd} error={pwdError} onSubmit={handleUnlock} />;
+  const canGenerate = offre.trim().length >= 50;
+
+  // ── Shared styles ──────────────────────────────────────────────────────────
+  const card = {
+    background: '#fff',
+    border: `1px solid ${tokens.border}`,
+    borderRadius: 12,
+    overflow: 'hidden',
+  };
+  const cardHeader = {
+    padding: '14px 20px',
+    borderBottom: `1px solid ${tokens.border}`,
+    display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+  };
+  const cardTitle = { fontSize: 13, fontWeight: 600, color: tokens.text };
+  const cardSub = { fontSize: 11.5, fontWeight: 300, marginTop: 1 };
+
+  const btnAction = {
+    display: 'inline-flex', alignItems: 'center', gap: 5,
+    padding: '6px 12px',
+    background: '#fff', border: `1.5px solid ${tokens.border}`,
+    borderRadius: 7, fontSize: 12, fontWeight: 500,
+    color: tokens.gray[600], cursor: 'pointer',
+    fontFamily: 'Outfit, sans-serif', transition: 'all .15s',
+  };
+
+  const statusColor = {
+    idle: tokens.muted,
+    generating: tokens.primary[500],
+    done: '#22C55E',
+    error: '#EF4444',
+  };
+  const statusLabel = {
+    idle: 'En attente',
+    generating: 'Rédaction en cours…',
+    done: 'Prête',
+    error: 'Erreur',
+  };
 
   return (
-    <div style={{ minHeight: '100vh', background: 'var(--bg-soft)', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ minHeight: '100vh', background: tokens.bgSoft, display: 'flex', flexDirection: 'column' }}>
       <Navbar />
-      <main style={{ flex: 1, padding: '48px 0 80px' }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 32px' }}>
 
-          {/* Header */}
-          <div style={{ marginBottom: 40 }}>
-            <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '.08em', textTransform: 'uppercase', color: 'var(--p500)', display: 'block', marginBottom: 8 }}>Outil personnel</span>
-            <h1 style={{ fontSize: 28, fontWeight: 700, letterSpacing: '-.03em', color: 'var(--text)', marginBottom: 8 }}>Lettre de motivation</h1>
-            <p style={{ fontSize: 14, color: 'var(--muted)', fontWeight: 300 }}>Colle une offre d'emploi et génère une lettre personnalisée depuis ton profil.</p>
+      <main style={{ flex: 1, paddingTop: 80 }}>
+        {/* Page header */}
+        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '32px 32px 24px' }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: tokens.primary[500], letterSpacing: '.08em', textTransform: 'uppercase', marginBottom: 8 }}>
+            Outil personnel
           </div>
+          <h1 style={{ fontSize: 26, fontWeight: 700, color: tokens.text, letterSpacing: '-.03em', marginBottom: 6 }}>
+            Lettre de motivation
+          </h1>
+          <p style={{ fontSize: 14, color: tokens.muted, fontWeight: 300 }}>
+            Colle une offre d'emploi et génère une lettre personnalisée depuis ton profil.
+          </p>
+        </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24, alignItems: 'start' }}>
+        {/* Two-column grid */}
+        <div style={{
+          maxWidth: 1200, margin: '0 auto',
+          padding: '0 32px 64px',
+          display: 'grid',
+          gridTemplateColumns: '340px 1fr',
+          gap: 20,
+          alignItems: 'start',
+        }}>
 
-            {/* Formulaire */}
-            <div style={{ background: '#fff', border: '1px solid var(--border)', borderRadius: 12, overflow: 'hidden' }}>
-              <div style={{ padding: '20px 24px', borderBottom: '1px solid var(--border)' }}>
-                <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)', marginBottom: 2 }}>Offre d'emploi</div>
-                <div style={{ fontSize: 11, color: 'var(--muted)' }}>Colle le texte complet de l'offre</div>
+          {/* ── LEFT CARD ── */}
+          <div style={card}>
+            <div style={cardHeader}>
+              <div>
+                <div style={cardTitle}>Offre d'emploi</div>
+                <div style={{ ...cardSub, color: tokens.muted }}>Colle le texte complet de l'offre</div>
               </div>
-              <div style={{ padding: 24 }}>
-                <textarea
-                  value={offre}
-                  onChange={e => setOffre(e.target.value)}
-                  placeholder="Colle ici le texte de l'offre d'emploi — titre du poste, missions, profil recherché, stack, entreprise..."
-                  style={{
-                    width: '100%', minHeight: 260, padding: '12px 14px', border: '1px solid var(--border)',
-                    borderRadius: 8, fontSize: 13, fontFamily: 'inherit', color: 'var(--text)',
-                    background: 'var(--bg-soft)', resize: 'vertical', lineHeight: 1.6, outline: 'none',
-                    transition: 'border-color .15s',
-                  }}
-                  onFocus={e => e.target.style.borderColor = 'var(--p400)'}
-                  onBlur={e => e.target.style.borderColor = 'var(--border)'}
+            </div>
+            <div style={{ padding: '20px 20px 24px', display: 'flex', flexDirection: 'column', gap: 12 }}>
+
+              <FormField label="Entreprise" placeholder="Ex : Weborama" value={entreprise} onChange={e => setEntreprise(e.target.value)} />
+              <FormField label="Poste" placeholder="Ex : Product Designer IA" value={poste} onChange={e => setPoste(e.target.value)} />
+              <FormField type="textarea" label="Texte de l'offre" placeholder="Colle ici le texte complet de l'offre d'emploi…" value={offre} onChange={e => setOffre(e.target.value)} rows={7} />
+
+              {/* Divider */}
+              <div style={{ borderTop: `1px solid ${tokens.border}`, margin: '2px 0' }} />
+
+              {/* Contexte toggle */}
+              <Toggle checked={contexteOn} onChange={setContexteOn} label="Contexte complémentaire" />
+              {contexteOn && (
+                <FormField
+                  type="textarea"
+                  placeholder="Info trouvée sur leur site, angle à mettre en avant…"
+                  value={contexte}
+                  onChange={e => setContexte(e.target.value)}
+                  rows={3}
+                  sx={{ borderColor: tokens.primary[200], background: tokens.primary[50] }}
                 />
+              )}
 
-                {/* Ton */}
-                <div style={{ marginTop: 20 }}>
-                  <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '.06em', textTransform: 'uppercase', color: 'var(--muted)', marginBottom: 10 }}>Ton</div>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 8 }}>
-                    {TONS.map(t => (
-                      <button key={t.id} onClick={() => setTon(t.id)} style={{
-                        padding: '9px 10px', borderRadius: 7, border: '1px solid',
-                        borderColor: ton === t.id ? 'var(--p400)' : 'var(--border)',
-                        background: ton === t.id ? 'var(--p50)' : '#fff',
-                        cursor: 'pointer', textAlign: 'left', transition: 'all .15s',
-                      }}>
-                        <div style={{ fontSize: 12, fontWeight: 600, color: ton === t.id ? 'var(--p600)' : 'var(--text)', marginBottom: 2 }}>{t.label}</div>
-                        <div style={{ fontSize: 10, color: 'var(--muted)', fontWeight: 300 }}>{t.desc}</div>
-                      </button>
-                    ))}
-                  </div>
+              {/* Divider */}
+              <div style={{ borderTop: `1px solid ${tokens.border}`, margin: '2px 0' }} />
+
+              {/* Ton */}
+              <div>
+                <div style={{ fontSize: 11, fontWeight: 600, color: tokens.muted, letterSpacing: '.06em', textTransform: 'uppercase', marginBottom: 8 }}>Ton</div>
+                <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                  {TONS.map(t => (
+                    <Tag
+                      key={t.id}
+                      category="secondary"
+                      clickable
+                      isActive={ton === t.id}
+                      onClick={() => setTon(t.id)}
+                    >
+                      {t.label}
+                    </Tag>
+                  ))}
                 </div>
+              </div>
 
-                {/* Bouton */}
+              {/* Generate button */}
+              {status === 'generating' ? (
+                <button onClick={handleStop} style={{
+                  width: '100%', padding: '11px 0',
+                  background: tokens.gray[100], color: tokens.gray[600],
+                  border: `1.5px solid ${tokens.border}`, borderRadius: 8,
+                  fontSize: 13, fontWeight: 600, cursor: 'pointer',
+                  fontFamily: 'Outfit, sans-serif',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+                }}>
+                  <StopIcon sx={{ fontSize: 15 }} />
+                  Arrêter
+                </button>
+              ) : (
                 <button
-                  onClick={generate}
-                  disabled={status === 'generating' || offre.trim().length < 50}
+                  onClick={status === 'done' ? handleRegen : generate}
+                  disabled={!canGenerate}
                   style={{
-                    marginTop: 20, width: '100%', padding: '12px 0', borderRadius: 8, border: 'none',
-                    background: status === 'generating' ? 'var(--p300)' : offre.trim().length < 50 ? 'var(--g100)' : 'var(--p500)',
-                    color: offre.trim().length < 50 ? 'var(--muted)' : '#fff',
-                    fontSize: 14, fontWeight: 600, cursor: offre.trim().length < 50 ? 'default' : 'pointer',
-                    transition: 'background .15s', fontFamily: 'inherit',
+                    width: '100%', padding: '11px 0',
+                    background: canGenerate ? tokens.primary[500] : tokens.gray[100],
+                    color: canGenerate ? '#fff' : tokens.gray[400],
+                    border: 'none', borderRadius: 8,
+                    fontSize: 13, fontWeight: 600,
+                    cursor: canGenerate ? 'pointer' : 'default',
+                    fontFamily: 'Outfit, sans-serif', transition: 'background .15s',
                     display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
                   }}
                 >
-                  {status === 'generating' ? (
-                    <><Spinner /> Génération en cours…</>
-                  ) : 'Générer la lettre'}
+                  {status === 'done'
+                    ? <><RefreshIcon sx={{ fontSize: 15 }} />Regénérer</>
+                    : <><AutoAwesomeIcon sx={{ fontSize: 15 }} />Générer la lettre</>
+                  }
                 </button>
-                {offre.trim().length < 50 && offre.length > 0 && (
-                  <div style={{ fontSize: 11, color: 'var(--muted)', textAlign: 'center', marginTop: 8 }}>Offre trop courte — colle l'offre complète</div>
-                )}
+              )}
+              {!canGenerate && offre.length > 0 && (
+                <div style={{ fontSize: 11, color: tokens.muted, textAlign: 'center', marginTop: -6 }}>
+                  Offre trop courte — colle l'offre complète
+                </div>
+              )}
+
+            </div>
+          </div>
+
+          {/* ── RIGHT CARD ── */}
+          <div style={card}>
+            <div style={cardHeader}>
+              <div>
+                <div style={cardTitle}>Lettre générée</div>
+                <div style={{ ...cardSub, color: statusColor[status] }}>{statusLabel[status]}</div>
               </div>
+              {(status === 'done' || status === 'generating') && (
+                <div style={{ display: 'flex', gap: 7 }}>
+                  {status === 'done' && (<>
+                    <button onClick={handleCopy} style={btnAction}>
+                      {copied ? <CheckIcon sx={{ fontSize: 13, color: '#22C55E' }} /> : <ContentCopyIcon sx={{ fontSize: 13 }} />}
+                      {copied ? 'Copié !' : 'Copier'}
+                    </button>
+                    <button onClick={handlePdf} style={btnAction}>
+                      <FileDownloadIcon sx={{ fontSize: 13 }} />
+                      PDF A4
+                    </button>
+                    <button onClick={handleRegen} style={btnAction}>
+                      <RefreshIcon sx={{ fontSize: 13 }} />
+                      Relancer
+                    </button>
+                  </>)}
+                  {status === 'generating' && (
+                    <button onClick={handleStop} style={btnAction}>
+                      <StopIcon sx={{ fontSize: 13 }} />
+                      Arrêter
+                    </button>
+                  )}
+                </div>
+              )}
             </div>
 
-            {/* Output */}
-            <div style={{ background: '#fff', border: '1px solid var(--border)', borderRadius: 12, overflow: 'hidden' }}>
-              <div style={{ padding: '16px 24px', borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <div>
-                  <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)', marginBottom: 2 }}>Lettre générée</div>
-                  <div style={{ fontSize: 11, color: 'var(--muted)' }}>
-                    {status === 'idle' && 'En attente'}
-                    {status === 'generating' && <span style={{ color: 'var(--p500)' }}>Rédaction en cours…</span>}
-                    {status === 'done' && <span style={{ color: '#22C55E' }}>Prête</span>}
-                    {status === 'error' && <span style={{ color: '#EF4444' }}>Erreur</span>}
-                  </div>
+            {/* Card body */}
+            <div style={{ padding: 20, background: tokens.bgPanel }}>
+
+              {/* Floating toolbar — only when done */}
+              {status === 'done' && editReady && (
+                <div style={{ marginBottom: 10, display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <FloatingToolbar onFormat={applyFormat} />
+                  <span style={{ fontSize: 11, color: tokens.gray[400], fontWeight: 300 }}>
+                    Sélectionne du texte pour formater
+                  </span>
                 </div>
-                {(status === 'done' || status === 'generating') && (
-                  <div style={{ display: 'flex', gap: 8 }}>
-                    {status === 'done' && (
-                      <>
-                        <ActionBtn onClick={handleCopy} icon="📋">{copied ? 'Copié !' : 'Copier'}</ActionBtn>
-                        <ActionBtn onClick={handlePdf} icon="⬇︎">PDF</ActionBtn>
-                        <ActionBtn onClick={handleRegen} icon="↺">Relancer</ActionBtn>
-                      </>
+              )}
+
+              {/* Empty state */}
+              {status === 'idle' && (
+                <div style={{
+                  minHeight: 400, display: 'flex', flexDirection: 'column',
+                  alignItems: 'center', justifyContent: 'center', gap: 10,
+                  color: tokens.muted,
+                }}>
+                  <AutoAwesomeIcon sx={{ fontSize: 32, color: tokens.gray[300] }} />
+                  <div style={{ fontSize: 13, fontWeight: 300 }}>Colle une offre et clique sur Générer</div>
+                </div>
+              )}
+
+              {/* Error state */}
+              {status === 'error' && (
+                <div style={{ textAlign: 'center', padding: 40, color: '#EF4444', fontSize: 13 }}>
+                  Une erreur est survenue. Vérifie ta connexion et réessaie.
+                </div>
+              )}
+
+              {/* A4 Document */}
+              {(status === 'generating' || status === 'done') && (
+                <div ref={a4Ref} style={{ position: 'relative' }}>
+
+                  {/* Floating toolbar positioned above selection */}
+                  {toolbarPos && status === 'done' && (
+                    <div style={{
+                      position: 'absolute',
+                      top: toolbarPos.top,
+                      left: toolbarPos.left,
+                      transform: 'translateX(-50%)',
+                      zIndex: 100,
+                      pointerEvents: 'auto',
+                    }}>
+                      <FloatingToolbar onFormat={applyFormat} />
+                    </div>
+                  )}
+
+                  {/* A4 sheet */}
+                  <div className="lm-print-area" style={{
+                    background: '#fff',
+                    border: `1px solid ${tokens.border}`,
+                    boxShadow: '0 2px 16px rgba(26,37,64,.07), 0 8px 32px rgba(26,37,64,.04)',
+                    borderRadius: 3,
+                    padding: '48px 52px',
+                  }}>
+
+                    {/* Sender */}
+                    <div style={{ marginBottom: 24 }}>
+                      <div style={{ fontSize: 14, fontWeight: 700, color: tokens.text, letterSpacing: '-.01em', marginBottom: 2 }}>
+                        Thomas Reynier
+                      </div>
+                      <div style={{ fontSize: 11.5, color: tokens.muted, fontWeight: 300, lineHeight: 1.9 }}>
+                        reynier.design@gmail.com &nbsp;·&nbsp; 06 26 53 21 29<br />
+                        linkedin.com/in/thomas-reynier-product-design &nbsp;·&nbsp; Paris
+                      </div>
+                    </div>
+
+                    {/* Date + recipient */}
+                    <div style={{ fontSize: 12, color: tokens.gray[400], fontWeight: 300, marginBottom: 6 }}>
+                      Paris, le {frenchDate()}
+                    </div>
+                    {(entreprise || poste) && (
+                      <div style={{ marginBottom: 24 }}>
+                        <div style={{ fontSize: 10.5, color: tokens.gray[300], textTransform: 'uppercase', letterSpacing: '.06em', fontWeight: 500, marginBottom: 2 }}>
+                          À l'attention de
+                        </div>
+                        <div style={{ fontSize: 13, fontWeight: 600, color: tokens.text, letterSpacing: '-.01em' }}>
+                          {[entreprise, poste].filter(Boolean).join(' — ')}
+                        </div>
+                      </div>
                     )}
+
+                    {/* Streaming body (non-editable) */}
                     {status === 'generating' && (
-                      <ActionBtn onClick={() => { abortRef.current?.abort(); setStatus('idle'); }} icon="✕">Arrêter</ActionBtn>
+                      <StreamingBody text={letterText} />
                     )}
-                  </div>
-                )}
-              </div>
 
-              <div style={{ padding: 24, minHeight: 400 }} id="letter-output">
-                {status === 'idle' && (
-                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: 360, gap: 12, color: 'var(--muted)' }}>
-                    <div style={{ fontSize: 32 }}>✉️</div>
-                    <div style={{ fontSize: 13, fontWeight: 400 }}>Colle une offre et clique sur Générer</div>
-                  </div>
-                )}
+                    {/* Editable body (after done) */}
+                    {status === 'done' && (
+                      <div
+                        ref={letterBodyRef}
+                        contentEditable={editReady}
+                        suppressContentEditableWarning
+                        style={{
+                          outline: 'none',
+                          minHeight: 320,
+                          pointerEvents: editReady ? 'auto' : 'none',
+                        }}
+                      />
+                    )}
 
-                {status === 'error' && (
-                  <div style={{ textAlign: 'center', padding: 40, color: '#EF4444', fontSize: 13 }}>
-                    Une erreur est survenue. Vérifie ta connexion et réessaie.
-                  </div>
-                )}
+                    {/* Signature */}
+                    <div style={{ fontSize: 13, fontWeight: 600, color: tokens.text, letterSpacing: '-.01em', marginTop: 28 }}>
+                      Thomas Reynier
+                    </div>
 
-                {(status === 'generating' || status === 'done') && letterText && (
-                  <LetterBody text={letterText} />
-                )}
-              </div>
-
-              {/* Ton selector for regen */}
-              {status === 'done' && (
-                <div style={{ padding: '0 24px 24px', borderTop: '1px solid var(--border)', paddingTop: 16 }}>
-                  <div style={{ fontSize: 11, color: 'var(--muted)', marginBottom: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.06em' }}>Relancer avec un autre ton</div>
-                  <div style={{ display: 'flex', gap: 8 }}>
-                    {TONS.map(t => (
-                      <button key={t.id} onClick={() => { setTon(t.id); setTimeout(generate, 50); }} style={{
-                        padding: '6px 12px', borderRadius: 6, border: '1px solid var(--border)',
-                        background: ton === t.id ? 'var(--p50)' : '#fff', cursor: 'pointer',
-                        fontSize: 12, fontWeight: 500, color: ton === t.id ? 'var(--p600)' : 'var(--muted)',
-                        fontFamily: 'inherit',
-                      }}>{t.label}</button>
-                    ))}
                   </div>
                 </div>
               )}
             </div>
           </div>
+
         </div>
       </main>
+
       <Footer />
-    </div>
-  );
-}
 
-function LetterBody({ text }) {
-  const { paragraphs, kpiContent } = parseLetter(text);
-
-  return (
-    <div style={{ fontSize: 13.5, lineHeight: 1.8, color: 'var(--muted)', fontWeight: 300 }}>
-      {paragraphs.map((p, i) => {
-        if (p === '[KPI_BLOCK]' && kpiContent) {
-          return (
-            <div key={i} style={{
-              background: 'var(--p50)', border: '1px solid var(--p100)', borderRadius: 8,
-              padding: '12px 16px', margin: '16px 0', display: 'flex', gap: 10,
-            }}>
-              <span style={{ fontSize: 14, flexShrink: 0, marginTop: 1 }}>◆</span>
-              <div style={{ fontSize: 12.5, color: 'var(--p600)', lineHeight: 1.65 }}>{renderText(kpiContent)}</div>
-            </div>
-          );
+      {/* Editable body styles */}
+      <style>{`
+        .lm-p {
+          font-size: 13px;
+          color: ${tokens.gray[600]};
+          line-height: 1.8;
+          font-weight: 300;
+          margin-bottom: 13px;
+          border-radius: 5px;
+          padding: 5px 8px;
+          margin-left: -8px;
+          outline: none;
+          transition: background .12s;
         }
-        return <p key={i} style={{ marginBottom: 14 }}>{renderText(p)}</p>;
-      })}
+        .lm-p:hover { background: ${tokens.primary[50]}; }
+        .lm-kpi {
+          background: ${tokens.primary[50]};
+          border: 1px solid ${tokens.primary[100]};
+          border-left: 3px solid ${tokens.primary[400]};
+          border-radius: 8px;
+          padding: 12px 16px;
+          margin: 14px 0;
+          font-size: 12.5px;
+          color: ${tokens.primary[600]};
+          line-height: 1.7;
+          display: flex;
+          gap: 10px;
+          align-items: flex-start;
+        }
+        .lm-kpi-icon {
+          color: ${tokens.primary[400]};
+          font-weight: 700;
+          flex-shrink: 0;
+          margin-top: 1px;
+        }
+      `}</style>
     </div>
-  );
-}
-
-function PasswordGate({ pwd, setPwd, error, onSubmit }) {
-  return (
-    <div style={{ minHeight: '100vh', background: 'var(--bg-soft)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'inherit' }}>
-      <div style={{ background: '#fff', border: '1px solid var(--border)', borderRadius: 14, padding: '40px 48px', width: 380, textAlign: 'center', boxShadow: '0 4px 24px rgba(0,0,0,.06)' }}>
-        <div style={{ fontSize: 32, marginBottom: 16 }}>🔒</div>
-        <div style={{ fontSize: 16, fontWeight: 700, color: 'var(--text)', marginBottom: 6 }}>Accès privé</div>
-        <div style={{ fontSize: 13, color: 'var(--muted)', fontWeight: 300, marginBottom: 28 }}>Cette page est réservée à Thomas.</div>
-        <input
-          type="password"
-          value={pwd}
-          onChange={e => setPwd(e.target.value)}
-          onKeyDown={e => e.key === 'Enter' && onSubmit()}
-          placeholder="Mot de passe"
-          style={{
-            width: '100%', padding: '11px 14px', border: `1px solid ${error ? '#EF4444' : 'var(--border)'}`,
-            borderRadius: 8, fontSize: 14, fontFamily: 'inherit', marginBottom: 12, outline: 'none',
-            transition: 'border-color .15s', textAlign: 'center',
-          }}
-          autoFocus
-        />
-        {error && <div style={{ fontSize: 12, color: '#EF4444', marginBottom: 12 }}>Mot de passe incorrect</div>}
-        <button onClick={onSubmit} style={{
-          width: '100%', padding: '11px 0', background: 'var(--p500)', color: '#fff',
-          border: 'none', borderRadius: 8, fontSize: 14, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit',
-        }}>Accéder</button>
-      </div>
-    </div>
-  );
-}
-
-function ActionBtn({ onClick, icon, children }) {
-  return (
-    <button onClick={onClick} style={{
-      display: 'inline-flex', alignItems: 'center', gap: 5,
-      padding: '6px 12px', borderRadius: 6, border: '1px solid var(--border)',
-      background: '#fff', cursor: 'pointer', fontSize: 12, fontWeight: 500,
-      color: 'var(--muted)', fontFamily: 'inherit', transition: 'border-color .15s',
-    }}>
-      <span>{icon}</span>{children}
-    </button>
-  );
-}
-
-function Spinner() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ animation: 'spin 1s linear infinite' }}>
-      <style>{`@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>
-      <path d="M21 12a9 9 0 11-6.219-8.56"/>
-    </svg>
   );
 }
