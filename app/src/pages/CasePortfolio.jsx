@@ -192,21 +192,26 @@ export default function CasePortfolio() {
           <div className="sec-body">
             <h2>De la conception au produit avec Claude Code</h2>
             <p>Le développement est la traduction des décisions de conception en produit livrable. J'ai piloté Claude Code avec les mêmes instructions que j'aurais données à un développeur — stack, structure, comportements attendus, contraintes.</p>
-            <p>Claude Code gère également le versioning — commits, push, branches — ce qui me permet de rester concentré sur les décisions produit plutôt que sur la logistique technique.</p>
+            <p>Le repo va plus loin qu'un site portfolio : il contient une feature autonome qui réutilise la connaissance accumulée pour accélérer chaque candidature. Le CLAUDE.md n'est pas qu'un brief de design — c'est le profil IA de Thomas, exploitable pour d'autres usages.</p>
             <div className="steps">
               <Step icon={<img src="/images/icon-claude.svg" alt="Claude"/>} stepNum="STACK" title="React · Vite · MUI · React Router · GitHub" body="15 fichiers JSX — pages, layouts et composants. Architecture décidée dès le départ pour rester lisible et maintenable au fil des itérations."/>
               <Step icon={<img src="/images/icon-claude.svg" alt="Claude"/>} stepNum="LIVRAISON" title="Vercel · déploiement continu" body="Chaque push sur main déclenche un build automatique. Vercel Analytics et Speed Insights intégrés pour mesurer les performances réelles."/>
-              <Step icon={<img src="/images/icon-claude.svg" alt="Claude"/>} stepNum="CONNAISSANCE" title="Le repo comme base de connaissance active" body="Le CLAUDE.md versionné sur GitHub est aussi utilisé pour générer des lettres de motivation personnalisées par entreprise — la connaissance accumulée produit de la valeur au-delà du portfolio." isLast/>
+              <Step icon={<img src="/images/icon-claude.svg" alt="Claude"/>} stepNum="KNOWLEDGE REUSE" title="CLAUDE.md comme profil vivant — une base, plusieurs produits" body="Le même CLAUDE.md qui pilote le portfolio génère des lettres de motivation personnalisées. Coller une offre suffit : l'IA croise les exigences de l'offre avec le profil de Thomas, sélectionne les expériences pertinentes, respecte le tone of voice, et génère une lettre en 30 secondes — streaming temps réel, 4 tons, bloc KPI, export PDF A4." isLast/>
             </div>
+            <h3 style={{fontSize:16,fontWeight:600,color:'var(--text)',letterSpacing:'-0.02em',marginTop:32,marginBottom:8}}>Feature Lettre de motivation — avantages du process</h3>
             <ul className="result-list">
-              <li>15 fichiers JSX — 5 pages, 2 layouts, 4 composants custom, utilitaires</li>
-              <li>CV HTML maintenu dans le même repo, avec le même design system — identité professionnelle cohérente depuis une source unique</li>
-              <li>3 lettres de motivation personnalisées générées depuis le même repo — format HTML + PDF</li>
-              <li>155 commits propres sur GitHub — versioning géré par Claude Code</li>
+              <li><strong>Offre collée → lettre complète en 30 secondes</strong> — sans cette feature : 45 min à 1h de rédaction par candidature</li>
+              <li><strong>Personnalisation réelle, pas un template</strong> — l'IA lit l'offre, identifie les mots-clés et les croise avec les expériences concrètes de Thomas (Weborama, Pepyte, Nectar)</li>
+              <li><strong>Tone of voice cohérent</strong> — le même registre sobre et direct que le portfolio, défini une fois dans le CLAUDE.md, appliqué à chaque lettre sans dérive</li>
+              <li><strong>4 tons adaptables</strong> — Équilibré · Formel · Concis · Engagé — selon la culture de l'entreprise ciblée</li>
+              <li><strong>Bloc KPI automatique</strong> — l'IA formate les métriques d'impact (80% de composants en moins, 12 entretiens, MVP en 10 jours) en callout visuel</li>
+              <li><strong>Contexte complémentaire</strong> — un toggle pour ajouter des informations spécifiques à l'entreprise : motivation précise, projet en cours, contact interne</li>
+              <li><strong>Export PDF A4 print-ready</strong> — même qualité visuelle que le CV du repo, directement envoyable</li>
+              <li>Scalable — même process pour n'importe quelle offre, sans réécriture du profil à chaque fois</li>
             </ul>
             <div className="illustrations-grid-2" style={{marginTop:24}}>
-              <IllustrationItem src="/images/portfolio-lm-1.png" caption="Lettre de motivation — générée depuis le CLAUDE.md + brief entreprise"/>
-              <IllustrationItem src="/images/portfolio-dev-1.png" caption="Claude Code en session — décision produit traduite en composant React"/>
+              <IllustrationItem src="/images/portfolio-lm-form.png" caption="Interface de génération — offre collée, entreprise, poste, ton · prêt à générer"/>
+              <IllustrationItem src="/images/portfolio-lm-1.png" caption="Lettre générée — profil croisé avec l'offre, bloc KPI formaté, ton respecté"/>
             </div>
           </div>
         </div>
