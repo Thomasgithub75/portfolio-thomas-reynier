@@ -12,6 +12,63 @@ import TestimonialCard from '../components/TestimonialCard/TestimonialCard';
 import { tokens } from '../theme/theme';
 import { useState } from 'react';
 
+// ── Auth ──────────────────────────────────────────────────────────────────────
+const PASSWORD = import.meta.env.VITE_DS_PASSWORD || 'thomas2026';
+
+function PasswordGate({ onUnlock }) {
+  const [pwd, setPwd] = useState('');
+  const [error, setError] = useState(false);
+
+  const submit = () => {
+    if (pwd === PASSWORD) { onUnlock(); }
+    else { setError(true); setTimeout(() => setError(false), 2000); }
+  };
+
+  return (
+    <div style={{
+      minHeight: '100vh', background: tokens.bgSoft,
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      fontFamily: 'Outfit, sans-serif',
+    }}>
+      <div style={{
+        background: '#fff', border: `1px solid ${tokens.border}`,
+        borderRadius: 14, padding: '40px 48px', width: 380,
+        textAlign: 'center', boxShadow: '0 4px 24px rgba(0,0,0,.06)',
+      }}>
+        <div style={{ fontSize: 28, marginBottom: 16 }}>🎨</div>
+        <div style={{ fontSize: 16, fontWeight: 700, color: tokens.text, marginBottom: 6 }}>Design System</div>
+        <div style={{ fontSize: 13, color: tokens.muted, fontWeight: 300, marginBottom: 28 }}>
+          Accès réservé à Thomas.
+        </div>
+        <input
+          type="password"
+          value={pwd}
+          onChange={e => setPwd(e.target.value)}
+          onKeyDown={e => e.key === 'Enter' && submit()}
+          placeholder="Mot de passe"
+          autoFocus
+          style={{
+            width: '100%', padding: '11px 14px',
+            border: `1px solid ${error ? '#EF4444' : tokens.border}`,
+            borderRadius: 8, fontSize: 14, fontFamily: 'Outfit, sans-serif',
+            marginBottom: 12, outline: 'none', textAlign: 'center',
+            transition: 'border-color .15s',
+          }}
+        />
+        {error && <div style={{ fontSize: 12, color: '#EF4444', marginBottom: 12 }}>Mot de passe incorrect</div>}
+        <button onClick={submit} style={{
+          width: '100%', padding: '11px 0',
+          background: tokens.primary[500], color: '#fff',
+          border: 'none', borderRadius: 8, fontSize: 14,
+          fontWeight: 600, cursor: 'pointer', fontFamily: 'Outfit, sans-serif',
+        }}>
+          Accéder
+        </button>
+      </div>
+    </div>
+  );
+}
+
 // Icônes Material Design utilisées dans le portfolio
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
@@ -193,6 +250,14 @@ function ToggleLabelDemo() {
 // ── Page ──────────────────────────────────────────────────────────────────────
 
 export default function DesignSystem() {
+  const [unlocked, setUnlocked] = useState(() => localStorage.getItem('ds_auth') === '1');
+
+  if (!unlocked) return <PasswordGate onUnlock={() => { localStorage.setItem('ds_auth', '1'); setUnlocked(true); }} />;
+
+  return <DesignSystemContent />;
+}
+
+function DesignSystemContent() {
   const [activeTag, setActiveTag] = useState(null);
 
   const toggle = (id) => setActiveTag(prev => prev === id ? null : id);

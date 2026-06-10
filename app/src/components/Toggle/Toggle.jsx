@@ -4,13 +4,13 @@ import { tokens } from '../../theme/theme';
 
 const trackColors = {
   on: {
-    enabled: tokens.primary[600],
-    hover:   tokens.primary[700],
-    pressed: tokens.primary[800],
+    enabled: tokens.primary[500],
+    hover: tokens.primary[600],
+    pressed: tokens.primary[700],
   },
   off: {
     enabled: tokens.gray[400],
-    hover:   tokens.gray[500],
+    hover: tokens.gray[500],
     pressed: tokens.gray[600],
   },
 };

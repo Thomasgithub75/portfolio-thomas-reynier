@@ -322,6 +322,7 @@ export default function Home() {
               { href:'/case/pepyte', thumb:'/images/thumb-pepyte.jpg', logo:'/images/logo-pepyte.svg', role:'UX Research & Design', roleClass:'project-role-pepyte', duration:'26 mois', name:'Pepyte', desc:"Audit de 62 champs, 10 entretiens recruteurs et conception de la fonctionnalité de matching — de la recherche à l'interface.", tags:['UX Research','Entretiens','User Flows','Figma'] },
               { href:'/case/weborama', thumb:'/images/thumb-weborama.jpg', logo:'/images/logo-weborama.svg', role:'Design System Lead', roleClass:'project-role-weborama', duration:'16 mois', name:'Weborama', desc:"Audit de 974 composants, ateliers de co-construction et création d'un Design System de zéro — 80% de composants en moins.", tags:['Design System','Atomic Design','Figma Make','Zeroheight'] },
               { href:'/case/nectar', thumb:'/images/thumb-nectar.jpg', logo:'/images/logo-nectar.svg', role:'Founding Designer', roleClass:'project-role-nectar', duration:'En cours', name:'Nectar', desc:"MVP B2B mobile-first piloté par IA — de la recherche utilisateur aux 8 écrans livrés, avec un process documenté et réplicable.", tags:['Figma Make','Claude MCP','Design System','UX Research'] },
+              { href:'/case/portfolio', thumb:'/images/thumb-portfolio.jpg', logo:'/images/logo-portfolio.svg', role:'Design × IA × Code', roleClass:'project-role-portfolio', duration:'10 jours', name:'Portfolio', desc:"Ce portfolio — conçu, codé et déployé sans écrire une ligne de code. 155 commits, React + MUI, piloté entièrement avec Claude Code.", tags:['Claude Code','React','Design System','Vercel'] },
             ].map(p => <ProjectCard key={p.name} p={p}/>)}
           </div>
         </div>
@@ -433,6 +434,7 @@ const ROLE_STYLES = {
   'project-role-pepyte': { background:'#F0EDFE', color:'#6B45D6', border:'1px solid #D6CCFC' },
   'project-role-weborama': { background:'#E3F7EE', color:'#0E7A56', border:'1px solid #A7E3CA' },
   'project-role-nectar': { background:'#FEF3E2', color:'#A05C0A', border:'1px solid #F9D5A0' },
+  'project-role-portfolio': { background:'#F0F4FF', color:'#2145A8', border:'1px solid #C4D0F5' },
 };
 
 function HeroBtn({ onClick, primary, href, target, rel, children }) {
