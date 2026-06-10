@@ -60,7 +60,10 @@ export default function LettreMotivation() {
     try {
       const res = await fetch('/api/generate-letter', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'x-letter-secret': import.meta.env.VITE_LETTER_SECRET || '',
+        },
         body: JSON.stringify({ offre, ton }),
         signal: abortRef.current.signal,
       });

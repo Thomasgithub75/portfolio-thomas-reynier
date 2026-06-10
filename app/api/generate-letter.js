@@ -69,6 +69,11 @@ export default async function handler(req, res) {
 
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
+  const SECRET = process.env.LETTER_SECRET;
+  if (SECRET && req.headers['x-letter-secret'] !== SECRET) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+
   const { offre, ton = 'equilibre' } = req.body;
 
   if (!offre || offre.trim().length < 50) {
