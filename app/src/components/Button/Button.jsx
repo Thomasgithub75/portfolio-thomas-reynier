@@ -33,7 +33,7 @@ const PrimaryButton = styled(MuiButton)(() => ({
     backgroundColor: tokens.primary[700],
     boxShadow: 'none',
   },
-  '&.Mui-disabled': {
+  '&&.Mui-disabled': {
     backgroundColor: tokens.primary[200],
     color: '#ffffff',
   },
@@ -61,7 +61,7 @@ const SecondaryButton = styled(MuiButton)(() => ({
     color: tokens.gray[800],
     boxShadow: 'none',
   },
-  '&.Mui-disabled': {
+  '&&.Mui-disabled': {
     backgroundColor: tokens.gray[50],
     color: tokens.gray[300],
   },

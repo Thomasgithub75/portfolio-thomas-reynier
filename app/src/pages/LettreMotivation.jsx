@@ -1,4 +1,5 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import Navbar from '../layouts/Navbar';
 import Footer from '../layouts/Footer';
 import Button from '../components/Button/Button';
@@ -217,6 +218,8 @@ export default function LettreMotivation() {
 }
 
 function LettreApp() {
+  const isMobile = useMediaQuery('(max-width:768px)');
+
   // Form
   const [entreprise, setEntreprise] = useState('');
   const [poste, setPoste] = useState('');
@@ -369,9 +372,11 @@ function LettreApp() {
     overflow: 'hidden',
   };
   const cardHeader = {
-    padding: '14px 20px',
+    padding: isMobile ? '12px 16px' : '14px 20px',
     borderBottom: `1px solid ${tokens.border}`,
-    display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+    display: 'flex', alignItems: isMobile ? 'flex-start' : 'center',
+    justifyContent: 'space-between', gap: 8,
+    flexWrap: isMobile ? 'wrap' : 'nowrap',
   };
   const cardTitle = { fontSize: 13, fontWeight: 600, color: tokens.text };
   const cardSub = { fontSize: 11.5, fontWeight: 300, marginTop: 1 };
@@ -395,14 +400,14 @@ function LettreApp() {
 
       <main style={{ flex: 1, paddingTop: 80 }}>
         {/* Page header */}
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '32px 32px 24px' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto', padding: isMobile ? '24px 16px 16px' : '32px 32px 24px' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: tokens.primary[500], letterSpacing: '.08em', textTransform: 'uppercase', marginBottom: 8 }}>
             Outil personnel
           </div>
-          <h1 style={{ fontSize: 26, fontWeight: 700, color: tokens.text, letterSpacing: '-.03em', marginBottom: 6 }}>
+          <h1 style={{ fontSize: isMobile ? 22 : 26, fontWeight: 700, color: tokens.text, letterSpacing: '-.03em', marginBottom: 6 }}>
             Lettre de motivation
           </h1>
-          <p style={{ fontSize: 14, color: tokens.muted, fontWeight: 300 }}>
+          <p style={{ fontSize: 13, color: tokens.muted, fontWeight: 300 }}>
             Colle une offre d'emploi et génère une lettre personnalisée depuis ton profil.
           </p>
         </div>
@@ -410,10 +415,10 @@ function LettreApp() {
         {/* Two-column grid */}
         <div style={{
           maxWidth: 1200, margin: '0 auto',
-          padding: '0 32px 64px',
+          padding: isMobile ? '0 16px 48px' : '0 32px 64px',
           display: 'grid',
-          gridTemplateColumns: '340px 1fr',
-          gap: 20,
+          gridTemplateColumns: isMobile ? '1fr' : '340px 1fr',
+          gap: 16,
           alignItems: 'start',
         }}>
 
@@ -508,7 +513,7 @@ function LettreApp() {
                 <div style={{ ...cardSub, color: statusColor[status] }}>{statusLabel[status]}</div>
               </div>
               {(status === 'done' || status === 'generating') && (
-                <div style={{ display: 'flex', gap: 7 }}>
+                <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', justifyContent: 'flex-end' }}>
                   {status === 'done' && (<>
                     <Button variant="ghost" size="sm" onClick={handleCopy}
                       startIcon={copied ? <CheckIcon sx={{ fontSize: 13, color: '#22C55E' }} /> : <ContentCopyIcon sx={{ fontSize: 13 }} />}>
@@ -589,7 +594,7 @@ function LettreApp() {
                     border: `1px solid ${tokens.border}`,
                     boxShadow: '0 2px 16px rgba(26,37,64,.07), 0 8px 32px rgba(26,37,64,.04)',
                     borderRadius: 3,
-                    padding: '48px 52px',
+                    padding: isMobile ? '28px 20px' : '48px 52px',
                   }}>
 
                     {/* Sender */}
