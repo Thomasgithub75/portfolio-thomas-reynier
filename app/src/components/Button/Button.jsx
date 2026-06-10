@@ -1,3 +1,15 @@
+/**
+ * @component Button
+ * @usage Action principale ou secondaire sur n'importe quelle page ou feature.
+ *
+ * Variantes :
+ *   "primary"   — CTA principal : générer, envoyer, valider. Une seule par écran en règle générale.
+ *   "secondary" — Action secondaire : annuler, revenir, option alternative.
+ *   "ghost"     — Action tertiaire ou lien discret : télécharger, accéder, voir plus.
+ *
+ * Tailles : "md" (défaut) pour les CTA standards, "sm" pour les actions dans un toolbar ou une card dense.
+ * Accepte startIcon / endIcon (MUI Icons uniquement).
+ */
 import MuiButton from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import { tokens } from '../../theme/theme';

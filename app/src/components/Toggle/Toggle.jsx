@@ -1,3 +1,21 @@
+/**
+ * @component Toggle
+ * @usage Switch binaire (on/off) pour des choix réversibles dans un formulaire ou une interface.
+ *
+ * Cas d'usage :
+ *   - Afficher/masquer un champ conditionnel (ex : "Ajouter un contexte")
+ *   - Activer/désactiver un mode ou une option dans une feature
+ *   - Ne pas utiliser pour des actions irréversibles — utiliser Button à la place
+ *
+ * Props :
+ *   checked   — état contrôlé (true = on, false = off)
+ *   onChange  — callback (newValue: boolean)
+ *   label     — texte optionnel affiché à droite du toggle
+ *
+ * États visuels (automatiques) :
+ *   on  — brand[500] → brand[600] (hover) → brand[700] (pressed)
+ *   off — gray[400]  → gray[500]  (hover) → gray[600]  (pressed)
+ */
 import { useState } from 'react';
 import Box from '@mui/material/Box';
 import { tokens } from '../../theme/theme';

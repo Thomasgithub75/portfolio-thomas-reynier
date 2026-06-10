@@ -1,3 +1,23 @@
+/**
+ * @component Tag
+ * @usage Étiquette de compétence, catégorie ou filtre. Peut être cliquable (clickable=true).
+ *
+ * Cas d'usage typiques :
+ *   - Listes de compétences dans une page (non cliquable)
+ *   - Filtres de contenu : trier des projets, choisir un ton dans un formulaire (clickable + isActive)
+ *   - Labels colorés dans une card ou un header de case study
+ *
+ * Variantes de couleur :
+ *   "primary"   — bleu plein (compétence forte, filtre sélectionné)
+ *   "secondary" — bleu clair (compétence standard, filtre neutre)
+ *   "design"    — violet clair (compétences design)
+ *   "dev"       — orange clair (compétences techniques / dev)
+ *   "pm"        — vert clair (compétences produit / PM)
+ *   "langNatif" — bleu plein (langue native)
+ *   "langPro"   — bleu clair (langue professionnelle)
+ *
+ * Pour un filtre actif/inactif : utiliser clickable=true + isActive + isDimmed.
+ */
 import Box from '@mui/material/Box';
 import { tokens } from '../../theme/theme';
 

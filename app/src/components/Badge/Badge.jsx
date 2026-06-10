@@ -1,3 +1,17 @@
+/**
+ * @component Badge
+ * @usage Étiquette compacte (pill) pour labelliser un type, un rôle ou un statut. Non interactif.
+ *
+ * Quand utiliser Badge vs Tag :
+ *   Badge  — info statique, non cliquable (ex : "Projet perso", "Lead Designer", type de case study).
+ *   Tag    — info cliquable ou filtre interactif (ex : compétences, catégories de contenu).
+ *
+ * Variantes :
+ *   "default" — bleu clair, usage générique (rôle, label neutre)
+ *   "case"    — bleu foncé, pour identifier un type de case study ou de mission
+ *   "side"    — violet, pour projets side / perso
+ *   "perso"   — vert, pour projets personnels
+ */
 import Box from '@mui/material/Box';
 import { tokens } from '../../theme/theme';
 

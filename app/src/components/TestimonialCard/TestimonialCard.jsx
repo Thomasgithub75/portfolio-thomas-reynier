@@ -1,3 +1,22 @@
+/**
+ * @component TestimonialCard
+ * @usage Card de preuve sociale avec citation, auteur, étoiles et logo entreprise.
+ *
+ * Cas d'usage :
+ *   - Section témoignages sur la Home
+ *   - Section sociale proof sur une page de cas d'usage ou de landing
+ *
+ * Variantes :
+ *   featured=false (défaut) — card compacte en colonne, pour une grille de témoignages
+ *   featured=true           — card large 2 colonnes (keyQuote + citation complète), à utiliser seule ou en hero testimonial
+ *
+ * Props clés :
+ *   keyQuote     — phrase courte mise en avant en gras (accroche du témoignage)
+ *   quote        — citation complète en italique
+ *   companyLogo  — logo de l'entreprise (path image)
+ *   avatar       — photo de l'auteur (path image)
+ *   linkedinUrl  — affiche un badge LinkedIn cliquable si fourni
+ */
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';

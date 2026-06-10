@@ -1,3 +1,21 @@
+/**
+ * @component FormField
+ * @usage Champ de formulaire stylisé selon le design system. À utiliser pour tout input ou textarea du site.
+ *
+ * Cas d'usage :
+ *   - Formulaire de génération (lettre de motivation, brief projet, prompt)
+ *   - Formulaire de contact
+ *   - Tout champ de saisie dans une feature nécessitant une input ou zone de texte longue
+ *
+ * Types :
+ *   "input"    — champ texte court (entreprise, poste, email…)
+ *   "textarea" — champ texte long (offre, contexte, message…), prop rows pour la hauteur
+ *
+ * États visuels (automatiques) :
+ *   enabled  — fond gray[100], sans bordure
+ *   hover    — fond gray[200]
+ *   focus    — fond transparent + bordure 1.5px brand[500]
+ */
 import { useState } from 'react';
 import Box from '@mui/material/Box';
 import { tokens } from '../../theme/theme';
