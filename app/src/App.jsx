@@ -5,21 +5,23 @@ import Home from './pages/Home';
 import CaseWeborama from './pages/CaseWeborama';
 import CasePepyte from './pages/CasePepyte';
 import CaseNectar from './pages/CaseNectar';
+import CasePortfolio from './pages/CasePortfolio';
+import LettreMotivation from './pages/LettreMotivation';
 import './styles/global.css';
 
 export default function App() {
   return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/case/weborama" element={<CaseWeborama />} />
-          <Route path="/case/pepyte" element={<CasePepyte />} />
-          <Route path="/case/nectar" element={<CaseNectar />} />
-        </Routes>
-      </BrowserRouter>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/case/weborama" element={<CaseWeborama />} />
+        <Route path="/case/pepyte" element={<CasePepyte />} />
+        <Route path="/case/nectar" element={<CaseNectar />} />
+        <Route path="/case/portfolio" element={<CasePortfolio />} />
+        <Route path="/lettre-motivation" element={<LettreMotivation />} />
+      </Routes>
       <Analytics />
       <SpeedInsights />
-    </>
+    </BrowserRouter>
   );
 }
