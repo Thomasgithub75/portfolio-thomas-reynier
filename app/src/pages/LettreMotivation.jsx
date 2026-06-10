@@ -231,6 +231,7 @@ function LettreApp() {
   // Generation
   const [status, setStatus] = useState('idle'); // idle | generating | done | error
   const [letterText, setLetterText] = useState('');
+  const letterAccumRef = useRef(''); // source de vérité pour le texte accumulé (sync)
   const abortRef = useRef(null);
 
   // Editing
@@ -252,18 +253,23 @@ function LettreApp() {
     return () => document.head.removeChild(el);
   }, []);
 
-  // Init contentEditable when streaming is done
+  // Render lettre quand la génération est terminée — utilise la ref (jamais le state)
   useEffect(() => {
-    if (status === 'done' && letterText && !editReady) {
+    if (status === 'done' && !editReady) {
+      const html = buildHtml(letterAccumRef.current);
+      if (!html) return;
       setEditReady(true);
       setTimeout(() => {
         if (letterBodyRef.current) {
-          letterBodyRef.current.innerHTML = buildHtml(letterText);
+          letterBodyRef.current.innerHTML = html;
         }
       }, 30);
     }
-    if (status === 'idle') setEditReady(false);
-  }, [status, letterText, editReady]);
+    if (status === 'idle') {
+      setEditReady(false);
+      letterAccumRef.current = '';
+    }
+  }, [status, editReady]);
 
   // Floating toolbar on selection
   const handleSelectionChange = useCallback(() => {
@@ -299,6 +305,7 @@ function LettreApp() {
     if (!offre.trim() || offre.trim().length < 50) return;
     setStatus('generating');
     setLetterText('');
+    letterAccumRef.current = '';
     setEditReady(false);
     setToolbarPos(null);
     abortRef.current = new AbortController();
@@ -332,7 +339,10 @@ function LettreApp() {
           try {
             const { text, error } = JSON.parse(raw);
             if (error) throw new Error(error);
-            if (text) setLetterText(prev => prev + text);
+            if (text) {
+              letterAccumRef.current += text;
+              setLetterText(letterAccumRef.current);
+            }
           } catch {}
         }
       }
