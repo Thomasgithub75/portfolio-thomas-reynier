@@ -230,6 +230,7 @@ function LettreApp() {
 
   // Generation
   const [status, setStatus] = useState('idle'); // idle | generating | done | error
+  const [errorMsg, setErrorMsg] = useState('');
   const [letterText, setLetterText] = useState('');
   const letterAccumRef = useRef(''); // source de vérité pour le texte accumulé (sync)
   const abortRef = useRef(null);
@@ -336,19 +337,22 @@ function LettreApp() {
           if (!line.startsWith('data: ')) continue;
           const raw = line.slice(6).trim();
           if (raw === '[DONE]') { setStatus('done'); continue; }
-          try {
-            const { text, error } = JSON.parse(raw);
-            if (error) throw new Error(error);
-            if (text) {
-              letterAccumRef.current += text;
-              setLetterText(letterAccumRef.current);
-            }
-          } catch {}
+          let parsed;
+          try { parsed = JSON.parse(raw); } catch { continue; }
+          if (parsed.error) throw new Error(parsed.error); // remonte au catch externe
+          if (parsed.text) {
+            letterAccumRef.current += parsed.text;
+            setLetterText(letterAccumRef.current);
+          }
         }
       }
       setStatus('done');
     } catch (err) {
-      if (err.name !== 'AbortError') setStatus('error');
+      if (err.name !== 'AbortError') {
+        setErrorMsg(err.message || 'Erreur inconnue');
+        setStatus('error');
+        console.error('[LettreMotivation] Erreur génération:', err.message);
+      }
     }
   }, [offre, ton, entreprise, poste, contexte, contexteOn]);
 
@@ -570,7 +574,7 @@ function LettreApp() {
               {/* Error state */}
               {status === 'error' && (
                 <div style={{ textAlign: 'center', padding: 40, color: '#EF4444', fontSize: 13 }}>
-                  Une erreur est survenue. Vérifie ta connexion et réessaie.
+                  {errorMsg || 'Une erreur est survenue. Vérifie ta connexion et réessaie.'}
                 </div>
               )}
 
