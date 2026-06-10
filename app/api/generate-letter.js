@@ -69,13 +69,17 @@ function checkOrigin(req) {
     return { allowed: true, origin };
   }
 
+  // Allow same-host requests — covers all Vercel deployment URLs automatically
+  // (preview, production, custom domain) without needing to list each one
+  const host = req.headers.host || '';
+  if (host && origin.includes(host)) {
+    return { allowed: true, origin };
+  }
+
+  // Fallback: check against manually configured allowed origins
   const allowedOrigins = getAllowedOrigins();
-
-  // If ALLOWED_ORIGINS is not configured, block non-localhost in production
-  if (allowedOrigins.length === 0) return { allowed: false, origin };
-
   const matched = allowedOrigins.find(a => origin.startsWith(a));
-  return { allowed: !!matched, origin: matched || '' };
+  return { allowed: !!matched, origin: matched ? origin : '' };
 }
 
 // ── Handler ───────────────────────────────────────────────────────────────────
