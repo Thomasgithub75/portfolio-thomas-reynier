@@ -19,17 +19,17 @@ const PrimaryButton = styled(MuiButton)(() => ({
   backgroundColor: tokens.primary[500],
   color: '#ffffff',
   boxShadow: 'none',
-  '&:hover': {
+  '&&:hover': {
     backgroundColor: tokens.primary[600],
     boxShadow: 'none',
   },
-  '&:focus-visible': {
+  '&&:focus-visible': {
     backgroundColor: tokens.primary[600],
     outline: `2px solid ${tokens.primary[800]}`,
     outlineOffset: '2px',
     boxShadow: 'none',
   },
-  '&:active': {
+  '&&:active': {
     backgroundColor: tokens.primary[700],
     boxShadow: 'none',
   },
@@ -44,19 +44,19 @@ const SecondaryButton = styled(MuiButton)(() => ({
   backgroundColor: tokens.gray[100],
   color: tokens.gray[600],
   boxShadow: 'none',
-  '&:hover': {
+  '&&:hover': {
     backgroundColor: tokens.gray[200],
     color: tokens.gray[700],
     boxShadow: 'none',
   },
-  '&:focus-visible': {
+  '&&:focus-visible': {
     backgroundColor: tokens.gray[200],
     color: tokens.gray[700],
     outline: `2px solid ${tokens.primary[500]}`,
     outlineOffset: '2px',
     boxShadow: 'none',
   },
-  '&:active': {
+  '&&:active': {
     backgroundColor: tokens.gray[300],
     color: tokens.gray[800],
     boxShadow: 'none',
@@ -73,7 +73,7 @@ const GhostButton = styled(MuiButton)(({ theme }) => ({
   border: `1px solid ${theme.palette.divider}`,
   backgroundColor: 'transparent',
   boxShadow: 'none',
-  '&:hover': {
+  '&&:hover': {
     borderColor: '#ccc',
     backgroundColor: theme.palette.background.paper,
     boxShadow: 'none',
@@ -94,9 +94,11 @@ export default function Button({
   disabled,
   onClick,
   href,
+  sx: userSx = {},
 }) {
   const muiSize = size === 'sm' ? 'small' : 'medium';
-  const sx = size === 'sm' ? { fontSize: '0.8125rem', padding: '6px 14px' } : {};
+  const sizeSx = size === 'sm' ? { fontSize: '0.8125rem', padding: '6px 14px' } : {};
+  const sx = { ...sizeSx, ...userSx };
 
   const commonProps = { size: muiSize, startIcon, endIcon, disabled, onClick, href, sx };
 
