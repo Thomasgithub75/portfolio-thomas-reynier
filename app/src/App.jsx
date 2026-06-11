@@ -18,8 +18,9 @@ export default function App() {
         <Route path="/case/weborama" element={<CaseWeborama />} />
         <Route path="/case/pepyte" element={<CasePepyte />} />
         <Route path="/case/nectar" element={<CaseNectar />} />
-        {/* WIP — case study hidden during revision */}
+        {/* WIP — hidden publicly, accessible via /wip/portfolio */}
         <Route path="/case/portfolio" element={<Navigate to="/" replace />} />
+        <Route path="/wip/portfolio" element={<CasePortfolio />} />
         <Route path="/lettre-motivation" element={<LettreMotivation />} />
         <Route path="/design-system" element={<DesignSystem />} />
       </Routes>
