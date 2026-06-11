@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import Home from './pages/Home';
@@ -18,7 +18,8 @@ export default function App() {
         <Route path="/case/weborama" element={<CaseWeborama />} />
         <Route path="/case/pepyte" element={<CasePepyte />} />
         <Route path="/case/nectar" element={<CaseNectar />} />
-        <Route path="/case/portfolio" element={<CasePortfolio />} />
+        {/* WIP — case study hidden during revision */}
+        <Route path="/case/portfolio" element={<Navigate to="/" replace />} />
         <Route path="/lettre-motivation" element={<LettreMotivation />} />
         <Route path="/design-system" element={<DesignSystem />} />
       </Routes>
