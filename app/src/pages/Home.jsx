@@ -100,6 +100,7 @@ export default function Home() {
   const [activeSkills, setActiveSkills] = useState([]);
   const [panelOpen, setPanelOpen] = useState(false);
   const scrollProgress = useScrollProgress();
+  const isMobile = useMediaQuery('(max-width:768px)');
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -202,6 +203,116 @@ export default function Home() {
           </div>
         </div>
         <style>{`@keyframes dotPulse{0%{transform:scale(1);opacity:.6}50%{transform:scale(2.4);opacity:0}100%{transform:scale(1);opacity:0}}`}</style>
+      </section>
+
+      <hr className="divider"/>
+
+      {/* PROJETS + étude de cas verrouillée ───────────────────────── */}
+      <section id="projets">
+        <div className="container">
+          <p className="section-label">Études de cas</p>
+          <h2>Mes derniers projets</h2>
+          <div className="home-projects-grid">
+            {[
+              { href:'/case/pepyte', thumb:'/images/thumb-pepyte.jpg', logo:'/images/logo-pepyte.svg', role:'UX Research & Design', roleClass:'project-role-pepyte', duration:'26 mois', name:'Pepyte', desc:"Audit de 62 champs, 10 entretiens recruteurs et conception de la fonctionnalité de matching — de la recherche à l'interface.", tags:['UX Research','Design System','Design IA'] },
+              { href:'/case/weborama', thumb:'/images/thumb-weborama.jpg', logo:'/images/logo-weborama.svg', role:'Design System Lead', roleClass:'project-role-weborama', duration:'16 mois', name:'Weborama', desc:"Audit de 974 composants, ateliers de co-construction et création d'un Design System de zéro — 80% de composants en moins.", tags:['UX Research','Design System','Design IA'] },
+              { href:'/case/nectar', thumb:'/images/thumb-nectar.jpg', logo:'/images/logo-nectar.svg', role:'Founding Designer', roleClass:'project-role-nectar', duration:'En cours', name:'Nectar', desc:"MVP B2B mobile-first piloté par IA — de la recherche utilisateur aux 8 écrans livrés, avec un process documenté et réplicable.", tags:['UX Research','Design System','Design IA'] },
+            ].map(p => <ProjectCard key={p.name} p={p}/>)}
+          </div>
+
+          {/* Étude de cas verrouillée — intégrée dans la section projets */}
+          <div style={{display:'flex',alignItems:'center',gap:12,margin:'24px 0 20px'}}>
+            <div style={{flex:1,height:'1px',background:'var(--border)'}}/>
+            <span style={{fontSize:12,color:'var(--muted)',fontWeight:500,letterSpacing:'.03em',whiteSpace:'nowrap'}}>Présentée en entretien uniquement</span>
+            <div style={{flex:1,height:'1px',background:'var(--border)'}}/>
+          </div>
+          <LockedCaseCard/>
+        </div>
+      </section>
+
+      {/* IA FEATURE ─────────────────────────────────────────────────── */}
+      <section id="fonctionnalite-ia" style={{background:'var(--p50)',borderTop:'1px solid var(--p100)',position:'relative',overflow:'hidden'}}>
+        <div style={{position:'absolute',top:-60,right:-60,width:280,height:280,background:'radial-gradient(circle,var(--p100) 0%,transparent 70%)',pointerEvents:'none'}}/>
+        <div className="container" style={{position:'relative',zIndex:1}}>
+          <div style={{display:'flex',alignItems:'center',gap:48,flexWrap:'wrap'}}>
+
+            {/* Gauche — texte */}
+            <div style={{flex:'1 1 320px',minWidth:0}}>
+              <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:16}}>
+                <span style={{fontSize:11,fontWeight:700,letterSpacing:'.08em',textTransform:'uppercase',color:'var(--blue)',background:'var(--bg)',border:'1px solid var(--blue-border)',padding:'3px 10px',borderRadius:20}}>Matching IA</span>
+                <span style={{fontSize:11,fontWeight:600,color:'var(--muted)',letterSpacing:'.04em'}}>· Exclusif</span>
+              </div>
+              <h2 style={{fontSize:isMobile?26:32,fontWeight:800,color:'var(--text)',letterSpacing:'-.03em',lineHeight:1.15,marginBottom:14}}>
+                Testez notre compatibilité.
+              </h2>
+              <p style={{fontSize:15,color:'var(--muted)',fontWeight:300,lineHeight:1.7,marginBottom:28,maxWidth:400}}>
+                Collez votre offre d'emploi. L'IA identifie les compétences recherchées et les fait correspondre à mes études de cas — avec la preuve concrète pour chacune. Exportable en PDF.
+              </p>
+              <Link
+                to="/fonctionnalite-ia"
+                style={{display:'inline-flex',alignItems:'center',gap:8,background:'var(--blue)',color:'#fff',fontSize:14,fontWeight:600,padding:'11px 22px',borderRadius:8,textDecoration:'none',transition:'background .15s'}}
+                onMouseEnter={e=>e.currentTarget.style.background='var(--blue-deep)'}
+                onMouseLeave={e=>e.currentTarget.style.background='var(--blue)'}
+              >
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                Faire le test
+              </Link>
+            </div>
+
+            {/* Droite — teaser preview */}
+            {!isMobile && (
+              <div style={{flex:'1 1 320px',minWidth:0}}>
+                <div style={{background:'var(--bg)',border:'1px solid var(--border)',borderRadius:14,overflow:'hidden',boxShadow:'0 8px 32px rgba(25,86,219,.1)'}}>
+
+                  {/* Mini header entreprise × Thomas */}
+                  <div style={{padding:'14px 16px',borderBottom:'1px solid var(--border)',display:'flex',alignItems:'center',gap:12,background:'var(--bg-soft)'}}>
+                    <div style={{width:36,height:36,borderRadius:8,background:'var(--blue-light)',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0}}>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" strokeWidth="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    </div>
+                    <div style={{flex:1}}>
+                      <p style={{fontSize:10,color:'var(--muted)',marginBottom:3}}>Votre entreprise</p>
+                      <div style={{height:8,width:80,background:'var(--border)',borderRadius:3}}/>
+                    </div>
+                    <span style={{fontSize:16,color:'var(--border)',margin:'0 4px'}}>×</span>
+                    <img src="/images/profile.png" alt="Thomas" style={{width:36,height:36,borderRadius:8,objectFit:'cover',border:'1.5px solid var(--border)',flexShrink:0}}/>
+                  </div>
+
+                  {/* Titre résultat */}
+                  <div style={{padding:'10px 16px 8px',borderBottom:'1px solid var(--border)'}}>
+                    <p style={{fontSize:10,color:'var(--muted)',marginBottom:2}}>4 points de compatibilité</p>
+                    <p style={{fontSize:13,fontWeight:700,color:'var(--text)'}}>Notre compatibilité</p>
+                  </div>
+
+                  {/* Faux résultats */}
+                  {[
+                    {logo:'/images/logo-pepyte.svg',label:'Recherche utilisateur',w:170},
+                    {logo:'/images/logo-weborama.svg',label:'Design System',w:140},
+                    {logo:'/images/logo-nectar.svg',label:"Utilisation de l'IA",w:110},
+                  ].map((row,i) => (
+                    <div key={i} style={{padding:'10px 16px',borderBottom:'1px solid var(--border)',display:'flex',flexDirection:'column',gap:5}}>
+                      <div style={{display:'flex',alignItems:'center',gap:7}}>
+                        <img src={row.logo} alt="" style={{width:13,height:13,objectFit:'contain'}}/>
+                        <span style={{fontSize:11.5,fontWeight:600,color:'var(--text)'}}>{row.label}</span>
+                      </div>
+                      <div style={{display:'flex',flexDirection:'column',gap:3}}>
+                        <div style={{height:6,background:'var(--bg-soft)',borderRadius:3,width:'100%',border:'1px solid var(--border)'}}/>
+                        <div style={{height:6,background:'var(--bg-soft)',borderRadius:3,width:row.w,border:'1px solid var(--border)'}}/>
+                      </div>
+                    </div>
+                  ))}
+
+                  {/* CTA overlay */}
+                  <div style={{padding:'12px 16px',background:'var(--blue-light)',borderTop:'1px solid var(--blue-border)',display:'flex',justifyContent:'center'}}>
+                    <span style={{fontSize:11.5,fontWeight:600,color:'var(--blue)',display:'flex',alignItems:'center',gap:6}}>
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                      Votre résultat personnalisé vous attend
+                    </span>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
       </section>
 
       <hr className="divider"/>
@@ -324,65 +435,6 @@ export default function Home() {
                 </div>
               )}
             </div>
-          </div>
-        </div>
-      </section>
-
-      <hr className="divider"/>
-
-      {/* PROJETS */}
-      <section id="projets">
-        <div className="container">
-          <p className="section-label">Études de cas</p>
-          <h2>Mes derniers projets</h2>
-          <div className="home-projects-grid">
-            {[
-              { href:'/case/pepyte', thumb:'/images/thumb-pepyte.jpg', logo:'/images/logo-pepyte.svg', role:'UX Research & Design', roleClass:'project-role-pepyte', duration:'26 mois', name:'Pepyte', desc:"Audit de 62 champs, 10 entretiens recruteurs et conception de la fonctionnalité de matching — de la recherche à l'interface.", tags:['UX Research','Design System','Design IA'] },
-              { href:'/case/weborama', thumb:'/images/thumb-weborama.jpg', logo:'/images/logo-weborama.svg', role:'Design System Lead', roleClass:'project-role-weborama', duration:'16 mois', name:'Weborama', desc:"Audit de 974 composants, ateliers de co-construction et création d'un Design System de zéro — 80% de composants en moins.", tags:['UX Research','Design System','Design IA'] },
-              { href:'/case/nectar', thumb:'/images/thumb-nectar.jpg', logo:'/images/logo-nectar.svg', role:'Founding Designer', roleClass:'project-role-nectar', duration:'En cours', name:'Nectar', desc:"MVP B2B mobile-first piloté par IA — de la recherche utilisateur aux 8 écrans livrés, avec un process documenté et réplicable.", tags:['UX Research','Design System','Design IA'] },
-            ].map(p => <ProjectCard key={p.name} p={p}/>)}
-          </div>
-        </div>
-      </section>
-
-      <hr className="divider"/>
-
-      {/* LOCKED CASE STUDY */}
-      <section id="entretien">
-        <div className="container">
-          <p className="section-label">Sur demande · Entretien</p>
-          <h2>Une étude de cas présentée en entretien</h2>
-          <p style={{color:'var(--muted)',fontSize:15,fontWeight:300,marginBottom:28,marginTop:-12}}>Cette étude de cas n'est pas disponible en ligne. Elle se présente lors d'un entretien.</p>
-          <LockedCaseCard />
-        </div>
-      </section>
-
-      <hr className="divider"/>
-
-      {/* IA FEATURE */}
-      <section id="fonctionnalite-ia">
-        <div className="container">
-          <p className="section-label">Matching IA</p>
-          <div style={{ display:'flex', alignItems:'flex-start', justifyContent:'space-between', flexWrap:'wrap', gap:20 }}>
-            <div style={{ maxWidth:520 }}>
-              <h2 style={{ marginBottom:12 }}>Testez notre compatibilité</h2>
-              <p style={{ color:'var(--muted)', fontSize:15, fontWeight:300, lineHeight:1.65 }}>
-                Collez votre offre. L'IA identifie les compétences recherchées et les fait correspondre à mes études de cas — avec les preuves concrètes pour chacune. Exportable en PDF.
-              </p>
-            </div>
-            <Link
-              to="/fonctionnalite-ia"
-              style={{
-                display:'inline-flex', alignItems:'center', gap:8, flexShrink:0,
-                background:'#111827', color:'#fff', fontSize:14, fontWeight:600,
-                padding:'11px 20px', borderRadius:9, textDecoration:'none',
-              }}
-            >
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-              </svg>
-              Faire le test
-            </Link>
           </div>
         </div>
       </section>
@@ -563,7 +615,7 @@ function LockedCaseCard() {
           background: 'var(--bg)',
           display: 'flex',
           flexDirection: isMobile ? 'column' : 'row',
-          maxWidth: 760,
+          maxWidth: '100%',
           boxShadow: '0 2px 12px rgba(0,0,0,.06)',
           transition: 'box-shadow 0.2s, transform 0.2s',
         }}

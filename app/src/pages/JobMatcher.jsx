@@ -242,7 +242,7 @@ export default function JobMatcher() {
                   <img
                     src="/images/profile.png"
                     alt="Thomas Reynier"
-                    style={{ width: 52, height: 52, borderRadius: 12, objectFit: 'cover', border: '1px solid var(--border)', flexShrink: 0, order: isMobile ? 0 : 1 }}
+                    style={{ width: 52, height: 52, borderRadius: '50%', objectFit: 'cover', border: '1px solid var(--border)', flexShrink: 0, order: isMobile ? 0 : 1 }}
                   />
                 </div>
               </div>
