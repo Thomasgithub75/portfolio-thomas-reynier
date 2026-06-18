@@ -313,14 +313,32 @@ export default function JobMatcher() {
 
                           {/* Preuve */}
                           {proj.locked ? (
-                            <div style={{ position: 'relative' }}>
-                              <p style={{ fontSize: 13.5, color: 'var(--text)', lineHeight: 1.7, fontWeight: 300, WebkitMaskImage: 'linear-gradient(to bottom, black 35%, transparent 100%)', maskImage: 'linear-gradient(to bottom, black 35%, transparent 100%)', userSelect: 'none' }}>
-                                {proj.proof}
-                              </p>
-                              <p style={{ fontSize: 11, color: 'var(--muted)', fontStyle: 'italic', marginTop: 4 }}>
-                                Détaillée en entretien sur demande
-                              </p>
-                            </div>
+                            <>
+                              <div style={{ position: 'relative' }}>
+                                <p style={{ fontSize: 13.5, color: 'var(--text)', lineHeight: 1.7, fontWeight: 300, WebkitMaskImage: 'linear-gradient(to bottom, black 35%, transparent 100%)', maskImage: 'linear-gradient(to bottom, black 35%, transparent 100%)', userSelect: 'none' }}>
+                                  {proj.proof}
+                                </p>
+                              </div>
+                              {/* Bannière entretien */}
+                              <div style={{ display: 'flex', alignItems: isMobile ? 'flex-start' : 'center', justifyContent: 'space-between', flexDirection: isMobile ? 'column' : 'row', gap: 10, background: 'var(--blue-light)', border: '1px solid var(--blue-border)', borderRadius: 9, padding: '12px 14px', marginTop: 4 }}>
+                                <div style={{ display: 'flex', alignItems: 'flex-start', gap: 9 }}>
+                                  <LockIcon/>
+                                  <p style={{ fontSize: 12.5, color: 'var(--blue-deep)', lineHeight: 1.55, fontWeight: 400 }}>
+                                    Cette étude de cas se présente uniquement en entretien — c'est précisément l'occasion d'en parler.
+                                  </p>
+                                </div>
+                                <a
+                                  href="https://mail.google.com/mail/?view=cm&to=reynier.design@gmail.com"
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="no-print"
+                                  style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12, fontWeight: 700, color: 'var(--blue)', background: 'var(--bg)', border: '1.5px solid var(--blue-border)', borderRadius: 7, padding: '6px 12px', textDecoration: 'none', whiteSpace: 'nowrap', flexShrink: 0 }}
+                                >
+                                  <MailIcon/>
+                                  Planifier un échange
+                                </a>
+                              </div>
+                            </>
                           ) : (
                             <p style={{ fontSize: 13.5, color: 'var(--text)', lineHeight: 1.7, fontWeight: 300 }}>{proj.proof}</p>
                           )}
