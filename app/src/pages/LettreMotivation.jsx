@@ -47,18 +47,13 @@ function renderInline(text) {
   );
 }
 
-function buildHtml(text) {
-  const kpiMatch = text.match(/\[KPI_START\]([\s\S]*?)\[KPI_END\]/);
-  const kpiContent = kpiMatch ? kpiMatch[1].trim() : null;
-  const bodyText = text.replace(/\[KPI_START\][\s\S]*?\[KPI_END\]/, '[KPI_BLOCK]');
-  const paragraphs = bodyText.split(/\n\n+/).map(p => p.trim()).filter(Boolean);
-
-  return paragraphs.map(p => {
-    if (p === '[KPI_BLOCK]' && kpiContent) {
-      const html = kpiContent.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+function buildHtmlFromSegments(segs) {
+  return segs.map(seg => {
+    if (seg.type === 'kpi') {
+      const html = seg.text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
       return `<div class="lm-kpi"><span class="lm-kpi-icon">◆</span><span>${html}</span></div>`;
     }
-    const html = p.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    const html = seg.text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
     return `<p class="lm-p">${html}</p>`;
   }).join('');
 }
@@ -216,6 +211,7 @@ function LettreApp() {
   const [errorMsg, setErrorMsg] = useState('');
   const [letterText, setLetterText] = useState('');
   const letterAccumRef = useRef(''); // source de vérité pour le texte accumulé (sync)
+  const [segments, setSegments] = useState([]); // paragraphes édités indépendamment
   const abortRef = useRef(null);
 
   // Print
@@ -232,10 +228,20 @@ function LettreApp() {
     return () => document.head.removeChild(el);
   }, []);
 
-  // Reset on idle
+  // Segments : parse quand done, reset quand idle
   useEffect(() => {
+    if (status === 'done') {
+      const { paragraphs, kpiContent } = parseLetter(letterAccumRef.current);
+      setSegments(paragraphs.map(p => {
+        if (p === '[KPI_BLOCK]') {
+          return { type: 'kpi', text: (kpiContent || '').replace(/\*\*/g, '') };
+        }
+        return { type: 'paragraph', text: p.replace(/\*\*/g, '') };
+      }));
+    }
     if (status === 'idle') {
       letterAccumRef.current = '';
+      setSegments([]);
     }
   }, [status]);
 
@@ -294,11 +300,12 @@ function LettreApp() {
 
   const handleStop = () => { abortRef.current?.abort(); setStatus('idle'); };
 
+  const updateSegment = (index, newText) => {
+    setSegments(prev => prev.map((seg, i) => i === index ? { ...seg, text: newText } : seg));
+  };
+
   const handleCopy = () => {
-    const text = letterText
-      .replace(/\[KPI_START\]/g, '')
-      .replace(/\[KPI_END\]/g, '')
-      .replace(/\*\*/g, '');
+    const text = segments.map(seg => seg.text).join('\n\n');
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
@@ -306,7 +313,7 @@ function LettreApp() {
 
   const handlePdf = () => {
     if (printBodyRef.current) {
-      printBodyRef.current.innerHTML = buildHtml(letterText);
+      printBodyRef.current.innerHTML = buildHtmlFromSegments(segments);
     }
     window.print();
   };
@@ -553,16 +560,56 @@ function LettreApp() {
                       <StreamingBody text={letterText} />
                     )}
 
-                    {/* Editable body — DS FormField */}
-                    {status === 'done' && (
+                    {/* Editable body — un FormField par paragraphe */}
+                    {status === 'done' && segments.length > 0 && (
                       <>
-                        <div className="lm-print-textarea">
-                          <FormField
-                            type="textarea"
-                            value={letterText}
-                            onChange={e => setLetterText(e.target.value)}
-                            rows={18}
-                          />
+                        <div className="lm-print-textarea" style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                          {segments.map((seg, i) =>
+                            seg.type === 'kpi' ? (
+                              <div key={i} style={{
+                                background: tokens.primary[50],
+                                border: `1px solid ${tokens.primary[100]}`,
+                                borderLeft: `3px solid ${tokens.primary[400]}`,
+                                borderRadius: 8,
+                                padding: '4px 8px 4px 12px',
+                                display: 'flex',
+                                gap: 8,
+                                alignItems: 'flex-start',
+                              }}>
+                                <span style={{
+                                  color: tokens.primary[400], fontWeight: 700,
+                                  flexShrink: 0, paddingTop: 10, fontSize: 12,
+                                }}>◆</span>
+                                <FormField
+                                  type="textarea"
+                                  value={seg.text}
+                                  onChange={e => updateSegment(i, e.target.value)}
+                                  rows={3}
+                                  sx={{
+                                    background: 'transparent',
+                                    fontSize: '12.5px',
+                                    color: tokens.primary[600],
+                                    fontWeight: 500,
+                                    lineHeight: '1.7',
+                                  }}
+                                />
+                              </div>
+                            ) : (
+                              <FormField
+                                key={i}
+                                type="textarea"
+                                value={seg.text}
+                                onChange={e => updateSegment(i, e.target.value)}
+                                rows={4}
+                                sx={{
+                                  fontSize: '13px',
+                                  color: tokens.gray[600],
+                                  fontWeight: 300,
+                                  lineHeight: '1.8',
+                                }}
+                              />
+                            )
+                          )}
                         </div>
                         <div ref={printBodyRef} className="lm-print-body" />
                       </>
