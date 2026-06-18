@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import Navbar from '../layouts/Navbar';
 import Footer from '../layouts/Footer';
 import { trackEvent } from '../utils/analytics';
@@ -472,6 +473,7 @@ function LockedCaseCard() {
   const [shake, setShake] = useState(false);
   const inputRef = useRef(null);
   const navigate = useNavigate();
+  const isMobile = useMediaQuery('(max-width:640px)');
 
   useEffect(() => {
     if (showModal) setTimeout(() => inputRef.current?.focus(), 60);
@@ -513,6 +515,7 @@ function LockedCaseCard() {
           overflow: 'hidden',
           background: 'var(--bg)',
           display: 'flex',
+          flexDirection: isMobile ? 'column' : 'row',
           maxWidth: 760,
           boxShadow: '0 2px 12px rgba(0,0,0,.06)',
           transition: 'box-shadow 0.2s, transform 0.2s',
@@ -521,7 +524,12 @@ function LockedCaseCard() {
         onMouseLeave={e => { e.currentTarget.style.boxShadow='0 2px 12px rgba(0,0,0,.06)'; e.currentTarget.style.transform='none'; }}
       >
         {/* Blurred thumbnail */}
-        <div style={{ width: 260, minHeight: 220, position: 'relative', overflow: 'hidden', flexShrink: 0 }}>
+        <div style={{
+          width: isMobile ? '100%' : 260,
+          height: isMobile ? 180 : 'auto',
+          minHeight: isMobile ? 'unset' : 220,
+          position: 'relative', overflow: 'hidden', flexShrink: 0,
+        }}>
           <img
             src="/images/pepyte-sig-apres.jpg"
             alt=""
@@ -538,13 +546,13 @@ function LockedCaseCard() {
         </div>
 
         {/* Content */}
-        <div style={{ padding: '24px 28px', display: 'flex', flexDirection: 'column', gap: 12, flex: 1 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+        <div style={{ padding: isMobile ? '20px 16px' : '24px 28px', display: 'flex', flexDirection: 'column', gap: 12, flex: 1 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
             <img src="/images/logo-pepyte.svg" alt="Pepyte" style={{ width: 22, height: 22, borderRadius: 5, objectFit: 'contain' }}/>
             <span style={{ fontSize: 11, fontWeight: 600, padding: '3px 10px', borderRadius: 20, background: '#F0EDFE', color: '#6B45D6', border: '1px solid #D6CCFC' }}>Feature Design</span>
             <span style={{ fontSize: 12, color: 'var(--muted)', marginLeft: 'auto' }}>Juin 2026</span>
           </div>
-          <p style={{ fontSize: 19, fontWeight: 700, color: 'var(--text)', letterSpacing: '-.025em', lineHeight: 1.2 }}>Probabilité de signature</p>
+          <p style={{ fontSize: isMobile ? 17 : 19, fontWeight: 700, color: 'var(--text)', letterSpacing: '-.025em', lineHeight: 1.2 }}>Probabilité de signature</p>
           <p style={{ fontSize: 13, color: 'var(--muted)', lineHeight: 1.65, fontWeight: 300 }}>
             Comment transformer un dashboard de pilotage aveugle en outil de décision — feature conçue de A à Z, de l'insight à la mise en production.
           </p>
@@ -553,17 +561,21 @@ function LockedCaseCard() {
               <span key={t} className="badge" style={{ background: 'var(--blue-light)', color: 'var(--blue)' }}>{t}</span>
             ))}
           </div>
-          <div style={{ marginTop: 'auto', paddingTop: 12 }}>
+          <div style={{ marginTop: isMobile ? 4 : 'auto', paddingTop: 12 }}>
             <span style={{
-              display: 'inline-flex', alignItems: 'center', gap: 8,
+              display: isMobile ? 'flex' : 'inline-flex',
+              justifyContent: isMobile ? 'center' : 'flex-start',
+              alignItems: 'center', gap: 8,
               background: '#111827', color: '#fff',
               fontSize: 13, fontWeight: 600,
               padding: '9px 16px', borderRadius: 8,
+              width: isMobile ? '100%' : 'auto',
+              boxSizing: 'border-box',
             }}>
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
               </svg>
-              Présentée en entretien — Entrer le code
+              {isMobile ? 'Entrer le code' : 'Présentée en entretien — Entrer le code'}
             </span>
           </div>
         </div>
@@ -577,7 +589,7 @@ function LockedCaseCard() {
         >
           <div
             style={{
-              background: '#fff', borderRadius: 16, padding: '36px 32px', width: '100%', maxWidth: 380,
+              background: '#fff', borderRadius: 16, padding: isMobile ? '28px 20px' : '36px 32px', width: '100%', maxWidth: 380,
               boxShadow: '0 24px 80px rgba(0,0,0,.2)',
               animation: shake ? 'shake .4s ease' : 'none',
             }}
