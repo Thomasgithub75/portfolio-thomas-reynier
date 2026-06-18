@@ -236,21 +236,52 @@ export default function Home() {
         <div className="container" style={{position:'relative',zIndex:1}}>
           <div style={{display:'flex',alignItems:'center',gap:48,flexWrap:'wrap'}}>
 
-            {/* Gauche — texte */}
+            {/* Gauche — timeline */}
             <div style={{flex:'1 1 320px',minWidth:0}}>
               <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:16}}>
                 <span style={{fontSize:11,fontWeight:700,letterSpacing:'.08em',textTransform:'uppercase',color:'var(--blue)',background:'var(--bg)',border:'1px solid var(--blue-border)',padding:'3px 10px',borderRadius:20}}>Matching IA</span>
                 <span style={{fontSize:11,fontWeight:600,color:'var(--muted)',letterSpacing:'.04em'}}>· Exclusif</span>
               </div>
-              <h2 style={{fontSize:isMobile?26:32,fontWeight:800,color:'var(--text)',letterSpacing:'-.03em',lineHeight:1.15,marginBottom:14}}>
+              <h2 style={{fontSize:isMobile?26:32,fontWeight:800,color:'var(--text)',letterSpacing:'-.03em',lineHeight:1.15,marginBottom:32}}>
                 Testez notre compatibilité.
               </h2>
-              <p style={{fontSize:15,color:'var(--muted)',fontWeight:300,lineHeight:1.7,marginBottom:28,maxWidth:400}}>
-                Collez votre offre d'emploi. L'IA identifie les compétences recherchées et les fait correspondre à mes études de cas — avec la preuve concrète pour chacune. Exportable en PDF.
-              </p>
+
+              {/* Timeline B */}
+              <div style={{display:'flex',flexDirection:'column'}}>
+                {[
+                  'Collez votre offre d\'emploi',
+                  'L\'IA identifie nos points de matching',
+                  'Exportez le résultat en PDF.',
+                ].map((label, i, arr) => (
+                  <div key={i} style={{display:'flex',gap:16,alignItems:'flex-start'}}>
+                    {/* Numéro + ligne */}
+                    <div style={{display:'flex',flexDirection:'column',alignItems:'center',flexShrink:0,width:36}}>
+                      <div style={{
+                        width:36,height:36,borderRadius:'50%',
+                        background:'var(--blue-light)',color:'var(--blue)',
+                        border:'1.5px solid var(--blue-border)',
+                        fontSize:13,fontWeight:800,
+                        display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0,
+                      }}>
+                        {String(i+1).padStart(2,'0')}
+                      </div>
+                      {i < arr.length - 1 && (
+                        <div style={{width:2,flex:1,minHeight:28,background:'var(--blue-border)',margin:'6px 0',borderRadius:2}}/>
+                      )}
+                    </div>
+                    {/* Label */}
+                    <div style={{paddingBottom: i < arr.length - 1 ? 28 : 0, paddingTop:7}}>
+                      <p style={{fontSize:16,fontWeight:700,color:'var(--text)',letterSpacing:'-.02em',lineHeight:1.3}}>
+                        {label}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
               <Link
                 to="/fonctionnalite-ia"
-                style={{display:'inline-flex',alignItems:'center',gap:8,background:'var(--blue)',color:'#fff',fontSize:14,fontWeight:600,padding:'11px 22px',borderRadius:8,textDecoration:'none',transition:'background .15s'}}
+                style={{display:'inline-flex',alignItems:'center',gap:8,background:'var(--blue)',color:'#fff',fontSize:14,fontWeight:600,padding:'11px 22px',borderRadius:8,textDecoration:'none',marginTop:32}}
                 onMouseEnter={e=>e.currentTarget.style.background='var(--blue-deep)'}
                 onMouseLeave={e=>e.currentTarget.style.background='var(--blue)'}
               >
