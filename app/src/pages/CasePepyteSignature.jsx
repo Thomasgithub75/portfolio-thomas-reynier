@@ -59,7 +59,7 @@ function CaseGate({ onUnlock }) {
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginBottom: 10 }}>
             <img src="/images/logo-pepyte.svg" alt="Pepyte" style={{ height: 18 }}/>
             <span style={{ fontSize: 12, color: '#9CA3AF' }}>·</span>
-            <span style={{ fontSize: 13, color: '#6B7280', fontWeight: 500 }}>Probabilité de signature</span>
+            <span style={{ fontSize: 13, color: '#6B7280', fontWeight: 500 }}>Mon nouveau process IA</span>
           </div>
           <p style={{ fontSize: 20, fontWeight: 700, color: '#111827', marginBottom: 8 }}>Étude de cas protégée</p>
           <p style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.65 }}>
@@ -107,7 +107,7 @@ export default function CasePepyteSignature() {
   if (!unlocked) return <CaseGate onUnlock={() => setUnlocked(true)} />;
 
   return (
-    <CaseLayout title="Pepyte : Probabilité de signature" tocItems={TOC}>
+    <CaseLayout title="Pepyte : Mon nouveau process IA" tocItems={TOC}>
       <div className="case-header">
         <div className="container">
           <Link className="back-link" to="/#projets">
@@ -121,7 +121,7 @@ export default function CasePepyteSignature() {
           </div>
           <div className="case-title-row">
             <img className="case-logo" src="/images/logo-pepyte.svg" alt="Pepyte"/>
-            <h1 className="case-h1">Probabilité de signature</h1>
+            <h1 className="case-h1">Mon nouveau process IA</h1>
           </div>
           <p className="meta-row">Product Designer · Pepyte · HR tech SaaS · Figma · Prototypes HTML</p>
           <p className="reading-time">

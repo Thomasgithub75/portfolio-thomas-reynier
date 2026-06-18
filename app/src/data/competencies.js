@@ -108,7 +108,7 @@ export const COMPETENCIES = [
         proof: "J'ai conçu l'intégralité du parcours utilisateur de Nectar, de la discovery à la livraison des 8 écrans du MVP. Chaque écran découle d'un besoin identifié en recherche — aucun écran gratuit, aucune feature sans usage validé.",
       },
       {
-        name: 'Probabilité de signature — Pepyte',
+        name: 'Mon nouveau process IA — Pepyte',
         url: '/case/pepyte-signature',
         logo: '/images/logo-pepyte.svg',
         locked: true,
@@ -247,7 +247,7 @@ export const COMPETENCIES = [
         proof: "Sur le chantier Design System, j'ai priorisé les composants à créer en priorité en fonction de leur fréquence d'usage et de leur impact sur la cohérence des 4 applications — approche valeur/effort appliquée au design.",
       },
       {
-        name: 'Probabilité de signature — Pepyte',
+        name: 'Mon nouveau process IA — Pepyte',
         url: '/case/pepyte-signature',
         logo: '/images/logo-pepyte.svg',
         locked: true,
@@ -302,7 +302,7 @@ export const COMPETENCIES = [
     keywords: ['ux writing', 'microcopy', 'contenu', 'wording', 'rédaction interface', 'content design', 'copywriting', 'libellé', 'nomenclature', 'langage interface'],
     projects: [
       {
-        name: 'Probabilité de signature — Pepyte',
+        name: 'Mon nouveau process IA — Pepyte',
         url: '/case/pepyte-signature',
         logo: '/images/logo-pepyte.svg',
         locked: true,
