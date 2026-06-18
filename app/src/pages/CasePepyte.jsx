@@ -87,7 +87,7 @@ export default function CasePepyte() {
             <p>J'ai mené 10 entretiens avec des recruteurs, incluant une phase d'observation directe : chaque participant présentait son outil en conditions réelles. L'objectif était de comprendre les informations réellement collectées, les arbitrages quotidiens et les limites des outils existants.</p>
             <p>Ces entretiens ont permis d'identifier <strong>18 nouveaux champs pertinents</strong>, dont 8 absents du benchmark. Ils ont également fait émerger des opportunités concrètes : matching automatique, synthèse de profil par IA et complétion audio des fiches.</p>
             <div className="illustrations-grid-2" style={{marginTop:24}}>
-              <IllustrationItem src="/images/pepyte-recherche-1.jpg" caption="Entretien individuel"/>
+              <IllustrationItem src="/images/pepyte-recherche-1.jpg" caption="Entretien individuel" bg="#111"/>
               <IllustrationItem src="/images/pepyte-recherche-2.jpg" caption="Compte rendu des entretiens"/>
             </div>
           </div>

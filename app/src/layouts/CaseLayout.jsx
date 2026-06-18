@@ -83,10 +83,10 @@ export function Img({ src, alt, noZoom }) {
   );
 }
 
-export function IllustrationItem({ src, alt, caption, noZoom }) {
+export function IllustrationItem({ src, alt, caption, noZoom, bg }) {
   return (
     <figure className="illustration-item">
-      <div className="illustration-item-inner">
+      <div className="illustration-item-inner" style={bg ? {backgroundColor: bg} : {}}>
         <Img src={src} alt={alt} noZoom={noZoom}/>
       </div>
       {caption && <figcaption className="illustration-caption">{caption}</figcaption>}
