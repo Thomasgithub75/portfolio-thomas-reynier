@@ -12,19 +12,19 @@ const SKILL_PROJS = {
     { logo:'/images/logo-nectar.svg', bg:'#FFFBEB', name:'Nectar', desc:'Discovery · interviews sales & PM', type:'Side project', url:'/case/nectar' }
   ],
   'Product Design': [
+    { logo:'/images/logo-pepyte.svg', bg:'#F5F3FF', name:'Probabilité de signature', desc:'Feature · Dashboard · Logique métier', type:'Case study', url:'/case/pepyte-signature', locked:true },
     { logo:'/images/logo-pepyte.svg', bg:'#F5F3FF', name:'Pepyte', desc:'Refonte onboarding · mobile first', type:'Case study', url:'/case/pepyte' },
     { logo:'/images/logo-weborama.svg', bg:'#EFF8FF', name:'Weborama', desc:'Nouveau SaaS AdTech de 0', type:'Case study', url:'/case/weborama' },
     { logo:'/images/logo-nectar.svg', bg:'#FFFBEB', name:'Nectar', desc:'App mobile B2B · design to code', type:'Side project', url:'/case/nectar' },
-    { logo:'/images/logo-pepyte.svg', bg:'#F5F3FF', name:'Probabilité de signature', desc:'Feature · Dashboard · Logique métier', type:'Case study', url:'/case/pepyte-signature', locked:true },
   ],
   'Design System': [
     { logo:'/images/logo-weborama.svg', bg:'#EFF8FF', name:'Weborama', desc:'DS from scratch · tokens · Storybook', type:'Case study', url:'/case/weborama' },
     { logo:'/images/logo-pepyte.svg', bg:'#F5F3FF', name:'Pepyte', desc:'Audit & gouvernance DS existant', type:'Case study', url:'/case/pepyte' }
   ],
   'Prototypage haute fidélité': [
+    { logo:'/images/logo-pepyte.svg', bg:'#F5F3FF', name:'Probabilité de signature', desc:'4 prototypes HTML · itération rapide · IA', type:'Case study', url:'/case/pepyte-signature', locked:true },
     { logo:'/images/logo-pepyte.svg', bg:'#F5F3FF', name:'Pepyte', desc:'Prototypes testables · Figma avancé', type:'Case study', url:'/case/pepyte' },
     { logo:'/images/logo-nectar.svg', bg:'#FFFBEB', name:'Nectar', desc:'Prototype interactif mobile', type:'Side project', url:'/case/nectar' },
-    { logo:'/images/logo-pepyte.svg', bg:'#F5F3FF', name:'Probabilité de signature', desc:'4 prototypes HTML · itération rapide · IA', type:'Case study', url:'/case/pepyte-signature', locked:true },
   ],
   'Atomic Design': [
     { logo:'/images/logo-weborama.svg', bg:'#EFF8FF', name:'Weborama', desc:'Architecture composants · Atomic', type:'Case study', url:'/case/weborama' }
@@ -51,9 +51,9 @@ const SKILL_PROJS = {
     { logo:'/images/logo-weborama.svg', bg:'#EFF8FF', name:'Weborama', desc:'Tests prototypes · itérations UX', type:'Case study', url:'/case/weborama' }
   ],
   'User flows & zoning': [
+    { logo:'/images/logo-pepyte.svg', bg:'#F5F3FF', name:'Probabilité de signature', desc:'Dashboard redesign · signal unique · pilotage', type:'Case study', url:'/case/pepyte-signature', locked:true },
     { logo:'/images/logo-nectar.svg', bg:'#FFFBEB', name:'Nectar', desc:'Flow saisie → validation · 15 edge cases', type:'Side project', url:'/case/nectar' },
     { logo:'/images/logo-pepyte.svg', bg:'#F5F3FF', name:'Pepyte', desc:'Parcours onboarding complet · zoning', type:'Case study', url:'/case/pepyte' },
-    { logo:'/images/logo-pepyte.svg', bg:'#F5F3FF', name:'Probabilité de signature', desc:'Dashboard redesign · signal unique · pilotage', type:'Case study', url:'/case/pepyte-signature', locked:true },
   ]
 };
 
