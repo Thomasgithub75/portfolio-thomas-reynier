@@ -102,6 +102,9 @@ export default async function handler(req, res) {
   if (!offre || offre.trim().length < 50) {
     return res.status(400).json({ error: 'Offre trop courte' });
   }
+  if (offre.length > 12000) {
+    return res.status(400).json({ error: 'Offre trop longue' });
+  }
 
   const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
@@ -171,7 +174,8 @@ RÈGLES STRICTES:
     res.write('data: [DONE]\n\n');
     res.end();
   } catch (err) {
-    res.write(`data: ${JSON.stringify({ error: err.message })}\n\n`);
+    const isProd = process.env.NODE_ENV === 'production';
+    res.write(`data: ${JSON.stringify({ error: isProd ? 'Erreur serveur' : err.message })}\n\n`);
     res.end();
   }
 }

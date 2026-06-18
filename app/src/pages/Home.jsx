@@ -342,6 +342,36 @@ export default function Home() {
 
       <hr className="divider"/>
 
+      {/* IA FEATURE */}
+      <section id="fonctionnalite-ia">
+        <div className="container">
+          <p className="section-label">Fonctionnalité IA</p>
+          <div style={{ display:'flex', alignItems:'flex-start', justifyContent:'space-between', flexWrap:'wrap', gap:20 }}>
+            <div style={{ maxWidth:520 }}>
+              <h2 style={{ marginBottom:12 }}>Analysez votre offre, obtenez mes preuves</h2>
+              <p style={{ color:'var(--muted)', fontSize:15, fontWeight:300, lineHeight:1.65 }}>
+                Collez votre offre d'emploi. L'IA identifie les compétences demandées et les fait correspondre aux études de cas qui en apportent la preuve — exportable en PDF.
+              </p>
+            </div>
+            <Link
+              to="/fonctionnalite-ia"
+              style={{
+                display:'inline-flex', alignItems:'center', gap:8, flexShrink:0,
+                background:'#111827', color:'#fff', fontSize:14, fontWeight:600,
+                padding:'11px 20px', borderRadius:9, textDecoration:'none',
+              }}
+            >
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+              </svg>
+              Analyser une offre
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <hr className="divider"/>
+
       {/* RECOMMANDATIONS */}
       <section id="recommandations">
         <div className="container">

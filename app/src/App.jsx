@@ -7,6 +7,7 @@ import CasePepyte from './pages/CasePepyte';
 import CaseNectar from './pages/CaseNectar';
 import CasePortfolio from './pages/CasePortfolio';
 import CasePepyteSignature from './pages/CasePepyteSignature';
+import JobMatcher from './pages/JobMatcher';
 import LettreMotivation from './pages/LettreMotivation';
 import DesignSystem from './pages/DesignSystem';
 import './styles/global.css';
@@ -20,6 +21,7 @@ export default function App() {
         <Route path="/case/pepyte" element={<CasePepyte />} />
         <Route path="/case/nectar" element={<CaseNectar />} />
         <Route path="/case/pepyte-signature" element={<CasePepyteSignature />} />
+        <Route path="/fonctionnalite-ia" element={<JobMatcher />} />
         {/* Portfolio case study — local only */}
         <Route path="/case/portfolio" element={<Navigate to="/" replace />} />
         <Route path="/wip/portfolio" element={import.meta.env.DEV ? <CasePortfolio /> : <Navigate to="/" replace />} />
