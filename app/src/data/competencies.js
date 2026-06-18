@@ -107,6 +107,13 @@ export const COMPETENCIES = [
         logo: '/images/logo-nectar.svg',
         proof: "J'ai conçu l'intégralité du parcours utilisateur de Nectar, de la discovery à la livraison des 8 écrans du MVP. Chaque écran découle d'un besoin identifié en recherche — aucun écran gratuit, aucune feature sans usage validé.",
       },
+      {
+        name: 'Probabilité de signature — Pepyte',
+        url: '/case/pepyte-signature',
+        logo: '/images/logo-pepyte.svg',
+        locked: true,
+        proof: "J'ai refondu de A à Z l'outil de pilotage quotidien des headhunters : suppression des métriques parasites, conception d'un signal unique calculé automatiquement, 4 itérations de prototypes HTML avant de figer la solution. La décision centrale : le dashboard doit répondre à une seule question — sur quelle offre agir maintenant.",
+      },
     ],
   },
 
@@ -239,6 +246,13 @@ export const COMPETENCIES = [
         logo: '/images/logo-weborama.svg',
         proof: "Sur le chantier Design System, j'ai priorisé les composants à créer en priorité en fonction de leur fréquence d'usage et de leur impact sur la cohérence des 4 applications — approche valeur/effort appliquée au design.",
       },
+      {
+        name: 'Probabilité de signature — Pepyte',
+        url: '/case/pepyte-signature',
+        logo: '/images/logo-pepyte.svg',
+        locked: true,
+        proof: "J'ai modélisé une logique de priorité automatique basée sur la position des candidats dans le pipeline. Chaque étape du kanban a une probabilité de signature associée. 5 arbitrages documentés — dont un contre-intuitif assumé : Priorité Haute = probabilité basse, car 'priorité' décrit une action à mener, pas un état.",
+      },
     ],
   },
 
@@ -288,9 +302,10 @@ export const COMPETENCIES = [
     keywords: ['ux writing', 'microcopy', 'contenu', 'wording', 'rédaction interface', 'content design', 'copywriting', 'libellé', 'nomenclature', 'langage interface'],
     projects: [
       {
-        name: 'Pepyte — Probabilité de signature',
+        name: 'Probabilité de signature — Pepyte',
         url: '/case/pepyte-signature',
         logo: '/images/logo-pepyte.svg',
+        locked: true,
         proof: "Sur la feature Probabilité de signature, le choix du wording a été une décision de design à part entière. J'ai arbitré en faveur de '% de signer' — le verbe du quotidien des recruteurs — contre des formulations abstraites ('score de conversion', 'indice de confiance'). Un mot compris sans explication vaut mieux qu'une métrique précise mais opaque.",
       },
     ],

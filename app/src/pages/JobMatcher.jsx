@@ -280,24 +280,43 @@ export default function JobMatcher() {
                             padding: isMobile ? '16px' : '20px 24px',
                             borderBottom: pIdx < comp.projects.length - 1 ? '1px solid var(--border)' : 'none',
                             display: 'flex', flexDirection: 'column', gap: 10,
+                            background: proj.locked ? '#FAFAFA' : 'transparent',
                           }}
                         >
                           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                             <img src={proj.logo} alt={proj.name} style={{ width: 20, height: 20, objectFit: 'contain', borderRadius: 4, flexShrink: 0 }}/>
                             <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)' }}>{proj.name}</span>
-                            <Link
-                              to={proj.url}
-                              className="no-print"
-                              style={{ marginLeft: 'auto', fontSize: 12, color: 'var(--blue)', fontWeight: 600, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 4, flexShrink: 0 }}
-                            >
-                              Voir la preuve complète
-                              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                            </Link>
+                            {proj.locked ? (
+                              <span className="no-print" style={{ marginLeft: 'auto', display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: 11, fontWeight: 600, color: '#6B7280', background: '#F3F4F6', border: '1px solid #E5E7EB', padding: '3px 9px', borderRadius: 20, flexShrink: 0 }}>
+                                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                                En entretien
+                              </span>
+                            ) : (
+                              <Link
+                                to={proj.url}
+                                className="no-print"
+                                style={{ marginLeft: 'auto', fontSize: 12, color: 'var(--blue)', fontWeight: 600, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 4, flexShrink: 0 }}
+                              >
+                                Voir la preuve complète
+                                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                              </Link>
+                            )}
                           </div>
-                          <p style={{ fontSize: 13.5, color: '#374151', lineHeight: 1.7, fontWeight: 300 }}>{proj.proof}</p>
+
+                          {proj.locked ? (
+                            <div style={{ position: 'relative' }}>
+                              <p style={{ fontSize: 13.5, color: '#374151', lineHeight: 1.7, fontWeight: 300, WebkitMaskImage: 'linear-gradient(to bottom, black 40%, transparent 100%)', maskImage: 'linear-gradient(to bottom, black 40%, transparent 100%)', userSelect: 'none' }}>{proj.proof}</p>
+                              <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', paddingBottom: 2 }}>
+                                <span style={{ fontSize: 11, color: '#9CA3AF', fontStyle: 'italic' }}>Détaillée en entretien sur demande</span>
+                              </div>
+                            </div>
+                          ) : (
+                            <p style={{ fontSize: 13.5, color: '#374151', lineHeight: 1.7, fontWeight: 300 }}>{proj.proof}</p>
+                          )}
+
                           {/* Print URL */}
                           <p style={{ display: 'none', fontSize: 10, color: '#9CA3AF' }} className="print-url">
-                            thomas-reynier.fr{proj.url}
+                            {proj.locked ? 'Présentée en entretien — thomas-reynier.fr' : `thomas-reynier.fr${proj.url}`}
                           </p>
                         </div>
                       ))}

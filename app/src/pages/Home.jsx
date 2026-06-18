@@ -14,7 +14,8 @@ const SKILL_PROJS = {
   'Product Design': [
     { logo:'/images/logo-pepyte.svg', bg:'#F5F3FF', name:'Pepyte', desc:'Refonte onboarding · mobile first', type:'Case study', url:'/case/pepyte' },
     { logo:'/images/logo-weborama.svg', bg:'#EFF8FF', name:'Weborama', desc:'Nouveau SaaS AdTech de 0', type:'Case study', url:'/case/weborama' },
-    { logo:'/images/logo-nectar.svg', bg:'#FFFBEB', name:'Nectar', desc:'App mobile B2B · design to code', type:'Side project', url:'/case/nectar' }
+    { logo:'/images/logo-nectar.svg', bg:'#FFFBEB', name:'Nectar', desc:'App mobile B2B · design to code', type:'Side project', url:'/case/nectar' },
+    { logo:'/images/logo-pepyte.svg', bg:'#F5F3FF', name:'Probabilité de signature', desc:'Feature · Dashboard · Logique métier', type:'Case study', url:'/case/pepyte-signature', locked:true },
   ],
   'Design System': [
     { logo:'/images/logo-weborama.svg', bg:'#EFF8FF', name:'Weborama', desc:'DS from scratch · tokens · Storybook', type:'Case study', url:'/case/weborama' },
@@ -22,7 +23,8 @@ const SKILL_PROJS = {
   ],
   'Prototypage haute fidélité': [
     { logo:'/images/logo-pepyte.svg', bg:'#F5F3FF', name:'Pepyte', desc:'Prototypes testables · Figma avancé', type:'Case study', url:'/case/pepyte' },
-    { logo:'/images/logo-nectar.svg', bg:'#FFFBEB', name:'Nectar', desc:'Prototype interactif mobile', type:'Side project', url:'/case/nectar' }
+    { logo:'/images/logo-nectar.svg', bg:'#FFFBEB', name:'Nectar', desc:'Prototype interactif mobile', type:'Side project', url:'/case/nectar' },
+    { logo:'/images/logo-pepyte.svg', bg:'#F5F3FF', name:'Probabilité de signature', desc:'4 prototypes HTML · itération rapide · IA', type:'Case study', url:'/case/pepyte-signature', locked:true },
   ],
   'Atomic Design': [
     { logo:'/images/logo-weborama.svg', bg:'#EFF8FF', name:'Weborama', desc:'Architecture composants · Atomic', type:'Case study', url:'/case/weborama' }
@@ -50,7 +52,8 @@ const SKILL_PROJS = {
   ],
   'User flows & zoning': [
     { logo:'/images/logo-nectar.svg', bg:'#FFFBEB', name:'Nectar', desc:'Flow saisie → validation · 15 edge cases', type:'Side project', url:'/case/nectar' },
-    { logo:'/images/logo-pepyte.svg', bg:'#F5F3FF', name:'Pepyte', desc:'Parcours onboarding complet · zoning', type:'Case study', url:'/case/pepyte' }
+    { logo:'/images/logo-pepyte.svg', bg:'#F5F3FF', name:'Pepyte', desc:'Parcours onboarding complet · zoning', type:'Case study', url:'/case/pepyte' },
+    { logo:'/images/logo-pepyte.svg', bg:'#F5F3FF', name:'Probabilité de signature', desc:'Dashboard redesign · signal unique · pilotage', type:'Case study', url:'/case/pepyte-signature', locked:true },
   ]
 };
 
@@ -284,7 +287,21 @@ export default function Home() {
                     <button onClick={closePanel} style={{position:'absolute',top:12,right:12,width:24,height:24,borderRadius:6,background:'#EEF3FD',border:'none',cursor:'pointer',display:'flex',alignItems:'center',justifyContent:'center',color:'#1956DB',fontSize:16,fontFamily:'inherit'}}>×</button>
                   </div>
                   <div>
-                    {panelProjects.map(p => (
+                    {panelProjects.map(p => p.locked ? (
+                      <div key={p.name} style={{display:'flex',alignItems:'flex-start',gap:10,padding:'10px 16px',borderBottom:'0.5px solid #E5E9F5',position:'relative',background:'#FAFAFA',cursor:'default'}}>
+                        <div style={{width:34,height:34,borderRadius:7,flexShrink:0,display:'flex',alignItems:'center',justifyContent:'center',overflow:'hidden',background:p.bg,opacity:.7}}>
+                          <img src={p.logo} alt={p.name} style={{width:'100%',height:'100%',objectFit:'contain',padding:5}}/>
+                        </div>
+                        <div style={{flex:1,minWidth:0,paddingRight:24}}>
+                          <div style={{fontSize:13,fontWeight:500,color:'var(--muted)',lineHeight:1.2,marginBottom:2}}>{p.name}</div>
+                          <div style={{fontSize:11,color:'var(--muted)',lineHeight:1.4,marginBottom:4,whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis',opacity:.7}}>{p.desc}</div>
+                          <span style={{fontSize:10,padding:'2px 7px',borderRadius:5,fontWeight:600,display:'inline-flex',alignItems:'center',gap:4,background:'#F3F4F6',color:'#6B7280',border:'1px solid #E5E7EB'}}>
+                            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                            En entretien
+                          </span>
+                        </div>
+                      </div>
+                    ) : (
                       <Link key={p.name} to={p.url} style={{display:'flex',alignItems:'flex-start',gap:10,padding:'10px 16px',textDecoration:'none',color:'inherit',borderBottom:'0.5px solid #E5E9F5',transition:'background 0.15s',position:'relative'}} onMouseEnter={e=>e.currentTarget.style.background='#F4F8FE'} onMouseLeave={e=>e.currentTarget.style.background=''}>
                         <div style={{width:34,height:34,borderRadius:7,flexShrink:0,display:'flex',alignItems:'center',justifyContent:'center',fontSize:11,fontWeight:700,color:'#fff',overflow:'hidden',background:p.logo?p.bg:p.color}}>
                           {p.logo ? <img src={p.logo} alt={p.name} style={{width:'100%',height:'100%',objectFit:'contain',padding:5}}/> : p.initials}
