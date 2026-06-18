@@ -11,8 +11,8 @@
   --text:#1A2540;--muted:#5B6A8A;--border:#E5E7EB;--bg:#FFFFFF;--bg-soft:#F9FAFB;
   --proj-bg:#EEF3FD;--proj-fg:#1956DB;--proj-border:#C3D5F9;
 }
-html{scroll-behavior:smooth}
-body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 
 /* ── NAV ── */
 .nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:60px;display:flex;align-items:center;justify-content:center}
