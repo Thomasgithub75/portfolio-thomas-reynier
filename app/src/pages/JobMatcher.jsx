@@ -108,13 +108,13 @@ export default function JobMatcher() {
               Retour
             </Link>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 20, marginBottom: 8 }}>
-              <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '.08em', textTransform: 'uppercase', color: 'var(--blue)', background: 'var(--blue-light)', padding: '3px 10px', borderRadius: 20 }}>Fonctionnalité IA</span>
+              <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '.08em', textTransform: 'uppercase', color: 'var(--blue)', background: 'var(--blue-light)', padding: '3px 10px', borderRadius: 20 }}>Matching IA</span>
             </div>
             <h1 style={{ fontSize: isMobile ? 26 : 34, fontWeight: 800, color: 'var(--text)', letterSpacing: '-.03em', lineHeight: 1.15, marginBottom: 10 }}>
-              Collez votre offre.<br/>Je vous montre mes preuves.
+              Testez notre compatibilité.
             </h1>
             <p style={{ fontSize: 15, color: 'var(--muted)', fontWeight: 300, maxWidth: 520, lineHeight: 1.65 }}>
-              L'IA analyse votre offre d'emploi et identifie, pour chaque compétence demandée, l'étude de cas qui en apporte la preuve concrète. Exportable en PDF.
+              Collez votre offre d'emploi. En quelques secondes, vous saurez quelles compétences je peux prouver — et avec quels projets concrets. Résultat exportable en PDF.
             </p>
           </div>
         </div>
@@ -123,12 +123,12 @@ export default function JobMatcher() {
         <div className="container no-print" style={{ paddingTop: 36, paddingBottom: 12 }}>
           <form onSubmit={handleAnalyse}>
             <label style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', display: 'block', marginBottom: 8 }}>
-              Offre d'emploi
+              Votre offre d'emploi
             </label>
             <textarea
               value={offre}
               onChange={e => { setOffre(e.target.value); setError(''); }}
-              placeholder="Collez ici l'offre d'emploi complète — titre du poste, missions, compétences requises..."
+              placeholder="Collez l'offre complète ici — titre du poste, missions, compétences recherchées..."
               rows={isMobile ? 8 : 10}
               style={{
                 width: '100%', boxSizing: 'border-box',
@@ -138,7 +138,7 @@ export default function JobMatcher() {
                 resize: 'vertical', outline: 'none', color: 'var(--text)',
               }}
             />
-            {error && <p style={{ fontSize: 12, color: '#EF4444', marginTop: 6 }}>{error}</p>}
+            {error && <p style={{ fontSize: 12, color: '#EF4444', marginTop: 6 }}>Collez une offre complète pour démarrer le matching.</p>}
             <div style={{ marginTop: 12 }}>
               <button
                 type="submit"
@@ -157,14 +157,14 @@ export default function JobMatcher() {
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ animation: 'spin 1s linear infinite' }}>
                       <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
                     </svg>
-                    Analyse en cours…
+                    Matching en cours…
                   </>
                 ) : (
                   <>
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
                     </svg>
-                    Analyser l'offre
+                    Lancer le matching
                   </>
                 )}
               </button>
@@ -232,8 +232,8 @@ export default function JobMatcher() {
                 {/* Titre + actions */}
                 <div style={{ display: 'flex', alignItems: isMobile ? 'flex-start' : 'center', justifyContent: 'space-between', flexDirection: isMobile ? 'column' : 'row', gap: 12 }}>
                   <div>
-                    <p style={{ fontSize: 13, color: 'var(--muted)', marginBottom: 4 }}>{results.length} compétence{results.length > 1 ? 's' : ''} identifiée{results.length > 1 ? 's' : ''} · {today}</p>
-                    <h2 style={{ fontSize: isMobile ? 19 : 22, fontWeight: 700, color: 'var(--text)', letterSpacing: '-.02em' }}>Ce que je peux prouver pour cette offre</h2>
+                    <p style={{ fontSize: 13, color: 'var(--muted)', marginBottom: 4 }}>{results.length} point{results.length > 1 ? 's' : ''} de compatibilité · {today}</p>
+                    <h2 style={{ fontSize: isMobile ? 19 : 22, fontWeight: 700, color: 'var(--text)', letterSpacing: '-.02em' }}>Notre compatibilité</h2>
                   </div>
                   <button
                     onClick={handlePrint}
@@ -290,7 +290,7 @@ export default function JobMatcher() {
                               className="no-print"
                               style={{ marginLeft: 'auto', fontSize: 12, color: 'var(--blue)', fontWeight: 600, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 4, flexShrink: 0 }}
                             >
-                              Voir l'étude de cas
+                              Voir la preuve complète
                               <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                             </Link>
                           </div>
@@ -309,8 +309,8 @@ export default function JobMatcher() {
               {/* Bottom CTA */}
               <div className="no-print" style={{ marginTop: 32, padding: '24px', background: 'var(--blue-light, #EFF6FF)', borderRadius: 12, border: '1px solid var(--blue)', display: 'flex', alignItems: isMobile ? 'flex-start' : 'center', justifyContent: 'space-between', flexDirection: isMobile ? 'column' : 'row', gap: 16 }}>
                 <div>
-                  <p style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 4 }}>Une étude de cas à présenter en entretien</p>
-                  <p style={{ fontSize: 13, color: 'var(--muted)', fontWeight: 300 }}>Je peux détailler chacune de ces preuves en direct lors d'un entretien vidéo.</p>
+                  <p style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 4 }}>La suite se passe en entretien</p>
+                  <p style={{ fontSize: 13, color: 'var(--muted)', fontWeight: 300 }}>Je présente chaque point de compatibilité en détail lors d'un entretien vidéo. Prenons 30 minutes.</p>
                 </div>
                 <a
                   href="https://mail.google.com/mail/?view=cm&to=reynier.design@gmail.com"
@@ -325,7 +325,7 @@ export default function JobMatcher() {
                   }}
                 >
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
-                  Me contacter
+                  Planifier un échange
                 </a>
               </div>
             </div>

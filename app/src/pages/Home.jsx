@@ -345,12 +345,12 @@ export default function Home() {
       {/* IA FEATURE */}
       <section id="fonctionnalite-ia">
         <div className="container">
-          <p className="section-label">Fonctionnalité IA</p>
+          <p className="section-label">Matching IA</p>
           <div style={{ display:'flex', alignItems:'flex-start', justifyContent:'space-between', flexWrap:'wrap', gap:20 }}>
             <div style={{ maxWidth:520 }}>
-              <h2 style={{ marginBottom:12 }}>Analysez votre offre, obtenez mes preuves</h2>
+              <h2 style={{ marginBottom:12 }}>Testez notre compatibilité</h2>
               <p style={{ color:'var(--muted)', fontSize:15, fontWeight:300, lineHeight:1.65 }}>
-                Collez votre offre d'emploi. L'IA identifie les compétences demandées et les fait correspondre aux études de cas qui en apportent la preuve — exportable en PDF.
+                Collez votre offre. L'IA identifie les compétences recherchées et les fait correspondre à mes études de cas — avec les preuves concrètes pour chacune. Exportable en PDF.
               </p>
             </div>
             <Link
@@ -364,7 +364,7 @@ export default function Home() {
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
               </svg>
-              Analyser une offre
+              Faire le test
             </Link>
           </div>
         </div>
