@@ -12,7 +12,7 @@ const SKILL_PROJS = {
     { logo:'/images/logo-nectar.svg', bg:'#FFFBEB', name:'Nectar', desc:'Discovery · interviews sales & PM', type:'Side project', url:'/case/nectar' }
   ],
   'Product Design': [
-    { logo:'/images/logo-pepyte.svg', bg:'#F5F3FF', name:'Probabilité de signature', desc:'Feature · Dashboard · Logique métier', type:'Case study', url:'/case/pepyte-signature', locked:true },
+    { logo:'/images/logo-pepyte.svg', bg:'#F5F3FF', name:'Mon nouveau process IA', desc:'Feature · Dashboard · Logique métier', type:'Case study', url:'/case/pepyte-signature', locked:true },
     { logo:'/images/logo-pepyte.svg', bg:'#F5F3FF', name:'Pepyte', desc:'Refonte onboarding · mobile first', type:'Case study', url:'/case/pepyte' },
     { logo:'/images/logo-weborama.svg', bg:'#EFF8FF', name:'Weborama', desc:'Nouveau SaaS AdTech de 0', type:'Case study', url:'/case/weborama' },
     { logo:'/images/logo-nectar.svg', bg:'#FFFBEB', name:'Nectar', desc:'App mobile B2B · design to code', type:'Side project', url:'/case/nectar' },
@@ -22,7 +22,7 @@ const SKILL_PROJS = {
     { logo:'/images/logo-pepyte.svg', bg:'#F5F3FF', name:'Pepyte', desc:'Audit & gouvernance DS existant', type:'Case study', url:'/case/pepyte' }
   ],
   'Prototypage haute fidélité': [
-    { logo:'/images/logo-pepyte.svg', bg:'#F5F3FF', name:'Probabilité de signature', desc:'4 prototypes HTML · itération rapide · IA', type:'Case study', url:'/case/pepyte-signature', locked:true },
+    { logo:'/images/logo-pepyte.svg', bg:'#F5F3FF', name:'Mon nouveau process IA', desc:'4 prototypes HTML · itération rapide · IA', type:'Case study', url:'/case/pepyte-signature', locked:true },
     { logo:'/images/logo-pepyte.svg', bg:'#F5F3FF', name:'Pepyte', desc:'Prototypes testables · Figma avancé', type:'Case study', url:'/case/pepyte' },
     { logo:'/images/logo-nectar.svg', bg:'#FFFBEB', name:'Nectar', desc:'Prototype interactif mobile', type:'Side project', url:'/case/nectar' },
   ],
@@ -51,7 +51,7 @@ const SKILL_PROJS = {
     { logo:'/images/logo-weborama.svg', bg:'#EFF8FF', name:'Weborama', desc:'Tests prototypes · itérations UX', type:'Case study', url:'/case/weborama' }
   ],
   'User flows & zoning': [
-    { logo:'/images/logo-pepyte.svg', bg:'#F5F3FF', name:'Probabilité de signature', desc:'Dashboard redesign · signal unique · pilotage', type:'Case study', url:'/case/pepyte-signature', locked:true },
+    { logo:'/images/logo-pepyte.svg', bg:'#F5F3FF', name:'Mon nouveau process IA', desc:'Dashboard redesign · signal unique · pilotage', type:'Case study', url:'/case/pepyte-signature', locked:true },
     { logo:'/images/logo-nectar.svg', bg:'#FFFBEB', name:'Nectar', desc:'Flow saisie → validation · 15 edge cases', type:'Side project', url:'/case/nectar' },
     { logo:'/images/logo-pepyte.svg', bg:'#F5F3FF', name:'Pepyte', desc:'Parcours onboarding complet · zoning', type:'Case study', url:'/case/pepyte' },
   ]
@@ -682,7 +682,7 @@ function LockedCaseCard() {
             <span style={{ fontSize: 11, fontWeight: 600, padding: '3px 10px', borderRadius: 20, background: '#F0EDFE', color: '#6B45D6', border: '1px solid #D6CCFC' }}>Feature Design</span>
             <span style={{ fontSize: 12, color: 'var(--muted)', marginLeft: 'auto' }}>Juin 2026</span>
           </div>
-          <p style={{ fontSize: isMobile ? 17 : 19, fontWeight: 700, color: 'var(--text)', letterSpacing: '-.025em', lineHeight: 1.2 }}>Probabilité de signature</p>
+          <p style={{ fontSize: isMobile ? 17 : 19, fontWeight: 700, color: 'var(--text)', letterSpacing: '-.025em', lineHeight: 1.2 }}>Mon nouveau process IA</p>
           <p style={{ fontSize: 13, color: 'var(--muted)', lineHeight: 1.65, fontWeight: 300 }}>
             Comment transformer un dashboard de pilotage aveugle en outil de décision — feature conçue de A à Z, de l'insight à la mise en production.
           </p>
