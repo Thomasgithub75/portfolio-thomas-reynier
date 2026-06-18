@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Proto 1 — État initial</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+    background: #F8F9FB;
+    padding: 32px 40px 40px;
+    width: 1200px;
+  }
+  .label-proto {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: #9BA3AF;
+    margin-bottom: 20px;
+  }
+  .dashboard {
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #E5E7EB;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,.06);
+  }
+  .table-head {
+    display: grid;
+    grid-template-columns: 1fr 180px 160px 100px 100px;
+    padding: 12px 20px;
+    background: #F9FAFB;
+    border-bottom: 1px solid #E5E7EB;
+    gap: 16px;
+  }
+  .table-head span {
+    font-size: 11.5px;
+    font-weight: 600;
+    color: #9BA3AF;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+  }
+  .row {
+    display: grid;
+    grid-template-columns: 1fr 180px 160px 100px 100px;
+    padding: 16px 20px;
+    border-bottom: 1px solid #F3F4F6;
+    gap: 16px;
+    align-items: center;
+    transition: background .15s;
+  }
+  .row:last-child { border-bottom: none; }
+  .row:hover { background: #FAFAFA; }
+  .offer-name { font-size: 14px; font-weight: 600; color: #111827; margin-bottom: 3px; }
+  .offer-company { font-size: 12.5px; color: #6B7280; }
+  .avatars {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+  .avatar {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    margin-left: -6px;
+    font-size: 10px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+  }
+  .avatar:first-child { margin-left: 0; }
+  .count-label { font-size: 12px; color: #6B7280; margin-left: 6px; }
+  .priority-cell { display: flex; align-items: center; gap: 6px; }
+  .priority-arrows {
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1;
+  }
+  .priority-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: #374151;
+  }
+  .p-high { color: #059669; }
+  .p-med { color: #6B7280; }
+  .p-low { color: #9CA3AF; }
+  .date-cell { font-size: 12.5px; color: #6B7280; }
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 8px;
+    border-radius: 20px;
+    font-size: 11.5px;
+    font-weight: 600;
+  }
+  .s-active { background: #ECFDF5; color: #059669; }
+  .s-urgent { background: #FFF7ED; color: #D97706; }
+  .annotation {
+    margin-top: 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: #FFF3CD;
+    border: 1px solid #FDE68A;
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+  .annotation-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  .annotation-text { font-size: 12.5px; color: #92400E; line-height: 1.5; }
+  .annotation strong { font-weight: 700; }
+</style>
+</head>
+<body>
+  <p class="label-proto">Proto 1 — État initial · Dashboard headhunter</p>
+  <div class="dashboard">
+    <div class="table-head">
+      <span>Offre</span>
+      <span>Candidats en process</span>
+      <span>Priorité</span>
+      <span>Statut</span>
+      <span>Ouverture</span>
+    </div>
+
+    <div class="row">
+      <div>
+        <p class="offer-name">Lead Developer Full Stack</p>
+        <p class="offer-company">TechCorp · 80–100k€</p>
+      </div>
+      <div class="avatars">
+        <div class="avatar" style="background:#6366F1">A</div>
+        <div class="avatar" style="background:#10B981">B</div>
+        <div class="avatar" style="background:#F59E0B">C</div>
+        <div class="avatar" style="background:#EF4444">D</div>
+        <div class="avatar" style="background:#8B5CF6">+8</div>
+        <span class="count-label">12 candidats</span>
+      </div>
+      <div class="priority-cell">
+        <span class="priority-arrows p-med">━</span>
+        <span class="priority-label">Normale</span>
+      </div>
+      <div><span class="status-pill s-active">Active</span></div>
+      <div class="date-cell">Il y a 8 j.</div>
+    </div>
+
+    <div class="row">
+      <div>
+        <p class="offer-name">Product Manager Senior</p>
+        <p class="offer-company">StartupX · 65–80k€</p>
+      </div>
+      <div class="avatars">
+        <div class="avatar" style="background:#3B82F6">E</div>
+        <div class="avatar" style="background:#EC4899">F</div>
+        <span class="count-label">2 candidats</span>
+      </div>
+      <div class="priority-cell">
+        <span class="priority-arrows p-high">↑↑</span>
+        <span class="priority-label">Haute</span>
+      </div>
+      <div><span class="status-pill s-urgent">Urgente</span></div>
+      <div class="date-cell">Il y a 3 j.</div>
+    </div>
+
+    <div class="row">
+      <div>
+        <p class="offer-name">Data Engineer</p>
+        <p class="offer-company">ScaleupY · 55–70k€</p>
+      </div>
+      <div class="avatars">
+        <div class="avatar" style="background:#F97316">G</div>
+        <div class="avatar" style="background:#14B8A6">H</div>
+        <div class="avatar" style="background:#A78BFA">I</div>
+        <div class="avatar" style="background:#FB923C">+3</div>
+        <span class="count-label">6 candidats</span>
+      </div>
+      <div class="priority-cell">
+        <span class="priority-arrows p-high">↑</span>
+        <span class="priority-label">Haute</span>
+      </div>
+      <div><span class="status-pill s-active">Active</span></div>
+      <div class="date-cell">Il y a 12 j.</div>
+    </div>
+
+    <div class="row">
+      <div>
+        <p class="offer-name">UX Designer confirmé</p>
+        <p class="offer-company">AgenceZ · 45–58k€</p>
+      </div>
+      <div class="avatars">
+        <div class="avatar" style="background:#0EA5E9">J</div>
+        <div class="avatar" style="background:#D946EF">K</div>
+        <div class="avatar" style="background:#22C55E">L</div>
+        <div class="avatar" style="background:#EAB308">+4</div>
+        <span class="count-label">7 candidats</span>
+      </div>
+      <div class="priority-cell">
+        <span class="priority-arrows p-low">↓↓</span>
+        <span class="priority-label">Basse</span>
+      </div>
+      <div><span class="status-pill s-active">Active</span></div>
+      <div class="date-cell">Il y a 21 j.</div>
+    </div>
+  </div>
+
+  <div class="annotation">
+    <span class="annotation-icon">⚠</span>
+    <p class="annotation-text">
+      <strong>Problème :</strong> 12 candidats sur Lead Dev vs. 2 sur PM Senior — le count ne dit rien de l'avancement réel.
+      Les flèches (↑↑ ━ ↓↓) sont ambiguës et personne ne les maintient à jour.
+      Le PM Senior a 2 candidats en Proposition finale : c'est l'offre urgente, mais rien ne le montre.
+    </p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<title>Proto 2 — Barre pipeline</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+    background: #F8F9FB;
+    padding: 32px 40px 40px;
+    width: 1200px;
+  }
+  .label-proto {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: #9BA3AF;
+    margin-bottom: 20px;
+  }
+  .dashboard {
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #E5E7EB;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,.06);
+  }
+  .table-head {
+    display: grid;
+    grid-template-columns: 1fr 360px 100px 100px;
+    padding: 12px 20px;
+    background: #F9FAFB;
+    border-bottom: 1px solid #E5E7EB;
+    gap: 16px;
+  }
+  .table-head span {
+    font-size: 11.5px;
+    font-weight: 600;
+    color: #9BA3AF;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+  }
+  .row {
+    display: grid;
+    grid-template-columns: 1fr 360px 100px 100px;
+    padding: 18px 20px;
+    border-bottom: 1px solid #F3F4F6;
+    gap: 16px;
+    align-items: center;
+  }
+  .row:last-child { border-bottom: none; }
+  .offer-name { font-size: 14px; font-weight: 600; color: #111827; margin-bottom: 3px; }
+  .offer-company { font-size: 12.5px; color: #6B7280; }
+  .pipeline-wrap { display: flex; flex-direction: column; gap: 6px; }
+  .pipeline-bar {
+    display: flex;
+    height: 10px;
+    border-radius: 6px;
+    overflow: hidden;
+    gap: 1px;
+  }
+  .seg {
+    height: 100%;
+    border-radius: 2px;
+  }
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .leg-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10.5px;
+    color: #6B7280;
+  }
+  .leg-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .date-cell { font-size: 12.5px; color: #6B7280; }
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 8px;
+    border-radius: 20px;
+    font-size: 11.5px;
+    font-weight: 600;
+  }
+  .s-active { background: #ECFDF5; color: #059669; }
+  .s-urgent { background: #FFF7ED; color: #D97706; }
+  .annotation {
+    margin-top: 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: #FFF3CD;
+    border: 1px solid #FDE68A;
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+  .annotation-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  .annotation-text { font-size: 12.5px; color: #92400E; line-height: 1.5; }
+  .annotation strong { font-weight: 700; }
+  /* stage colors */
+  .c-pipe     { background: #E5E7EB; }
+  .c-valid    { background: #BFDBFE; }
+  .c-e1       { background: #93C5FD; }
+  .c-e2       { background: #60A5FA; }
+  .c-e3       { background: #3B82F6; }
+  .c-e4       { background: #2563EB; }
+  .c-prop     { background: #7C3AED; }
+</style>
+</head>
+<body>
+  <p class="label-proto">Proto 2 — Barre pipeline · Distribution des candidats par étape</p>
+  <div class="dashboard">
+    <div class="table-head">
+      <span>Offre</span>
+      <span>Répartition dans le pipeline</span>
+      <span>Statut</span>
+      <span>Ouverture</span>
+    </div>
+
+    <!-- Row 1 : 12 candidats, surtout en début de pipe -->
+    <div class="row">
+      <div>
+        <p class="offer-name">Lead Developer Full Stack</p>
+        <p class="offer-company">TechCorp · 80–100k€</p>
+      </div>
+      <div class="pipeline-wrap">
+        <div class="pipeline-bar">
+          <div class="seg c-pipe"  style="flex:5"></div>
+          <div class="seg c-valid" style="flex:3"></div>
+          <div class="seg c-e1"    style="flex:2"></div>
+          <div class="seg c-e2"    style="flex:1"></div>
+          <div class="seg c-e3"    style="flex:1"></div>
+        </div>
+        <div class="legend">
+          <span class="leg-item"><span class="leg-dot c-pipe"></span>Pipe ×5</span>
+          <span class="leg-item"><span class="leg-dot c-valid"></span>Validé ×3</span>
+          <span class="leg-item"><span class="leg-dot c-e1"></span>E.1 ×2</span>
+          <span class="leg-item"><span class="leg-dot c-e2"></span>E.2 ×1</span>
+          <span class="leg-item"><span class="leg-dot c-e3"></span>E.3 ×1</span>
+        </div>
+      </div>
+      <div><span class="status-pill s-active">Active</span></div>
+      <div class="date-cell">Il y a 8 j.</div>
+    </div>
+
+    <!-- Row 2 : 2 candidats mais en Proposition finale -->
+    <div class="row">
+      <div>
+        <p class="offer-name">Product Manager Senior</p>
+        <p class="offer-company">StartupX · 65–80k€</p>
+      </div>
+      <div class="pipeline-wrap">
+        <div class="pipeline-bar">
+          <div class="seg c-prop" style="flex:2"></div>
+        </div>
+        <div class="legend">
+          <span class="leg-item"><span class="leg-dot c-prop"></span>Proposition ×2</span>
+        </div>
+      </div>
+      <div><span class="status-pill s-urgent">Urgente</span></div>
+      <div class="date-cell">Il y a 3 j.</div>
+    </div>
+
+    <!-- Row 3 -->
+    <div class="row">
+      <div>
+        <p class="offer-name">Data Engineer</p>
+        <p class="offer-company">ScaleupY · 55–70k€</p>
+      </div>
+      <div class="pipeline-wrap">
+        <div class="pipeline-bar">
+          <div class="seg c-pipe"  style="flex:2"></div>
+          <div class="seg c-valid" style="flex:2"></div>
+          <div class="seg c-e1"    style="flex:1"></div>
+          <div class="seg c-e3"    style="flex:1"></div>
+        </div>
+        <div class="legend">
+          <span class="leg-item"><span class="leg-dot c-pipe"></span>Pipe ×2</span>
+          <span class="leg-item"><span class="leg-dot c-valid"></span>Validé ×2</span>
+          <span class="leg-item"><span class="leg-dot c-e1"></span>E.1 ×1</span>
+          <span class="leg-item"><span class="leg-dot c-e3"></span>E.3 ×1</span>
+        </div>
+      </div>
+      <div><span class="status-pill s-active">Active</span></div>
+      <div class="date-cell">Il y a 12 j.</div>
+    </div>
+
+    <!-- Row 4 -->
+    <div class="row">
+      <div>
+        <p class="offer-name">UX Designer confirmé</p>
+        <p class="offer-company">AgenceZ · 45–58k€</p>
+      </div>
+      <div class="pipeline-wrap">
+        <div class="pipeline-bar">
+          <div class="seg c-pipe"  style="flex:2"></div>
+          <div class="seg c-e1"    style="flex:1"></div>
+          <div class="seg c-e2"    style="flex:1"></div>
+          <div class="seg c-e4"    style="flex:1"></div>
+          <div class="seg c-prop"  style="flex:2"></div>
+        </div>
+        <div class="legend">
+          <span class="leg-item"><span class="leg-dot c-pipe"></span>Pipe ×2</span>
+          <span class="leg-item"><span class="leg-dot c-e1"></span>E.1 ×1</span>
+          <span class="leg-item"><span class="leg-dot c-e2"></span>E.2 ×1</span>
+          <span class="leg-item"><span class="leg-dot c-e4"></span>E.4 ×1</span>
+          <span class="leg-item"><span class="leg-dot c-prop"></span>Prop. ×2</span>
+        </div>
+      </div>
+      <div><span class="status-pill s-active">Active</span></div>
+      <div class="date-cell">Il y a 21 j.</div>
+    </div>
+  </div>
+
+  <div class="annotation">
+    <span class="annotation-icon">⚠</span>
+    <p class="annotation-text">
+      <strong>Problème :</strong> Riche visuellement, mais cognitivement lourd — il faut apprendre le code couleur et comparer 4 barres en parallèle.
+      La barre dit <em>"où sont les candidats"</em>, pas <em>"où dois-je agir"</em>.
+    </p>
+  </div>
+</body>
+</html>

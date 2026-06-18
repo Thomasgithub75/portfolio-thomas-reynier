@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<title>Décisions design — Détails</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+    background: #F8F9FB;
+    padding: 40px;
+    width: 1200px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+  }
+  .card {
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #E5E7EB;
+    padding: 24px;
+    box-shadow: 0 1px 4px rgba(0,0,0,.05);
+  }
+  .card-label {
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    color: #9BA3AF;
+    margin-bottom: 16px;
+  }
+  /* Badge priority */
+  .priority-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .badge-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .b-haute   { background: #FEF2F2; color: #DC2626; }
+  .b-haute   .badge-dot { background: #EF4444; }
+  .b-moyenne { background: #FFFBEB; color: #D97706; }
+  .b-moyenne .badge-dot { background: #F59E0B; }
+  .b-basse   { background: #F0FDF4; color: #16A34A; }
+  .b-basse   .badge-dot { background: #22C55E; }
+  .badge-group { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; margin-bottom: 16px; }
+  .note {
+    font-size: 11.5px;
+    color: #6B7280;
+    line-height: 1.55;
+    padding-top: 12px;
+    border-top: 1px solid #F3F4F6;
+  }
+  .note strong { color: #111827; font-weight: 600; }
+
+  /* Probability display */
+  .prob-display {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    margin-bottom: 16px;
+  }
+  .prob-num { font-size: 42px; font-weight: 800; color: #111827; line-height: 1; }
+  .prob-label { font-size: 13px; color: #9CA3AF; font-weight: 500; }
+  .prob-cap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+  }
+  .cap-bar {
+    flex: 1;
+    height: 6px;
+    background: #F3F4F6;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .cap-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #6366F1, #8B5CF6);
+    border-radius: 4px;
+  }
+  .cap-max { font-size: 11px; color: #9BA3AF; font-weight: 600; white-space: nowrap; }
+
+  /* Wording */
+  .wording-block { margin-bottom: 16px; }
+  .wording-compare { display: flex; flex-direction: column; gap: 10px; }
+  .wording-row { display: flex; align-items: center; gap: 10px; }
+  .wording-icon { font-size: 14px; flex-shrink: 0; width: 20px; text-align: center; }
+  .wording-text { font-size: 13px; line-height: 1.4; }
+  .wording-good { color: #059669; font-weight: 600; }
+  .wording-bad  { color: #9CA3AF; text-decoration: line-through; font-weight: 400; }
+
+  /* Inverted logic */
+  .arrow-table { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
+  .arrow-table td { padding: 8px 0; font-size: 12.5px; border-bottom: 1px solid #F3F4F6; }
+  .arrow-table tr:last-child td { border-bottom: none; }
+  .arrow-table .pct { font-weight: 700; color: #111827; width: 55px; }
+  .arrow-table .action-label { color: #6B7280; }
+  .arrow-table .badge-sm {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 2px 8px; border-radius: 20px; font-size: 11px; font-weight: 700;
+  }
+</style>
+</head>
+<body>
+  <div class="grid">
+
+    <!-- Card 1 : Priority badges -->
+    <div class="card">
+      <p class="card-label">Décision 03 — Logique inversée</p>
+      <div class="badge-group">
+        <span class="priority-badge b-haute"><span class="badge-dot"></span>Haute</span>
+        <span class="priority-badge b-moyenne"><span class="badge-dot"></span>Moyenne</span>
+        <span class="priority-badge b-basse"><span class="badge-dot"></span>Basse</span>
+      </div>
+      <table class="arrow-table">
+        <tr>
+          <td class="pct">28 %</td>
+          <td class="action-label">→ Pipeline à alimenter</td>
+          <td><span class="badge-sm b-haute"><span class="badge-dot"></span>Haute</span></td>
+        </tr>
+        <tr>
+          <td class="pct">62 %</td>
+          <td class="action-label">→ Process en cours</td>
+          <td><span class="badge-sm b-moyenne"><span class="badge-dot"></span>Moyenne</span></td>
+        </tr>
+        <tr>
+          <td class="pct">85 %</td>
+          <td class="action-label">→ Laisser l'inertie</td>
+          <td><span class="badge-sm b-basse"><span class="badge-dot"></span>Basse</span></td>
+        </tr>
+      </table>
+      <p class="note"><strong>Règle :</strong> Priorité décrit une action attendue, pas un état. Haute = besoin d'agir, pas "avancement élevé".</p>
+    </div>
+
+    <!-- Card 2 : Probability + plafond 90% -->
+    <div class="card">
+      <p class="card-label">Décision 02 — Plafonné à 90 %</p>
+      <div class="prob-display">
+        <span class="prob-num">90 %</span>
+        <span class="prob-label">maximum · jamais 100 %</span>
+      </div>
+      <div class="prob-cap">
+        <div class="cap-bar"><div class="cap-fill" style="width:90%"></div></div>
+        <span class="cap-max">max 90 %</span>
+      </div>
+      <p class="note" style="margin-top:16px"><strong>Pourquoi :</strong> Tant qu'un contrat n'est pas signé, il reste une incertitude réelle. 100 % donnerait une fausse certitude — et risque de démobiliser le HH sur une offre pas encore close.</p>
+    </div>
+
+    <!-- Card 3 : Wording -->
+    <div class="card">
+      <p class="card-label">Décision 05 — Wording métier</p>
+      <div class="wording-block">
+        <div class="wording-compare">
+          <div class="wording-row">
+            <span class="wording-icon">✓</span>
+            <span class="wording-text wording-good">28 % de signer</span>
+          </div>
+          <div class="wording-row">
+            <span class="wording-icon">✗</span>
+            <span class="wording-text wording-bad">Score de conversion</span>
+          </div>
+          <div class="wording-row">
+            <span class="wording-icon">✗</span>
+            <span class="wording-text wording-bad">Indice de confiance</span>
+          </div>
+          <div class="wording-row">
+            <span class="wording-icon">✗</span>
+            <span class="wording-text wording-bad">Taux de transformation</span>
+          </div>
+        </div>
+      </div>
+      <p class="note"><strong>"Signer"</strong> est le verbe du quotidien des headhunters. Un placement = une signature. Pas de jargon — un mot compris sans explication.</p>
+    </div>
+
+  </div>
+</body>
+</html>

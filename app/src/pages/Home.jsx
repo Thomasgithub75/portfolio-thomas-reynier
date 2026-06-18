@@ -1,5 +1,5 @@
-import { useState, useEffect, useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect, useCallback, useRef } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Navbar from '../layouts/Navbar';
 import Footer from '../layouts/Footer';
 import { trackEvent } from '../utils/analytics';
@@ -329,6 +329,18 @@ export default function Home() {
 
       <hr className="divider"/>
 
+      {/* LOCKED CASE STUDY */}
+      <section id="entretien">
+        <div className="container">
+          <p className="section-label">Sur demande · Entretien</p>
+          <h2>Une étude de cas présentée en direct</h2>
+          <p style={{color:'var(--muted)',fontSize:15,fontWeight:300,marginBottom:28,marginTop:-12}}>Cette étude de cas n'est pas disponible en ligne. Elle se présente lors d'un entretien.</p>
+          <LockedCaseCard />
+        </div>
+      </section>
+
+      <hr className="divider"/>
+
       {/* RECOMMANDATIONS */}
       <section id="recommandations">
         <div className="container">
@@ -451,6 +463,173 @@ function HeroBtn({ onClick, primary, href, target, rel, children }) {
   };
   if (href) return <a href={href} target={target} rel={rel} onClick={onClick} style={style} {...handlers}>{children}</a>;
   return <button onClick={onClick} style={style} {...handlers}>{children}</button>;
+}
+
+function LockedCaseCard() {
+  const [showModal, setShowModal] = useState(false);
+  const [code, setCode] = useState('');
+  const [error, setError] = useState(false);
+  const [shake, setShake] = useState(false);
+  const inputRef = useRef(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (showModal) setTimeout(() => inputRef.current?.focus(), 60);
+  }, [showModal]);
+
+  useEffect(() => {
+    if (!showModal) { setCode(''); setError(false); }
+  }, [showModal]);
+
+  useEffect(() => {
+    const fn = e => { if (e.key === 'Escape') setShowModal(false); };
+    document.addEventListener('keydown', fn);
+    return () => document.removeEventListener('keydown', fn);
+  }, []);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (code === 'thomas2026') {
+      sessionStorage.setItem('pepyte_sig_access', 'true');
+      setShowModal(false);
+      navigate('/case/pepyte-signature');
+    } else {
+      setError(true);
+      setShake(true);
+      setTimeout(() => setShake(false), 420);
+      setTimeout(() => setError(false), 2200);
+    }
+  }
+
+  return (
+    <>
+      {/* Card */}
+      <div
+        onClick={() => setShowModal(true)}
+        style={{
+          cursor: 'pointer',
+          borderRadius: 12,
+          border: '1px solid var(--border)',
+          overflow: 'hidden',
+          background: 'var(--bg)',
+          display: 'flex',
+          maxWidth: 760,
+          boxShadow: '0 2px 12px rgba(0,0,0,.06)',
+          transition: 'box-shadow 0.2s, transform 0.2s',
+        }}
+        onMouseEnter={e => { e.currentTarget.style.boxShadow='0 8px 32px rgba(0,0,0,.12)'; e.currentTarget.style.transform='translateY(-3px)'; }}
+        onMouseLeave={e => { e.currentTarget.style.boxShadow='0 2px 12px rgba(0,0,0,.06)'; e.currentTarget.style.transform='none'; }}
+      >
+        {/* Blurred thumbnail */}
+        <div style={{ width: 260, minHeight: 220, position: 'relative', overflow: 'hidden', flexShrink: 0 }}>
+          <img
+            src="/images/pepyte-sig-apres.jpg"
+            alt=""
+            style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top left', filter: 'blur(10px) brightness(.55)', transform: 'scale(1.08)', display: 'block' }}
+          />
+          <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 10 }}>
+            <div style={{ width: 44, height: 44, borderRadius: '50%', background: 'rgba(255,255,255,.15)', backdropFilter: 'blur(4px)', border: '1.5px solid rgba(255,255,255,.3)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.9)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+            </div>
+            <span style={{ fontSize: 11, fontWeight: 600, color: 'rgba(255,255,255,.7)', letterSpacing: '.08em', textTransform: 'uppercase' }}>Code requis</span>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div style={{ padding: '24px 28px', display: 'flex', flexDirection: 'column', gap: 12, flex: 1 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            <img src="/images/logo-pepyte.svg" alt="Pepyte" style={{ width: 22, height: 22, borderRadius: 5, objectFit: 'contain' }}/>
+            <span style={{ fontSize: 11, fontWeight: 600, padding: '3px 10px', borderRadius: 20, background: '#F0EDFE', color: '#6B45D6', border: '1px solid #D6CCFC' }}>Feature Design</span>
+            <span style={{ fontSize: 12, color: 'var(--muted)', marginLeft: 'auto' }}>Juin 2026</span>
+          </div>
+          <p style={{ fontSize: 19, fontWeight: 700, color: 'var(--text)', letterSpacing: '-.025em', lineHeight: 1.2 }}>Probabilité de signature</p>
+          <p style={{ fontSize: 13, color: 'var(--muted)', lineHeight: 1.65, fontWeight: 300 }}>
+            Comment transformer un dashboard de pilotage aveugle en outil de décision — feature conçue de A à Z, de l'insight à la mise en production.
+          </p>
+          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginTop: 2 }}>
+            {['Product Design', 'Logique métier', 'Prototypage'].map(t => (
+              <span key={t} className="badge" style={{ background: 'var(--blue-light)', color: 'var(--blue)' }}>{t}</span>
+            ))}
+          </div>
+          <div style={{ marginTop: 'auto', paddingTop: 12 }}>
+            <span style={{
+              display: 'inline-flex', alignItems: 'center', gap: 8,
+              background: '#111827', color: '#fff',
+              fontSize: 13, fontWeight: 600,
+              padding: '9px 16px', borderRadius: 8,
+            }}>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+              Présentée en entretien — Entrer le code
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* Modal */}
+      {showModal && (
+        <div
+          style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,.55)', backdropFilter: 'blur(6px)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16 }}
+          onClick={e => { if (e.target === e.currentTarget) setShowModal(false); }}
+        >
+          <div
+            style={{
+              background: '#fff', borderRadius: 16, padding: '36px 32px', width: '100%', maxWidth: 380,
+              boxShadow: '0 24px 80px rgba(0,0,0,.2)',
+              animation: shake ? 'shake .4s ease' : 'none',
+            }}
+          >
+            <style>{`@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}`}</style>
+            <div style={{ textAlign: 'center', marginBottom: 24 }}>
+              <div style={{ width: 52, height: 52, borderRadius: '50%', background: '#F3F4F6', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#374151" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+              </div>
+              <p style={{ fontSize: 18, fontWeight: 700, color: '#111827', marginBottom: 6 }}>Accès sur demande</p>
+              <p style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.6 }}>Cette étude de cas se présente uniquement en entretien. Si vous avez un code d'accès, entrez-le ci-dessous.</p>
+            </div>
+            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+              <input
+                ref={inputRef}
+                type="password"
+                value={code}
+                onChange={e => { setCode(e.target.value); setError(false); }}
+                placeholder="Code d'accès"
+                style={{
+                  width: '100%', padding: '11px 14px', borderRadius: 8, fontSize: 15,
+                  border: error ? '1.5px solid #EF4444' : '1.5px solid #E5E7EB',
+                  outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box',
+                  background: error ? '#FEF2F2' : '#fff',
+                  transition: 'border-color .15s, background .15s',
+                }}
+              />
+              {error && <p style={{ fontSize: 12, color: '#EF4444', margin: 0 }}>Code incorrect. Contactez Thomas pour obtenir l'accès.</p>}
+              <button
+                type="submit"
+                style={{
+                  width: '100%', padding: '11px', borderRadius: 8, fontSize: 14, fontWeight: 600,
+                  background: '#111827', color: '#fff', border: 'none', cursor: 'pointer',
+                  fontFamily: 'inherit', marginTop: 4,
+                }}
+              >
+                Accéder à l'étude de cas
+              </button>
+            </form>
+            <p style={{ textAlign: 'center', fontSize: 12, color: '#9CA3AF', marginTop: 16 }}>
+              Pas encore de code ?{' '}
+              <a href="https://mail.google.com/mail/?view=cm&to=reynier.design@gmail.com" target="_blank" rel="noopener" style={{ color: '#1956DB', textDecoration: 'none', fontWeight: 500 }}>
+                Contactez Thomas
+              </a>
+            </p>
+          </div>
+        </div>
+      )}
+    </>
+  );
 }
 
 function ProjectCard({ p }) {
