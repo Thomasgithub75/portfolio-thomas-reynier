@@ -84,20 +84,12 @@ export function Img({ src, alt, noZoom }) {
 }
 
 export function IllustrationItem({ src, alt, caption, noZoom, bg }) {
-  const [open, setOpen] = useState(false);
   return (
     <figure className="illustration-item">
-      <div
-        className="illustration-item-inner"
-        style={bg ? {backgroundColor: bg} : {}}
-        onClick={noZoom ? undefined : () => setOpen(true)}
-        role={noZoom ? undefined : 'button'}
-        tabIndex={noZoom ? undefined : 0}
-      >
-        <img src={src} alt={alt || ''} style={{width:'100%', display:'block'}}/>
+      <div className="illustration-item-inner" style={bg ? {backgroundColor: bg} : {}}>
+        <Img src={src} alt={alt} noZoom={noZoom}/>
       </div>
       {caption && <figcaption className="illustration-caption">{caption}</figcaption>}
-      {open && <Lightbox src={src} onClose={() => setOpen(false)}/>}
     </figure>
   );
 }
