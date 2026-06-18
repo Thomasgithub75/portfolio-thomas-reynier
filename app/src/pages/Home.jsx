@@ -334,7 +334,7 @@ export default function Home() {
       <section id="entretien">
         <div className="container">
           <p className="section-label">Sur demande · Entretien</p>
-          <h2>Une étude de cas présentée en direct</h2>
+          <h2>Une étude de cas présentée en entretien</h2>
           <p style={{color:'var(--muted)',fontSize:15,fontWeight:300,marginBottom:28,marginTop:-12}}>Cette étude de cas n'est pas disponible en ligne. Elle se présente lors d'un entretien.</p>
           <LockedCaseCard />
         </div>
