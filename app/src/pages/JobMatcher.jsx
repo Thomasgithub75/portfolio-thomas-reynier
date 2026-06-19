@@ -61,9 +61,9 @@ const SpinnerIcon = () => (
   </svg>
 );
 
-const BoltIcon = () => (
+const SparkleIcon = () => (
   <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M7 2v11h3v9l7-12h-4l4-8z"/>
+    <path d="M19 9l-1.26-2.74L15 5l2.74-1.26L19 1l1.26 2.74L23 5l-2.74 1.26L19 9zm-7.5.5L9 4 6.5 9.5 1 12l5.5 2.5L9 20l2.5-5.5L17 12l-5.5-2.5zM19 15l-1.26 2.74L15 19l2.74 1.26L19 23l1.26-2.74L23 19l-2.74-1.26L19 15z"/>
   </svg>
 );
 
@@ -186,9 +186,9 @@ export default function JobMatcher() {
             <div style={{ marginTop: 14 }}>
               <Button
                 variant="primary"
-                disabled={loading}
+                disabled={loading || offre.trim().length < 10}
                 onClick={handleAnalyse}
-                startIcon={loading ? <SpinnerIcon/> : <BoltIcon/>}
+                startIcon={loading ? <SpinnerIcon/> : <SparkleIcon/>}
                 sx={{ width: isMobile ? '100%' : 'auto' }}
               >
                 {loading ? 'Analyse en cours…' : 'Lancer l\'analyse'}
@@ -254,7 +254,7 @@ export default function JobMatcher() {
                     {results.length} point{results.length > 1 ? 's' : ''} de compatibilité · {today}
                   </p>
                   <h2 style={{ fontSize: isMobile ? 19 : 22, fontWeight: 700, color: 'var(--text)', letterSpacing: '-.02em' }}>
-                    Notre compatibilité
+                    Analyse de compatibilité
                   </h2>
                 </div>
                 <div className="no-print">

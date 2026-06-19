@@ -311,7 +311,7 @@ export default function Home() {
                   {/* Titre résultat */}
                   <div style={{padding:'10px 16px 8px',borderBottom:'1px solid var(--border)'}}>
                     <p style={{fontSize:10,color:'var(--muted)',marginBottom:2}}>4 points de compatibilité</p>
-                    <p style={{fontSize:13,fontWeight:700,color:'var(--text)'}}>Notre compatibilité</p>
+                    <p style={{fontSize:13,fontWeight:700,color:'var(--text)'}}>Analyse de compatibilité</p>
                   </div>
 
                   {/* Faux résultats */}
