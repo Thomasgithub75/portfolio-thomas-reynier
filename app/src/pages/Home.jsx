@@ -285,8 +285,8 @@ export default function Home() {
                 onMouseEnter={e=>e.currentTarget.style.background='var(--blue-deep)'}
                 onMouseLeave={e=>e.currentTarget.style.background='var(--blue)'}
               >
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-                Faire le test
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9l-1.26-2.74L15 5l2.74-1.26L19 1l1.26 2.74L23 5l-2.74 1.26L19 9zm-7.5.5L9 4 6.5 9.5 1 12l5.5 2.5L9 20l2.5-5.5L17 12l-5.5-2.5zM19 15l-1.26 2.74L15 19l2.74 1.26L19 23l1.26-2.74L23 19l-2.74-1.26L19 15z"/></svg>
+                Tester le matching IA
               </Link>
             </div>
 

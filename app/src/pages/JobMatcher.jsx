@@ -61,9 +61,9 @@ const SpinnerIcon = () => (
   </svg>
 );
 
-const SearchIcon = () => (
-  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+const BoltIcon = () => (
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M7 2v11h3v9l7-12h-4l4-8z"/>
   </svg>
 );
 
@@ -188,10 +188,10 @@ export default function JobMatcher() {
                 variant="primary"
                 disabled={loading}
                 onClick={handleAnalyse}
-                startIcon={loading ? <SpinnerIcon/> : <SearchIcon/>}
+                startIcon={loading ? <SpinnerIcon/> : <BoltIcon/>}
                 sx={{ width: isMobile ? '100%' : 'auto' }}
               >
-                {loading ? 'Matching en cours…' : 'Lancer le matching'}
+                {loading ? 'Analyse en cours…' : 'Lancer l\'analyse'}
               </Button>
             </div>
           </form>
