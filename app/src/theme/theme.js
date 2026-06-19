@@ -127,6 +127,32 @@ const theme = createTheme({
         },
       },
     },
+    MuiTooltip: {
+      defaultProps: {
+        arrow: true,
+        placement: 'top',
+      },
+      styleOverrides: {
+        tooltip: {
+          backgroundColor: primary[50],
+          color:           primary[500],
+          border:          `1px solid ${primary[200]}`,
+          borderRadius:    20,
+          fontSize:        11,
+          fontWeight:      600,
+          letterSpacing:   '.06em',
+          padding:         '4px 12px',
+          fontFamily:      "'Outfit', sans-serif",
+          boxShadow:       '0 2px 8px rgba(25,86,219,.12)',
+        },
+        arrow: {
+          color: primary[50],
+          '&::before': {
+            border: `1px solid ${primary[200]}`,
+          },
+        },
+      },
+    },
   },
 
   // tokens bruts accessibles partout via theme.designTokens
