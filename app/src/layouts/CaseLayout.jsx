@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import { trackEvent } from '../utils/analytics';
@@ -193,6 +194,7 @@ export default function CaseLayout({ title, tocItems, tocMissions, children }) {
   const progress = useScrollProgress();
   const bttVisible = useBackToTop();
   const { activeId, tocVisible } = useToc(tocItems.filter(i => i.id).map(i => i.id));
+  const showToc = !useMediaQuery('(max-width:1200px)');
   useInView();
 
   useEffect(() => { window.scrollTo(0, 0); }, []);
@@ -201,15 +203,19 @@ export default function CaseLayout({ title, tocItems, tocMissions, children }) {
     <>
       <div className="reading-progress" style={{ width: `${progress}%` }}/>
       <Navbar/>
-      {/* TOC */}
-      <aside className="toc" style={{ opacity: tocVisible ? 1 : 0, pointerEvents: tocVisible ? 'auto' : 'none' }}>
-        <p className="toc-title">Sommaire</p>
-        {tocItems.map((item, i) =>
-          item.mission
-            ? <span key={i} className="toc-mission">{item.mission}</span>
-            : <a key={item.id} className={`toc-link${activeId === item.id ? ' active' : ''}`} href={`#${item.id}`} onClick={e => { e.preventDefault(); document.getElementById(item.id)?.scrollIntoView({ behavior: 'smooth' }); }}>{item.label}</a>
-        )}
-      </aside>
+      {/* TOC — not rendered at all below 1200px: a fixed-position element placed off-screen
+          (left: calc(50% + 500px)) triggers a horizontal rubber-band scroll bug in iOS Safari
+          even when hidden via CSS display:none */}
+      {showToc && (
+        <aside className="toc" style={{ opacity: tocVisible ? 1 : 0, pointerEvents: tocVisible ? 'auto' : 'none' }}>
+          <p className="toc-title">Sommaire</p>
+          {tocItems.map((item, i) =>
+            item.mission
+              ? <span key={i} className="toc-mission">{item.mission}</span>
+              : <a key={item.id} className={`toc-link${activeId === item.id ? ' active' : ''}`} href={`#${item.id}`} onClick={e => { e.preventDefault(); document.getElementById(item.id)?.scrollIntoView({ behavior: 'smooth' }); }}>{item.label}</a>
+          )}
+        </aside>
+      )}
       {children}
       <button className={`back-to-top${bttVisible ? ' visible' : ''}`} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} aria-label="Retour en haut">
         <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
