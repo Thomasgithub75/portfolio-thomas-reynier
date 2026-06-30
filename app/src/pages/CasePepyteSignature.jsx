@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import CaseLayout, { IllustrationItem, CaseCta, OtherProjects } from '../layouts/CaseLayout';
 import { Link } from 'react-router-dom';
 
@@ -104,6 +105,7 @@ export default function CasePepyteSignature() {
   const [unlocked, setUnlocked] = useState(
     sessionStorage.getItem('pepyte_sig_access') === 'true'
   );
+  const isMobile = useMediaQuery('(max-width:640px)');
   if (!unlocked) return <CaseGate onUnlock={() => setUnlocked(true)} />;
 
   return (
@@ -178,7 +180,10 @@ export default function CasePepyteSignature() {
 
             <div style={{background:'#F9FAFB',border:'1px solid #E5E7EB',borderRadius:12,padding:'20px 24px',marginTop:20,marginBottom:4}}>
               <div style={{fontSize:11,fontWeight:600,letterSpacing:'.08em',textTransform:'uppercase',color:'#9CA3AF',marginBottom:16}}>Méthode de prototypage</div>
-              <div style={{display:'grid',gridTemplateColumns:'1fr auto 1fr auto 1fr auto 1fr auto 1fr',gap:0,alignItems:'flex-start'}}>
+              <div style={isMobile
+                ? {display:'flex',flexDirection:'column',gap:0,alignItems:'stretch'}
+                : {display:'grid',gridTemplateColumns:'1fr auto 1fr auto 1fr auto 1fr auto 1fr',gap:0,alignItems:'flex-start'}
+              }>
 
                 <div>
                   <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:8}}>
@@ -190,7 +195,10 @@ export default function CasePepyteSignature() {
                   <p style={{fontSize:11.5,color:'#6B7280',lineHeight:1.6,margin:0}}>Knowledge base : études, entretiens, contexte produit, DS, skills UX & writing</p>
                 </div>
 
-                <div style={{display:'flex',alignItems:'flex-start',padding:'8px 10px',paddingTop:8,color:'#D1D5DB',fontSize:18,flexShrink:0}}>→</div>
+                <div style={isMobile
+                  ? {display:'flex',justifyContent:'center',padding:'6px 0',color:'#D1D5DB',fontSize:18,flexShrink:0}
+                  : {display:'flex',alignItems:'flex-start',padding:'8px 10px',paddingTop:8,color:'#D1D5DB',fontSize:18,flexShrink:0}
+                }>{isMobile ? '↓' : '→'}</div>
 
                 <div>
                   <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:8}}>
@@ -203,7 +211,10 @@ export default function CasePepyteSignature() {
                   <p style={{fontSize:11.5,color:'#6B7280',lineHeight:1.6,margin:0}}>Objectif exposé → itérations en conversation</p>
                 </div>
 
-                <div style={{display:'flex',alignItems:'flex-start',padding:'8px 10px',paddingTop:8,color:'#D1D5DB',fontSize:18,flexShrink:0}}>→</div>
+                <div style={isMobile
+                  ? {display:'flex',justifyContent:'center',padding:'6px 0',color:'#D1D5DB',fontSize:18,flexShrink:0}
+                  : {display:'flex',alignItems:'flex-start',padding:'8px 10px',paddingTop:8,color:'#D1D5DB',fontSize:18,flexShrink:0}
+                }>{isMobile ? '↓' : '→'}</div>
 
                 <div>
                   <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:8}}>
@@ -215,7 +226,10 @@ export default function CasePepyteSignature() {
                   <p style={{fontSize:11.5,color:'#6B7280',lineHeight:1.6,margin:0}}>Propositions testables dans le navigateur, chacune documentée</p>
                 </div>
 
-                <div style={{display:'flex',alignItems:'flex-start',padding:'8px 10px',paddingTop:8,color:'#D1D5DB',fontSize:18,flexShrink:0}}>→</div>
+                <div style={isMobile
+                  ? {display:'flex',justifyContent:'center',padding:'6px 0',color:'#D1D5DB',fontSize:18,flexShrink:0}
+                  : {display:'flex',alignItems:'flex-start',padding:'8px 10px',paddingTop:8,color:'#D1D5DB',fontSize:18,flexShrink:0}
+                }>{isMobile ? '↓' : '→'}</div>
 
                 <div>
                   <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:8}}>
@@ -225,7 +239,10 @@ export default function CasePepyteSignature() {
                   <p style={{fontSize:11.5,color:'#6B7280',lineHeight:1.6,margin:0}}>Direction validée → maquette avec notre Design System</p>
                 </div>
 
-                <div style={{display:'flex',alignItems:'flex-start',padding:'8px 10px',paddingTop:8,color:'#D1D5DB',fontSize:18,flexShrink:0}}>→</div>
+                <div style={isMobile
+                  ? {display:'flex',justifyContent:'center',padding:'6px 0',color:'#D1D5DB',fontSize:18,flexShrink:0}
+                  : {display:'flex',alignItems:'flex-start',padding:'8px 10px',paddingTop:8,color:'#D1D5DB',fontSize:18,flexShrink:0}
+                }>{isMobile ? '↓' : '→'}</div>
 
                 <div>
                   <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:8}}>
