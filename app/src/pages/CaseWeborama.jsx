@@ -214,7 +214,6 @@ export default function CaseWeborama() {
       <CaseCta/>
       <OtherProjects projects={[
         { href:'/case/pepyte', thumb:'/images/thumb-pepyte.jpg', logo:'/images/logo-pepyte.svg', role:'UX Research & Design', roleClass:'', duration:'26 mois', name:'Pepyte', desc:'Recherche utilisateur & conception de la fonctionnalité de matching — de l\'audit à l\'interface.', tags:['UX Research','Entretiens','Figma'] },
-        { href:'/case/nectar', thumb:'/images/thumb-nectar.jpg', logo:'/images/logo-nectar.svg', role:'Founding Designer', roleClass:'role-nectar', duration:'En cours', name:'Nectar', desc:'MVP SaaS piloté par IA — de la recherche utilisateur au développement, 100% du process assisté par IA.', tags:['UX Research','Figma Make','Claude'] },
       ]}/>
     </CaseLayout>
   );

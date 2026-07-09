@@ -8,14 +8,12 @@ import { trackEvent } from '../utils/analytics';
 const SKILL_PROJS = {
   'UX Research': [
     { logo:'/images/logo-pepyte.svg', bg:'#F5F3FF', name:'Pepyte', desc:'12 entretiens · JTBD · synthèse IA', type:'Case study', url:'/case/pepyte' },
-    { logo:'/images/logo-weborama.svg', bg:'#EFF8FF', name:'Weborama', desc:'Audit UX · tests · heatmaps', type:'Case study', url:'/case/weborama' },
-    { logo:'/images/logo-nectar.svg', bg:'#FFFBEB', name:'Nectar', desc:'Discovery · interviews sales & PM', type:'Side project', url:'/case/nectar' }
+    { logo:'/images/logo-weborama.svg', bg:'#EFF8FF', name:'Weborama', desc:'Audit UX · tests · heatmaps', type:'Case study', url:'/case/weborama' }
   ],
   'Product Design': [
     { logo:'/images/logo-pepyte.svg', bg:'#F5F3FF', name:'Mon nouveau process IA', desc:'Feature · Dashboard · Logique métier', type:'Case study', url:'/case/pepyte-signature', locked:true },
     { logo:'/images/logo-pepyte.svg', bg:'#F5F3FF', name:'Pepyte', desc:'Refonte onboarding · mobile first', type:'Case study', url:'/case/pepyte' },
     { logo:'/images/logo-weborama.svg', bg:'#EFF8FF', name:'Weborama', desc:'Nouveau SaaS AdTech de 0', type:'Case study', url:'/case/weborama' },
-    { logo:'/images/logo-nectar.svg', bg:'#FFFBEB', name:'Nectar', desc:'App mobile B2B · design to code', type:'Side project', url:'/case/nectar' },
   ],
   'Design System': [
     { logo:'/images/logo-weborama.svg', bg:'#EFF8FF', name:'Weborama', desc:'DS from scratch · tokens · Storybook', type:'Case study', url:'/case/weborama' },
@@ -24,23 +22,19 @@ const SKILL_PROJS = {
   'Prototypage haute fidélité': [
     { logo:'/images/logo-pepyte.svg', bg:'#F5F3FF', name:'Mon nouveau process IA', desc:'4 prototypes HTML · itération rapide · IA', type:'Case study', url:'/case/pepyte-signature', locked:true },
     { logo:'/images/logo-pepyte.svg', bg:'#F5F3FF', name:'Pepyte', desc:'Prototypes testables · Figma avancé', type:'Case study', url:'/case/pepyte' },
-    { logo:'/images/logo-nectar.svg', bg:'#FFFBEB', name:'Nectar', desc:'Prototype interactif mobile', type:'Side project', url:'/case/nectar' },
   ],
   'Atomic Design': [
     { logo:'/images/logo-weborama.svg', bg:'#EFF8FF', name:'Weborama', desc:'Architecture composants · Atomic', type:'Case study', url:'/case/weborama' }
   ],
   'Design to Code': [
-    { logo:'/images/logo-nectar.svg', bg:'#FFFBEB', name:'Nectar', desc:'Next.js · Tailwind · Supabase · Vercel', type:'Side project', url:'/case/nectar' },
     { initials:'PF', color:'#1956DB', name:'Portfolio', desc:'React · MUI · Design System', type:'Personnel', url:'/' }
   ],
   'IA générative': [
-    { logo:'/images/logo-nectar.svg', bg:'#FFFBEB', name:'Nectar', desc:'Claude Code · MCP · Figma Make', type:'Side project', url:'/case/nectar' },
     { logo:'/images/logo-pepyte.svg', bg:'#F5F3FF', name:'Pepyte', desc:'Synthèse entretiens · research IA', type:'Case study', url:'/case/pepyte' }
   ],
   'Entretiens utilisateurs': [
     { logo:'/images/logo-pepyte.svg', bg:'#F5F3FF', name:'Pepyte', desc:'12 entretiens · JTBD · pain points', type:'Case study', url:'/case/pepyte' },
-    { logo:'/images/logo-weborama.svg', bg:'#EFF8FF', name:'Weborama', desc:'Entretiens équipes produit & sales', type:'Case study', url:'/case/weborama' },
-    { logo:'/images/logo-nectar.svg', bg:'#FFFBEB', name:'Nectar', desc:'Discovery · interviews commerciaux & PM', type:'Side project', url:'/case/nectar' }
+    { logo:'/images/logo-weborama.svg', bg:'#EFF8FF', name:'Weborama', desc:'Entretiens équipes produit & sales', type:'Case study', url:'/case/weborama' }
   ],
   'Audit UX': [
     { logo:'/images/logo-weborama.svg', bg:'#EFF8FF', name:'Weborama', desc:'Audit UX · heatmaps · tests utilisateurs', type:'Case study', url:'/case/weborama' },
@@ -52,7 +46,6 @@ const SKILL_PROJS = {
   ],
   'User flows & zoning': [
     { logo:'/images/logo-pepyte.svg', bg:'#F5F3FF', name:'Mon nouveau process IA', desc:'Dashboard redesign · signal unique · pilotage', type:'Case study', url:'/case/pepyte-signature', locked:true },
-    { logo:'/images/logo-nectar.svg', bg:'#FFFBEB', name:'Nectar', desc:'Flow saisie → validation · 15 edge cases', type:'Side project', url:'/case/nectar' },
     { logo:'/images/logo-pepyte.svg', bg:'#F5F3FF', name:'Pepyte', desc:'Parcours onboarding complet · zoning', type:'Case study', url:'/case/pepyte' },
   ]
 };
@@ -216,7 +209,6 @@ export default function Home() {
             {[
               { href:'/case/pepyte', thumb:'/images/thumb-pepyte.jpg', logo:'/images/logo-pepyte.svg', role:'UX Research & Design', roleClass:'project-role-pepyte', duration:'26 mois', name:'Pepyte', desc:"Audit de 62 champs, 10 entretiens recruteurs et conception de la fonctionnalité de matching — de la recherche à l'interface.", tags:['UX Research','Design System','Design IA'] },
               { href:'/case/weborama', thumb:'/images/thumb-weborama.jpg', logo:'/images/logo-weborama.svg', role:'Design System Lead', roleClass:'project-role-weborama', duration:'16 mois', name:'Weborama', desc:"Audit de 974 composants, ateliers de co-construction et création d'un Design System de zéro — 80% de composants en moins.", tags:['UX Research','Design System','Design IA'] },
-              { href:'/case/nectar', thumb:'/images/thumb-nectar.jpg', logo:'/images/logo-nectar.svg', role:'Founding Designer', roleClass:'project-role-nectar', duration:'En cours', name:'Nectar', desc:"MVP B2B mobile-first piloté par IA — de la recherche utilisateur aux 8 écrans livrés, avec un process documenté et réplicable.", tags:['UX Research','Design System','Design IA'] },
             ].map(p => <ProjectCard key={p.name} p={p}/>)}
           </div>
 

@@ -19,12 +19,14 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/case/weborama" element={<CaseWeborama />} />
         <Route path="/case/pepyte" element={<CasePepyte />} />
-        <Route path="/case/nectar" element={<CaseNectar />} />
         <Route path="/case/pepyte-signature" element={<CasePepyteSignature />} />
         <Route path="/fonctionnalite-ia" element={<JobMatcher />} />
         {/* Portfolio case study — local only */}
         <Route path="/case/portfolio" element={<Navigate to="/" replace />} />
         <Route path="/wip/portfolio" element={import.meta.env.DEV ? <CasePortfolio /> : <Navigate to="/" replace />} />
+        {/* Nectar case study — archived, local only, kept for reference */}
+        <Route path="/case/nectar" element={<Navigate to="/" replace />} />
+        <Route path="/wip/nectar" element={import.meta.env.DEV ? <CaseNectar /> : <Navigate to="/" replace />} />
         <Route path="/lettre-motivation" element={<LettreMotivation />} />
         <Route path="/design-system" element={<DesignSystem />} />
       </Routes>

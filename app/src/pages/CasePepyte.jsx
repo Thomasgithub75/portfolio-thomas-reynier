@@ -227,7 +227,6 @@ export default function CasePepyte() {
       <CaseCta/>
       <OtherProjects projects={[
         { href:'/case/weborama', thumb:'/images/thumb-weborama.jpg', logo:'/images/logo-weborama.svg', role:'Design System Lead', roleClass:'role-weborama', duration:'16 mois', name:'Weborama', desc:"2 Design Systems, process AI Ready et idéation via Figma Make — 4 équipes alignées sur une source unique.", tags:['Design System','Figma Make','AI Ready'] },
-        { href:'/case/nectar', thumb:'/images/thumb-nectar.jpg', logo:'/images/logo-nectar.svg', role:'Founding Designer', roleClass:'role-nectar', duration:'En cours', name:'Nectar', desc:'MVP SaaS piloté par IA — de la recherche utilisateur au développement, 100% du process assisté par IA.', tags:['UX Research','Figma Make','Claude'] },
       ]}/>
     </CaseLayout>
   );

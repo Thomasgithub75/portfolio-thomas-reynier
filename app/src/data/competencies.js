@@ -21,12 +21,6 @@ export const COMPETENCIES = [
         logo: '/images/logo-weborama.svg',
         proof: "J'ai conduit des entretiens avec les POs, BUs et équipes produit pour comprendre les usages réels des 4 outils SaaS. Ces entretiens ont alimenté l'audit du Design System existant et orienté les priorités de refonte — avant toute décision de conception.",
       },
-      {
-        name: 'Nectar',
-        url: '/case/nectar',
-        logo: '/images/logo-nectar.svg',
-        proof: "J'ai mené une phase de discovery complète avec interviews utilisateurs et cadre JTBD (Jobs to Be Done) pour définir les besoins réels avant toute conception. Les insights ont directement structuré l'architecture de l'application et les fonctionnalités prioritaires du MVP.",
-      },
     ],
   },
 
@@ -102,12 +96,6 @@ export const COMPETENCIES = [
         proof: "J'ai conçu les parcours UX des nouvelles fonctionnalités du SaaS AdTech en collaboration avec les équipes produit et développement — de la définition des besoins à la livraison des interfaces.",
       },
       {
-        name: 'Nectar',
-        url: '/case/nectar',
-        logo: '/images/logo-nectar.svg',
-        proof: "J'ai conçu l'intégralité du parcours utilisateur de Nectar, de la discovery à la livraison des 8 écrans du MVP. Chaque écran découle d'un besoin identifié en recherche — aucun écran gratuit, aucune feature sans usage validé.",
-      },
-      {
         name: 'Mon nouveau process IA — Pepyte',
         url: '/case/pepyte-signature',
         logo: '/images/logo-pepyte.svg',
@@ -134,12 +122,6 @@ export const COMPETENCIES = [
         logo: '/images/logo-pepyte.svg',
         proof: "J'ai contribué à la création et la gouvernance du Design System Trésor chez Pepyte — cohérence entre composants Figma et interfaces produit, audit de l'existant, identification des incohérences et priorisation des corrections.",
       },
-      {
-        name: 'Nectar',
-        url: '/case/nectar',
-        logo: '/images/logo-nectar.svg',
-        proof: "J'ai construit un Design System token-based pour Nectar, de zéro, en suivant une approche Atomic Design — connecté directement au développement via Claude Code pour une cohérence design-code garantie.",
-      },
     ],
   },
 
@@ -160,12 +142,6 @@ export const COMPETENCIES = [
         logo: '/images/logo-pepyte.svg',
         proof: "J'ai collaboré étroitement avec l'équipe de développement Pepyte pour l'intégration des formulaires et de la fonctionnalité de matching — de la spec technique au suivi de livraison, avec des itérations design pilotées par les retours dev.",
       },
-      {
-        name: 'Nectar',
-        url: '/case/nectar',
-        logo: '/images/logo-nectar.svg',
-        proof: "Sur Nectar, j'ai piloté moi-même le développement du MVP via Claude Code — ce qui m'a donné une compréhension concrète des contraintes techniques et une capacité à faire des choix de design réalistes dès la conception.",
-      },
     ],
   },
 
@@ -174,12 +150,6 @@ export const COMPETENCIES = [
     label: 'Utilisation de l\'IA',
     keywords: ['intelligence artificielle', 'ia', 'ai', 'outil ia', 'figma make', 'claude', 'chatgpt', 'llm', 'génératif', 'ai-driven', 'ia générative', 'prompt', 'automatisation'],
     projects: [
-      {
-        name: 'Nectar',
-        url: '/case/nectar',
-        logo: '/images/logo-nectar.svg',
-        proof: "J'ai piloté l'intégralité du process design de Nectar avec l'IA : recherche utilisateur assistée, idéation via Figma Make, maquettage, développement du MVP via Claude Code. Chaque étape — discovery, définition, conception, delivery — a été augmentée par l'IA. C'est un process documenté et réplicable.",
-      },
       {
         name: 'Pepyte',
         url: '/case/pepyte',
@@ -201,30 +171,10 @@ export const COMPETENCIES = [
     keywords: ['from scratch', 'de zéro', '0 à 1', 'créer', 'nouveau produit', 'founding designer', 'lancement', 'startup', 'mvp', 'product design from scratch'],
     projects: [
       {
-        name: 'Nectar',
-        url: '/case/nectar',
-        logo: '/images/logo-nectar.svg',
-        proof: "J'ai conçu Nectar de zéro : recherche utilisateur, définition produit, architecture de l'information, Design System, 8 écrans livrés et développement du MVP. Projet 100 % piloté par IA, du premier entretien utilisateur au déploiement sur Vercel.",
-      },
-      {
         name: 'Weborama',
         url: '/case/weborama',
         logo: '/images/logo-weborama.svg',
         proof: "En tant que Founding Designer IA sur le nouveau produit SaaS de Weborama, j'ai conçu l'expérience de zéro — vision produit, parcours utilisateur, Design System IA — en collaboration avec les équipes produit et développement.",
-      },
-    ],
-  },
-
-  {
-    id: 'mobile-first',
-    label: 'Design mobile-first',
-    keywords: ['mobile', 'mobile-first', 'application mobile', 'app mobile', 'responsive', 'ios', 'android', 'smartphone', 'tablette'],
-    projects: [
-      {
-        name: 'Nectar',
-        url: '/case/nectar',
-        logo: '/images/logo-nectar.svg',
-        proof: "Nectar est une application mobile B2B conçue mobile-first. Les 8 écrans du MVP ont été pensés en priorité pour une utilisation terrain sur smartphone — navigation, saisie, consultation de données — avant toute adaptation desktop.",
       },
     ],
   },
@@ -281,12 +231,6 @@ export const COMPETENCIES = [
     label: 'Vision & stratégie produit',
     keywords: ['vision produit', 'stratégie produit', 'product strategy', 'product thinking', 'sens produit', 'product sense', 'positionnement', 'proposition de valeur', 'founding designer'],
     projects: [
-      {
-        name: 'Nectar',
-        url: '/case/nectar',
-        logo: '/images/logo-nectar.svg',
-        proof: "Sur Nectar, j'ai défini la vision produit de A à Z : identification du problème, proposition de valeur, périmètre du MVP, architecture de l'information et roadmap de livraison. Chaque décision de conception découle d'une logique produit — pas d'une intuition esthétique.",
-      },
       {
         name: 'Weborama',
         url: '/case/weborama',
