@@ -226,7 +226,7 @@ h1.case-h1{font-size:clamp(28px,4vw,44px);font-weight:600;letter-spacing:-0.03em
 /* ── HOME GRID CLASSES ── */
 .home-hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
 .home-hero-image{position:relative;width:100%;max-width:320px;justify-self:center}
-.home-projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.home-projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
 .home-exp-grid{display:grid;grid-template-columns:1fr 260px;gap:32px;align-items:start}
 .home-exp-row{display:grid;grid-template-columns:160px 1fr;gap:32px}
 .home-rec-featured-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}

@@ -210,15 +210,8 @@ export default function Home() {
               { href:'/case/pepyte', thumb:'/images/thumb-pepyte.jpg', logo:'/images/logo-pepyte.svg', role:'UX Research & Design', roleClass:'project-role-pepyte', duration:'26 mois', name:'Pepyte', desc:"Audit de 62 champs, 10 entretiens recruteurs et conception de la fonctionnalité de matching — de la recherche à l'interface.", tags:['UX Research','Design System','Design IA'] },
               { href:'/case/weborama', thumb:'/images/thumb-weborama.jpg', logo:'/images/logo-weborama.svg', role:'Design System Lead', roleClass:'project-role-weborama', duration:'16 mois', name:'Weborama', desc:"Audit de 974 composants, ateliers de co-construction et création d'un Design System de zéro — 80% de composants en moins.", tags:['UX Research','Design System','Design IA'] },
             ].map(p => <ProjectCard key={p.name} p={p}/>)}
+            <LockedCaseCard/>
           </div>
-
-          {/* Étude de cas verrouillée — intégrée dans la section projets */}
-          <div style={{display:'flex',alignItems:'center',gap:12,margin:'24px 0 20px'}}>
-            <div style={{flex:1,height:'1px',background:'var(--border)'}}/>
-            <span style={{fontSize:12,color:'var(--muted)',fontWeight:500,letterSpacing:'.03em',whiteSpace:'nowrap'}}>Présentée en entretien uniquement</span>
-            <div style={{flex:1,height:'1px',background:'var(--border)'}}/>
-          </div>
-          <LockedCaseCard/>
         </div>
       </section>
 
@@ -593,6 +586,8 @@ function LockedCaseCard() {
   const [code, setCode] = useState('');
   const [error, setError] = useState(false);
   const [shake, setShake] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const [pressed, setPressed] = useState(false);
   const inputRef = useRef(null);
   const navigate = useNavigate();
   const isMobile = useMediaQuery('(max-width:640px)');
@@ -627,31 +622,25 @@ function LockedCaseCard() {
 
   return (
     <>
-      {/* Card */}
+      {/* Card — même gabarit que ProjectCard */}
       <div
         onClick={() => setShowModal(true)}
         style={{
-          cursor: 'pointer',
-          borderRadius: 12,
-          border: '1px solid var(--border)',
-          overflow: 'hidden',
-          background: 'var(--bg)',
-          display: 'flex',
-          flexDirection: isMobile ? 'column' : 'row',
-          maxWidth: '100%',
-          boxShadow: '0 2px 12px rgba(0,0,0,.06)',
-          transition: 'box-shadow 0.2s, transform 0.2s',
+          background:'var(--bg)', display:'flex', flexDirection:'column',
+          borderRadius:10,
+          border: hovered ? '1px solid var(--blue)' : '1px solid var(--border)',
+          overflow:'hidden', cursor:'pointer',
+          transition:'border-color 0.2s,box-shadow 0.2s,transform 0.2s',
+          boxShadow: hovered ? '0 8px 32px rgba(25,86,219,0.12)' : 'none',
+          transform: pressed ? 'scale(0.98)' : hovered ? 'translateY(-4px)' : 'none',
         }}
-        onMouseEnter={e => { e.currentTarget.style.boxShadow='0 8px 32px rgba(0,0,0,.12)'; e.currentTarget.style.transform='translateY(-3px)'; }}
-        onMouseLeave={e => { e.currentTarget.style.boxShadow='0 2px 12px rgba(0,0,0,.06)'; e.currentTarget.style.transform='none'; }}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => { setHovered(false); setPressed(false); }}
+        onMouseDown={() => setPressed(true)}
+        onMouseUp={() => setPressed(false)}
       >
         {/* Blurred thumbnail */}
-        <div style={{
-          width: isMobile ? '100%' : 260,
-          height: isMobile ? 180 : 'auto',
-          minHeight: isMobile ? 'unset' : 220,
-          position: 'relative', overflow: 'hidden', flexShrink: 0,
-        }}>
+        <div style={{ width:'100%', height:200, background:'var(--bg-soft)', borderBottom:'1px solid var(--border)', overflow:'hidden', flexShrink:0, position:'relative' }}>
           <img
             src="/images/pepyte-sig-apres.jpg"
             alt=""
@@ -668,38 +657,35 @@ function LockedCaseCard() {
         </div>
 
         {/* Content */}
-        <div style={{ padding: isMobile ? '20px 16px' : '24px 28px', display: 'flex', flexDirection: 'column', gap: 12, flex: 1 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-            <img src="/images/logo-pepyte.svg" alt="Pepyte" style={{ width: 22, height: 22, borderRadius: 5, objectFit: 'contain' }}/>
-            <span style={{ fontSize: 11, fontWeight: 600, padding: '3px 10px', borderRadius: 20, background: '#F0EDFE', color: '#6B45D6', border: '1px solid #D6CCFC' }}>Feature Design</span>
-            <span style={{ fontSize: 12, color: 'var(--muted)', marginLeft: 'auto' }}>Juin 2026</span>
+        <div style={{ padding:20, display:'flex', flexDirection:'column', gap:10, flex:1 }}>
+          <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', gap:8 }}>
+            <div style={{ display:'flex', alignItems:'center', gap:8, flex:1, minWidth:0 }}>
+              <img src="/images/logo-pepyte.svg" alt="Pepyte" style={{ width:22, height:22, borderRadius:5, objectFit:'contain', flexShrink:0 }}/>
+              <span style={{ fontSize:11, fontWeight:600, padding:'3px 10px', borderRadius:20, whiteSpace:'nowrap', background:'#F3F4F6', color:'#6B7280', border:'1px solid #E5E7EB' }}>Présentée en entretien</span>
+            </div>
+            <span style={{ fontSize:12, color:'var(--muted)', fontWeight:400, whiteSpace:'nowrap', flexShrink:0 }}>Juin 2026</span>
           </div>
-          <p style={{ fontSize: isMobile ? 17 : 19, fontWeight: 700, color: 'var(--text)', letterSpacing: '-.025em', lineHeight: 1.2 }}>Mon nouveau process IA</p>
-          <p style={{ fontSize: 13, color: 'var(--muted)', lineHeight: 1.65, fontWeight: 300 }}>
+          <p style={{ fontSize:18, fontWeight:600, color:'var(--text)', letterSpacing:'-0.025em', lineHeight:1.2 }}>Mon nouveau process IA</p>
+          <p style={{ fontSize:13, color:'var(--muted)', lineHeight:1.6, fontWeight:300 }}>
             Comment transformer un dashboard de pilotage aveugle en outil de décision — feature conçue de A à Z, de l'insight à la mise en production.
           </p>
-          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginTop: 2 }}>
+          <div style={{ display:'flex', flexWrap:'wrap', gap:6, marginTop:4 }}>
             {['Product Design', 'Logique métier', 'Prototypage'].map(t => (
               <span key={t} className="badge" style={{ background: 'var(--blue-light)', color: 'var(--blue)' }}>{t}</span>
             ))}
           </div>
-          <div style={{ marginTop: isMobile ? 4 : 'auto', paddingTop: 12 }}>
-            <span style={{
-              display: isMobile ? 'flex' : 'inline-flex',
-              justifyContent: isMobile ? 'center' : 'flex-start',
-              alignItems: 'center', gap: 8,
-              background: '#111827', color: '#fff',
-              fontSize: 13, fontWeight: 600,
-              padding: '9px 16px', borderRadius: 8,
-              width: isMobile ? '100%' : 'auto',
-              boxSizing: 'border-box',
-            }}>
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-              </svg>
-              {isMobile ? 'Entrer le code' : 'Présentée en entretien — Entrer le code'}
-            </span>
-          </div>
+        </div>
+        <div style={{ padding:'0 16px 16px' }}>
+          <span style={{
+            display:'flex', width:'100%', borderRadius:8, fontSize:14,
+            padding:'10px 16px', justifyContent:'center', alignItems:'center', gap:8,
+            background:'#111827', color:'#fff', fontWeight:600,
+          }}>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+            Entrer le code
+          </span>
         </div>
       </div>
 
