@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
 
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+/* Kept in a low-priority layer so it never overrides Astryx component styles */
+@layer reset{*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}}
 :root{
   --p50:#EEF3FD;--p100:#D7E5FB;--p200:#9DB8F2;--p300:#6191E9;--p400:#3B70E1;
   --p500:#1956DB;--p600:#1141A8;--p700:#0C2E7A;--p800:#061F52;--p900:#030F2D;
