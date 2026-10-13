@@ -7,6 +7,11 @@ import { Heading } from '@astryxdesign/core/Heading';
 import { Text } from '@astryxdesign/core/Text';
 import { TextInput } from '@astryxdesign/core/TextInput';
 import { SegmentedControl, SegmentedControlItem } from '@astryxdesign/core/SegmentedControl';
+import { Switch } from '@astryxdesign/core/Switch';
+import { CheckboxInput } from '@astryxdesign/core/CheckboxInput';
+import { TabList, Tab } from '@astryxdesign/core/TabList';
+import { Avatar } from '@astryxdesign/core/Avatar';
+import { Divider } from '@astryxdesign/core/Divider';
 import { VStack, HStack } from '@astryxdesign/core/Layout';
 import { portfolioTheme, brand } from '../theme/astryxTheme';
 // Order matters: reset → component styles (theme tokens are injected by <Theme>)
@@ -71,6 +76,9 @@ function RadiusSample({ label, radius }) {
 export default function AstryxSandbox() {
   const [mode, setMode] = useState('light');
   const [email, setEmail] = useState('');
+  const [tab, setTab] = useState('projets');
+  const [notify, setNotify] = useState(true);
+  const [accepted, setAccepted] = useState(true);
 
   return (
     <Theme theme={portfolioTheme} mode={mode}>
@@ -119,6 +127,13 @@ export default function AstryxSandbox() {
               <Button label="En savoir plus" variant="ghost" size="lg" />
               <Button label="Supprimer" variant="destructive" size="lg" />
             </HStack>
+            <HStack gap={2} wrap="wrap" vAlign="center">
+              <Button label="Petit" variant="primary" size="sm" />
+              <Button label="Moyen" variant="primary" size="md" />
+              <Button label="Grand" variant="primary" size="lg" />
+              <Button label="Désactivé" variant="primary" isDisabled />
+              <Button label="Désactivé" variant="secondary" isDisabled />
+            </HStack>
           </VStack>
 
           <VStack gap={3}>
@@ -129,6 +144,35 @@ export default function AstryxSandbox() {
               <Badge label="À l'écoute" variant="success" />
               <Badge label="IA" variant="info" />
             </HStack>
+          </VStack>
+
+          <VStack gap={3}>
+            <Heading level={2}>Onglets</Heading>
+            <TabList value={tab} onChange={setTab} hasDivider>
+              <Tab value="accueil" label="Accueil" />
+              <Tab value="expertises" label="Expertises" />
+              <Tab value="projets" label="Projets" />
+            </TabList>
+          </VStack>
+
+          <VStack gap={3}>
+            <Heading level={2}>Sélection</Heading>
+            <HStack gap={6} wrap="wrap" vAlign="center">
+              <Switch label="Notifications" value={notify} onChange={setNotify} />
+              <Switch label="Mode discret" value={!notify} onChange={(v) => setNotify(!v)} />
+              <CheckboxInput label="J'accepte" value={accepted} onChange={setAccepted} />
+              <CheckboxInput label="Newsletter" value={!accepted} onChange={(v) => setAccepted(!v)} />
+            </HStack>
+          </VStack>
+
+          <VStack gap={3}>
+            <Heading level={2}>Avatars</Heading>
+            <HStack gap={3} vAlign="center">
+              <Avatar name="Thomas Reynier" size="sm" />
+              <Avatar name="Thomas Reynier" size="md" />
+              <Avatar name="Thomas Reynier" size="lg" />
+            </HStack>
+            <Divider />
           </VStack>
 
           <VStack gap={3}>
