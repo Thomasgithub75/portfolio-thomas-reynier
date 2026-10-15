@@ -2,11 +2,11 @@ import { defineTheme } from '@astryxdesign/core/theme';
 import { neutralTheme } from '@astryxdesign/theme-neutral';
 
 // Astryx theme for the portfolio — colors and radius inspired by starkfuture.com:
-// monochrome black/white surfaces, a single orange highlight, pill-shaped actions.
+// monochrome black/white surfaces, a tech/fintech-style violet highlight, pill-shaped actions.
 // Token values are [light, dark] pairs.
 
 export const brand = {
-  orange: '#F15A24',
+  violet: '#7B2FFF',
   black: '#000000',
   ink: '#0A0A0A',
   graphite: '#1E1E1E',
@@ -50,20 +50,20 @@ export const portfolioTheme = defineTheme({
     '--color-text-primary': [brand.ink, '#FFFFFFE0'],
     '--color-text-secondary': [brand.slate, '#FFFFFFA3'],
     '--color-text-disabled': ['#00000066', '#FFFFFF66'],
-    // Orange highlight — darkened in light mode to keep a 4.5:1 contrast on white
-    '--color-text-accent': ['#C2410C', '#FF7A45'],
+    // Violet highlight — darkened in light mode to keep a 4.5:1 contrast on white
+    '--color-text-accent': ['#5B0EB3', '#B38CFF'],
 
     // Icons
     '--color-icon-primary': [brand.ink, '#FFFFFFE0'],
     '--color-icon-secondary': [brand.slate, '#FFFFFFA3'],
-    '--color-icon-accent': brand.orange,
+    '--color-icon-accent': brand.violet,
 
     // Borders
     '--color-border': [brand.silver, '#FFFFFF29'],
     '--color-border-emphasized': ['#BDBDBD', brand.steel],
 
     // Focus ring
-    '--focus-outline-color': brand.orange,
+    '--focus-outline-color': brand.violet,
 
     // Radius: 8px elements, 16px containers, pill actions
     '--radius-inner': '4px',

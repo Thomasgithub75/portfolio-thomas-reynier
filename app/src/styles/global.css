@@ -15,22 +15,28 @@
   --border-soft:#E5E9F5;--border-strong:#D1D5DB;
   --ink:#111827;--ink-2:#374151;--n-muted:#6B7280;--n-subtle:#9CA3AF;
   --n-soft:#F3F4F6;--n-faint:#FAFAFA;--panel:#F4F8FE;
+  --tag-design-bg:#EEEDFE;--tag-design-fg:#534AB7;
+  --tag-dev-bg:#E1F5EE;--tag-dev-fg:#0F6E56;
+  --tag-pm-bg:#FAEEDA;--tag-pm-fg:#854F0B;
 }
-/* Dark mode (test) — palette inspired by starkfuture.com: black surfaces, orange accent */
+/* Dark mode (test) — palette inspired by tech/fintech apps (Revolut-style): black surfaces, electric violet accent */
 :root[data-theme="dark"]{
   color-scheme:dark;
-  --p50:rgba(241,90,36,.14);--p100:rgba(241,90,36,.22);--p200:rgba(241,90,36,.45);--p300:#C94A1D;--p400:#FF7A45;
-  --p500:#F15A24;--p600:#FF7A45;--p700:#FF9A70;--p800:#FFD9C9;--p900:#FFD9C9;
+  --p50:rgba(141,74,255,.14);--p100:rgba(141,74,255,.22);--p200:rgba(141,74,255,.45);--p300:#5B0EB3;--p400:#A873FF;
+  --p500:#8D4AFF;--p600:#A873FF;--p700:#C9A8FF;--p800:#E8D9FF;--p900:#E8D9FF;
   --g50:#141414;--g100:#242424;--g200:#333333;--g300:#424242;--g400:#8A8A8A;
   --g500:#A3A3A3;--g600:#D7D7D7;--g700:#ECECEC;--g800:#FFFFFF;--g900:#FFFFFF;
-  --blue:#F15A24;--blue-light:rgba(241,90,36,.14);--blue-mid:#FF7A45;--blue-deep:#FF7A45;
-  --blue-border:rgba(241,90,36,.45);--blue-bg:rgba(241,90,36,.22);
+  --blue:#8D4AFF;--blue-light:rgba(141,74,255,.14);--blue-mid:#A873FF;--blue-deep:#A873FF;
+  --blue-border:rgba(141,74,255,.45);--blue-bg:rgba(141,74,255,.22);
   --text:rgba(255,255,255,.88);--muted:rgba(255,255,255,.64);--border:rgba(255,255,255,.16);--bg:#000000;--bg-soft:#141414;
-  --proj-bg:#1E1E1E;--proj-fg:#F15A24;--proj-border:rgba(255,255,255,.16);
+  --proj-bg:#1E1E1E;--proj-fg:#8D4AFF;--proj-border:rgba(255,255,255,.16);
   --surface:#1E1E1E;--on-accent:#000000;--nav-bg:rgba(0,0,0,0.85);
   --border-soft:rgba(255,255,255,.12);--border-strong:#424242;
   --ink:#FFFFFF;--ink-2:#D7D7D7;--n-muted:rgba(255,255,255,.64);--n-subtle:rgba(255,255,255,.4);
   --n-soft:#242424;--n-faint:#141414;--panel:#141414;
+  --tag-design-bg:rgba(141,74,255,.18);--tag-design-fg:#C9A8FF;
+  --tag-dev-bg:rgba(45,212,160,.16);--tag-dev-fg:#7EEAC4;
+  --tag-pm-bg:rgba(245,158,11,.18);--tag-pm-fg:#FBBF72;
 }
 html{scroll-behavior:smooth;overflow-x:hidden}
 body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}

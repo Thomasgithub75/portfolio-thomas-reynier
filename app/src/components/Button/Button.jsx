@@ -13,24 +13,27 @@
 import { useState } from 'react';
 import { tokens } from '../../theme/theme';
 
+// Reads CSS custom properties (see styles/global.css) so the button follows the
+// active site theme (light, or the violet dark-mode test) instead of a fixed palette.
+// Fallbacks keep the exact current light-mode look if a var is ever missing.
 const VARIANTS = {
   primary: {
-    base:     { background: tokens.primary[500], color: '#fff',            border: 'none' },
-    hover:    { background: tokens.primary[600], color: '#fff',            border: 'none' },
-    pressed:  { background: tokens.primary[700], color: '#fff',            border: 'none' },
-    disabled: { background: tokens.primary[200], color: '#fff',            border: 'none' },
+    base:     { background: `var(--p500, ${tokens.primary[500]})`, color: '#fff',                            border: 'none' },
+    hover:    { background: `var(--p600, ${tokens.primary[600]})`, color: '#fff',                            border: 'none' },
+    pressed:  { background: `var(--p700, ${tokens.primary[700]})`, color: '#fff',                            border: 'none' },
+    disabled: { background: `var(--p200, ${tokens.primary[200]})`, color: '#fff',                            border: 'none' },
   },
   secondary: {
-    base:     { background: tokens.gray[100],    color: tokens.gray[600],  border: 'none' },
-    hover:    { background: tokens.gray[200],    color: tokens.gray[700],  border: 'none' },
-    pressed:  { background: tokens.gray[300],    color: tokens.gray[800],  border: 'none' },
-    disabled: { background: tokens.gray[50],     color: tokens.gray[300],  border: 'none' },
+    base:     { background: `var(--g100, ${tokens.gray[100]})`,    color: `var(--g600, ${tokens.gray[600]})`, border: 'none' },
+    hover:    { background: `var(--g200, ${tokens.gray[200]})`,    color: `var(--g700, ${tokens.gray[700]})`, border: 'none' },
+    pressed:  { background: `var(--g300, ${tokens.gray[300]})`,    color: `var(--g800, ${tokens.gray[800]})`, border: 'none' },
+    disabled: { background: `var(--g50, ${tokens.gray[50]})`,      color: `var(--g300, ${tokens.gray[300]})`, border: 'none' },
   },
   ghost: {
-    base:     { background: 'transparent',       color: tokens.text,       border: `1.5px solid ${tokens.border}` },
-    hover:    { background: tokens.bgSoft,       color: tokens.text,       border: `1.5px solid ${tokens.gray[300]}` },
-    pressed:  { background: tokens.gray[100],    color: tokens.text,       border: `1.5px solid ${tokens.gray[300]}` },
-    disabled: { background: 'transparent',       color: tokens.gray[300],  border: `1.5px solid ${tokens.border}` },
+    base:     { background: 'transparent',                        color: `var(--text, ${tokens.text})`,      border: `1.5px solid var(--border, ${tokens.border})` },
+    hover:    { background: `var(--bg-soft, ${tokens.bgSoft})`,    color: `var(--text, ${tokens.text})`,      border: `1.5px solid var(--g300, ${tokens.gray[300]})` },
+    pressed:  { background: `var(--g100, ${tokens.gray[100]})`,    color: `var(--text, ${tokens.text})`,      border: `1.5px solid var(--g300, ${tokens.gray[300]})` },
+    disabled: { background: 'transparent',                        color: `var(--g300, ${tokens.gray[300]})`, border: `1.5px solid var(--border, ${tokens.border})` },
   },
 };
 

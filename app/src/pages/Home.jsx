@@ -58,14 +58,18 @@ const SEC_SKILLS = ['Prototypage haute fidélité','Atomic Design','Design to Co
 const TOOLS = [
   { name:'Figma', cat:'design' }, { name:'Figma Make', cat:'design' }, { name:'Lovable', cat:'design' },
   { name:'Zeroheight', cat:'design' }, { name:'Supernova', cat:'design' }, { name:'Storybook', cat:'design' },
-  { name:'Mobbin', cat:'design' }, { name:'Replit', cat:'dev' }, { name:'VSCode', cat:'dev' },
-  { name:'Supabase', cat:'dev' }, { name:'Vercel', cat:'dev' }, { name:'Jira', cat:'pm' }, { name:'Notion', cat:'pm' }
+  { name:'Mobbin', cat:'design' }, { name:'Astryx', cat:'design' }, { name:'Claude Design', cat:'design' },
+  { name:'Replit', cat:'dev' }, { name:'VSCode', cat:'dev' }, { name:'Claude Code', cat:'dev' },
+  { name:'Supabase', cat:'dev' }, { name:'Vercel', cat:'dev' }, { name:'Bitbucket', cat:'dev' },
+  { name:'Jira', cat:'pm' }, { name:'Notion', cat:'pm' }
 ];
 
+// Reads CSS custom properties (see styles/global.css) so tool tags follow the
+// active site theme (light, or the violet dark-mode test) instead of fixed pastel colors.
 const TOOL_STYLE = {
-  design: { background:'#EEEDFE', color:'#534AB7' },
-  dev:    { background:'#E1F5EE', color:'#0F6E56' },
-  pm:     { background:'#FAEEDA', color:'#854F0B' },
+  design: { background:'var(--tag-design-bg, #EEEDFE)', color:'var(--tag-design-fg, #534AB7)' },
+  dev:    { background:'var(--tag-dev-bg, #E1F5EE)',    color:'var(--tag-dev-fg, #0F6E56)' },
+  pm:     { background:'var(--tag-pm-bg, #FAEEDA)',     color:'var(--tag-pm-fg, #854F0B)' },
 };
 
 function getUniqueProjects(skills) {

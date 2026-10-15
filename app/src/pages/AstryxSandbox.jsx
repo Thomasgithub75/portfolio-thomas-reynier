@@ -23,7 +23,7 @@ const SWATCHES = [
   ['Surface', 'var(--color-background-surface)'],
   ['Muted', 'var(--color-background-muted)'],
   ['Accent', 'var(--color-accent)'],
-  ['Highlight', brand.orange],
+  ['Highlight', brand.violet],
   ['Texte', 'var(--color-text-primary)'],
   ['Texte secondaire', 'var(--color-text-secondary)'],
   ['Bordure', 'var(--color-border)'],
