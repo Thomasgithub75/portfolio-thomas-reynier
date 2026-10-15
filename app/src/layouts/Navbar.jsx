@@ -1,9 +1,14 @@
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import DarkModeOutlined from '@mui/icons-material/DarkModeOutlined';
+import LightModeOutlined from '@mui/icons-material/LightModeOutlined';
+import useColorMode from '../hooks/useColorMode';
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const { mode, toggleMode } = useColorMode();
+  const isDark = mode === 'dark';
   const location = useLocation();
   const navigate = useNavigate();
   const isHome = location.pathname === '/';
@@ -35,6 +40,14 @@ export default function Navbar() {
             <li><button className="nav-link" style={{background:'none',border:'none',cursor:'pointer',fontFamily:'inherit'}} onClick={() => handleAnchor('projets')}>Projets</button></li>
             <li><button className="nav-cta" style={{background:'var(--blue)',border:'none',cursor:'pointer',fontFamily:'inherit'}} onClick={() => handleAnchor('contact')}>Contact</button></li>
           </ul>
+          <button
+            className="nav-mode-toggle"
+            aria-label={isDark ? 'Passer en mode clair' : 'Passer en mode sombre'}
+            aria-pressed={isDark}
+            onClick={toggleMode}
+          >
+            {isDark ? <LightModeOutlined fontSize="small" /> : <DarkModeOutlined fontSize="small" />}
+          </button>
           <button className={`burger${open ? ' active' : ''}`} aria-label="Menu" onClick={toggle}>
             <span/><span/><span/>
           </button>
@@ -48,7 +61,7 @@ export default function Navbar() {
             <li><button onClick={() => handleAnchor('competences')}>Expertises</button></li>
             <li><button onClick={() => handleAnchor('projets')}>Projets</button></li>
             <li style={{borderBottom:'none',padding:'20px 2rem 24px'}}>
-              <button onClick={() => handleAnchor('contact')} style={{display:'block',width:'100%',textAlign:'center',background:'var(--blue)',color:'#fff',fontWeight:600,padding:'16px',borderRadius:10,fontSize:16,border:'none',cursor:'pointer',fontFamily:"'Outfit',sans-serif"}}>Contact</button>
+              <button onClick={() => handleAnchor('contact')} style={{display:'block',width:'100%',textAlign:'center',background:'var(--blue)',color:'var(--on-accent)',fontWeight:600,padding:'16px',borderRadius:10,fontSize:16,border:'none',cursor:'pointer',fontFamily:"'Outfit',sans-serif"}}>Contact</button>
             </li>
           </ul>
           <div className="mob-footer-inner">

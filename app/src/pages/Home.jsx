@@ -27,7 +27,7 @@ const SKILL_PROJS = {
     { logo:'/images/logo-weborama.svg', bg:'#EFF8FF', name:'Weborama', desc:'Architecture composants · Atomic', type:'Case study', url:'/case/weborama' }
   ],
   'Design to Code': [
-    { initials:'PF', color:'#1956DB', name:'Portfolio', desc:'React · MUI · Design System', type:'Personnel', url:'/' }
+    { initials:'PF', color:'var(--p500)', name:'Portfolio', desc:'React · MUI · Design System', type:'Personnel', url:'/' }
   ],
   'IA générative': [
     { logo:'/images/logo-pepyte.svg', bg:'#F5F3FF', name:'Pepyte', desc:'Synthèse entretiens · research IA', type:'Case study', url:'/case/pepyte' }
@@ -58,14 +58,18 @@ const SEC_SKILLS = ['Prototypage haute fidélité','Atomic Design','Design to Co
 const TOOLS = [
   { name:'Figma', cat:'design' }, { name:'Figma Make', cat:'design' }, { name:'Lovable', cat:'design' },
   { name:'Zeroheight', cat:'design' }, { name:'Supernova', cat:'design' }, { name:'Storybook', cat:'design' },
-  { name:'Mobbin', cat:'design' }, { name:'Replit', cat:'dev' }, { name:'VSCode', cat:'dev' },
-  { name:'Supabase', cat:'dev' }, { name:'Vercel', cat:'dev' }, { name:'Jira', cat:'pm' }, { name:'Notion', cat:'pm' }
+  { name:'Mobbin', cat:'design' }, { name:'Astryx', cat:'design' }, { name:'Claude Design', cat:'design' },
+  { name:'Replit', cat:'dev' }, { name:'VSCode', cat:'dev' }, { name:'Claude Code', cat:'dev' },
+  { name:'Supabase', cat:'dev' }, { name:'Vercel', cat:'dev' }, { name:'Bitbucket', cat:'dev' },
+  { name:'Jira', cat:'pm' }, { name:'Notion', cat:'pm' }
 ];
 
+// Reads CSS custom properties (see styles/global.css) so tool tags follow the
+// active site theme (light, or the violet dark-mode test) instead of fixed pastel colors.
 const TOOL_STYLE = {
-  design: { background:'#EEEDFE', color:'#534AB7' },
-  dev:    { background:'#E1F5EE', color:'#0F6E56' },
-  pm:     { background:'#FAEEDA', color:'#854F0B' },
+  design: { background:'var(--tag-design-bg, #EEEDFE)', color:'var(--tag-design-fg, #534AB7)' },
+  dev:    { background:'var(--tag-dev-bg, #E1F5EE)',    color:'var(--tag-dev-fg, #0F6E56)' },
+  pm:     { background:'var(--tag-pm-bg, #FAEEDA)',     color:'var(--tag-pm-fg, #854F0B)' },
 };
 
 function getUniqueProjects(skills) {
@@ -129,7 +133,7 @@ export default function Home() {
       <div className="home-reading-progress" style={{width:`${scrollProgress}%`}}/>
 
       {/* HERO */}
-      <section id="hero" style={{paddingTop:140,paddingBottom:80,background:'linear-gradient(145deg,var(--p50) 0%,#fff 55%)'}}>
+      <section id="hero" style={{paddingTop:140,paddingBottom:80,background:'linear-gradient(145deg,var(--p50) 0%,var(--bg) 55%)'}}>
         <div className="container">
           <div className="home-hero-grid">
             <div>
@@ -182,10 +186,10 @@ export default function Home() {
               </div>
             </div>
             <div className="home-hero-image">
-              <div style={{width:'100%',aspectRatio:'1/1',borderRadius:'50%',overflow:'hidden',boxShadow:'0 0 0 4px #fff,0 0 0 6px rgba(25,86,219,0.2),0 10px 40px rgba(25,86,219,0.12)'}}>
+              <div style={{width:'100%',aspectRatio:'1/1',borderRadius:'50%',overflow:'hidden',boxShadow:'0 0 0 4px var(--bg),0 0 0 6px rgba(25,86,219,0.2),0 10px 40px rgba(25,86,219,0.12)'}}>
                 <img src="/images/profile.png" alt="Thomas Reynier" style={{width:'100%',height:'100%',objectFit:'cover',objectPosition:'center top'}}/>
               </div>
-              <div style={{position:'absolute',bottom:24,right:-4,background:'#fff',border:'1px solid var(--border)',borderRadius:20,padding:'6px 14px',display:'flex',alignItems:'center',gap:7,fontSize:13,fontWeight:500,color:'var(--text)',boxShadow:'0 2px 12px rgba(0,0,0,0.08)',whiteSpace:'nowrap'}}>
+              <div style={{position:'absolute',bottom:24,right:-4,background:'var(--surface)',border:'1px solid var(--border)',borderRadius:20,padding:'6px 14px',display:'flex',alignItems:'center',gap:7,fontSize:13,fontWeight:500,color:'var(--text)',boxShadow:'0 2px 12px rgba(0,0,0,0.08)',whiteSpace:'nowrap'}}>
                 <span style={{position:'relative',width:10,height:10,flexShrink:0,display:'inline-flex',alignItems:'center',justifyContent:'center'}}>
                   <span style={{position:'absolute',inset:0,background:'#22C55E',borderRadius:'50%',animation:'dotPulse 2s ease-out infinite'}}/>
                   <span style={{position:'absolute',width:8,height:8,background:'#22C55E',borderRadius:'50%',zIndex:1}}/>
@@ -266,7 +270,7 @@ export default function Home() {
 
               <Link
                 to="/fonctionnalite-ia"
-                style={{display:'inline-flex',alignItems:'center',gap:8,background:'var(--blue)',color:'#fff',fontSize:14,fontWeight:600,padding:'11px 22px',borderRadius:8,textDecoration:'none',marginTop:32}}
+                style={{display:'inline-flex',alignItems:'center',gap:8,background:'var(--blue)',color:'var(--on-accent)',fontSize:14,fontWeight:600,padding:'11px 22px',borderRadius:8,textDecoration:'none',marginTop:32}}
                 onMouseEnter={e=>e.currentTarget.style.background='var(--blue-deep)'}
                 onMouseLeave={e=>e.currentTarget.style.background='var(--blue)'}
               >
@@ -342,18 +346,18 @@ export default function Home() {
           <div className="home-exp-grid">
             <div>
               {/* COMPÉTENCES */}
-              <div className="home-exp-row" style={{padding:'24px 0',borderBottom:'0.5px solid #E5E9F5'}}>
+              <div className="home-exp-row" style={{padding:'24px 0',borderBottom:'0.5px solid var(--border-soft)'}}>
                 <div style={{display:'flex',flexDirection:'column',gap:10,paddingTop:4}}>
                   <span style={{fontSize:12,fontWeight:700,letterSpacing:'0.08em',textTransform:'uppercase',color:'var(--text)'}}>Compétences</span>
                   <div style={{display:'flex',flexDirection:'column',gap:5}}>
-                    {[{bg:'#1956DB',label:'Core'},{bg:'#EEF3FD',label:'Secondaire'}].map(s=>(
+                    {[{bg:'var(--p500)',label:'Core'},{bg:'var(--p50)',label:'Secondaire'}].map(s=>(
                       <div key={s.label} style={{display:'flex',alignItems:'center',gap:6,fontSize:11,color:'var(--muted)'}}>
                         <span style={{width:12,height:12,borderRadius:3,flexShrink:0,background:s.bg,display:'inline-block'}}/>
                         {s.label}
                       </div>
                     ))}
                   </div>
-                  <div style={{display:'inline-flex',alignItems:'center',gap:4,fontSize:11,background:'#EEF3FD',color:'#1956DB',borderRadius:6,padding:'3px 7px',marginTop:2,width:'fit-content'}}>
+                  <div style={{display:'inline-flex',alignItems:'center',gap:4,fontSize:11,background:'var(--p50)',color:'var(--p500)',borderRadius:6,padding:'3px 7px',marginTop:2,width:'fit-content'}}>
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M9 12V6.5a1.5 1.5 0 013 0V12"/><path d="M12 12a1.5 1.5 0 013 0v1.5a1.5 1.5 0 013 0V17a5 5 0 01-5 5H9a5 5 0 01-5-5v-1a1.5 1.5 0 013 0"/></svg>
                     Cliquable
                   </div>
@@ -369,7 +373,7 @@ export default function Home() {
               </div>
 
               {/* OUTILS */}
-              <div className="home-exp-row" style={{padding:'24px 0',borderBottom:'0.5px solid #E5E9F5'}}>
+              <div className="home-exp-row" style={{padding:'24px 0',borderBottom:'0.5px solid var(--border-soft)'}}>
                 <div style={{display:'flex',flexDirection:'column',gap:10,paddingTop:4}}>
                   <span style={{fontSize:12,fontWeight:700,letterSpacing:'0.08em',textTransform:'uppercase',color:'var(--text)'}}>Outils</span>
                   <div style={{display:'flex',flexDirection:'column',gap:5}}>
@@ -392,8 +396,8 @@ export default function Home() {
               <div className="home-exp-row" style={{padding:'24px 0'}}>
                 <span style={{fontSize:12,fontWeight:700,letterSpacing:'0.08em',textTransform:'uppercase',color:'var(--text)',paddingTop:4}}>Langues</span>
                 <div style={{display:'flex',flexWrap:'wrap',gap:8}}>
-                  <span className="badge" style={{background:'#1956DB',color:'#fff',fontWeight:500}}>Français — Natif</span>
-                  <span className="badge" style={{background:'#EEF3FD',color:'#1141A8'}}>Anglais — Professionnel</span>
+                  <span className="badge" style={{background:'var(--p500)',color:'var(--on-accent)',fontWeight:500}}>Français — Natif</span>
+                  <span className="badge" style={{background:'var(--p50)',color:'var(--p600)'}}>Anglais — Professionnel</span>
                 </div>
               </div>
             </div>
@@ -401,50 +405,50 @@ export default function Home() {
             {/* PANEL */}
             <div style={{position:'sticky',top:16}}>
               {!panelOpen && (
-                <div style={{border:'0.5px dashed #9DB8F2',borderRadius:12,padding:'28px 20px',display:'flex',flexDirection:'column',alignItems:'center',gap:10,textAlign:'center'}}>
+                <div style={{border:'0.5px dashed var(--p200)',borderRadius:12,padding:'28px 20px',display:'flex',flexDirection:'column',alignItems:'center',gap:10,textAlign:'center'}}>
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#9DB8F2" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg>
                   <p style={{fontSize:12,color:'var(--muted)',lineHeight:1.5,maxWidth:190}}>Sélectionner une compétence pour voir les projets associés</p>
                 </div>
               )}
               {panelOpen && (
-                <div style={{border:'0.5px solid #9DB8F2',borderRadius:12,overflow:'hidden'}}>
-                  <div style={{padding:'14px 16px 12px',borderBottom:'0.5px solid #E5E9F5',position:'relative'}}>
-                    <span style={{fontSize:10,fontWeight:700,letterSpacing:'0.08em',textTransform:'uppercase',color:'#1956DB',display:'block',marginBottom:4}}>Projets associés</span>
+                <div style={{border:'0.5px solid var(--p200)',borderRadius:12,overflow:'hidden'}}>
+                  <div style={{padding:'14px 16px 12px',borderBottom:'0.5px solid var(--border-soft)',position:'relative'}}>
+                    <span style={{fontSize:10,fontWeight:700,letterSpacing:'0.08em',textTransform:'uppercase',color:'var(--p500)',display:'block',marginBottom:4}}>Projets associés</span>
                     <p style={{fontSize:14,fontWeight:700,color:'var(--text)',lineHeight:1.3,paddingRight:32}}>{panelLabel}</p>
-                    <button onClick={closePanel} style={{position:'absolute',top:12,right:12,width:24,height:24,borderRadius:6,background:'#EEF3FD',border:'none',cursor:'pointer',display:'flex',alignItems:'center',justifyContent:'center',color:'#1956DB',fontSize:16,fontFamily:'inherit'}}>×</button>
+                    <button onClick={closePanel} style={{position:'absolute',top:12,right:12,width:24,height:24,borderRadius:6,background:'var(--p50)',border:'none',cursor:'pointer',display:'flex',alignItems:'center',justifyContent:'center',color:'var(--p500)',fontSize:16,fontFamily:'inherit'}}>×</button>
                   </div>
                   <div>
                     {panelProjects.map(p => p.locked ? (
-                      <div key={p.name} style={{display:'flex',alignItems:'flex-start',gap:10,padding:'10px 16px',borderBottom:'0.5px solid #E5E9F5',position:'relative',background:'#FAFAFA',cursor:'default'}}>
+                      <div key={p.name} style={{display:'flex',alignItems:'flex-start',gap:10,padding:'10px 16px',borderBottom:'0.5px solid var(--border-soft)',position:'relative',background:'var(--n-faint)',cursor:'default'}}>
                         <div style={{width:34,height:34,borderRadius:7,flexShrink:0,display:'flex',alignItems:'center',justifyContent:'center',overflow:'hidden',background:p.bg,opacity:.7}}>
                           <img src={p.logo} alt={p.name} style={{width:'100%',height:'100%',objectFit:'contain',padding:5}}/>
                         </div>
                         <div style={{flex:1,minWidth:0,paddingRight:24}}>
                           <div style={{fontSize:13,fontWeight:500,color:'var(--muted)',lineHeight:1.2,marginBottom:2}}>{p.name}</div>
                           <div style={{fontSize:11,color:'var(--muted)',lineHeight:1.4,marginBottom:4,whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis',opacity:.7}}>{p.desc}</div>
-                          <span style={{fontSize:10,padding:'2px 7px',borderRadius:5,fontWeight:600,display:'inline-flex',alignItems:'center',gap:4,background:'#F3F4F6',color:'#6B7280',border:'1px solid #E5E7EB'}}>
+                          <span style={{fontSize:10,padding:'2px 7px',borderRadius:5,fontWeight:600,display:'inline-flex',alignItems:'center',gap:4,background:'var(--n-soft)',color:'var(--n-muted)',border:'1px solid var(--border)'}}>
                             <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
                             En entretien
                           </span>
                         </div>
                       </div>
                     ) : (
-                      <Link key={p.name} to={p.url} style={{display:'flex',alignItems:'flex-start',gap:10,padding:'10px 16px',textDecoration:'none',color:'inherit',borderBottom:'0.5px solid #E5E9F5',transition:'background 0.15s',position:'relative'}} onMouseEnter={e=>e.currentTarget.style.background='#F4F8FE'} onMouseLeave={e=>e.currentTarget.style.background=''}>
-                        <div style={{width:34,height:34,borderRadius:7,flexShrink:0,display:'flex',alignItems:'center',justifyContent:'center',fontSize:11,fontWeight:700,color:'#fff',overflow:'hidden',background:p.logo?p.bg:p.color}}>
+                      <Link key={p.name} to={p.url} style={{display:'flex',alignItems:'flex-start',gap:10,padding:'10px 16px',textDecoration:'none',color:'inherit',borderBottom:'0.5px solid var(--border-soft)',transition:'background 0.15s',position:'relative'}} onMouseEnter={e=>e.currentTarget.style.background='var(--panel)'} onMouseLeave={e=>e.currentTarget.style.background=''}>
+                        <div style={{width:34,height:34,borderRadius:7,flexShrink:0,display:'flex',alignItems:'center',justifyContent:'center',fontSize:11,fontWeight:700,color:'var(--on-accent)',overflow:'hidden',background:p.logo?p.bg:p.color}}>
                           {p.logo ? <img src={p.logo} alt={p.name} style={{width:'100%',height:'100%',objectFit:'contain',padding:5}}/> : p.initials}
                         </div>
                         <div style={{flex:1,minWidth:0,paddingRight:20}}>
                           <div style={{fontSize:13,fontWeight:500,color:'var(--text)',lineHeight:1.2,marginBottom:2}}>{p.name}</div>
                           <div style={{fontSize:11,color:'var(--muted)',lineHeight:1.4,marginBottom:4,whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{p.desc}</div>
-                          <span style={{fontSize:10,padding:'2px 7px',borderRadius:5,fontWeight:500,display:'inline-block',background:p.type==='Case study'?'#EEF3FD':p.type==='Side project'?'#FAEEDA':'#EAF3DE',color:p.type==='Case study'?'#1141A8':p.type==='Side project'?'#854F0B':'#3B6D11'}}>{p.type}</span>
+                          <span style={{fontSize:10,padding:'2px 7px',borderRadius:5,fontWeight:500,display:'inline-block',background:p.type==='Case study'?'var(--p50)':p.type==='Side project'?'#FAEEDA':'#EAF3DE',color:p.type==='Case study'?'var(--p600)':p.type==='Side project'?'#854F0B':'#3B6D11'}}>{p.type}</span>
                         </div>
-                        <span style={{position:'absolute',right:14,top:'50%',transform:'translateY(-50%)',color:'#1956DB',display:'flex',alignItems:'center'}}>
+                        <span style={{position:'absolute',right:14,top:'50%',transform:'translateY(-50%)',color:'var(--p500)',display:'flex',alignItems:'center'}}>
                           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
                         </span>
                       </Link>
                     ))}
                   </div>
-                  <div style={{background:'#F4F8FE',borderTop:'0.5px solid #9DB8F2',padding:'9px 16px',display:'flex',alignItems:'center',gap:5,fontSize:11,color:'#1141A8'}}>
+                  <div style={{background:'var(--panel)',borderTop:'0.5px solid var(--p200)',padding:'9px 16px',display:'flex',alignItems:'center',gap:5,fontSize:11,color:'var(--p600)'}}>
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
                     {panelProjects.length} projet{panelProjects.length>1?'s':''} trouvé{panelProjects.length>1?'s':''}
                   </div>
@@ -464,7 +468,7 @@ export default function Home() {
           <h2>Témoignages de mes collaborateurs</h2>
           <div style={{display:'flex',flexDirection:'column',gap:16}}>
             {/* Featured */}
-            <div style={{background:'#fff',border:'1px solid var(--border)',borderRadius:14,padding:32}}>
+            <div style={{background:'var(--surface)',border:'1px solid var(--border)',borderRadius:14,padding:32}}>
               <div className="home-rec-featured-grid">
                 <div style={{display:'flex',flexDirection:'column',gap:14}}>
                   <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',gap:8}}>
@@ -498,7 +502,7 @@ export default function Home() {
                 { logo:'/images/logo-pepyte.svg', logoAlt:'Pepyte', keyquote:'« Une capacité de travail impressionnante à une positivité contagieuse. »', quote:"Thomas est un Product Designer motivé, combinant une capacité de travail impressionnante à une positivité contagieuse. Son dévouement et son optimisme inspirent toute l'équipe. Fortement recommandé !", avatar:'/images/avatar-antoine.png', name:'Antoine Girard', role:'Co-CEO & Co-Founder · Pepyte', li:'https://www.linkedin.com/in/antoine-girard-202561143/' },
                 { logo:'/images/logo-weborama.svg', logoAlt:'Weborama', keyquote:'« Faire de l\'IA un véritable allié stratégique. »', quote:"Thomas a su faire de l'IA un véritable allié stratégique, l'intégrant avec maîtrise dans ses méthodes de conception pour créer des produits plus intelligents et optimiser les parcours utilisateurs.", avatar:'/images/avatar-donia.png', name:'Donia Ben Ghorbal', role:'Lead Product Designer · Weborama', li:'https://www.linkedin.com/in/donia-benghorbal-750ba1143/' },
               ].map(r => (
-                <div key={r.name} style={{background:'#fff',border:'1px solid var(--border)',borderRadius:14,padding:24,display:'flex',flexDirection:'column',gap:14}}>
+                <div key={r.name} style={{background:'var(--surface)',border:'1px solid var(--border)',borderRadius:14,padding:24,display:'flex',flexDirection:'column',gap:14}}>
                   <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',gap:8}}>
                     <div style={{display:'flex',gap:2}}>{[0,1,2,3,4].map(i=><span key={i} style={{color:'#F59E0B',fontSize:14}}>★</span>)}</div>
                     <img src={r.logo} alt={r.logoAlt} style={{height:20,width:'auto',objectFit:'contain',opacity:.85,flexShrink:0}}/>
@@ -569,8 +573,8 @@ function HeroBtn({ onClick, primary, href, target, rel, children }) {
   const [pressed, setPressed] = useState(false);
   const base = { display:'inline-flex', alignItems:'center', gap:8, padding:'11px 22px', borderRadius:7, fontSize:15, fontWeight:500, border:'none', cursor:'pointer', fontFamily:'inherit', textDecoration:'none', transition:'background 0.15s,color 0.15s,transform 0.1s', transform: pressed ? 'scale(0.97)' : 'scale(1)' };
   const style = primary
-    ? { ...base, background: pressed ? '#0C2E7A' : hovered ? '#1141A8' : '#1956DB', color:'#fff' }
-    : { ...base, background: pressed ? '#A0AFCF' : hovered ? '#C7D2E8' : '#EBF0F8', color: pressed ? '#1E2E4A' : hovered ? '#3A4864' : '#405070' };
+    ? { ...base, background: pressed ? 'var(--p700)' : hovered ? 'var(--p600)' : 'var(--p500)', color:'var(--on-accent)' }
+    : { ...base, background: pressed ? 'var(--g300)' : hovered ? 'var(--g200)' : 'var(--g100)', color: pressed ? 'var(--g800)' : hovered ? 'var(--g700)' : 'var(--g600)' };
   const handlers = {
     onMouseEnter:() => setHovered(true),
     onMouseLeave:() => { setHovered(false); setPressed(false); },
@@ -663,7 +667,7 @@ function LockedCaseCard() {
           <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', gap:8 }}>
             <div style={{ display:'flex', alignItems:'center', gap:8, flex:1, minWidth:0 }}>
               <img src="/images/logo-pepyte.svg" alt="Pepyte" style={{ width:22, height:22, borderRadius:5, objectFit:'contain', flexShrink:0 }}/>
-              <span style={{ fontSize:11, fontWeight:600, padding:'3px 10px', borderRadius:20, whiteSpace:'nowrap', background:'#F3F4F6', color:'#6B7280', border:'1px solid #E5E7EB' }}>Présentée en entretien</span>
+              <span style={{ fontSize:11, fontWeight:600, padding:'3px 10px', borderRadius:20, whiteSpace:'nowrap', background:'var(--n-soft)', color:'var(--n-muted)', border:'1px solid var(--border)' }}>Présentée en entretien</span>
             </div>
             <span style={{ fontSize:12, color:'var(--muted)', fontWeight:400, whiteSpace:'nowrap', flexShrink:0 }}>Juin 2026</span>
           </div>
@@ -682,8 +686,8 @@ function LockedCaseCard() {
             style={{
               display:'flex', width:'100%', borderRadius:8, fontSize:14,
               padding:'10px 16px', justifyContent:'center',
-              background: btnPressed ? '#A0AFCF' : btnHovered ? '#C7D2E8' : '#EBF0F8',
-              color: btnPressed ? '#1E2E4A' : btnHovered ? '#3A4864' : '#405070',
+              background: btnPressed ? 'var(--g300)' : btnHovered ? 'var(--g200)' : 'var(--g100)',
+              color: btnPressed ? 'var(--g800)' : btnHovered ? 'var(--g700)' : 'var(--g600)',
               fontWeight:500, alignItems:'center', gap:8,
               transition:'background 0.15s,color 0.15s,transform 0.1s',
               transform: btnPressed ? 'scale(0.97)' : 'scale(1)',
@@ -709,20 +713,20 @@ function LockedCaseCard() {
         >
           <div
             style={{
-              background: '#fff', borderRadius: 16, padding: isMobile ? '28px 20px' : '36px 32px', width: '100%', maxWidth: 380,
+              background:'var(--surface)', borderRadius: 16, padding: isMobile ? '28px 20px' : '36px 32px', width: '100%', maxWidth: 380,
               boxShadow: '0 24px 80px rgba(0,0,0,.2)',
               animation: shake ? 'shake .4s ease' : 'none',
             }}
           >
             <style>{`@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}`}</style>
             <div style={{ textAlign: 'center', marginBottom: 24 }}>
-              <div style={{ width: 52, height: 52, borderRadius: '50%', background: '#F3F4F6', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
+              <div style={{ width: 52, height: 52, borderRadius: '50%', background: 'var(--n-soft)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#374151" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
                 </svg>
               </div>
-              <p style={{ fontSize: 18, fontWeight: 700, color: '#111827', marginBottom: 6 }}>Accès sur demande</p>
-              <p style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.6 }}>Cette étude de cas se présente uniquement en entretien. Si vous avez un code d'accès, entrez-le ci-dessous.</p>
+              <p style={{ fontSize: 18, fontWeight: 700, color: 'var(--ink)', marginBottom: 6 }}>Accès sur demande</p>
+              <p style={{ fontSize: 13, color: 'var(--n-muted)', lineHeight: 1.6 }}>Cette étude de cas se présente uniquement en entretien. Si vous avez un code d'accès, entrez-le ci-dessous.</p>
             </div>
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               <input
@@ -733,7 +737,7 @@ function LockedCaseCard() {
                 placeholder="Code d'accès"
                 style={{
                   width: '100%', padding: '11px 14px', borderRadius: 8, fontSize: 15,
-                  border: error ? '1.5px solid #EF4444' : '1.5px solid #E5E7EB',
+                  border: error ? '1.5px solid #EF4444' : '1.5px solid var(--border)',
                   outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box',
                   background: error ? '#FEF2F2' : '#fff',
                   transition: 'border-color .15s, background .15s',
@@ -744,16 +748,16 @@ function LockedCaseCard() {
                 type="submit"
                 style={{
                   width: '100%', padding: '11px', borderRadius: 8, fontSize: 14, fontWeight: 600,
-                  background: '#111827', color: '#fff', border: 'none', cursor: 'pointer',
+                  background: 'var(--ink)', color:'var(--on-accent)', border: 'none', cursor: 'pointer',
                   fontFamily: 'inherit', marginTop: 4,
                 }}
               >
                 Accéder à l'étude de cas
               </button>
             </form>
-            <p style={{ textAlign: 'center', fontSize: 12, color: '#9CA3AF', marginTop: 16 }}>
+            <p style={{ textAlign: 'center', fontSize: 12, color: 'var(--n-subtle)', marginTop: 16 }}>
               Pas encore de code ?{' '}
-              <a href="https://mail.google.com/mail/?view=cm&to=reynier.design@gmail.com" target="_blank" rel="noopener" style={{ color: '#1956DB', textDecoration: 'none', fontWeight: 500 }}>
+              <a href="https://mail.google.com/mail/?view=cm&to=reynier.design@gmail.com" target="_blank" rel="noopener" style={{ color: 'var(--p500)', textDecoration: 'none', fontWeight: 500 }}>
                 Contactez Thomas
               </a>
             </p>
@@ -810,8 +814,8 @@ function ProjectCard({ p }) {
           style={{
             display:'flex', width:'100%', borderRadius:8, fontSize:14,
             padding:'10px 16px', justifyContent:'center',
-            background: btnPressed ? '#A0AFCF' : btnHovered ? '#C7D2E8' : '#EBF0F8',
-            color: btnPressed ? '#1E2E4A' : btnHovered ? '#3A4864' : '#405070',
+            background: btnPressed ? 'var(--g300)' : btnHovered ? 'var(--g200)' : 'var(--g100)',
+            color: btnPressed ? 'var(--g800)' : btnHovered ? 'var(--g700)' : 'var(--g600)',
             fontWeight:500, alignItems:'center', gap:8,
             transition:'background 0.15s,color 0.15s,transform 0.1s',
             transform: btnPressed ? 'scale(0.97)' : 'scale(1)',
@@ -836,12 +840,12 @@ function SkillTag({ skill, active, isCore, onToggle }) {
 
   // Tokens: p500=#1956DB · p600=#1141A8 · p700=#0C2E7A · p50=#EEF3FD · p100=#D7E5FB · p200=#9DB8F2
   const coreStyle = active
-    ? { ...base, background: pressed ? '#0C2E7A' : hovered ? '#1141A8' : '#1141A8', color:'#fff', borderColor:'#1956DB' }
-    : { ...base, background: pressed ? '#0C2E7A' : hovered ? '#1141A8' : '#1956DB', color:'#fff', borderColor:'#1956DB' };
+    ? { ...base, background: pressed ? 'var(--p700)' : hovered ? 'var(--p600)' : 'var(--p600)', color:'var(--on-accent)', borderColor:'var(--p500)' }
+    : { ...base, background: pressed ? 'var(--p700)' : hovered ? 'var(--p600)' : 'var(--p500)', color:'var(--on-accent)', borderColor:'var(--p500)' };
 
   const secStyle = active
-    ? { ...base, background: pressed ? '#9DB8F2' : hovered ? '#D7E5FB' : '#D7E5FB', color: pressed ? '#0C2E7A' : '#1141A8', borderColor:'#9DB8F2' }
-    : { ...base, background: pressed ? '#9DB8F2' : hovered ? '#D7E5FB' : '#EEF3FD', color: pressed || hovered ? '#0C2E7A' : '#1141A8', borderColor:'#9DB8F2' };
+    ? { ...base, background: pressed ? 'var(--p200)' : hovered ? 'var(--p100)' : 'var(--p100)', color: pressed ? 'var(--p700)' : 'var(--p600)', borderColor:'var(--p200)' }
+    : { ...base, background: pressed ? 'var(--p200)' : hovered ? 'var(--p100)' : 'var(--p50)', color: pressed || hovered ? 'var(--p700)' : 'var(--p600)', borderColor:'var(--p200)' };
 
   return (
     <button

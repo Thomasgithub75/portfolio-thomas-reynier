@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "astryx-sandbox",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "/Users/wiamboumehdi/Desktop/portfolio-thomas-reynier/app", "run", "dev"],
+      "port": 5173
+    }
+  ]
+}
