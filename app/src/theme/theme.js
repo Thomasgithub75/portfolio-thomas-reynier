@@ -62,6 +62,10 @@ const tokens = {
   tagDevFg:     '#0F6E56',
   tagPmBg:      '#FAEEDA',
   tagPmFg:      '#854F0B',
+
+  // Intro (splash screen) — accent IA
+  aiViolet:      '#8B5CF6',
+  aiVioletLight: '#C084FC',
 };
 
 const theme = createTheme({

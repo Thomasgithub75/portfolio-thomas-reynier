@@ -8,6 +8,7 @@ import Badge from '../components/Badge/Badge';
 import Tag from '../components/Tag/Tag';
 import FormField from '../components/FormField/FormField';
 import Toggle from '../components/Toggle/Toggle';
+import Intro from '../components/Intro/Intro';
 import OverflowMenu from '../components/OverflowMenu/OverflowMenu';
 import TestimonialCard from '../components/TestimonialCard/TestimonialCard';
 import { tokens } from '../theme/theme';
@@ -242,6 +243,18 @@ function ToggleDemo() {
 function ToggleLabelDemo() {
   const [on, setOn] = useState(true);
   return <Toggle checked={on} onChange={setOn} label="Contexte complémentaire" />;
+}
+
+// ── Intro demo ────────────────────────────────────────────────────────────────
+
+function IntroDemo() {
+  const [playing, setPlaying] = useState(false);
+  return (
+    <>
+      <Button variant="secondary" onClick={() => setPlaying(true)}>Rejouer l'intro</Button>
+      {playing && <Intro once={false} onDone={() => setPlaying(false)} />}
+    </>
+  );
 }
 
 // ── DocBlock ──────────────────────────────────────────────────────────────────
@@ -1008,6 +1021,39 @@ const [showContext, setShowContext] = useState(false);
     rows={3}
   />
 )}`}
+        />
+      </Section>
+
+      <Divider sx={{ mb: 4 }} />
+
+      <Section title="Intro" subtitle="Splash screen d'arrivée — fond noir, nom en blanc (Albert Sans 700), phrases en dégradé aiViolet → aiVioletLight. Joué une fois par session.">
+        <Group label="Aperçu">
+          <IntroDemo />
+        </Group>
+
+        <DocBlock
+          props={[
+            ['name', 'string', "'Thomas Reynier'", 'Texte principal affiché en blanc.'],
+            ['lines', 'string[]', '2 phrases', 'Phrases affichées sous le nom, l\'une après l\'autre. La durée totale s\'adapte au nombre de phrases.'],
+            ['once', 'boolean', 'true', 'Si true, l\'intro ne se joue qu\'une fois par session de navigation (sessionStorage).'],
+            ['onDone', 'function', '—', 'Callback appelé quand l\'intro a disparu.'],
+          ]}
+          usage={[
+            'Monté une seule fois dans App.jsx, au-dessus des routes : l\'intro couvre tout l\'écran.',
+            'Un clic n\'importe où permet de passer l\'intro.',
+            'Respecte prefers-reduced-motion : l\'intro devient quasi instantanée.',
+            'Garder 1 à 2 phrases courtes (moins de 6 mots) pour rester sous les 4 secondes.',
+          ]}
+          code={`import Intro from '../components/Intro/Intro';
+
+// Dans App.jsx, juste dans <BrowserRouter>
+<Intro />
+
+// Phrases personnalisées, rejouée à chaque visite
+<Intro
+  lines={['Systèmes, produits, IA.']}
+  once={false}
+/>`}
         />
       </Section>
 
