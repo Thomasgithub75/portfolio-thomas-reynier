@@ -38,18 +38,19 @@
 .intro-stage { position: relative; height: 96px; margin-top: 22px; }
 
 .intro-prompt {
-  position: absolute; left: 50%; top: 0; translate: -50% 0;
-  display: inline-flex; align-items: center; gap: 10px;
+  /* Centrage dans `transform` (la propriété `translate` est supprimée à la minification) */
+  position: absolute; left: 50%; top: 0;
+  display: flex; align-items: center; gap: 10px;
   min-width: min(330px, calc(100vw - 48px));
   padding: 10px 10px 10px 16px; border-radius: 999px;
   border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.05);
   font-size: clamp(0.85rem, 3.2vw, 1rem); color: rgba(255,255,255,0.75);
-  opacity: 0; transform: translateY(8px);
+  opacity: 0; transform: translate(-50%, 8px);
   transition: opacity 0.4s ease, transform 0.4s ease, border-color 0.3s, box-shadow 0.3s;
 }
-.intro-prompt.is-on { opacity: 1; transform: none; }
+.intro-prompt.is-on { opacity: 1; transform: translate(-50%, 0); }
 .intro-prompt.is-sent { border-color: color-mix(in srgb, var(--intro-violet-1) 70%, transparent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--intro-violet-1) 15%, transparent); }
-.intro-prompt.is-gone { opacity: 0; transform: translateY(-6px); }
+.intro-prompt.is-gone { opacity: 0; transform: translate(-50%, -6px); }
 .intro-prompt-text { flex: 1; text-align: left; white-space: nowrap; }
 .intro-send {
   flex: none; width: 28px; height: 28px; border-radius: 50%;
