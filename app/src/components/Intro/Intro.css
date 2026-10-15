@@ -1,3 +1,4 @@
+/* ── Conteneur ─────────────────────────────────────────────────────────────── */
 .intro {
   --intro-bg: #000;
   --intro-fg: #fff;
@@ -5,14 +6,15 @@
   display: grid; place-items: center;
   background: var(--intro-bg); color: var(--intro-fg);
   font-family: 'Albert Sans', system-ui, sans-serif;
-  cursor: pointer;
+  cursor: pointer; overflow: hidden;
   transition: opacity 0.6s ease;
 }
 .intro.is-leaving { opacity: 0; pointer-events: none; }
 
-.intro-inner { text-align: center; padding: 0 16px; transition: transform 0.6s ease; }
+.intro-inner { position: relative; z-index: 1; text-align: center; padding: 0 16px; transition: transform 0.6s ease; }
 .intro.is-leaving .intro-inner { transform: scale(1.06); }
 
+/* ── Nom ───────────────────────────────────────────────────────────────────── */
 .intro-name {
   margin: 0;
   font-size: clamp(2.6rem, 11vw, 4.5rem);
@@ -22,29 +24,104 @@
   animation: intro-in 0.9s cubic-bezier(.2,.7,.2,1) 0.15s forwards;
 }
 
-.intro-tagline {
-  position: relative; height: 1.4em; margin-top: 14px;
-  font-size: clamp(0.95rem, 3.6vw, 1.2rem);
-  font-weight: 500; letter-spacing: -0.01em;
+/* ── Halo violet qui respire ───────────────────────────────────────────────── */
+.intro-glow {
+  position: absolute; left: 50%; top: 50%;
+  width: 520px; height: 520px; margin: -260px 0 0 -260px; border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--intro-violet-1) 35%, transparent), transparent 65%);
+  opacity: 0; transform: scale(0.6); pointer-events: none;
+  transition: opacity 1s ease, transform 1.4s ease;
 }
-.intro-tagline span {
-  position: absolute; left: 50%; top: 0; white-space: nowrap;
+.intro-glow.is-on { opacity: 1; transform: scale(1); animation: intro-breathe 2.4s ease-in-out infinite; }
+
+/* ── Zone sous le nom : prompt puis réponse ────────────────────────────────── */
+.intro-stage { position: relative; height: 96px; margin-top: 22px; }
+
+.intro-prompt {
+  position: absolute; left: 50%; top: 0; translate: -50% 0;
+  display: inline-flex; align-items: center; gap: 10px;
+  min-width: min(330px, calc(100vw - 48px));
+  padding: 10px 10px 10px 16px; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.05);
+  font-size: clamp(0.85rem, 3.2vw, 1rem); color: rgba(255,255,255,0.75);
+  opacity: 0; transform: translateY(8px);
+  transition: opacity 0.4s ease, transform 0.4s ease, border-color 0.3s, box-shadow 0.3s;
+}
+.intro-prompt.is-on { opacity: 1; transform: none; }
+.intro-prompt.is-sent { border-color: color-mix(in srgb, var(--intro-violet-1) 70%, transparent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--intro-violet-1) 15%, transparent); }
+.intro-prompt.is-gone { opacity: 0; transform: translateY(-6px); }
+.intro-prompt-text { flex: 1; text-align: left; white-space: nowrap; }
+.intro-send {
+  flex: none; width: 28px; height: 28px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: rgba(255,255,255,0.12); transition: background 0.3s;
+}
+.intro-send svg { font-size: 16px; color: #fff; }
+.intro-prompt.is-sent .intro-send { background: var(--intro-violet-1); }
+
+.intro-answer {
+  position: absolute; left: 0; right: 0; top: 10px;
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+}
+.intro-line {
+  display: flex; align-items: center; justify-content: center;
+  min-height: 1.5em; white-space: nowrap;
+  font-size: clamp(0.95rem, 3.6vw, 1.2rem); font-weight: 500;
+}
+
+.intro-spark {
+  flex: none; margin-right: 8px;
+  font-size: 18px !important; color: var(--intro-violet-2);
+  filter: drop-shadow(0 0 8px color-mix(in srgb, var(--intro-violet-2) 80%, transparent));
+}
+.intro-spark.is-thinking { animation: intro-spark 1.2s ease-in-out infinite; }
+
+.intro-thinking {
+  background: linear-gradient(90deg, #555 0%, #ddd 50%, #555 100%); background-size: 200% 100%;
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  animation: intro-shimmer 1.4s linear infinite;
+}
+
+/* Mots en streaming, en dégradé violet */
+.intro-tok {
+  display: inline-block; white-space: pre;
   color: var(--intro-violet-1);
   background: linear-gradient(90deg, var(--intro-violet-1), var(--intro-violet-2), var(--intro-violet-1));
   background-size: 200% 100%;
-  -webkit-background-clip: text; background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 12px rgba(139, 92, 246, 0.55));
-  animation: intro-shimmer 2.5s linear infinite;
-  opacity: 0; transform: translate(-50%, 8px);
-  transition: opacity 0.45s ease, transform 0.45s cubic-bezier(.2,.7,.2,1);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  opacity: 0; transform: translateY(4px); filter: blur(6px);
+  animation: intro-tok 0.35s ease forwards, intro-shimmer 2.5s linear infinite;
 }
-.intro-tagline span.is-on  { opacity: 1; transform: translate(-50%, 0); }
-.intro-tagline span.is-off { opacity: 0; transform: translate(-50%, -8px); }
 
-@keyframes intro-in { to { opacity: 1; transform: scale(1); filter: blur(0); } }
+.intro-caret {
+  display: inline-block; width: 9px; height: 1.05em; margin-left: 2px; vertical-align: -0.15em;
+  border-radius: 2px; background: var(--intro-violet-2);
+  box-shadow: 0 0 12px var(--intro-violet-1);
+  animation: intro-blink 0.9s steps(1) infinite;
+}
+.intro-caret.is-solid { animation: none; }
+
+/* Tags générés */
+.intro-tags { display: flex; gap: 8px; justify-content: center; min-height: 28px; }
+.intro-tag {
+  font-size: 13px; font-weight: 500; color: #E9DDFF;
+  padding: 5px 12px; border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--intro-violet-2) 45%, transparent);
+  background: color-mix(in srgb, var(--intro-violet-1) 12%, transparent);
+  box-shadow: 0 0 14px color-mix(in srgb, var(--intro-violet-1) 25%, transparent);
+  opacity: 0; transform: translateY(6px) scale(0.9); filter: blur(4px);
+  animation: intro-tag 0.45s cubic-bezier(.2,.7,.2,1) forwards;
+}
+
+/* ── Keyframes ─────────────────────────────────────────────────────────────── */
+@keyframes intro-in      { to { opacity: 1; transform: scale(1); filter: blur(0); } }
+@keyframes intro-breathe { 50% { transform: scale(1.12); opacity: 0.7; } }
 @keyframes intro-shimmer { to { background-position: -200% 0; } }
+@keyframes intro-spark   { 50% { transform: rotate(20deg) scale(0.8); opacity: 0.6; } }
+@keyframes intro-tok     { to { opacity: 1; transform: none; filter: blur(0) drop-shadow(0 0 12px rgba(139, 92, 246, 0.55)); } }
+@keyframes intro-blink   { 50% { opacity: 0; } }
+@keyframes intro-tag     { to { opacity: 1; transform: none; filter: blur(0); } }
 
 @media (prefers-reduced-motion: reduce) {
-  .intro, .intro * { animation-duration: 0.01ms !important; animation-delay: 0s !important; transition: none !important; }
+  .intro, .intro * { animation-duration: 0.01ms !important; animation-delay: 0s !important; animation-iteration-count: 1 !important; transition: none !important; }
 }

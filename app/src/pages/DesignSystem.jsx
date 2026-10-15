@@ -1026,7 +1026,7 @@ const [showContext, setShowContext] = useState(false);
 
       <Divider sx={{ mb: 4 }} />
 
-      <Section title="Intro" subtitle="Splash screen d'arrivée — fond noir, nom en blanc (Albert Sans 700), phrases en dégradé aiViolet → aiVioletLight. Joué une fois par session.">
+      <Section title="Intro" subtitle="Splash screen d'arrivée « prompt → réponse » — fond noir, nom en blanc (Albert Sans 700), question tapée dans un champ de chat, réponse en streaming (aiViolet → aiVioletLight) puis tags générés. Joué une fois par session.">
         <Group label="Aperçu">
           <IntroDemo />
         </Group>
@@ -1034,24 +1034,29 @@ const [showContext, setShowContext] = useState(false);
         <DocBlock
           props={[
             ['name', 'string', "'Thomas Reynier'", 'Texte principal affiché en blanc.'],
-            ['lines', 'string[]', '2 phrases', 'Phrases affichées sous le nom, l\'une après l\'autre. La durée totale s\'adapte au nombre de phrases.'],
+            ['question', 'string', "'Que fait Thomas ?'", 'Question tapée dans le champ de chat avant envoi.'],
+            ['answer', 'string', "'L’IA au service des équipes design'", 'Réponse affichée mot par mot, en dégradé violet.'],
+            ['tags', 'string[]', "['Systèmes', 'Produits', 'IA']", 'Pastilles qui apparaissent une par une sous la réponse.'],
             ['once', 'boolean', 'true', 'Si true, l\'intro ne se joue qu\'une fois par session de navigation (sessionStorage).'],
             ['onDone', 'function', '—', 'Callback appelé quand l\'intro a disparu.'],
           ]}
           usage={[
             'Monté une seule fois dans App.jsx, au-dessus des routes : l\'intro couvre tout l\'écran.',
             'Un clic n\'importe où permet de passer l\'intro.',
-            'Respecte prefers-reduced-motion : l\'intro devient quasi instantanée.',
-            'Garder 1 à 2 phrases courtes (moins de 6 mots) pour rester sous les 4 secondes.',
+            'Respecte prefers-reduced-motion : l\'état final s\'affiche directement, sans animation.',
+            'Garder une question courte (moins de 25 caractères), une réponse de 6 mots max et 3 tags max.',
+            'Icônes : AutoAwesome et ArrowUpward (@mui/icons-material).',
           ]}
           code={`import Intro from '../components/Intro/Intro';
 
 // Dans App.jsx, juste dans <BrowserRouter>
 <Intro />
 
-// Phrases personnalisées, rejouée à chaque visite
+// Contenu personnalisé, rejouée à chaque visite
 <Intro
-  lines={['Systèmes, produits, IA.']}
+  question="Que fait Thomas ?"
+  answer="L’IA au service des équipes design"
+  tags={['Systèmes', 'Produits', 'IA']}
   once={false}
 />`}
         />
