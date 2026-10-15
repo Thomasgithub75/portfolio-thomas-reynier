@@ -10,11 +10,13 @@ import CasePepyteSignature from './pages/CasePepyteSignature';
 import JobMatcher from './pages/JobMatcher';
 import LettreMotivation from './pages/LettreMotivation';
 import DesignSystem from './pages/DesignSystem';
+import Intro from './components/Intro/Intro';
 import './styles/global.css';
 
 export default function App() {
   return (
     <BrowserRouter>
+      <Intro />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/case/weborama" element={<CaseWeborama />} />
