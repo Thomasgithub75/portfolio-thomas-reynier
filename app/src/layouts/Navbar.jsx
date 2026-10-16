@@ -17,13 +17,23 @@ export default function Navbar() {
 
   // Floating pill navbar once the page scrolls past the top (respond.io-style),
   // plus the reading-progress fill that lives inside it so it follows the same rounded corners.
+  // Updates are batched to one per animation frame — raw scroll events fire far more often
+  // than the UI needs, and re-rendering on every one of them is what made this feel janky.
   useEffect(() => {
-    function onScroll() {
+    let ticking = false;
+    function update() {
       setScrolled(window.scrollY > 8);
       const max = document.documentElement.scrollHeight - window.innerHeight;
       setProgress(max > 0 ? (window.scrollY / max) * 100 : 0);
+      ticking = false;
     }
-    onScroll();
+    function onScroll() {
+      if (!ticking) {
+        ticking = true;
+        window.requestAnimationFrame(update);
+      }
+    }
+    update();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
