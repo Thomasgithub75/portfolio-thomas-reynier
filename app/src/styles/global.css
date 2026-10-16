@@ -42,11 +42,11 @@ html{scroll-behavior:smooth;overflow-x:hidden}
 body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 
 /* ── NAV ── */
-.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--nav-bg);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:60px;display:flex;align-items:center;justify-content:center;overflow:hidden;margin:0;border-radius:0;box-shadow:none;transition:margin .25s ease,border-radius .25s ease,box-shadow .25s ease,border-color .25s ease,background-color .25s ease}
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--nav-bg);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid transparent;border-bottom-color:var(--border);height:60px;display:flex;align-items:center;justify-content:center;overflow:hidden;margin:0;border-radius:0;box-shadow:none;transition:margin .25s ease,border-radius .25s ease,box-shadow .25s ease,border-color .25s ease,background-color .25s ease,backdrop-filter .25s ease}
 /* Reading-progress fill — lives inside the nav so it's clipped by its corners (straight at top, rounded once scrolled) */
 .nav-progress{position:absolute;left:0;bottom:0;height:3px;background:var(--blue);transition:width .1s linear}
-/* Scrolled — floating inset card, clearly narrower than the viewport (respond.io-style) */
-.nav-scrolled{margin:14px 20px 0;border-radius:18px;background:var(--surface);border-bottom-color:transparent;box-shadow:0 12px 32px -10px rgba(0,0,0,.5)}
+/* Scrolled — floating glass card, clearly narrower than the viewport (respond.io-style) */
+.nav-scrolled{margin:14px 20px 0;border-radius:18px;background:rgba(255,255,255,.12);backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);border-color:rgba(255,255,255,.18);box-shadow:0 12px 32px -10px rgba(0,0,0,.5)}
 @media(max-width:640px){.nav-scrolled{margin:12px 16px 0;border-radius:16px}}
 .nav-inner{max-width:960px;width:100%;padding:0 2rem;display:flex;align-items:center;justify-content:space-between}
 .nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
