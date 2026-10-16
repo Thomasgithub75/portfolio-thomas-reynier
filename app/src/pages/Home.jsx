@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Navbar from '../layouts/Navbar';
@@ -80,23 +80,9 @@ function getUniqueProjects(skills) {
   });
 }
 
-function useScrollProgress() {
-  const [w, setW] = useState(0);
-  const fn = useCallback(() => {
-    const t = document.documentElement.scrollHeight - window.innerHeight;
-    setW(t > 0 ? (window.scrollY / t) * 100 : 0);
-  }, []);
-  useEffect(() => {
-    window.addEventListener('scroll', fn, { passive: true });
-    return () => window.removeEventListener('scroll', fn);
-  }, [fn]);
-  return w;
-}
-
 export default function Home() {
   const [activeSkills, setActiveSkills] = useState([]);
   const [panelOpen, setPanelOpen] = useState(false);
-  const scrollProgress = useScrollProgress();
   const isMobile = useMediaQuery('(max-width:768px)');
 
   useEffect(() => {
@@ -130,7 +116,6 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <div className="home-reading-progress" style={{width:`${scrollProgress}%`}}/>
 
       {/* HERO */}
       <section id="hero" style={{paddingTop:140,paddingBottom:80,background:'linear-gradient(145deg,var(--p50) 0%,var(--bg) 55%)'}}>

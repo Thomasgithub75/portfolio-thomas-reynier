@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import DarkModeOutlined from '@mui/icons-material/DarkModeOutlined';
@@ -7,11 +7,26 @@ import useColorMode from '../hooks/useColorMode';
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [progress, setProgress] = useState(0);
   const { mode, toggleMode } = useColorMode();
   const isDark = mode === 'dark';
   const location = useLocation();
   const navigate = useNavigate();
   const isHome = location.pathname === '/';
+
+  // Floating pill navbar once the page scrolls past the top (respond.io-style),
+  // plus the reading-progress fill that lives inside it so it follows the same rounded corners.
+  useEffect(() => {
+    function onScroll() {
+      setScrolled(window.scrollY > 8);
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      setProgress(max > 0 ? (window.scrollY / max) * 100 : 0);
+    }
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   function close() { setOpen(false); }
   function toggle() { setOpen(prev => !prev); }
@@ -28,7 +43,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="nav">
+      <nav className={`nav${scrolled ? ' nav-scrolled' : ''}`}>
         <div className="nav-inner">
           <Link className="nav-brand" to="/" onClick={close}>
             <div className="nav-logo-placeholder">TR</div>
@@ -52,6 +67,7 @@ export default function Navbar() {
             <span/><span/><span/>
           </button>
         </div>
+        <div className="nav-progress" style={{width:`${progress}%`}}/>
       </nav>
 
       {open && createPortal(
