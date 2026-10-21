@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Animation sous-titre hero</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FFFFFF;--bg-soft:#F9FAFB;--text:#1A2540;--muted:#5B6A8A;--border:#E5E7EB;
+  --blue:#4F46E5;--blue-light:#EEF2FF;--blue-border:#C7D2FE;
+  --grad:linear-gradient(110deg,#6C2BFF 0%,#2563EB 100%);--glow:rgba(91,60,255,.35);
+  --card:#FFFFFF;--input:#FFFFFF;
+}
+:root[data-theme="dark"]{
+  --bg:#000;--bg-soft:#141414;--text:rgba(255,255,255,.9);--muted:rgba(255,255,255,.64);--border:rgba(255,255,255,.16);
+  --blue:#A873FF;--blue-light:rgba(141,74,255,.14);--blue-border:rgba(141,74,255,.45);
+  --grad:linear-gradient(110deg,#7C4DFF 0%,#D946EF 100%);--glow:rgba(192,38,211,.35);
+  --card:#0B0B0B;--input:#141414;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#000;--bg-soft:#141414;--text:rgba(255,255,255,.9);--muted:rgba(255,255,255,.64);--border:rgba(255,255,255,.16);
+    --blue:#A873FF;--blue-light:rgba(141,74,255,.14);--blue-border:rgba(141,74,255,.45);
+    --grad:linear-gradient(110deg,#7C4DFF 0%,#D946EF 100%);--glow:rgba(192,38,211,.35);
+    --card:#0B0B0B;--input:#141414;
+  }
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Outfit,sans-serif;background:var(--bg-soft);color:var(--text);padding:32px 16px 64px}
+.wrap{max-width:860px;margin:0 auto}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:24px;flex-wrap:wrap}
+h1.page{font-size:22px;font-weight:600;letter-spacing:-.02em}
+.controls{display:flex;gap:8px}
+button.ctl{font:500 13px Outfit;padding:8px 14px;border-radius:9999px;border:1px solid var(--blue-border);background:var(--blue-light);color:var(--blue);cursor:pointer}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:28px 28px 32px;margin-bottom:20px}
+.label{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:18px}
+.label b{font-size:15px}
+.label span{font-size:13px;color:var(--muted)}
+.eyebrow{display:flex;align-items:center;gap:10px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}
+.eyebrow:before{content:'';width:24px;height:2px;background:var(--blue);border-radius:2px}
+.h1{font-size:clamp(28px,6vw,44px);font-weight:700;letter-spacing:-.03em;line-height:1.08;margin-bottom:12px}
+.ia{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{font-size:clamp(16px,3.6vw,20px);font-weight:600;color:var(--blue);min-height:1.6em}
+.dot{color:var(--muted)}
+.caret{display:inline-block;width:2px;height:1.05em;background:var(--blue);margin-left:2px;vertical-align:-0.15em;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.note{margin-top:14px;font-size:13px;color:var(--muted);line-height:1.5}
+
+/* A — prompt input */
+.prompt{display:flex;align-items:center;gap:10px;max-width:440px;border:1px solid var(--blue-border);background:var(--input);border-radius:14px;padding:10px 10px 10px 14px;box-shadow:0 8px 24px -12px var(--glow)}
+.prompt .spark{color:var(--blue);flex-shrink:0;display:flex}
+.prompt .txt{flex:1;font-size:clamp(15px,3.4vw,18px);font-weight:600;color:var(--blue);white-space:nowrap;overflow:hidden;min-height:1.5em}
+.prompt .send{width:34px;height:34px;border-radius:10px;border:0;background:var(--grad);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;opacity:.35;transition:opacity .2s,transform .2s}
+.prompt .send.on{opacity:1;transform:scale(1.06)}
+
+/* C — streaming tokens */
+.tok{display:inline-block;opacity:0;filter:blur(6px);transform:translateY(4px);transition:opacity .35s,filter .35s,transform .35s}
+.tok.in{opacity:1;filter:none;transform:none}
+.status{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--muted);margin-bottom:8px;height:18px}
+.pulse{width:7px;height:7px;border-radius:50%;background:var(--blue);animation:pl 1s ease-in-out infinite}
+@keyframes pl{50%{opacity:.25}}
+
+/* D — chat */
+.chat{display:flex;flex-direction:column;gap:10px;max-width:460px}
+.bubble-u{align-self:flex-end;background:var(--blue-light);color:var(--text);border:1px solid var(--blue-border);font-size:14px;padding:8px 12px;border-radius:14px 14px 4px 14px;opacity:0;transform:translateY(6px);transition:.3s}
+.bubble-u.in{opacity:1;transform:none}
+.bubble-a{display:flex;gap:10px;align-items:flex-start;opacity:0;transition:.3s}
+.bubble-a.in{opacity:1}
+.av{width:28px;height:28px;border-radius:8px;background:var(--grad);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.bubble-a .sub{padding-top:2px}
+
+@media (prefers-reduced-motion: reduce){
+  .caret,.pulse{animation:none}
+  .tok{transition:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1 class="page">Animation de « UX · Design System · IA »</h1>
+    <div class="controls">
+      <button class="ctl" id="replay">Rejouer</button>
+      <button class="ctl" id="theme">Light / Dark</button>
+    </div>
+  </header>
+
+  <div class="card">
+    <div class="label"><b>A · Champ de prompt</b><span>Le sous-titre se tape dans un champ façon ChatGPT/Claude, puis le bouton d'envoi s'allume.</span></div>
+    <div class="eyebrow">Thomas Reynier</div>
+    <div class="h1">Product Designer <span class="ia">IA</span></div>
+    <div class="prompt">
+      <span class="spark"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9l1.25-2.75L23 5l-2.75-1.25L19 1l-1.25 2.75L15 5l2.75 1.25zm-7.5.5L9 4 6.5 9.5 1 12l5.5 2.5L9 20l2.5-5.5L17 12z"/></svg></span>
+      <span class="txt" id="a"></span>
+      <button class="send" id="aSend" aria-hidden="true" tabindex="-1"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+    </div>
+    <p class="note">Le plus parlant pour ton profil IA. Ajoute un élément d'interface au hero.</p>
+  </div>
+
+  <div class="card">
+    <div class="label"><b>B · Machine à écrire</b><span>Le texte se tape lettre par lettre avec un curseur qui clignote, à la place du sous-titre actuel.</span></div>
+    <div class="eyebrow">Thomas Reynier</div>
+    <div class="h1">Product Designer <span class="ia">IA</span></div>
+    <div class="sub" id="b"></div>
+    <p class="note">Le plus sobre : aucun élément ajouté, la mise en page ne bouge pas.</p>
+  </div>
+
+  <div class="card">
+    <div class="label"><b>C · Streaming de tokens</b><span>Les mots apparaissent un par un avec un léger flou, comme une réponse de LLM, avec un statut « Génération… ».</span></div>
+    <div class="eyebrow">Thomas Reynier</div>
+    <div class="h1">Product Designer <span class="ia">IA</span></div>
+    <div class="status" id="cStatus"></div>
+    <div class="sub" id="c"></div>
+    <p class="note">Plus fluide qu'une machine à écrire, très « IA générative ».</p>
+  </div>
+
+  <div class="card">
+    <div class="label"><b>D · Mini-conversation</b><span>Une question s'affiche, puis la réponse se tape.</span></div>
+    <div class="eyebrow">Thomas Reynier</div>
+    <div class="h1">Product Designer <span class="ia">IA</span></div>
+    <div class="chat">
+      <div class="bubble-u" id="dQ">Sur quoi tu interviens ?</div>
+      <div class="bubble-a" id="dA">
+        <span class="av"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9l1.25-2.75L23 5l-2.75-1.25L19 1l-1.25 2.75L15 5l2.75 1.25zm-7.5.5L9 4 6.5 9.5 1 12l5.5 2.5L9 20l2.5-5.5L17 12z"/></svg></span>
+        <span class="sub" id="d"></span>
+      </div>
+    </div>
+    <p class="note">Le plus narratif, mais le plus chargé : il prend plus de place dans le hero.</p>
+  </div>
+</div>
+
+<script>
+const PARTS = [['UX',false],[' · ',true],['Design System',false],[' · ',true],['IA',false]];
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const sleep = ms => new Promise(r => setTimeout(r, reduce ? 0 : ms));
+let run = 0;
+
+function renderTyped(el, n, caret = true) {
+  let left = n, html = '';
+  for (const [t, dim] of PARTS) {
+    if (left <= 0) break;
+    const s = t.slice(0, left); left -= t.length;
+    html += dim ? `<span class="dot">${s}</span>` : s;
+  }
+  el.innerHTML = html + (caret ? '<span class="caret"></span>' : '');
+}
+const TOTAL = PARTS.reduce((n, [t]) => n + t.length, 0);
+
+async function typeInto(el, id, speed = 55) {
+  for (let i = 0; i <= TOTAL; i++) {
+    if (id !== run) return false;
+    renderTyped(el, i);
+    await sleep(speed + (PARTS.map(p=>p[0]).join('')[i-1] === ' ' ? 60 : 0));
+  }
+  return true;
+}
+
+async function A(id) {
+  const el = document.getElementById('a'), send = document.getElementById('aSend');
+  send.classList.remove('on'); el.innerHTML = '<span class="caret"></span>';
+  await sleep(500);
+  if (!(await typeInto(el, id))) return;
+  await sleep(250); send.classList.add('on');
+}
+async function B(id) {
+  const el = document.getElementById('b'); el.innerHTML = '<span class="caret"></span>';
+  await sleep(500); await typeInto(el, id, 60);
+}
+async function C(id) {
+  const el = document.getElementById('c'), st = document.getElementById('cStatus');
+  st.innerHTML = '<span class="pulse"></span>Génération…';
+  el.innerHTML = PARTS.map(([t, dim]) => `<span class="tok${dim ? ' dot' : ''}">${t.replace(/ /g,'&nbsp;')}</span>`).join('');
+  await sleep(700);
+  for (const tok of el.querySelectorAll('.tok')) { if (id !== run) return; tok.classList.add('in'); await sleep(220); }
+  await sleep(200); st.innerHTML = '';
+}
+async function D(id) {
+  const q = document.getElementById('dQ'), a = document.getElementById('dA'), el = document.getElementById('d');
+  q.classList.remove('in'); a.classList.remove('in'); el.innerHTML = '';
+  await sleep(300); q.classList.add('in');
+  await sleep(700); if (id !== run) return; a.classList.add('in');
+  el.innerHTML = '<span class="caret"></span>'; await sleep(400);
+  await typeInto(el, id, 50);
+}
+
+function play() { const id = ++run; A(id); B(id); C(id); D(id); }
+document.getElementById('replay').onclick = play;
+document.getElementById('theme').onclick = () => {
+  const r = document.documentElement;
+  const dark = r.dataset.theme ? r.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+  r.dataset.theme = dark ? 'light' : 'dark';
+};
+play();
+</script>
+</body>
+</html>
