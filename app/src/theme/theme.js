@@ -2,16 +2,16 @@ import { createTheme } from '@mui/material/styles';
 
 // ── Palette Primary (brand scale 50–900) ─────────────────────────────────────
 const primary = {
-  50:  '#EEF3FD',
-  100: '#D7E5FB',
-  200: '#9DB8F2',
-  300: '#6191E9',
-  400: '#3B70E1',
-  500: '#1956DB',
-  600: '#1141A8',
-  700: '#0C2E7A',
-  800: '#061F52',
-  900: '#030F2D',
+  50:  '#EEF2FF',
+  100: '#E0E7FF',
+  200: '#C7D2FE',
+  300: '#A5B4FC',
+  400: '#6366F1',
+  500: '#4F46E5',
+  600: '#4338CA',
+  700: '#3730A3',
+  800: '#312E81',
+  900: '#1E1B4B',
 };
 
 // ── Palette Gray (scale 50–900) ───────────────────────────────────────────────
@@ -147,7 +147,7 @@ const theme = createTheme({
           letterSpacing:   '.06em',
           padding:         '4px 12px',
           fontFamily:      "'Outfit', sans-serif",
-          boxShadow:       '0 2px 8px rgba(25,86,219,.12)',
+          boxShadow:       '0 2px 8px rgba(79,70,229,.12)',
         },
         arrow: {
           color: primary[50],

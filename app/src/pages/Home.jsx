@@ -84,6 +84,7 @@ export default function Home() {
   const [activeSkills, setActiveSkills] = useState([]);
   const [panelOpen, setPanelOpen] = useState(false);
   const isMobile = useMediaQuery('(max-width:768px)');
+  const isStacked = useMediaQuery('(max-width:900px)');
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -113,6 +114,64 @@ export default function Home() {
   const panelProjects = getUniqueProjects(activeSkills);
   const panelLabel = activeSkills.length === 1 ? activeSkills[0] : activeSkills.length + ' compétences';
 
+  // Skill → projects panel. Shared by the desktop sticky column and the stacked (≤900px) layout.
+  function renderPanel() {
+    return (
+      <>
+        {!panelOpen && (
+          <div style={{border:'0.5px dashed var(--p200)',borderRadius:12,padding:'28px 20px',display:'flex',flexDirection:'column',alignItems:'center',gap:10,textAlign:'center'}}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--blue-border)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg>
+            <p style={{fontSize:12,color:'var(--muted)',lineHeight:1.5,maxWidth:190}}>Sélectionner une compétence pour voir les projets associés</p>
+          </div>
+        )}
+        {panelOpen && (
+          <div style={{border:'0.5px solid var(--p200)',borderRadius:12,overflow:'hidden'}}>
+            <div style={{padding:'14px 16px 12px',borderBottom:'0.5px solid var(--border-soft)',position:'relative'}}>
+              <span style={{fontSize:10,fontWeight:700,letterSpacing:'0.08em',textTransform:'uppercase',color:'var(--p500)',display:'block',marginBottom:4}}>Projets associés</span>
+              <p style={{fontSize:14,fontWeight:700,color:'var(--text)',lineHeight:1.3,paddingRight:32}}>{panelLabel}</p>
+              <button onClick={closePanel} style={{position:'absolute',top:12,right:12,width:24,height:24,borderRadius:6,background:'var(--p50)',border:'none',cursor:'pointer',display:'flex',alignItems:'center',justifyContent:'center',color:'var(--p500)',fontSize:16,fontFamily:'inherit'}}>×</button>
+            </div>
+            <div>
+              {panelProjects.map(p => p.locked ? (
+                <div key={p.name} style={{display:'flex',alignItems:'flex-start',gap:10,padding:'10px 16px',borderBottom:'0.5px solid var(--border-soft)',position:'relative',background:'var(--n-faint)',cursor:'default'}}>
+                  <div style={{width:34,height:34,borderRadius:7,flexShrink:0,display:'flex',alignItems:'center',justifyContent:'center',overflow:'hidden',background:p.bg,opacity:.7}}>
+                    <img loading="lazy" src={p.logo} alt={p.name} style={{width:'100%',height:'100%',objectFit:'contain',padding:5}}/>
+                  </div>
+                  <div style={{flex:1,minWidth:0,paddingRight:24}}>
+                    <div style={{fontSize:13,fontWeight:500,color:'var(--muted)',lineHeight:1.2,marginBottom:2}}>{p.name}</div>
+                    <div style={{fontSize:11,color:'var(--muted)',lineHeight:1.4,marginBottom:4,whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis',opacity:.7}}>{p.desc}</div>
+                    <span style={{fontSize:10,padding:'2px 7px',borderRadius:5,fontWeight:600,display:'inline-flex',alignItems:'center',gap:4,background:'var(--n-soft)',color:'var(--n-muted)',border:'1px solid var(--border)'}}>
+                      <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                      En entretien
+                    </span>
+                  </div>
+                </div>
+              ) : (
+                <Link key={p.name} to={p.url} style={{display:'flex',alignItems:'flex-start',gap:10,padding:'10px 16px',textDecoration:'none',color:'inherit',borderBottom:'0.5px solid var(--border-soft)',transition:'background 0.15s',position:'relative'}} onMouseEnter={e=>e.currentTarget.style.background='var(--panel)'} onMouseLeave={e=>e.currentTarget.style.background=''}>
+                  <div style={{width:34,height:34,borderRadius:7,flexShrink:0,display:'flex',alignItems:'center',justifyContent:'center',fontSize:11,fontWeight:700,color:'var(--on-accent)',overflow:'hidden',background:p.logo?p.bg:p.color}}>
+                    {p.logo ? <img loading="lazy" src={p.logo} alt={p.name} style={{width:'100%',height:'100%',objectFit:'contain',padding:5}}/> : p.initials}
+                  </div>
+                  <div style={{flex:1,minWidth:0,paddingRight:20}}>
+                    <div style={{fontSize:13,fontWeight:500,color:'var(--text)',lineHeight:1.2,marginBottom:2}}>{p.name}</div>
+                    <div style={{fontSize:11,color:'var(--muted)',lineHeight:1.4,marginBottom:4,whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{p.desc}</div>
+                    <span style={{fontSize:10,padding:'2px 7px',borderRadius:5,fontWeight:500,display:'inline-block',background:p.type==='Case study'?'var(--p50)':p.type==='Side project'?'#FAEEDA':'#EAF3DE',color:p.type==='Case study'?'var(--p600)':p.type==='Side project'?'#854F0B':'#3B6D11'}}>{p.type}</span>
+                  </div>
+                  <span style={{position:'absolute',right:14,top:'50%',transform:'translateY(-50%)',color:'var(--p500)',display:'flex',alignItems:'center'}}>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                  </span>
+                </Link>
+              ))}
+            </div>
+            <div style={{background:'var(--panel)',borderTop:'0.5px solid var(--p200)',padding:'9px 16px',display:'flex',alignItems:'center',gap:5,fontSize:11,color:'var(--p600)'}}>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
+              {panelProjects.length} projet{panelProjects.length>1?'s':''} trouvé{panelProjects.length>1?'s':''}
+            </div>
+          </div>
+        )}
+      </>
+    );
+  }
+
   return (
     <>
       <Navbar />
@@ -127,7 +186,7 @@ export default function Home() {
                 PRODUCT DESIGNER
               </p>
               <h1 style={{fontSize:'clamp(22px,5.8vw,52px)',fontWeight:700,color:'var(--blue)',lineHeight:1.08,letterSpacing:'-0.03em',marginBottom:20,whiteSpace:'nowrap'}}>
-                UX <span style={{color:'var(--text)'}}>·</span> Design System <span style={{color:'var(--text)'}}>·</span> IA
+                UX <span style={{color:'var(--text)'}}>·</span> Design System <span style={{color:'var(--text)'}}>·</span> <span className="text-brand-gradient">IA</span>
               </h1>
               <p style={{fontSize:17,color:'var(--muted)',lineHeight:1.7,maxWidth:580,marginBottom:16,fontWeight:300}}>
                 La recherche oriente mes décisions, le Design System structure mes livrables, l'IA accélère la livraison.
@@ -171,7 +230,7 @@ export default function Home() {
               </div>
             </div>
             <div className="home-hero-image">
-              <div style={{width:'100%',aspectRatio:'1/1',borderRadius:'50%',overflow:'hidden',background:'var(--photo-bg)',boxShadow:'0 0 0 4px var(--bg),0 0 0 6px var(--photo-ring),0 10px 40px rgba(25,86,219,0.12)'}}>
+              <div style={{width:'100%',aspectRatio:'1/1',borderRadius:'50%',overflow:'hidden',background:'var(--photo-bg)',boxShadow:'0 0 0 4px var(--bg),0 0 0 6px var(--photo-ring),0 10px 40px rgba(79,70,229,0.12)'}}>
                 <img src="/images/profile-cutout.png" alt="Thomas Reynier" style={{width:'100%',height:'100%',objectFit:'cover',objectPosition:'center top'}}/>
               </div>
               <div style={{position:'absolute',bottom:24,right:-4,background:'var(--surface)',border:'1px solid var(--border)',borderRadius:20,padding:'6px 14px',display:'flex',alignItems:'center',gap:7,fontSize:13,fontWeight:500,color:'var(--text)',boxShadow:'0 2px 12px rgba(0,0,0,0.08)',whiteSpace:'nowrap'}}>
@@ -256,7 +315,7 @@ export default function Home() {
               <Link
                 to="/fonctionnalite-ia"
                 className="btn-brand"
-                style={{display:'inline-flex',alignItems:'center',gap:8,fontSize:14,fontWeight:600,padding:'11px 22px',borderRadius:8,textDecoration:'none',marginTop:32}}
+                style={{display:'inline-flex',alignItems:'center',gap:8,fontSize:14,fontWeight:600,padding:'11px 22px',borderRadius:'var(--radius-sm)',textDecoration:'none',marginTop:32}}
               >
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9l-1.26-2.74L15 5l2.74-1.26L19 1l1.26 2.74L23 5l-2.74 1.26L19 9zm-7.5.5L9 4 6.5 9.5 1 12l5.5 2.5L9 20l2.5-5.5L17 12l-5.5-2.5zM19 15l-1.26 2.74L15 19l2.74 1.26L19 23l1.26-2.74L23 19l-2.74-1.26L19 15z"/></svg>
                 Tester le matching IA
@@ -266,7 +325,7 @@ export default function Home() {
             {/* Droite — teaser preview */}
             {!isMobile && (
               <div style={{flex:'1 1 320px',minWidth:0}}>
-                <div style={{background:'var(--bg)',border:'1px solid var(--border)',borderRadius:14,overflow:'hidden',boxShadow:'0 8px 32px rgba(25,86,219,.1)'}}>
+                <div style={{background:'var(--bg)',border:'1px solid var(--border)',borderRadius:'var(--radius-md)',overflow:'hidden',boxShadow:'0 8px 32px rgba(79,70,229,.1)'}}>
 
                   {/* Mini header entreprise × Thomas */}
                   <div style={{padding:'14px 16px',borderBottom:'1px solid var(--border)',display:'flex',alignItems:'center',gap:12,background:'var(--bg-soft)'}}>
@@ -356,6 +415,8 @@ export default function Home() {
                 </div>
               </div>
 
+              {isStacked && panelOpen && <div style={{marginTop:16}}>{renderPanel()}</div>}
+
               {/* OUTILS */}
               <div className="home-exp-row" style={{padding:'24px 0',borderBottom:'0.5px solid var(--border-soft)'}}>
                 <div style={{display:'flex',flexDirection:'column',gap:10,paddingTop:4}}>
@@ -386,59 +447,12 @@ export default function Home() {
               </div>
             </div>
 
-            {/* PANEL */}
-            <div style={{position:'sticky',top:16}}>
-              {!panelOpen && (
-                <div style={{border:'0.5px dashed var(--p200)',borderRadius:12,padding:'28px 20px',display:'flex',flexDirection:'column',alignItems:'center',gap:10,textAlign:'center'}}>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#9DB8F2" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg>
-                  <p style={{fontSize:12,color:'var(--muted)',lineHeight:1.5,maxWidth:190}}>Sélectionner une compétence pour voir les projets associés</p>
-                </div>
-              )}
-              {panelOpen && (
-                <div style={{border:'0.5px solid var(--p200)',borderRadius:12,overflow:'hidden'}}>
-                  <div style={{padding:'14px 16px 12px',borderBottom:'0.5px solid var(--border-soft)',position:'relative'}}>
-                    <span style={{fontSize:10,fontWeight:700,letterSpacing:'0.08em',textTransform:'uppercase',color:'var(--p500)',display:'block',marginBottom:4}}>Projets associés</span>
-                    <p style={{fontSize:14,fontWeight:700,color:'var(--text)',lineHeight:1.3,paddingRight:32}}>{panelLabel}</p>
-                    <button onClick={closePanel} style={{position:'absolute',top:12,right:12,width:24,height:24,borderRadius:6,background:'var(--p50)',border:'none',cursor:'pointer',display:'flex',alignItems:'center',justifyContent:'center',color:'var(--p500)',fontSize:16,fontFamily:'inherit'}}>×</button>
-                  </div>
-                  <div>
-                    {panelProjects.map(p => p.locked ? (
-                      <div key={p.name} style={{display:'flex',alignItems:'flex-start',gap:10,padding:'10px 16px',borderBottom:'0.5px solid var(--border-soft)',position:'relative',background:'var(--n-faint)',cursor:'default'}}>
-                        <div style={{width:34,height:34,borderRadius:7,flexShrink:0,display:'flex',alignItems:'center',justifyContent:'center',overflow:'hidden',background:p.bg,opacity:.7}}>
-                          <img loading="lazy" src={p.logo} alt={p.name} style={{width:'100%',height:'100%',objectFit:'contain',padding:5}}/>
-                        </div>
-                        <div style={{flex:1,minWidth:0,paddingRight:24}}>
-                          <div style={{fontSize:13,fontWeight:500,color:'var(--muted)',lineHeight:1.2,marginBottom:2}}>{p.name}</div>
-                          <div style={{fontSize:11,color:'var(--muted)',lineHeight:1.4,marginBottom:4,whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis',opacity:.7}}>{p.desc}</div>
-                          <span style={{fontSize:10,padding:'2px 7px',borderRadius:5,fontWeight:600,display:'inline-flex',alignItems:'center',gap:4,background:'var(--n-soft)',color:'var(--n-muted)',border:'1px solid var(--border)'}}>
-                            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                            En entretien
-                          </span>
-                        </div>
-                      </div>
-                    ) : (
-                      <Link key={p.name} to={p.url} style={{display:'flex',alignItems:'flex-start',gap:10,padding:'10px 16px',textDecoration:'none',color:'inherit',borderBottom:'0.5px solid var(--border-soft)',transition:'background 0.15s',position:'relative'}} onMouseEnter={e=>e.currentTarget.style.background='var(--panel)'} onMouseLeave={e=>e.currentTarget.style.background=''}>
-                        <div style={{width:34,height:34,borderRadius:7,flexShrink:0,display:'flex',alignItems:'center',justifyContent:'center',fontSize:11,fontWeight:700,color:'var(--on-accent)',overflow:'hidden',background:p.logo?p.bg:p.color}}>
-                          {p.logo ? <img loading="lazy" src={p.logo} alt={p.name} style={{width:'100%',height:'100%',objectFit:'contain',padding:5}}/> : p.initials}
-                        </div>
-                        <div style={{flex:1,minWidth:0,paddingRight:20}}>
-                          <div style={{fontSize:13,fontWeight:500,color:'var(--text)',lineHeight:1.2,marginBottom:2}}>{p.name}</div>
-                          <div style={{fontSize:11,color:'var(--muted)',lineHeight:1.4,marginBottom:4,whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{p.desc}</div>
-                          <span style={{fontSize:10,padding:'2px 7px',borderRadius:5,fontWeight:500,display:'inline-block',background:p.type==='Case study'?'var(--p50)':p.type==='Side project'?'#FAEEDA':'#EAF3DE',color:p.type==='Case study'?'var(--p600)':p.type==='Side project'?'#854F0B':'#3B6D11'}}>{p.type}</span>
-                        </div>
-                        <span style={{position:'absolute',right:14,top:'50%',transform:'translateY(-50%)',color:'var(--p500)',display:'flex',alignItems:'center'}}>
-                          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-                        </span>
-                      </Link>
-                    ))}
-                  </div>
-                  <div style={{background:'var(--panel)',borderTop:'0.5px solid var(--p200)',padding:'9px 16px',display:'flex',alignItems:'center',gap:5,fontSize:11,color:'var(--p600)'}}>
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
-                    {panelProjects.length} projet{panelProjects.length>1?'s':''} trouvé{panelProjects.length>1?'s':''}
-                  </div>
-                </div>
-              )}
-            </div>
+            {/* PANEL — desktop: sticky right column. Stacked layout renders it under the skills instead. */}
+            {!isStacked && (
+              <div style={{position:'sticky',top:16}}>
+                {renderPanel()}
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -452,7 +466,7 @@ export default function Home() {
           <h2>Témoignages de mes collaborateurs</h2>
           <div style={{display:'flex',flexDirection:'column',gap:16}}>
             {/* Featured */}
-            <div style={{background:'var(--surface)',border:'1px solid var(--border)',borderRadius:14,padding:32}}>
+            <div style={{background:'var(--surface)',border:'1px solid var(--border)',borderRadius:'var(--radius-md)',padding:32}}>
               <div className="home-rec-featured-grid">
                 <div style={{display:'flex',flexDirection:'column',gap:14}}>
                   <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',gap:8}}>
@@ -469,8 +483,8 @@ export default function Home() {
                         <p style={{fontSize:11,color:'var(--muted)',fontWeight:300,marginTop:2}}>Co-CEO & Co-Founder · Pepyte</p>
                       </div>
                     </div>
-                    <a href="https://fr.linkedin.com/in/alexis-vaysse" target="_blank" rel="noopener" style={{display:'inline-flex',alignItems:'center',gap:5,fontSize:11,fontWeight:600,color:'#0A66C2',background:'#EBF3FB',border:'1px solid #C0DCF5',borderRadius:20,padding:'5px 10px',textDecoration:'none',whiteSpace:'nowrap',flexShrink:0}}>
-                      <svg width="11" height="11" viewBox="0 0 24 24" fill="#0A66C2"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    <a href="https://fr.linkedin.com/in/alexis-vaysse" target="_blank" rel="noopener" style={{display:'inline-flex',alignItems:'center',gap:5,fontSize:11,fontWeight:600,color:'var(--li-fg)',background:'var(--li-bg)',border:'1px solid var(--li-border)',borderRadius:'var(--radius-pill)',padding:'5px 10px',textDecoration:'none',whiteSpace:'nowrap',flexShrink:0}}>
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
                       LinkedIn
                     </a>
                   </div>
@@ -486,7 +500,7 @@ export default function Home() {
                 { logo:'/images/logo-pepyte.svg', logoAlt:'Pepyte', keyquote:'« Une capacité de travail impressionnante à une positivité contagieuse. »', quote:"Thomas est un Product Designer motivé, combinant une capacité de travail impressionnante à une positivité contagieuse. Son dévouement et son optimisme inspirent toute l'équipe. Fortement recommandé !", avatar:'/images/avatar-antoine.png', name:'Antoine Girard', role:'Co-CEO & Co-Founder · Pepyte', li:'https://www.linkedin.com/in/antoine-girard-202561143/' },
                 { logo:'/images/logo-weborama.svg', logoAlt:'Weborama', keyquote:'« Faire de l\'IA un véritable allié stratégique. »', quote:"Thomas a su faire de l'IA un véritable allié stratégique, l'intégrant avec maîtrise dans ses méthodes de conception pour créer des produits plus intelligents et optimiser les parcours utilisateurs.", avatar:'/images/avatar-donia.png', name:'Donia Ben Ghorbal', role:'Lead Product Designer · Weborama', li:'https://www.linkedin.com/in/donia-benghorbal-750ba1143/' },
               ].map(r => (
-                <div key={r.name} style={{background:'var(--surface)',border:'1px solid var(--border)',borderRadius:14,padding:24,display:'flex',flexDirection:'column',gap:14}}>
+                <div key={r.name} style={{background:'var(--surface)',border:'1px solid var(--border)',borderRadius:'var(--radius-md)',padding:24,display:'flex',flexDirection:'column',gap:14}}>
                   <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',gap:8}}>
                     <div style={{display:'flex',gap:2}}>{[0,1,2,3,4].map(i=><span key={i} style={{color:'#F59E0B',fontSize:14}}>★</span>)}</div>
                     <img loading="lazy" src={r.logo} alt={r.logoAlt} style={{height:20,width:'auto',objectFit:'contain',opacity:.85,flexShrink:0}}/>
@@ -502,8 +516,8 @@ export default function Home() {
                         <p style={{fontSize:11,color:'var(--muted)',fontWeight:300,marginTop:2}}>{r.role}</p>
                       </div>
                     </div>
-                    <a href={r.li} target="_blank" rel="noopener" style={{display:'inline-flex',alignItems:'center',gap:5,fontSize:11,fontWeight:600,color:'#0A66C2',background:'#EBF3FB',border:'1px solid #C0DCF5',borderRadius:20,padding:'5px 10px',textDecoration:'none',whiteSpace:'nowrap',flexShrink:0}}>
-                      <svg width="11" height="11" viewBox="0 0 24 24" fill="#0A66C2"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    <a href={r.li} target="_blank" rel="noopener" style={{display:'inline-flex',alignItems:'center',gap:5,fontSize:11,fontWeight:600,color:'var(--li-fg)',background:'var(--li-bg)',border:'1px solid var(--li-border)',borderRadius:'var(--radius-pill)',padding:'5px 10px',textDecoration:'none',whiteSpace:'nowrap',flexShrink:0}}>
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
                       LinkedIn
                     </a>
                   </div>
@@ -555,7 +569,7 @@ const ROLE_STYLES = {
 function HeroBtn({ onClick, primary, href, target, rel, children }) {
   const [hovered, setHovered] = useState(false);
   const [pressed, setPressed] = useState(false);
-  const base = { display:'inline-flex', alignItems:'center', gap:8, padding:'11px 22px', borderRadius:7, fontSize:15, fontWeight:500, border:'none', cursor:'pointer', fontFamily:'inherit', textDecoration:'none', transition:'background 0.15s,color 0.15s,transform 0.1s', transform: pressed ? 'scale(0.97)' : 'scale(1)' };
+  const base = { display:'inline-flex', alignItems:'center', gap:8, padding:'11px 22px', borderRadius:'var(--radius-sm)', fontSize:15, fontWeight:500, border:'none', cursor:'pointer', fontFamily:'inherit', textDecoration:'none', transition:'background 0.15s,color 0.15s,transform 0.1s', transform: pressed ? 'scale(0.97)' : 'scale(1)' };
   const style = primary
     ? base
     : { ...base, background: pressed ? 'var(--g300)' : hovered ? 'var(--g200)' : 'var(--g100)', color: pressed ? 'var(--g800)' : hovered ? 'var(--g700)' : 'var(--g600)' };
@@ -577,8 +591,6 @@ function LockedCaseCard() {
   const [shake, setShake] = useState(false);
   const [hovered, setHovered] = useState(false);
   const [pressed, setPressed] = useState(false);
-  const [btnHovered, setBtnHovered] = useState(false);
-  const [btnPressed, setBtnPressed] = useState(false);
   const inputRef = useRef(null);
   const navigate = useNavigate();
   const isMobile = useMediaQuery('(max-width:640px)');
@@ -615,14 +627,18 @@ function LockedCaseCard() {
     <>
       {/* Card — même gabarit que ProjectCard */}
       <div
+        role="button"
+        tabIndex={0}
+        aria-label="Mon nouveau process IA — étude de cas protégée, entrer le code"
         onClick={() => setShowModal(true)}
+        onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setShowModal(true); } }}
         style={{
           background:'var(--bg)', display:'flex', flexDirection:'column',
-          borderRadius:10,
+          borderRadius:'var(--radius-md)',
           border: hovered ? '1px solid var(--blue)' : '1px solid var(--border)',
           overflow:'hidden', cursor:'pointer',
           transition:'border-color 0.2s,box-shadow 0.2s,transform 0.2s',
-          boxShadow: hovered ? '0 8px 32px rgba(25,86,219,0.12)' : 'none',
+          boxShadow: hovered ? '0 8px 32px rgba(79,70,229,0.12)' : 'none',
           transform: pressed ? 'scale(0.98)' : hovered ? 'translateY(-4px)' : 'none',
         }}
         onMouseEnter={() => setHovered(true)}
@@ -635,7 +651,7 @@ function LockedCaseCard() {
           <img loading="lazy"
             src="/images/pepyte-sig-apres.jpg"
             alt=""
-            style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top left', filter: 'blur(10px) brightness(.55)', transform: 'scale(1.08)', display: 'block' }}
+            style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top left', filter: 'var(--locked-thumb-filter)', transform: 'scale(1.08)', display: 'block' }}
           />
           <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 10 }}>
             <div style={{ width: 44, height: 44, borderRadius: '50%', background: 'rgba(255,255,255,.15)', backdropFilter: 'blur(4px)', border: '1.5px solid rgba(255,255,255,.3)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -666,22 +682,8 @@ function LockedCaseCard() {
             ))}
           </div>
         </div>
-        <div style={{ padding:'0 16px 16px' }}>
-          <span
-            style={{
-              display:'flex', width:'100%', borderRadius:8, fontSize:14,
-              padding:'10px 16px', justifyContent:'center',
-              background: btnPressed ? 'var(--g300)' : btnHovered ? 'var(--g200)' : 'var(--g100)',
-              color: btnPressed ? 'var(--g800)' : btnHovered ? 'var(--g700)' : 'var(--g600)',
-              fontWeight:500, alignItems:'center', gap:8,
-              transition:'background 0.15s,color 0.15s,transform 0.1s',
-              transform: btnPressed ? 'scale(0.97)' : 'scale(1)',
-            }}
-            onMouseEnter={() => setBtnHovered(true)}
-            onMouseLeave={() => { setBtnHovered(false); setBtnPressed(false); }}
-            onMouseDown={e => { e.preventDefault(); setBtnPressed(true); }}
-            onMouseUp={() => setBtnPressed(false)}
-          >
+        <div style={{ padding:'0 20px 20px' }}>
+          <span style={{ display:'inline-flex', alignItems:'center', gap:6, fontSize:14, fontWeight:500, color:'var(--blue)' }}>
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
             </svg>
@@ -756,24 +758,22 @@ function LockedCaseCard() {
 function ProjectCard({ p }) {
   const [hovered, setHovered] = useState(false);
   const [pressed, setPressed] = useState(false);
-  const [btnHovered, setBtnHovered] = useState(false);
-  const [btnPressed, setBtnPressed] = useState(false);
   return (
     <Link
       to={p.href}
       className="home-project-card"
       onClick={() => trackEvent.caseStudyOpen(p.name)}
       onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => { setHovered(false); setPressed(false); setBtnHovered(false); setBtnPressed(false); }}
+      onMouseLeave={() => { setHovered(false); setPressed(false); }}
       onMouseDown={() => setPressed(true)}
       onMouseUp={() => setPressed(false)}
       style={{
         background:'var(--bg)', display:'flex', flexDirection:'column',
-        borderRadius:10,
+        borderRadius:'var(--radius-md)',
         border: hovered ? '1px solid var(--blue)' : '1px solid var(--border)',
         overflow:'hidden', textDecoration:'none', color:'inherit',
         transition:'border-color 0.2s,box-shadow 0.2s,transform 0.2s',
-        boxShadow: hovered ? '0 8px 32px rgba(25,86,219,0.12)' : 'none',
+        boxShadow: hovered ? '0 8px 32px rgba(79,70,229,0.12)' : 'none',
         transform: pressed ? 'scale(0.98)' : hovered ? 'translateY(-4px)' : 'none',
       }}
     >
@@ -794,23 +794,10 @@ function ProjectCard({ p }) {
           {p.tags.map(t => <span key={t} className="badge" style={{background:'var(--blue-light)',color:'var(--badge-fg)'}}>{t}</span>)}
         </div>
       </div>
-      <div style={{padding:'0 16px 16px'}}>
-        <span
-          style={{
-            display:'flex', width:'100%', borderRadius:8, fontSize:14,
-            padding:'10px 16px', justifyContent:'center',
-            background: btnPressed ? 'var(--g300)' : btnHovered ? 'var(--g200)' : 'var(--g100)',
-            color: btnPressed ? 'var(--g800)' : btnHovered ? 'var(--g700)' : 'var(--g600)',
-            fontWeight:500, alignItems:'center', gap:8,
-            transition:'background 0.15s,color 0.15s,transform 0.1s',
-            transform: btnPressed ? 'scale(0.97)' : 'scale(1)',
-          }}
-          onMouseEnter={() => setBtnHovered(true)}
-          onMouseLeave={() => { setBtnHovered(false); setBtnPressed(false); }}
-          onMouseDown={e => { e.preventDefault(); setBtnPressed(true); }}
-          onMouseUp={() => setBtnPressed(false)}
-        >
-          Voir le projet <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      <div style={{padding:'0 20px 20px'}}>
+        <span style={{display:'inline-flex',alignItems:'center',gap:6,fontSize:14,fontWeight:500,color:'var(--blue)'}}>
+          Voir le projet
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{transition:'transform 0.2s',transform:hovered?'translateX(4px)':'none'}}><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </span>
       </div>
     </Link>
@@ -823,7 +810,7 @@ function SkillTag({ skill, active, isCore, onToggle }) {
 
   const base = { fontFamily:'inherit', fontSize:13, fontWeight:500, padding:'3px 8px', borderRadius:6, cursor:'pointer', lineHeight:1.4, whiteSpace:'nowrap', display:'inline-flex', alignItems:'center', gap:6, transition:'background 0.15s,color 0.15s,transform 0.1s', border:'1.5px solid', transform: pressed ? 'scale(0.97)' : 'scale(1)' };
 
-  // Tokens: p500=#1956DB · p600=#1141A8 · p700=#0C2E7A · p50=#EEF3FD · p100=#D7E5FB · p200=#9DB8F2
+  // Tokens: p500=#4F46E5 · p600=#4338CA · p700=#3730A3 · p50=#EEF2FF · p100=#E0E7FF · p200=#C7D2FE
   const coreStyle = active
     ? { ...base, background: pressed ? 'var(--p700)' : hovered ? 'var(--p600)' : 'var(--p600)', color:'var(--on-accent)', borderColor:'var(--p500)' }
     : { ...base, background: pressed ? 'var(--p700)' : hovered ? 'var(--p600)' : 'var(--p500)', color:'var(--on-accent)', borderColor:'var(--p500)' };

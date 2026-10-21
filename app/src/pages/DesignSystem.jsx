@@ -127,7 +127,7 @@ function Group({ label, children }) {
 }
 
 function ColorSwatch({ name, value }) {
-  const isLight = ['#EEF3FD','#D7E5FB','#FFFFFF','#F9FAFB','#F4F8FE','#E5E7EB','#E5E9F5'].includes(value);
+  const isLight = ['#EEF3FD','#D7E5FB','#EEF2FF','#E0E7FF','#C7D2FE','#F5F6FF','#FFFFFF','#F9FAFB','#F4F8FE','#E5E7EB','#E5E9F5'].includes(value);
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, minWidth: 72 }}>
       <Box sx={{ width: 64, height: 64, borderRadius: 2, background: value, border: isLight ? `1px solid ${tokens.border}` : 'none' }} />
@@ -618,7 +618,7 @@ import OpenInNewIcon from '@mui/icons-material/OpenInNew';
           ]}
           usage={[
             'Composant non interactif (non cliquable, non filtrable) — pour info statique uniquement.',
-            'default → bleu clair (#D7E5FB / blueDeep) : rôle générique, label neutre.',
+            'default → bleu clair (#E0E7FF / blueDeep) : rôle générique, label neutre.',
             'case → bleu foncé (bgBlue / blueDeep) : type de mission, case study, contrat.',
             'side → orange clair (tagPmBg / tagPmFg) : projet side, projet perso, exploration.',
             'perso → vert clair (#EAF3DE / #3B6D11) : projet personnel, initiative propre.',
@@ -1271,7 +1271,7 @@ export default function MaNouvellePage() {
     borderRadius: '14px',
     overflow: 'hidden',
     transition: 'box-shadow 0.2s',
-    '&:hover': { boxShadow: '0 8px 32px rgba(25,86,219,0.1)' },
+    '&:hover': { boxShadow: '0 8px 32px rgba(79,70,229,0.1)' },
   }}
 >
   {/* Image cover */}

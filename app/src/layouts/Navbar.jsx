@@ -88,7 +88,7 @@ export default function Navbar() {
             <li><button onClick={() => handleAnchor('competences')}>Expertises</button></li>
             <li><button onClick={() => handleAnchor('projets')}>Projets</button></li>
             <li style={{borderBottom:'none',padding:'20px 2rem 24px'}}>
-              <button className="btn-brand" onClick={() => handleAnchor('contact')} style={{display:'block',width:'100%',textAlign:'center',fontWeight:600,padding:'16px',borderRadius:10,fontSize:16,border:'none',cursor:'pointer',fontFamily:"'Outfit',sans-serif"}}>Contact</button>
+              <button className="btn-brand" onClick={() => handleAnchor('contact')} style={{display:'block',width:'100%',textAlign:'center',fontWeight:600,padding:'16px',borderRadius:'var(--radius-sm)',fontSize:16,border:'none',cursor:'pointer',fontFamily:"'Outfit',sans-serif"}}>Contact</button>
             </li>
           </ul>
           <div className="mob-footer-inner">

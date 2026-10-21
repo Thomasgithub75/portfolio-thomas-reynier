@@ -84,12 +84,12 @@ const PRINT_STYLE = `
   .lm-kpi {
     display: flex !important;
     gap: 10pt !important;
-    border-left: 3px solid #1956DB !important;
-    background: #EEF3FD !important;
+    border-left: 3px solid var(--blue) !important;
+    background: var(--blue-light) !important;
     padding: 10pt 14pt !important;
     margin: 12pt 0 !important;
     font-size: 11pt !important;
-    color: #1956DB !important;
+    color: var(--blue) !important;
     border-radius: 6pt !important;
   }
   .lm-kpi-icon {

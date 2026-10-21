@@ -92,7 +92,7 @@ function CaseGate({ onUnlock }) {
         </form>
         <p style={{ textAlign: 'center', fontSize: 12, color: '#9CA3AF', marginTop: 18 }}>
           Pas encore de code ?{' '}
-          <a href="https://mail.google.com/mail/?view=cm&to=reynier.design@gmail.com" target="_blank" rel="noopener" style={{ color: '#1956DB', textDecoration: 'none', fontWeight: 500 }}>
+          <a href="https://mail.google.com/mail/?view=cm&to=reynier.design@gmail.com" target="_blank" rel="noopener" style={{ color: 'var(--blue)', textDecoration: 'none', fontWeight: 500 }}>
             Contactez Thomas
           </a>
         </p>
@@ -218,8 +218,8 @@ export default function CasePepyteSignature() {
 
                 <div>
                   <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:8}}>
-                    <div style={{width:32,height:32,borderRadius:8,background:'#EEF3FD',border:'1px solid #BFDBFE',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0}}>
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1956DB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                    <div style={{width:32,height:32,borderRadius:8,background:'var(--blue-light)',border:'1px solid #BFDBFE',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0}}>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
                     </div>
                     <span style={{fontSize:12,fontWeight:600,color:'#111827'}}>HTML</span>
                   </div>
@@ -393,40 +393,40 @@ export default function CasePepyteSignature() {
 
             <div style={{display:'flex',flexDirection:'column',gap:12,marginTop:16}}>
 
-              <div style={{background:'#EEF3FD',borderRadius:10,padding:'16px 20px',display:'flex',gap:14,alignItems:'flex-start'}}>
-                <div style={{width:30,height:30,borderRadius:7,background:'#1956DB',color:'#fff',display:'flex',alignItems:'center',justifyContent:'center',fontWeight:700,fontSize:11,flexShrink:0,marginTop:2}}>01</div>
+              <div style={{background:'var(--blue-light)',borderRadius:10,padding:'16px 20px',display:'flex',gap:14,alignItems:'flex-start'}}>
+                <div style={{width:30,height:30,borderRadius:7,background:'var(--blue)',color:'#fff',display:'flex',alignItems:'center',justifyContent:'center',fontWeight:700,fontSize:11,flexShrink:0,marginTop:2}}>01</div>
                 <div>
                   <p className="step-title" style={{margin:'0 0 5px'}}>Supprimer le nombre de candidats</p>
                   <p className="step-body" style={{margin:0}}>En vue de pilotage, c'est une métrique de volume, pas d'urgence. Le recruteur qui veut ce chiffre l'a en un clic sur l'offre. Ce qu'on perd : la vision instantanée du volume. Ce qu'on gagne : un dashboard qui dit quoi faire, pas combien.</p>
                 </div>
               </div>
 
-              <div style={{background:'#EEF3FD',borderRadius:10,padding:'16px 20px',display:'flex',gap:14,alignItems:'flex-start'}}>
-                <div style={{width:30,height:30,borderRadius:7,background:'#1956DB',color:'#fff',display:'flex',alignItems:'center',justifyContent:'center',fontWeight:700,fontSize:11,flexShrink:0,marginTop:2}}>02</div>
+              <div style={{background:'var(--blue-light)',borderRadius:10,padding:'16px 20px',display:'flex',gap:14,alignItems:'flex-start'}}>
+                <div style={{width:30,height:30,borderRadius:7,background:'var(--blue)',color:'#fff',display:'flex',alignItems:'center',justifyContent:'center',fontWeight:700,fontSize:11,flexShrink:0,marginTop:2}}>02</div>
                 <div>
                   <p className="step-title" style={{margin:'0 0 5px'}}>Plafonner à 90 %, jamais 100 %</p>
                   <p className="step-body" style={{margin:0}}>Tant qu'un contrat n'est pas signé, il reste une part d'incertitude réelle. Afficher 100 % donnerait une fausse certitude et risquerait de démobiliser un recruteur sur une offre pas encore close. Décision mathématiquement non-pure, mais honnête sur le plan métier.</p>
                 </div>
               </div>
 
-              <div style={{background:'#EEF3FD',borderRadius:10,padding:'16px 20px',display:'flex',gap:14,alignItems:'flex-start'}}>
-                <div style={{width:30,height:30,borderRadius:7,background:'#1956DB',color:'#fff',display:'flex',alignItems:'center',justifyContent:'center',fontWeight:700,fontSize:11,flexShrink:0,marginTop:2}}>03</div>
+              <div style={{background:'var(--blue-light)',borderRadius:10,padding:'16px 20px',display:'flex',gap:14,alignItems:'flex-start'}}>
+                <div style={{width:30,height:30,borderRadius:7,background:'var(--blue)',color:'#fff',display:'flex',alignItems:'center',justifyContent:'center',fontWeight:700,fontSize:11,flexShrink:0,marginTop:2}}>03</div>
                 <div>
                   <p className="step-title" style={{margin:'0 0 5px'}}>Priorité Haute = probabilité basse (contre-intuitif assumé)</p>
                   <p className="step-body" style={{margin:0}}>"Priorité" décrit une action à mener, pas un état. Une offre à 25 % a besoin du recruteur : sourcer, qualifier, relancer. Une offre à 85 % avance seule. Validé avec les recruteurs avant de figer le wording. Contre-intuitif au premier regard, naturel dès le premier jour.</p>
                 </div>
               </div>
 
-              <div style={{background:'#EEF3FD',borderRadius:10,padding:'16px 20px',display:'flex',gap:14,alignItems:'flex-start'}}>
-                <div style={{width:30,height:30,borderRadius:7,background:'#1956DB',color:'#fff',display:'flex',alignItems:'center',justifyContent:'center',fontWeight:700,fontSize:11,flexShrink:0,marginTop:2}}>04</div>
+              <div style={{background:'var(--blue-light)',borderRadius:10,padding:'16px 20px',display:'flex',gap:14,alignItems:'flex-start'}}>
+                <div style={{width:30,height:30,borderRadius:7,background:'var(--blue)',color:'#fff',display:'flex',alignItems:'center',justifyContent:'center',fontWeight:700,fontSize:11,flexShrink:0,marginTop:2}}>04</div>
                 <div>
                   <p className="step-title" style={{margin:'0 0 5px'}}>Afficher le label ET le pourcentage</p>
                   <p className="step-body" style={{margin:0}}>Lecture en deux temps : le label ("Haute") → décision immédiate. Le pourcentage → arbitrage fin entre offres au même niveau. La densité visuelle augmente légèrement, mais elle est compensée par la hiérarchie badge coloré / chiffre discret en dessous.</p>
                 </div>
               </div>
 
-              <div style={{background:'#EEF3FD',borderRadius:10,padding:'16px 20px',display:'flex',gap:14,alignItems:'flex-start'}}>
-                <div style={{width:30,height:30,borderRadius:7,background:'#1956DB',color:'#fff',display:'flex',alignItems:'center',justifyContent:'center',fontWeight:700,fontSize:11,flexShrink:0,marginTop:2}}>05</div>
+              <div style={{background:'var(--blue-light)',borderRadius:10,padding:'16px 20px',display:'flex',gap:14,alignItems:'flex-start'}}>
+                <div style={{width:30,height:30,borderRadius:7,background:'var(--blue)',color:'#fff',display:'flex',alignItems:'center',justifyContent:'center',fontWeight:700,fontSize:11,flexShrink:0,marginTop:2}}>05</div>
                 <div>
                   <p className="step-title" style={{margin:'0 0 5px'}}>Wording "X % de signer"</p>
                   <p className="step-body" style={{margin:0}}>"Signer" est le mot du quotidien des recruteurs — un placement, c'est une signature. Pas de jargon abstrait ("score de conversion", "indice de confiance"). Très ancré dans l'univers du recrutement, non transférable à d'autres métiers — et c'est voulu.</p>
@@ -463,7 +463,7 @@ export default function CasePepyteSignature() {
 
               <div style={{background:'#F9FAFB',border:'1px solid #E5E7EB',borderRadius:12,padding:'20px 24px'}}>
                 <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:12}}>
-                  <div style={{width:32,height:32,borderRadius:8,background:'#1956DB',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0}}>
+                  <div style={{width:32,height:32,borderRadius:8,background:'var(--blue)',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0}}>
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                   </div>
                   <p className="step-title" style={{margin:0}}>Un bon dashboard répond à une seule question</p>
