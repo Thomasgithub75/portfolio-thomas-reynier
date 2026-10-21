@@ -53,7 +53,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className={`nav${scrolled ? ' nav-scrolled' : ''}`}>
+      <nav className={`nav${scrolled && !open ? ' nav-scrolled' : ''}${open ? ' nav-open' : ''}`}>
         <div className="nav-inner">
           <Link className="nav-brand" to="/" onClick={close}>
             <div className="nav-logo-placeholder">TR</div>
