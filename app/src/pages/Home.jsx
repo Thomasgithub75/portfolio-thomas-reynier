@@ -547,10 +547,10 @@ export default function Home() {
 }
 
 const ROLE_STYLES = {
-  'project-role-pepyte': { background:'#F0EDFE', color:'#6B45D6', border:'1px solid #D6CCFC' },
-  'project-role-weborama': { background:'#E3F7EE', color:'#0E7A56', border:'1px solid #A7E3CA' },
-  'project-role-nectar': { background:'#FEF3E2', color:'#A05C0A', border:'1px solid #F9D5A0' },
-  'project-role-portfolio': { background:'#F0F4FF', color:'#2145A8', border:'1px solid #C4D0F5' },
+  'project-role-pepyte': { background:'var(--role-pepyte-bg)', color:'var(--role-pepyte-fg)', border:'1px solid var(--role-pepyte-border)' },
+  'project-role-weborama': { background:'var(--role-weborama-bg)', color:'var(--role-weborama-fg)', border:'1px solid var(--role-weborama-border)' },
+  'project-role-nectar': { background:'var(--role-nectar-bg)', color:'var(--role-nectar-fg)', border:'1px solid var(--role-nectar-border)' },
+  'project-role-portfolio': { background:'var(--role-portfolio-bg)', color:'var(--role-portfolio-fg)', border:'1px solid var(--role-portfolio-border)' },
 };
 
 function HeroBtn({ onClick, primary, href, target, rel, children }) {
@@ -662,7 +662,7 @@ function LockedCaseCard() {
           </p>
           <div style={{ display:'flex', flexWrap:'wrap', gap:6, marginTop:4 }}>
             {['Product Design', 'Logique métier', 'Prototypage'].map(t => (
-              <span key={t} className="badge" style={{ background: 'var(--blue-light)', color: 'var(--blue)' }}>{t}</span>
+              <span key={t} className="badge" style={{ background: 'var(--blue-light)', color: 'var(--badge-fg)' }}>{t}</span>
             ))}
           </div>
         </div>
@@ -791,7 +791,7 @@ function ProjectCard({ p }) {
         <p style={{fontSize:18,fontWeight:600,color:'var(--text)',letterSpacing:'-0.025em',lineHeight:1.2}}>{p.name}</p>
         <p style={{fontSize:13,color:'var(--muted)',lineHeight:1.6,fontWeight:300}}>{p.desc}</p>
         <div style={{display:'flex',flexWrap:'wrap',gap:6,marginTop:4}}>
-          {p.tags.map(t => <span key={t} className="badge" style={{background:'var(--blue-light)',color:'var(--blue)'}}>{t}</span>)}
+          {p.tags.map(t => <span key={t} className="badge" style={{background:'var(--blue-light)',color:'var(--badge-fg)'}}>{t}</span>)}
         </div>
       </div>
       <div style={{padding:'0 16px 16px'}}>
