@@ -4,6 +4,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import Navbar from '../layouts/Navbar';
 import Footer from '../layouts/Footer';
 import { trackEvent } from '../utils/analytics';
+import { unlock } from '../utils/unlock';
 
 const SKILL_PROJS = {
   'UX Research': [
@@ -597,9 +598,9 @@ function LockedCaseCard() {
     return () => document.removeEventListener('keydown', fn);
   }, []);
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    if (code === 'thomas2026') {
+    if (await unlock('pepyte', code)) {
       sessionStorage.setItem('pepyte_sig_access', 'true');
       setShowModal(false);
       navigate('/case/pepyte-signature');

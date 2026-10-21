@@ -29,6 +29,13 @@ function mockApiPlugin() {
         }));
       });
 
+      // En local, n'importe quel mot de passe ouvre les pages privées
+      server.middlewares.use('/api/unlock', (req, res) => {
+        if (req.method !== 'POST') { res.writeHead(405); res.end(); return; }
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ token: 'dev' }));
+      });
+
       server.middlewares.use('/api/generate-letter', (req, res) => {
         if (req.method === 'OPTIONS') {
           res.writeHead(200); res.end(); return;

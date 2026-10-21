@@ -12,17 +12,17 @@ import Intro from '../components/Intro/Intro';
 import OverflowMenu from '../components/OverflowMenu/OverflowMenu';
 import TestimonialCard from '../components/TestimonialCard/TestimonialCard';
 import { tokens } from '../theme/theme';
+import { unlock, getToken } from '../utils/unlock';
 import { useState } from 'react';
 
 // ── Auth ──────────────────────────────────────────────────────────────────────
-const PASSWORD = import.meta.env.VITE_DS_PASSWORD || 'thomas2026';
 
 function PasswordGate({ onUnlock }) {
   const [pwd, setPwd] = useState('');
   const [error, setError] = useState(false);
 
-  const submit = () => {
-    if (pwd === PASSWORD) { onUnlock(); }
+  const submit = async () => {
+    if (await unlock('ds', pwd)) { onUnlock(); }
     else { setError(true); setTimeout(() => setError(false), 2000); }
   };
 
@@ -369,9 +369,9 @@ function DocBlock({ props: propRows, usage, code }) {
 // ── Page ──────────────────────────────────────────────────────────────────────
 
 export default function DesignSystem() {
-  const [unlocked, setUnlocked] = useState(() => localStorage.getItem('ds_auth') === '1');
+  const [unlocked, setUnlocked] = useState(() => !!getToken('ds'));
 
-  if (!unlocked) return <PasswordGate onUnlock={() => { localStorage.setItem('ds_auth', '1'); setUnlocked(true); }} />;
+  if (!unlocked) return <PasswordGate onUnlock={() => setUnlocked(true)} />;
 
   return <DesignSystemContent />;
 }
