@@ -18,6 +18,7 @@
   --tag-design-bg:#EEEDFE;--tag-design-fg:#534AB7;
   --tag-dev-bg:#E1F5EE;--tag-dev-fg:#0F6E56;
   --tag-pm-bg:#FAEEDA;--tag-pm-fg:#854F0B;
+  --photo-ring:rgba(25,86,219,0.2);
 }
 /* Dark mode (test) — palette inspired by tech/fintech apps (Revolut-style): black surfaces, electric violet accent */
 :root[data-theme="dark"]{
@@ -37,6 +38,7 @@
   --tag-design-bg:rgba(141,74,255,.18);--tag-design-fg:#C9A8FF;
   --tag-dev-bg:rgba(45,212,160,.16);--tag-dev-fg:#7EEAC4;
   --tag-pm-bg:rgba(245,158,11,.18);--tag-pm-fg:#FBBF72;
+  --photo-ring:rgba(141,74,255,.5);
 }
 html{scroll-behavior:smooth;overflow-x:hidden}
 body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
