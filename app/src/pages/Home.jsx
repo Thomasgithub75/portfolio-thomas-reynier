@@ -177,39 +177,48 @@ export default function Home() {
       <Navbar />
 
       {/* HERO */}
-      <section id="hero" style={{paddingTop:140,paddingBottom:80,background:'linear-gradient(145deg,var(--p50) 0%,var(--bg) 55%)'}}>
+      <section id="hero" className="home-hero" style={{background:'linear-gradient(145deg,var(--p50) 0%,var(--bg) 55%)'}}>
         <div className="container">
           <div className="home-hero-grid">
-            <div>
-              <p style={{display:'flex',alignItems:'center',gap:10,fontSize:12,fontWeight:600,letterSpacing:'0.1em',textTransform:'uppercase',color:'var(--text)',marginBottom:20}}>
-                <span style={{width:28,height:2,background:'var(--blue)',borderRadius:2,flexShrink:0,display:'inline-block'}}/>
-                PRODUCT DESIGNER
-              </p>
+            <div className="hero-copy">
+              {/* Phones: small avatar + availability next to the eyebrow, so the big photo doesn't push the content below the fold */}
+              <div className="hero-eyebrow-row">
+                <div className="hero-avatar-mobile" aria-hidden="true">
+                  <img src="/images/profile-cutout.png" alt="" />
+                </div>
+                <div>
+                  <p style={{display:'flex',alignItems:'center',gap:10,fontSize:12,fontWeight:600,letterSpacing:'0.1em',textTransform:'uppercase',color:'var(--text)'}}>
+                    <span style={{width:28,height:2,background:'var(--blue)',borderRadius:2,flexShrink:0,display:'inline-block'}}/>
+                    PRODUCT DESIGNER
+                  </p>
+                  <p className="hero-status-mobile"><span className="hero-status-dot"/>À l'écoute · Freelance &amp; CDI</p>
+                </div>
+              </div>
               <h1 style={{fontSize:'clamp(22px,5.8vw,52px)',fontWeight:700,color:'var(--blue)',lineHeight:1.08,letterSpacing:'-0.03em',marginBottom:20,whiteSpace:'nowrap'}}>
                 UX <span style={{color:'var(--text)'}}>·</span> Design System <span style={{color:'var(--text)'}}>·</span> <span className="text-brand-gradient">IA</span>
               </h1>
               <p style={{fontSize:17,color:'var(--muted)',lineHeight:1.7,maxWidth:580,marginBottom:16,fontWeight:300}}>
                 La recherche oriente mes décisions, le Design System structure mes livrables, l'IA accélère la livraison.
               </p>
-              <div style={{display:'flex',flexDirection:'column',gap:12,marginBottom:28}}>
+              <div className="hero-points">
                 {[
                   { icon:<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 000-7h-11a3.5 3.5 0 010-7H15"/><circle cx="18" cy="5" r="3"/></svg>, label:'Parcours & interfaces', desc:'de la recherche utilisateur à la livraison' },
                   { icon:<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M11.99 18.54l-7.37-5.73L3 14.07l9 7 9-7-1.63-1.27-7.38 5.74zm.01-2.7l7.36-5.73L21 8.93l-9-7-9 7 1.63 1.18 7.37 5.73z"/></svg>, label:'Design Systems', desc:'création et gouvernance de systèmes' },
                   { icon:<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M9.937 15.5A2 2 0 008.5 14.063l-6.135-1.582a.5.5 0 010-.962L8.5 9.936A2 2 0 009.937 8.5l1.582-6.135a.5.5 0 01.963 0L14.063 8.5A2 2 0 0015.5 9.937l6.135 1.581a.5.5 0 010 .964L15.5 14.063a2 2 0 00-1.437 1.437l-1.582 6.135a.5.5 0 01-.963 0z"/><path d="M20 3v4M22 5h-4M4 17v2M5 18H3"/></svg>, label:'Intelligence artificielle', desc:'de la discovery à la livraison' }
                 ].map(card => (
-                  <div key={card.label} style={{display:'flex',alignItems:'flex-start',gap:12}}>
-                    <div style={{width:40,height:40,minWidth:40,background:'var(--blue-light)',borderRadius:10,display:'flex',alignItems:'center',justifyContent:'center',color:'var(--blue)'}}>{card.icon}</div>
-                    <p style={{fontSize:14,color:'var(--muted)',lineHeight:1.55,paddingTop:10}}><strong style={{color:'var(--text)',fontWeight:500}}>{card.label}</strong> — {card.desc}</p>
+                  <div key={card.label} className="hero-point">
+                    <div className="hero-point-icon">{card.icon}</div>
+                    <p className="hero-point-text"><strong>{card.label}</strong><span className="hero-point-desc"> — {card.desc}</span></p>
                   </div>
                 ))}
               </div>
-              <div style={{display:'flex',alignItems:'stretch',marginBottom:32}}>
+              <div className="hero-stats">
                 {[['5',"ans d'expérience"],['+10','produits SaaS'],['+100','features']].map(([num,lbl],i) => {
                   const hasPlus = num[0]==='+';
                   const digits = hasPlus ? num.slice(1) : num;
                   return (
-                    <div key={lbl} style={{paddingTop:4,paddingBottom:4,paddingRight:24,paddingLeft:i===0?0:24,borderRight:i<2?'1px solid var(--g200)':'none'}}>
-                      <span style={{display:'block',fontSize:26,fontWeight:600,letterSpacing:'-0.03em',lineHeight:1.1}}>
+                    <div key={lbl} className="hero-stat" style={{paddingLeft:i===0?0:undefined,borderRight:i<2?'1px solid var(--g200)':'none'}}>
+                      <span className="hero-stat-num">
                         {hasPlus && <span style={{color:'var(--text)'}}>+</span>}
                         <span style={{color:'var(--blue)'}}>{digits}</span>
                       </span>
@@ -218,7 +227,7 @@ export default function Home() {
                   );
                 })}
               </div>
-              <div style={{display:'flex',gap:12,alignItems:'center'}}>
+              <div className="hero-ctas">
                 <HeroBtn primary onClick={() => { const el=document.getElementById('projets'); if(el) el.scrollIntoView({behavior:'smooth'}); }}>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
                   Voir mes projets
