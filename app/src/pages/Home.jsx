@@ -145,7 +145,7 @@ export default function Home() {
                 ))}
               </div>
               <div style={{display:'flex',alignItems:'stretch',marginBottom:32}}>
-                {[['5',"ans d'expérience"],['+10','produit SaaS'],['+100','features']].map(([num,lbl],i) => {
+                {[['5',"ans d'expérience"],['+10','produits SaaS'],['+100','features']].map(([num,lbl],i) => {
                   const hasPlus = num[0]==='+';
                   const digits = hasPlus ? num.slice(1) : num;
                   return (
@@ -196,8 +196,8 @@ export default function Home() {
           <h2>Mes derniers projets</h2>
           <div className="home-projects-grid">
             {[
-              { href:'/case/pepyte', thumb:'/images/thumb-pepyte.jpg', logo:'/images/logo-pepyte.svg', role:'UX Research & Design', roleClass:'project-role-pepyte', duration:'26 mois', name:'Pepyte', desc:"Audit de 62 champs, 10 entretiens recruteurs et conception de la fonctionnalité de matching — de la recherche à l'interface.", tags:['UX Research','Design System','Design IA'] },
-              { href:'/case/weborama', thumb:'/images/thumb-weborama.jpg', logo:'/images/logo-weborama.svg', role:'Design System Lead', roleClass:'project-role-weborama', duration:'16 mois', name:'Weborama', desc:"Audit de 974 composants, ateliers de co-construction et création d'un Design System de zéro — 80% de composants en moins.", tags:['UX Research','Design System','Design IA'] },
+              { href:'/case/pepyte', thumb:'/images/thumb-pepyte.webp', logo:'/images/logo-pepyte.svg', role:'UX Research & Design', roleClass:'project-role-pepyte', duration:'26 mois', name:'Pepyte', desc:"Audit de 62 champs, 10 entretiens recruteurs et conception de la fonctionnalité de matching — de la recherche à l'interface.", tags:['UX Research','Design System','Design IA'] },
+              { href:'/case/weborama', thumb:'/images/thumb-weborama.webp', logo:'/images/logo-weborama.svg', role:'Design System Lead', roleClass:'project-role-weborama', duration:'16 mois', name:'Weborama', desc:"Audit de 974 composants, ateliers de co-construction et création d'un Design System de zéro — 80% de composants en moins.", tags:['UX Research','Design System','Design IA'] },
             ].map(p => <ProjectCard key={p.name} p={p}/>)}
             <LockedCaseCard/>
           </div>
@@ -279,7 +279,7 @@ export default function Home() {
                       <div style={{height:8,width:80,background:'var(--border)',borderRadius:3}}/>
                     </div>
                     <span style={{fontSize:16,color:'var(--border)',margin:'0 4px'}}>×</span>
-                    <img src="/images/profile.png" alt="Thomas" style={{width:36,height:36,borderRadius:8,objectFit:'cover',border:'1.5px solid var(--border)',flexShrink:0}}/>
+                    <img loading="lazy" src="/images/profile-thumb.jpg" alt="Thomas" style={{width:36,height:36,borderRadius:8,objectFit:'cover',border:'1.5px solid var(--border)',flexShrink:0}}/>
                   </div>
 
                   {/* Titre résultat */}
@@ -296,7 +296,7 @@ export default function Home() {
                   ].map((row,i) => (
                     <div key={i} style={{padding:'10px 16px',borderBottom:'1px solid var(--border)',display:'flex',flexDirection:'column',gap:5}}>
                       <div style={{display:'flex',alignItems:'center',gap:7}}>
-                        <img src={row.logo} alt="" style={{width:13,height:13,objectFit:'contain'}}/>
+                        <img loading="lazy" src={row.logo} alt="" style={{width:13,height:13,objectFit:'contain'}}/>
                         <span style={{fontSize:11.5,fontWeight:600,color:'var(--text)'}}>{row.label}</span>
                       </div>
                       <div style={{display:'flex',flexDirection:'column',gap:3}}>
@@ -406,7 +406,7 @@ export default function Home() {
                     {panelProjects.map(p => p.locked ? (
                       <div key={p.name} style={{display:'flex',alignItems:'flex-start',gap:10,padding:'10px 16px',borderBottom:'0.5px solid var(--border-soft)',position:'relative',background:'var(--n-faint)',cursor:'default'}}>
                         <div style={{width:34,height:34,borderRadius:7,flexShrink:0,display:'flex',alignItems:'center',justifyContent:'center',overflow:'hidden',background:p.bg,opacity:.7}}>
-                          <img src={p.logo} alt={p.name} style={{width:'100%',height:'100%',objectFit:'contain',padding:5}}/>
+                          <img loading="lazy" src={p.logo} alt={p.name} style={{width:'100%',height:'100%',objectFit:'contain',padding:5}}/>
                         </div>
                         <div style={{flex:1,minWidth:0,paddingRight:24}}>
                           <div style={{fontSize:13,fontWeight:500,color:'var(--muted)',lineHeight:1.2,marginBottom:2}}>{p.name}</div>
@@ -420,7 +420,7 @@ export default function Home() {
                     ) : (
                       <Link key={p.name} to={p.url} style={{display:'flex',alignItems:'flex-start',gap:10,padding:'10px 16px',textDecoration:'none',color:'inherit',borderBottom:'0.5px solid var(--border-soft)',transition:'background 0.15s',position:'relative'}} onMouseEnter={e=>e.currentTarget.style.background='var(--panel)'} onMouseLeave={e=>e.currentTarget.style.background=''}>
                         <div style={{width:34,height:34,borderRadius:7,flexShrink:0,display:'flex',alignItems:'center',justifyContent:'center',fontSize:11,fontWeight:700,color:'var(--on-accent)',overflow:'hidden',background:p.logo?p.bg:p.color}}>
-                          {p.logo ? <img src={p.logo} alt={p.name} style={{width:'100%',height:'100%',objectFit:'contain',padding:5}}/> : p.initials}
+                          {p.logo ? <img loading="lazy" src={p.logo} alt={p.name} style={{width:'100%',height:'100%',objectFit:'contain',padding:5}}/> : p.initials}
                         </div>
                         <div style={{flex:1,minWidth:0,paddingRight:20}}>
                           <div style={{fontSize:13,fontWeight:500,color:'var(--text)',lineHeight:1.2,marginBottom:2}}>{p.name}</div>
@@ -458,13 +458,13 @@ export default function Home() {
                 <div style={{display:'flex',flexDirection:'column',gap:14}}>
                   <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',gap:8}}>
                     <div style={{display:'flex',gap:2}}>{[0,1,2,3,4].map(i=><span key={i} style={{color:'#F59E0B',fontSize:15}}>★</span>)}</div>
-                    <img src="/images/logo-pepyte.svg" alt="Pepyte" style={{height:22,width:'auto',objectFit:'contain',opacity:.85,flexShrink:0}}/>
+                    <img loading="lazy" src="/images/logo-pepyte.svg" alt="Pepyte" style={{height:22,width:'auto',objectFit:'contain',opacity:.85,flexShrink:0}}/>
                   </div>
                   <p style={{fontSize:17,fontWeight:700,color:'var(--text)',lineHeight:1.45,letterSpacing:'-.015em'}}>« Une augmentation importante de la satisfaction des utilisateurs et de l'efficacité des processus de recrutement. »</p>
                   <hr style={{border:'none',borderTop:'1px solid var(--border)'}}/>
                   <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',gap:8}}>
                     <div style={{display:'flex',alignItems:'center',gap:10}}>
-                      <img src="/images/avatar-alexis.png" alt="Alexis Vaysse" style={{width:44,height:44,borderRadius:'50%',objectFit:'cover',flexShrink:0,border:'2px solid var(--border)'}}/>
+                      <img loading="lazy" src="/images/avatar-alexis.png" alt="Alexis Vaysse" style={{width:44,height:44,borderRadius:'50%',objectFit:'cover',flexShrink:0,border:'2px solid var(--border)'}}/>
                       <div>
                         <p style={{fontSize:14,fontWeight:600,color:'var(--text)',lineHeight:1.2}}>Alexis Vaysse</p>
                         <p style={{fontSize:11,color:'var(--muted)',fontWeight:300,marginTop:2}}>Co-CEO & Co-Founder · Pepyte</p>
@@ -490,14 +490,14 @@ export default function Home() {
                 <div key={r.name} style={{background:'var(--surface)',border:'1px solid var(--border)',borderRadius:14,padding:24,display:'flex',flexDirection:'column',gap:14}}>
                   <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',gap:8}}>
                     <div style={{display:'flex',gap:2}}>{[0,1,2,3,4].map(i=><span key={i} style={{color:'#F59E0B',fontSize:14}}>★</span>)}</div>
-                    <img src={r.logo} alt={r.logoAlt} style={{height:20,width:'auto',objectFit:'contain',opacity:.85,flexShrink:0}}/>
+                    <img loading="lazy" src={r.logo} alt={r.logoAlt} style={{height:20,width:'auto',objectFit:'contain',opacity:.85,flexShrink:0}}/>
                   </div>
                   <p style={{fontSize:15,fontWeight:700,color:'var(--text)',lineHeight:1.45,letterSpacing:'-.015em'}}>{r.keyquote}</p>
                   <p style={{fontSize:13,color:'var(--muted)',lineHeight:1.75,fontWeight:300,fontStyle:'italic'}}>{r.quote}</p>
                   <hr style={{border:'none',borderTop:'1px solid var(--border)'}}/>
                   <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',gap:8}}>
                     <div style={{display:'flex',alignItems:'center',gap:10}}>
-                      <img src={r.avatar} alt={r.name} style={{width:38,height:38,borderRadius:'50%',objectFit:'cover',flexShrink:0,border:'2px solid var(--border)'}}/>
+                      <img loading="lazy" src={r.avatar} alt={r.name} style={{width:38,height:38,borderRadius:'50%',objectFit:'cover',flexShrink:0,border:'2px solid var(--border)'}}/>
                       <div>
                         <p style={{fontSize:14,fontWeight:600,color:'var(--text)',lineHeight:1.2}}>{r.name}</p>
                         <p style={{fontSize:11,color:'var(--muted)',fontWeight:300,marginTop:2}}>{r.role}</p>
@@ -632,7 +632,7 @@ function LockedCaseCard() {
       >
         {/* Blurred thumbnail */}
         <div style={{ width:'100%', height:200, background:'var(--bg-soft)', borderBottom:'1px solid var(--border)', overflow:'hidden', flexShrink:0, position:'relative' }}>
-          <img
+          <img loading="lazy"
             src="/images/pepyte-sig-apres.jpg"
             alt=""
             style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top left', filter: 'blur(10px) brightness(.55)', transform: 'scale(1.08)', display: 'block' }}
@@ -651,7 +651,7 @@ function LockedCaseCard() {
         <div style={{ padding:20, display:'flex', flexDirection:'column', gap:10, flex:1 }}>
           <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', gap:8 }}>
             <div style={{ display:'flex', alignItems:'center', gap:8, flex:1, minWidth:0 }}>
-              <img src="/images/logo-pepyte.svg" alt="Pepyte" style={{ width:22, height:22, borderRadius:5, objectFit:'contain', flexShrink:0 }}/>
+              <img loading="lazy" src="/images/logo-pepyte.svg" alt="Pepyte" style={{ width:22, height:22, borderRadius:5, objectFit:'contain', flexShrink:0 }}/>
               <span style={{ fontSize:11, fontWeight:600, padding:'3px 10px', borderRadius:20, whiteSpace:'nowrap', background:'var(--n-soft)', color:'var(--n-muted)', border:'1px solid var(--border)' }}>Présentée en entretien</span>
             </div>
             <span style={{ fontSize:12, color:'var(--muted)', fontWeight:400, whiteSpace:'nowrap', flexShrink:0 }}>Juin 2026</span>
@@ -778,12 +778,12 @@ function ProjectCard({ p }) {
       }}
     >
       <div style={{width:'100%',height:200,background:'var(--bg-soft)',borderBottom:'1px solid var(--border)',overflow:'hidden',flexShrink:0}}>
-        <img src={p.thumb} alt={p.name} style={{width:'100%',height:'100%',objectFit:'cover',objectPosition:'center',display:'block',transition:'transform 0.4s ease',transform:hovered?'scale(1.04)':'scale(1)'}}/>
+        <img loading="lazy" src={p.thumb} alt={p.name} style={{width:'100%',height:'100%',objectFit:'cover',objectPosition:'center',display:'block',transition:'transform 0.4s ease',transform:hovered?'scale(1.04)':'scale(1)'}}/>
       </div>
       <div style={{padding:20,display:'flex',flexDirection:'column',gap:10,flex:1}}>
         <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',gap:8}}>
           <div style={{display:'flex',alignItems:'center',gap:8,flex:1,minWidth:0}}>
-            <img src={p.logo} alt={p.name} style={{width:22,height:22,borderRadius:5,objectFit:'contain',flexShrink:0}}/>
+            <img loading="lazy" src={p.logo} alt={p.name} style={{width:22,height:22,borderRadius:5,objectFit:'contain',flexShrink:0}}/>
             <span style={{fontSize:11,fontWeight:600,padding:'3px 10px',borderRadius:20,whiteSpace:'nowrap',...ROLE_STYLES[p.roleClass]}}>{p.role}</span>
           </div>
           <span style={{fontSize:12,color:'var(--muted)',fontWeight:400,whiteSpace:'nowrap',flexShrink:0}}>{p.duration}</span>

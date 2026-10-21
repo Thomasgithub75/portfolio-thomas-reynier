@@ -510,8 +510,8 @@ export default function CasePepyteSignature() {
 
       <CaseCta/>
       <OtherProjects projects={[
-        { href:'/case/pepyte', thumb:'/images/thumb-pepyte.jpg', logo:'/images/logo-pepyte.svg', role:'Product Designer', roleClass:'role-pepyte', duration:'26 mois', name:'Pepyte — Matching', desc:'UX Research, formulaires et conception du matching candidats-offres de A à Z.', tags:['UX Research','Prototypage','Matching'] },
-        { href:'/case/weborama', thumb:'/images/thumb-weborama.jpg', logo:'/images/logo-weborama.svg', role:'Design System Lead', roleClass:'role-weborama', duration:'16 mois', name:'Weborama', desc:"2 Design Systems, process AI Ready et idéation via Figma Make — 4 équipes alignées sur une source unique.", tags:['Design System','Figma Make','AI Ready'] },
+        { href:'/case/pepyte', thumb:'/images/thumb-pepyte.webp', logo:'/images/logo-pepyte.svg', role:'Product Designer', roleClass:'role-pepyte', duration:'26 mois', name:'Pepyte — Matching', desc:'UX Research, formulaires et conception du matching candidats-offres de A à Z.', tags:['UX Research','Prototypage','Matching'] },
+        { href:'/case/weborama', thumb:'/images/thumb-weborama.webp', logo:'/images/logo-weborama.svg', role:'Design System Lead', roleClass:'role-weborama', duration:'16 mois', name:'Weborama', desc:"2 Design Systems, process AI Ready et idéation via Figma Make — 4 équipes alignées sur une source unique.", tags:['Design System','Figma Make','AI Ready'] },
       ]}/>
     </CaseLayout>
   );

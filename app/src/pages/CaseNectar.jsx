@@ -201,8 +201,8 @@ export default function CaseNectar() {
 
       <CaseCta/>
       <OtherProjects projects={[
-        { href:'/case/pepyte', thumb:'/images/thumb-pepyte.jpg', logo:'/images/logo-pepyte.svg', role:'UX Research & Design', roleClass:'role-pepyte', duration:'26 mois', name:'Pepyte', desc:"Recherche utilisateur & conception de la fonctionnalité de matching — de l'audit à l'interface.", tags:['UX Research','Entretiens','Figma'] },
-        { href:'/case/weborama', thumb:'/images/thumb-weborama.jpg', logo:'/images/logo-weborama.svg', role:'Design System Lead', roleClass:'role-weborama', duration:'16 mois', name:'Weborama', desc:"2 Design Systems, process AI Ready et idéation via Figma Make — 4 équipes alignées sur une source unique.", tags:['Design System','Figma Make','AI Ready'] },
+        { href:'/case/pepyte', thumb:'/images/thumb-pepyte.webp', logo:'/images/logo-pepyte.svg', role:'UX Research & Design', roleClass:'role-pepyte', duration:'26 mois', name:'Pepyte', desc:"Recherche utilisateur & conception de la fonctionnalité de matching — de l'audit à l'interface.", tags:['UX Research','Entretiens','Figma'] },
+        { href:'/case/weborama', thumb:'/images/thumb-weborama.webp', logo:'/images/logo-weborama.svg', role:'Design System Lead', roleClass:'role-weborama', duration:'16 mois', name:'Weborama', desc:"2 Design Systems, process AI Ready et idéation via Figma Make — 4 équipes alignées sur une source unique.", tags:['Design System','Figma Make','AI Ready'] },
       ]}/>
     </CaseLayout>
   );

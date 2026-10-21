@@ -167,7 +167,7 @@ export function OtherProjects({ projects }) {
         <div className="projects-grid-2">
           {projects.map(p => (
             <Link key={p.name} to={p.href} className="project-card-case">
-              <div className="project-thumb"><img src={p.thumb} alt={p.name}/></div>
+              <div className="project-thumb"><img loading="lazy" src={p.thumb} alt={p.name}/></div>
               <div className="project-body">
                 <div className="project-header">
                   <div className="project-header-left">

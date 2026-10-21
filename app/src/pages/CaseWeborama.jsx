@@ -213,7 +213,7 @@ export default function CaseWeborama() {
 
       <CaseCta/>
       <OtherProjects projects={[
-        { href:'/case/pepyte', thumb:'/images/thumb-pepyte.jpg', logo:'/images/logo-pepyte.svg', role:'UX Research & Design', roleClass:'', duration:'26 mois', name:'Pepyte', desc:'Recherche utilisateur & conception de la fonctionnalité de matching — de l\'audit à l\'interface.', tags:['UX Research','Entretiens','Figma'] },
+        { href:'/case/pepyte', thumb:'/images/thumb-pepyte.webp', logo:'/images/logo-pepyte.svg', role:'UX Research & Design', roleClass:'', duration:'26 mois', name:'Pepyte', desc:'Recherche utilisateur & conception de la fonctionnalité de matching — de l\'audit à l\'interface.', tags:['UX Research','Entretiens','Figma'] },
       ]}/>
     </CaseLayout>
   );

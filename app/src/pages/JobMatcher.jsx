@@ -240,7 +240,7 @@ export default function JobMatcher() {
                     <p style={{ fontSize: 13, color: 'var(--muted)', marginTop: 2 }}>Product Designer IA · Paris</p>
                   </div>
                   <img
-                    src="/images/profile.png"
+                    src="/images/profile-thumb.jpg"
                     alt="Thomas Reynier"
                     style={{ width: 52, height: 52, borderRadius: '50%', objectFit: 'cover', border: '1px solid var(--border)', flexShrink: 0, order: isMobile ? 0 : 1 }}
                   />
