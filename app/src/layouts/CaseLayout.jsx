@@ -6,16 +6,6 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import { trackEvent } from '../utils/analytics';
 
-function useScrollProgress() {
-  const [w, setW] = useState(0);
-  useEffect(() => {
-    const fn = () => { const t = document.documentElement.scrollHeight - window.innerHeight; setW(t > 0 ? (window.scrollY / t) * 100 : 0); };
-    window.addEventListener('scroll', fn, { passive: true });
-    return () => window.removeEventListener('scroll', fn);
-  }, []);
-  return w;
-}
-
 function useBackToTop() {
   const [v, setV] = useState(false);
   useEffect(() => {
@@ -191,7 +181,6 @@ export function OtherProjects({ projects }) {
 }
 
 export default function CaseLayout({ title, tocItems, tocMissions, children }) {
-  const progress = useScrollProgress();
   const bttVisible = useBackToTop();
   const { activeId, tocVisible } = useToc(tocItems.filter(i => i.id).map(i => i.id));
   const showToc = !useMediaQuery('(max-width:1200px)');
@@ -201,7 +190,6 @@ export default function CaseLayout({ title, tocItems, tocMissions, children }) {
 
   return (
     <>
-      <div className="reading-progress" style={{ width: `${progress}%` }}/>
       <Navbar/>
       {/* TOC — not rendered at all below 1200px: a fixed-position element placed off-screen
           (left: calc(50% + 500px)) triggers a horizontal rubber-band scroll bug in iOS Safari
