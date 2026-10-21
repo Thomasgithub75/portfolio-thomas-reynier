@@ -17,7 +17,7 @@ export default function Footer() {
           </a>
         </Tooltip>
         <Tooltip title="Télécharger mon CV (PDF)" placement="top" arrow>
-          <a href="https://drive.google.com/uc?export=download&id=1Dm3rEo0oz8CxeUwx-cpPdG2FeY-uRfKo" target="_blank" rel="noopener" className="footer-icon" onClick={() => trackEvent.cvDownload()}>
+          <a href="/cv/CV_Thomas_Reynier_2026.pdf" download className="footer-icon" onClick={() => trackEvent.cvDownload()}>
             <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           </a>
         </Tooltip>
