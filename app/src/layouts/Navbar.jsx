@@ -67,11 +67,12 @@ export default function Navbar() {
           </ul>
           <button
             className="nav-mode-toggle"
-            aria-label={isDark ? 'Passer en mode clair' : 'Passer en mode sombre'}
+            aria-label={isDark ? 'Light : passer en mode clair' : 'Dark : passer en mode sombre'}
             aria-pressed={isDark}
             onClick={toggleMode}
           >
             {isDark ? <LightModeOutlined fontSize="small" /> : <DarkModeOutlined fontSize="small" />}
+            <span className="nav-mode-label">{isDark ? 'Light' : 'Dark'}</span>
           </button>
           <button className={`burger${open ? ' active' : ''}`} aria-label="Menu" onClick={toggle}>
             <span/><span/><span/>

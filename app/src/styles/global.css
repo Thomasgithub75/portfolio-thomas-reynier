@@ -81,7 +81,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);font
 .nav-cta:hover{opacity:0.88}
 .nav-cta::after{display:none !important}
 .nav-links{margin-left:auto}
-.nav-mode-toggle{margin-left:16px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:none;border:1px solid var(--border);border-radius:9999px;color:var(--text);cursor:pointer;transition:background .15s}
+.nav-mode-toggle{margin-left:16px;height:36px;padding:0 14px 0 10px;gap:6px;display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;background:none;border:1px solid var(--border);border-radius:9999px;color:var(--text);cursor:pointer;transition:background .15s}
 .nav-mode-toggle:hover{background:var(--bg-soft)}
 .nav-mode-toggle:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
 .burger{display:none;background:none;border:none;cursor:pointer;padding:6px;color:var(--text);flex-direction:column;gap:5px;align-items:center;justify-content:center}
