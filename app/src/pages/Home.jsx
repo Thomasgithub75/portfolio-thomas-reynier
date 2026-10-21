@@ -189,14 +189,17 @@ export default function Home() {
                 <div>
                   <p style={{display:'flex',alignItems:'center',gap:10,fontSize:12,fontWeight:600,letterSpacing:'0.1em',textTransform:'uppercase',color:'var(--text)'}}>
                     <span style={{width:28,height:2,background:'var(--blue)',borderRadius:2,flexShrink:0,display:'inline-block'}}/>
-                    PRODUCT DESIGNER
+                    Thomas Reynier
                   </p>
                   <p className="hero-status-mobile"><span className="hero-status-dot"/>À l'écoute · Freelance &amp; CDI</p>
                 </div>
               </div>
-              <h1 style={{fontSize:'clamp(22px,5.8vw,52px)',fontWeight:700,color:'var(--blue)',lineHeight:1.08,letterSpacing:'-0.03em',marginBottom:20,whiteSpace:'nowrap'}}>
-                UX <span style={{color:'var(--text)'}}>·</span> Design System <span style={{color:'var(--text)'}}>·</span> <span className="text-brand-gradient">IA</span>
+              <h1 style={{fontSize:'clamp(30px,8vw,56px)',fontWeight:700,color:'var(--text)',lineHeight:1.08,letterSpacing:'-0.03em',marginBottom:12,whiteSpace:'nowrap'}}>
+                Product Designer <span className="text-brand-gradient">IA</span>
               </h1>
+              <p style={{fontSize:'clamp(16px,4.4vw,20px)',fontWeight:600,color:'var(--blue)',letterSpacing:'-0.01em',marginBottom:16}}>
+                UX <span style={{color:'var(--muted)'}}>·</span> Design System <span style={{color:'var(--muted)'}}>·</span> IA
+              </p>
               <p style={{fontSize:17,color:'var(--muted)',lineHeight:1.7,maxWidth:580,marginBottom:16,fontWeight:300}}>
                 La recherche oriente mes décisions, le Design System structure mes livrables, l'IA accélère la livraison.
               </p>

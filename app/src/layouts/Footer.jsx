@@ -4,7 +4,7 @@ import { trackEvent } from '../utils/analytics';
 export default function Footer() {
   return (
     <footer className="footer">
-      <p>© 2026 Thomas Reynier · Product Designer · Paris</p>
+      <p>© 2026 Thomas Reynier · Product Designer IA · Paris</p>
       <div className="footer-icons">
         <Tooltip title="reynier.design@gmail.com" placement="top" arrow>
           <a href="https://mail.google.com/mail/?view=cm&to=reynier.design@gmail.com" target="_blank" rel="noopener" className="footer-icon" onClick={() => trackEvent.contactClick('footer')}>
