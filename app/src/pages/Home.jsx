@@ -362,9 +362,9 @@ export default function Home() {
                 <div style={{display:'flex',flexDirection:'column',gap:10,paddingTop:4}}>
                   <span style={{fontSize:12,fontWeight:700,letterSpacing:'0.08em',textTransform:'uppercase',color:'var(--text)'}}>Outils</span>
                   <div style={{display:'flex',flexDirection:'column',gap:5}}>
-                    {[{bg:'#EEEDFE',border:'#AFA9EC',label:'Design'},{bg:'#E1F5EE',border:'#5DCAA5',label:'Dev'},{bg:'#FAEEDA',border:'#EF9F27',label:'PM'}].map(s=>(
+                    {[{cat:'design',label:'Design'},{cat:'dev',label:'Dev'},{cat:'pm',label:'PM'}].map(s=>(
                       <div key={s.label} style={{display:'flex',alignItems:'center',gap:6,fontSize:11,color:'var(--muted)'}}>
-                        <span style={{width:12,height:12,borderRadius:3,flexShrink:0,background:s.bg,border:`0.5px solid ${s.border}`,display:'inline-block'}}/>
+                        <span style={{width:12,height:12,borderRadius:3,flexShrink:0,background:`var(--tag-${s.cat}-bg)`,border:`0.5px solid var(--tag-${s.cat}-border)`,display:'inline-block'}}/>
                         {s.label}
                       </div>
                     ))}
