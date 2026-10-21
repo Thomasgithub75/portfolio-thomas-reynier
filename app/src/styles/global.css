@@ -40,7 +40,7 @@
   --tag-dev-bg:rgba(45,212,160,.16);--tag-dev-fg:#7EEAC4;
   --tag-pm-bg:rgba(245,158,11,.18);--tag-pm-fg:#FBBF72;
   --photo-ring:rgba(141,74,255,.5);
-  --photo-bg:linear-gradient(180deg,#1E1E1E 0%,#341E5A 100%);
+  --photo-bg:linear-gradient(180deg,#1C1828 0%,#341E5A 100%);
 }
 html{scroll-behavior:smooth;overflow-x:hidden}
 body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
