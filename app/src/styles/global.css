@@ -21,7 +21,8 @@
   --tag-design-border:#AFA9EC;--tag-dev-border:#5DCAA5;--tag-pm-border:#EF9F27;
   --photo-ring:rgba(25,86,219,0.2);
   --photo-bg:#F7F8F9;
-  --glass-panel:rgba(255,255,255,.86);
+  --glass-panel:rgba(255,255,255,.55);
+  --glass-border:rgba(15,23,42,.08);
   --badge-fg:#1956DB;
   --role-pepyte-bg:#F0EDFE;--role-pepyte-fg:#6B45D6;--role-pepyte-border:#D6CCFC;
   --role-weborama-bg:#E3F7EE;--role-weborama-fg:#0E7A56;--role-weborama-border:#A7E3CA;
@@ -50,6 +51,7 @@
   --photo-ring:rgba(141,74,255,.5);
   --photo-bg:linear-gradient(180deg,#1C1828 0%,#341E5A 100%);
   --glass-panel:rgba(34,34,34,.86);
+  --glass-border:rgba(255,255,255,.18);
   --badge-fg:#C9A8FF;
   --role-pepyte-bg:rgba(141,74,255,.18);--role-pepyte-fg:#C9A8FF;--role-pepyte-border:rgba(141,74,255,.36);
   --role-weborama-bg:rgba(45,212,160,.16);--role-weborama-fg:#7EEAC4;--role-weborama-border:rgba(45,212,160,.32);
@@ -301,10 +303,10 @@ h1.case-h1{font-size:clamp(28px,4vw,44px);font-weight:600;letter-spacing:-0.03em
 .mob-menu li button{display:block;width:100%;padding:16px 2rem;font-size:19px;font-weight:500;color:var(--text);text-align:left;background:none;border:none;cursor:pointer;font-family:'Outfit',sans-serif}
 .mob-menu-cta-li{padding:12px 2rem 20px}
 .mob-menu-cta-li button{display:block;width:100%;text-align:center;background:var(--blue);color:var(--on-accent);font-weight:600;padding:16px;border-radius:10px;font-size:16px;border:none;cursor:pointer;font-family:'Outfit',sans-serif}
-.mob-overlay--floating{top:80px;left:16px;right:16px;max-height:calc(100vh - 96px);border-radius:16px;background:var(--glass-panel);backdrop-filter:blur(24px) saturate(140%);-webkit-backdrop-filter:blur(24px) saturate(140%);border:1px solid rgba(255,255,255,.18);box-shadow:0 12px 32px -10px rgba(0,0,0,.5)}
+.mob-overlay--floating{top:80px;left:16px;right:16px;max-height:calc(100vh - 96px);border-radius:16px;background:var(--glass-panel);backdrop-filter:blur(24px) saturate(140%);-webkit-backdrop-filter:blur(24px) saturate(140%);border:1px solid var(--glass-border);box-shadow:0 12px 32px -10px rgba(0,0,0,.5)}
 .mob-overlay--floating .mob-menu li button{padding-left:1.5rem;padding-right:1.5rem}
 .mob-overlay--floating .mob-menu li:last-child{padding-left:1.5rem !important;padding-right:1.5rem !important}
-.mob-overlay--floating .mob-footer-inner{padding:0 1.5rem;border-top-color:rgba(255,255,255,.18)}
+.mob-overlay--floating .mob-footer-inner{padding:0 1.5rem;border-top-color:var(--glass-border)}
 .mob-footer-inner{height:64px;border-top:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
 
 @media(max-width:900px){
