@@ -1058,6 +1058,7 @@ const [showContext, setShowContext] = useState(false);
             ['delay', 'number', '600', 'Attente avant le premier segment (ms).'],
             ['interval', 'number', '220', 'Délai entre deux segments (ms).'],
             ['status', 'string', "'Génération…'", 'Libellé affiché sous le texte pendant le streaming.'],
+            ['endCaret', 'boolean', 'true', 'Curseur qui clignote ~3 fois après le dernier segment, puis disparaît.'],
             ['replayKey', 'any', '—', 'Changer la valeur rejoue l\'animation.'],
             ['style', 'object', '—', 'Styles du conteneur <p> (taille, couleur, marges).'],
           ]}

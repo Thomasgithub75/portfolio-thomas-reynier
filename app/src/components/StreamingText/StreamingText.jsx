@@ -10,6 +10,7 @@
  *   delay     — attente avant le premier segment, en ms (défaut 600)
  *   interval  — délai entre deux segments, en ms (défaut 220)
  *   status    — libellé affiché pendant le streaming (défaut « Génération… »)
+ *   endCaret  — curseur qui clignote quelques fois après le dernier segment, puis disparaît (défaut true)
  *   replayKey — change cette valeur pour rejouer l'animation (page Design System)
  *   style     — styles du conteneur (taille, couleur, marges)
  *
@@ -30,24 +31,32 @@ export default function StreamingText({
   delay = 600,
   interval = 220,
   status = 'Génération…',
+  endCaret = true,
   replayKey,
   style,
 }) {
   const reduced = prefersReducedMotion();
   const [shown, setShown] = useState(reduced ? segments.length : 0);
   const [streaming, setStreaming] = useState(!reduced);
+  const [caret, setCaret] = useState(false);
 
   useEffect(() => {
     if (prefersReducedMotion()) { setShown(segments.length); setStreaming(false); return undefined; }
     setShown(0);
     setStreaming(true);
+    setCaret(false);
 
     const timers = [];
     const start = () => {
       segments.forEach((_, i) => {
         timers.push(setTimeout(() => setShown(i + 1), delay + i * interval));
       });
-      timers.push(setTimeout(() => setStreaming(false), delay + segments.length * interval + 250));
+      const end = delay + (segments.length - 1) * interval;
+      timers.push(setTimeout(() => setStreaming(false), end + interval + 250));
+      if (endCaret) {
+        timers.push(setTimeout(() => setCaret(true), end + 250));
+        timers.push(setTimeout(() => setCaret(false), end + 250 + 1800));
+      }
     };
 
     const introPlaying = document.documentElement.dataset.intro === 'playing';
@@ -58,7 +67,7 @@ export default function StreamingText({
       timers.forEach(clearTimeout);
       window.removeEventListener('intro:done', start);
     };
-  }, [segments, delay, interval, replayKey]);
+  }, [segments, delay, interval, endCaret, replayKey]);
 
   const label = segments.map(s => s.text).join('');
 
@@ -73,6 +82,7 @@ export default function StreamingText({
           {s.text}
         </span>
       ))}
+      {endCaret && <span aria-hidden="true" className={`streaming-text-caret${caret ? ' is-on' : ''}`} />}
       <span aria-hidden="true" className={`streaming-text-status${streaming ? ' is-on' : ''}`}>
         <span className="streaming-text-dot" />{status}
       </span>
