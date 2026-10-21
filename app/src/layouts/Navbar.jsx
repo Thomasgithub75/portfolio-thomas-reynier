@@ -63,7 +63,7 @@ export default function Navbar() {
             <li><button className="nav-link" style={{background:'none',border:'none',cursor:'pointer',fontFamily:'inherit'}} onClick={() => handleAnchor('hero')}>Accueil</button></li>
             <li><button className="nav-link" style={{background:'none',border:'none',cursor:'pointer',fontFamily:'inherit'}} onClick={() => handleAnchor('competences')}>Expertises</button></li>
             <li><button className="nav-link" style={{background:'none',border:'none',cursor:'pointer',fontFamily:'inherit'}} onClick={() => handleAnchor('projets')}>Projets</button></li>
-            <li><button className="nav-cta" style={{background:'var(--blue)',border:'none',cursor:'pointer',fontFamily:'inherit'}} onClick={() => handleAnchor('contact')}>Contact</button></li>
+            <li><button className="nav-cta btn-brand" style={{border:'none',cursor:'pointer',fontFamily:'inherit'}} onClick={() => handleAnchor('contact')}>Contact</button></li>
           </ul>
           <button
             className="nav-mode-toggle"
@@ -88,7 +88,7 @@ export default function Navbar() {
             <li><button onClick={() => handleAnchor('competences')}>Expertises</button></li>
             <li><button onClick={() => handleAnchor('projets')}>Projets</button></li>
             <li style={{borderBottom:'none',padding:'20px 2rem 24px'}}>
-              <button onClick={() => handleAnchor('contact')} style={{display:'block',width:'100%',textAlign:'center',background:'var(--blue)',color:'var(--on-accent)',fontWeight:600,padding:'16px',borderRadius:10,fontSize:16,border:'none',cursor:'pointer',fontFamily:"'Outfit',sans-serif"}}>Contact</button>
+              <button className="btn-brand" onClick={() => handleAnchor('contact')} style={{display:'block',width:'100%',textAlign:'center',fontWeight:600,padding:'16px',borderRadius:10,fontSize:16,border:'none',cursor:'pointer',fontFamily:"'Outfit',sans-serif"}}>Contact</button>
             </li>
           </ul>
           <div className="mob-footer-inner">
