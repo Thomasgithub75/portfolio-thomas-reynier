@@ -25,7 +25,7 @@
  * Accessibilité : respecte prefers-reduced-motion (état final affiché directement),
  * aria-hidden car purement décoratif (le contenu est repris dans la page).
  */
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import { tokens } from '../../theme/theme';
@@ -71,6 +71,13 @@ export default function Intro({
   const tagTotal = tags.length;
 
   useEffect(() => { onDoneRef.current = onDone; }, [onDone]);
+
+  // Lets page animations (e.g. the hero StreamingText) wait for the intro: flag set before
+  // any page effect runs, cleared with an 'intro:done' event once the overlay starts leaving.
+  useLayoutEffect(() => {
+    if (!visible) return;
+    document.documentElement.dataset.intro = 'playing';
+  }, [visible]);
 
   // Déroulé de la séquence
   useEffect(() => {
@@ -131,6 +138,8 @@ export default function Intro({
   useEffect(() => {
     if (!leaving) return undefined;
     document.documentElement.style.overflow = '';
+    delete document.documentElement.dataset.intro;
+    window.dispatchEvent(new Event('intro:done'));
     const t = setTimeout(() => {
       setVisible(false);
       onDoneRef.current?.();
