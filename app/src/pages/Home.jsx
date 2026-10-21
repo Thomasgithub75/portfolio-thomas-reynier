@@ -4,6 +4,12 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import Navbar from '../layouts/Navbar';
 import Footer from '../layouts/Footer';
 import { trackEvent } from '../utils/analytics';
+import StreamingText from '../components/StreamingText/StreamingText';
+
+// Hero subtitle, revealed like a streamed LLM answer
+const HERO_SEGMENTS = [
+  { text: 'UX' }, { text: ' · ', muted: true }, { text: 'Design System' }, { text: ' · ', muted: true }, { text: 'IA' },
+];
 
 const SKILL_PROJS = {
   'UX Research': [
@@ -197,9 +203,10 @@ export default function Home() {
               <h1 style={{fontSize:'clamp(30px,8vw,56px)',fontWeight:700,color:'var(--text)',lineHeight:1.08,letterSpacing:'-0.03em',marginBottom:12,whiteSpace:'nowrap'}}>
                 Product Designer <span className="text-brand-gradient">IA</span>
               </h1>
-              <p style={{fontSize:'clamp(16px,4.4vw,20px)',fontWeight:600,color:'var(--blue)',letterSpacing:'-0.01em',marginBottom:16}}>
-                UX <span style={{color:'var(--muted)'}}>·</span> Design System <span style={{color:'var(--muted)'}}>·</span> IA
-              </p>
+              <StreamingText
+                segments={HERO_SEGMENTS}
+                style={{fontSize:'clamp(16px,4.4vw,20px)',fontWeight:600,color:'var(--blue)',letterSpacing:'-0.01em',marginBottom:16}}
+              />
               <p style={{fontSize:17,color:'var(--muted)',lineHeight:1.7,maxWidth:580,marginBottom:16,fontWeight:300}}>
                 La recherche oriente mes décisions, le Design System structure mes livrables, l'IA accélère la livraison.
               </p>

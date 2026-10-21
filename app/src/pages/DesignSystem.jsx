@@ -9,6 +9,7 @@ import Tag from '../components/Tag/Tag';
 import FormField from '../components/FormField/FormField';
 import Toggle from '../components/Toggle/Toggle';
 import Intro from '../components/Intro/Intro';
+import StreamingText from '../components/StreamingText/StreamingText';
 import OverflowMenu from '../components/OverflowMenu/OverflowMenu';
 import TestimonialCard from '../components/TestimonialCard/TestimonialCard';
 import { tokens } from '../theme/theme';
@@ -243,6 +244,26 @@ function ToggleDemo() {
 function ToggleLabelDemo() {
   const [on, setOn] = useState(true);
   return <Toggle checked={on} onChange={setOn} label="Contexte complémentaire" />;
+}
+
+// ── StreamingText demo ────────────────────────────────────────────────────────
+
+const STREAMING_DEMO = [
+  { text: 'UX' }, { text: ' · ', muted: true }, { text: 'Design System' }, { text: ' · ', muted: true }, { text: 'IA' },
+];
+
+function StreamingTextDemo() {
+  const [key, setKey] = useState(0);
+  return (
+    <Stack spacing={3} alignItems="flex-start">
+      <StreamingText
+        segments={STREAMING_DEMO}
+        replayKey={key}
+        style={{ fontSize: 20, fontWeight: 600, color: 'var(--blue)', letterSpacing: '-0.01em', marginBottom: 8 }}
+      />
+      <Button variant="secondary" size="sm" onClick={() => setKey(k => k + 1)}>Rejouer</Button>
+    </Stack>
+  );
 }
 
 // ── Intro demo ────────────────────────────────────────────────────────────────
@@ -1021,6 +1042,41 @@ const [showContext, setShowContext] = useState(false);
     rows={3}
   />
 )}`}
+        />
+      </Section>
+
+      <Divider sx={{ mb: 4 }} />
+
+      <Section title="StreamingText" subtitle="Texte révélé segment par segment avec un léger flou, comme une réponse de LLM en streaming, avec un statut « Génération… ». Utilisé pour le sous-titre du hero.">
+        <Group label="Aperçu">
+          <StreamingTextDemo />
+        </Group>
+
+        <DocBlock
+          props={[
+            ['segments', '{ text, muted? }[]', '—', 'Segments révélés un par un. muted = segment secondaire (séparateur « · »), en couleur atténuée.'],
+            ['delay', 'number', '600', 'Attente avant le premier segment (ms).'],
+            ['interval', 'number', '220', 'Délai entre deux segments (ms).'],
+            ['status', 'string', "'Génération…'", 'Libellé affiché sous le texte pendant le streaming.'],
+            ['replayKey', 'any', '—', 'Changer la valeur rejoue l\'animation.'],
+            ['style', 'object', '—', 'Styles du conteneur <p> (taille, couleur, marges).'],
+          ]}
+          usage={[
+            'Réservé à un texte court et important (3 à 5 segments) : sous-titre du hero.',
+            'Déclarer le tableau segments hors du composant (constante) pour éviter de rejouer l\'animation à chaque rendu.',
+            'L\'espace final est réservé dès le départ et le statut est positionné en absolu : aucune variation de mise en page.',
+            'Attend la fin de l\'Intro (événement intro:done) si elle est en cours.',
+            'Respecte prefers-reduced-motion : texte affiché directement. Texte complet exposé via aria-label.',
+          ]}
+          code={`import StreamingText from '../components/StreamingText/StreamingText';
+
+const SEGMENTS = [
+  { text: 'UX' }, { text: ' · ', muted: true },
+  { text: 'Design System' }, { text: ' · ', muted: true },
+  { text: 'IA' },
+];
+
+<StreamingText segments={SEGMENTS} style={{ fontSize: 20, fontWeight: 600, color: 'var(--blue)' }} />`}
         />
       </Section>
 

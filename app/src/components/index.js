@@ -7,6 +7,7 @@ export { default as Tag }           from './Tag/Tag';
 export { default as FormField }     from './FormField/FormField';
 export { default as Toggle }        from './Toggle/Toggle';
 export { default as Intro }         from './Intro/Intro';
+export { default as StreamingText } from './StreamingText/StreamingText';
 
 export { default as TestimonialCard } from './TestimonialCard/TestimonialCard';
 
