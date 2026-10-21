@@ -171,8 +171,8 @@ export default function Home() {
               </div>
             </div>
             <div className="home-hero-image">
-              <div style={{width:'100%',aspectRatio:'1/1',borderRadius:'50%',overflow:'hidden',boxShadow:'0 0 0 4px var(--bg),0 0 0 6px var(--photo-ring),0 10px 40px rgba(25,86,219,0.12)'}}>
-                <img src="/images/profile.png" alt="Thomas Reynier" style={{width:'100%',height:'100%',objectFit:'cover',objectPosition:'center top'}}/>
+              <div style={{width:'100%',aspectRatio:'1/1',borderRadius:'50%',overflow:'hidden',background:'var(--photo-bg)',boxShadow:'0 0 0 4px var(--bg),0 0 0 6px var(--photo-ring),0 10px 40px rgba(25,86,219,0.12)'}}>
+                <img src="/images/profile-cutout.png" alt="Thomas Reynier" style={{width:'100%',height:'100%',objectFit:'cover',objectPosition:'center top'}}/>
               </div>
               <div style={{position:'absolute',bottom:24,right:-4,background:'var(--surface)',border:'1px solid var(--border)',borderRadius:20,padding:'6px 14px',display:'flex',alignItems:'center',gap:7,fontSize:13,fontWeight:500,color:'var(--text)',boxShadow:'0 2px 12px rgba(0,0,0,0.08)',whiteSpace:'nowrap'}}>
                 <span style={{position:'relative',width:10,height:10,flexShrink:0,display:'inline-flex',alignItems:'center',justifyContent:'center'}}>
