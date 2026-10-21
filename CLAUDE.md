@@ -137,6 +137,10 @@
 
 ## CV
 
+- **Source :** dépôt privé `thomas` (`travail/cv.md`, `travail/etude-de-cas-etam.md`), copié automatiquement ici par une action GitHub de ce dépôt-là :
+  - `app/content/cv.md` et `app/content/etude-de-cas-etam.md` (texte, sans les notes internes)
+  - `app/public/cv/CV_Thomas_Reynier_2026.pdf` (servi sur `/cv/CV_Thomas_Reynier_2026.pdf`, lien du footer)
+  - **Ne jamais modifier ces fichiers ici** : ils sont écrasés au prochain envoi. Modifier la source dans `thomas`.
 - **HTML (itération) :** `proposals/cv-v1.html`
 - **PDF export :** `proposals/cv-thomas-reynier.pdf`
 - **Format :** ATS pur · une colonne · français · A4
