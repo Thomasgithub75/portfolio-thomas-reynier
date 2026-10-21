@@ -535,7 +535,7 @@ tokens.primary[50]    // blueLight`}
       <Divider sx={{ mb: 7 }} />
 
       {/* ── BUTTON ────────────────────────────────────────── */}
-      <Section title="Button" subtitle="3 variantes : Primary · Secondary · Ghost">
+      <Section title="Button" subtitle="3 variantes : Primary (dégradé de marque) · Secondary (tonal) · Ghost (tertiaire, lien texte)">
         <Group label="Variantes — taille md">
           <Button variant="primary">Voir le projet</Button>
           <Button variant="secondary">Me contacter</Button>
@@ -554,7 +554,7 @@ tokens.primary[50]    // blueLight`}
 
         <DocBlock
           props={[
-            ['variant', "'primary' | 'secondary' | 'ghost'", "'primary'", 'Style visuel du bouton.'],
+            ['variant', "'primary' | 'secondary' | 'ghost'", "'primary'", 'primary = dégradé de marque (violet→bleu en light, violet→magenta en dark) · secondary = tonal (fond teinté, texte accent) · ghost = lien texte accent.'],
             ['size', "'md' | 'sm'", "'md'", 'md = CTA standard (padding 9/20px, fs 15px). sm = action dense (padding 6/12px, fs 13px).'],
             ['disabled', 'boolean', 'false', 'Désactive le bouton et applique le style désactivé.'],
             ['onClick', 'function', '—', 'Handler au clic. Non requis si href est fourni.'],

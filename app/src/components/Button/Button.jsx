@@ -3,43 +3,45 @@
  * @usage Action principale ou secondaire sur n'importe quelle page ou feature.
  *
  * Variantes :
- *   "primary"   — CTA principal : générer, envoyer, valider. Une seule par écran en règle générale.
- *   "secondary" — Action secondaire : annuler, revenir, option alternative.
- *   "ghost"     — Action tertiaire ou lien discret : télécharger, accéder, voir plus.
+ *   "primary"   — CTA principal (dégradé de marque) : générer, envoyer, contacter. Une seule par écran en règle générale.
+ *   "secondary" — Action secondaire (tonal : fond teinté, texte accent) : option alternative, LinkedIn, annuler.
+ *   "ghost"     — Action tertiaire (lien texte accent) : imprimer, régénérer, voir plus.
  *
  * Tailles : "md" (défaut) pour les CTA standards, "sm" pour les actions dans un toolbar ou une card dense.
  * Accepte startIcon / endIcon (MUI Icons uniquement).
  */
 import { useState } from 'react';
-import { tokens } from '../../theme/theme';
 
 // Reads CSS custom properties (see styles/global.css) so the button follows the
 // active site theme (light, or the violet dark-mode test) instead of a fixed palette.
 // Fallbacks keep the exact current light-mode look if a var is ever missing.
 const VARIANTS = {
+  // Primary — brand gradient (violet→blue in light, violet→magenta in dark) with a matching glow.
   primary: {
-    base:     { background: `var(--p500, ${tokens.primary[500]})`, color: '#fff',                            border: 'none' },
-    hover:    { background: `var(--p600, ${tokens.primary[600]})`, color: '#fff',                            border: 'none' },
-    pressed:  { background: `var(--p700, ${tokens.primary[700]})`, color: '#fff',                            border: 'none' },
-    disabled: { background: `var(--p200, ${tokens.primary[200]})`, color: '#fff',                            border: 'none' },
+    base:     { background: 'var(--brand-gradient)', color: 'var(--on-brand, #fff)', border: '1px solid transparent', boxShadow: '0 6px 20px -6px var(--brand-glow)' },
+    hover:    { background: 'var(--brand-gradient)', color: 'var(--on-brand, #fff)', border: '1px solid transparent', boxShadow: '0 10px 28px -6px var(--brand-glow)', filter: 'brightness(1.08)' },
+    pressed:  { background: 'var(--brand-gradient)', color: 'var(--on-brand, #fff)', border: '1px solid transparent', boxShadow: '0 4px 12px -6px var(--brand-glow)', filter: 'brightness(.95)' },
+    disabled: { background: 'var(--brand-gradient)', color: 'var(--on-brand, #fff)', border: '1px solid transparent', opacity: 0.45 },
   },
+  // Secondary — tonal accent: tinted background, accent text.
   secondary: {
-    base:     { background: `var(--g100, ${tokens.gray[100]})`,    color: `var(--g600, ${tokens.gray[600]})`, border: 'none' },
-    hover:    { background: `var(--g200, ${tokens.gray[200]})`,    color: `var(--g700, ${tokens.gray[700]})`, border: 'none' },
-    pressed:  { background: `var(--g300, ${tokens.gray[300]})`,    color: `var(--g800, ${tokens.gray[800]})`, border: 'none' },
-    disabled: { background: `var(--g50, ${tokens.gray[50]})`,      color: `var(--g300, ${tokens.gray[300]})`, border: 'none' },
+    base:     { background: 'var(--btn2-bg)',       color: 'var(--btn2-fg)', border: '1px solid var(--btn2-border)' },
+    hover:    { background: 'var(--btn2-bg-hover)', color: 'var(--btn2-fg)', border: '1px solid var(--btn2-border)' },
+    pressed:  { background: 'var(--btn2-bg-hover)', color: 'var(--btn2-fg)', border: '1px solid var(--btn2-border)', transform: 'translateY(1px)' },
+    disabled: { background: 'var(--btn2-bg)',       color: 'var(--btn2-fg)', border: '1px solid var(--btn2-border)', opacity: 0.45 },
   },
+  // Ghost (tertiary) — accent text link, underlined on hover.
   ghost: {
-    base:     { background: 'transparent',                        color: `var(--text, ${tokens.text})`,      border: `1.5px solid var(--border, ${tokens.border})` },
-    hover:    { background: `var(--bg-soft, ${tokens.bgSoft})`,    color: `var(--text, ${tokens.text})`,      border: `1.5px solid var(--g300, ${tokens.gray[300]})` },
-    pressed:  { background: `var(--g100, ${tokens.gray[100]})`,    color: `var(--text, ${tokens.text})`,      border: `1.5px solid var(--g300, ${tokens.gray[300]})` },
-    disabled: { background: 'transparent',                        color: `var(--g300, ${tokens.gray[300]})`, border: `1.5px solid var(--border, ${tokens.border})` },
+    base:     { background: 'transparent', color: 'var(--btn3-fg)', border: '1px solid transparent' },
+    hover:    { background: 'transparent', color: 'var(--btn3-fg)', border: '1px solid transparent', textDecoration: 'underline', textUnderlineOffset: 4 },
+    pressed:  { background: 'transparent', color: 'var(--btn3-fg)', border: '1px solid transparent', textDecoration: 'underline', textUnderlineOffset: 4 },
+    disabled: { background: 'transparent', color: 'var(--btn3-fg)', border: '1px solid transparent', opacity: 0.45 },
   },
 };
 
 const SIZES = {
-  md: { fontSize: 15, padding: '9px 20px', borderRadius: 8, gap: 8 },
-  sm: { fontSize: 13, padding: '6px 12px', borderRadius: 7, gap: 6 },
+  md: { fontSize: 15, padding: '9px 20px', borderRadius: 'var(--radius-sm, 8px)', gap: 8 },
+  sm: { fontSize: 13, padding: '6px 12px', borderRadius: 'var(--radius-sm, 8px)', gap: 6 },
 };
 
 export default function Button({
@@ -78,7 +80,7 @@ export default function Button({
     borderRadius: s.borderRadius,
     boxSizing: 'border-box',
     cursor: disabled ? 'not-allowed' : 'pointer',
-    transition: 'background-color 0.15s, color 0.15s, border-color 0.15s',
+    transition: 'background-color 0.15s, color 0.15s, border-color 0.15s, box-shadow 0.15s, filter 0.15s, transform 0.15s',
     textDecoration: 'none',
     userSelect: 'none',
     outline: 'none',

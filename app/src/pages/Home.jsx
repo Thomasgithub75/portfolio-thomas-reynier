@@ -567,19 +567,17 @@ const ROLE_STYLES = {
 };
 
 function HeroBtn({ onClick, primary, href, target, rel, children }) {
-  const [hovered, setHovered] = useState(false);
   const [pressed, setPressed] = useState(false);
   const base = { display:'inline-flex', alignItems:'center', gap:8, padding:'11px 22px', borderRadius:'var(--radius-sm)', fontSize:15, fontWeight:500, border:'none', cursor:'pointer', fontFamily:'inherit', textDecoration:'none', transition:'background 0.15s,color 0.15s,transform 0.1s', transform: pressed ? 'scale(0.97)' : 'scale(1)' };
   const style = primary
-    ? base
-    : { ...base, background: pressed ? 'var(--g300)' : hovered ? 'var(--g200)' : 'var(--g100)', color: pressed ? 'var(--g800)' : hovered ? 'var(--g700)' : 'var(--g600)' };
+    ? { ...base, border:'1px solid transparent' }
+    : (({ border, ...rest }) => rest)(base);
   const handlers = {
-    onMouseEnter:() => setHovered(true),
-    onMouseLeave:() => { setHovered(false); setPressed(false); },
+    onMouseLeave:() => setPressed(false),
     onMouseDown:() => setPressed(true),
     onMouseUp:() => setPressed(false),
   };
-  const className = primary ? 'btn-brand' : undefined;
+  const className = primary ? 'btn-brand' : 'btn-secondary';
   if (href) return <a href={href} target={target} rel={rel} onClick={onClick} className={className} style={style} {...handlers}>{children}</a>;
   return <button onClick={onClick} className={className} style={style} {...handlers}>{children}</button>;
 }
