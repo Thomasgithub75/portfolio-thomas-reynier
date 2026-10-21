@@ -1,9 +1,11 @@
 .streaming-text{position:relative;white-space:pre-wrap}
 .streaming-text-seg{display:inline-block;white-space:pre;opacity:0;filter:blur(6px);transform:translateY(4px);transition:opacity .35s ease,filter .35s ease,transform .35s ease}
 .streaming-text-seg.is-in{opacity:1;filter:none;transform:none}
-.streaming-text-seg.is-muted{color:var(--muted)}
+.streaming-text-seg.is-muted,.streaming-text-typed .is-muted{color:var(--muted)}
+.streaming-text-typed{white-space:pre}
 /* End caret: blinks a few times after the last segment, then fades out */
 .streaming-text-caret{display:inline-block;width:2px;height:1em;margin-left:3px;vertical-align:-0.12em;background:currentColor;border-radius:1px;opacity:0;transition:opacity .25s ease}
+.streaming-text-caret.is-typing{opacity:1;transition:none}
 .streaming-text-caret.is-on{opacity:1;animation:streaming-text-blink .6s steps(1) infinite}
 @keyframes streaming-text-blink{50%{opacity:0}}
 /* Status sits just under the line (absolute) so showing/hiding it never shifts the layout */

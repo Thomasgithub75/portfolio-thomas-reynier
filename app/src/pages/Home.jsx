@@ -6,10 +6,12 @@ import Footer from '../layouts/Footer';
 import { trackEvent } from '../utils/analytics';
 import StreamingText from '../components/StreamingText/StreamingText';
 
-// Hero subtitle, revealed like a streamed LLM answer
+// Hero subtitle, typed like an LLM answer
 const HERO_SEGMENTS = [
   { text: 'UX' }, { text: ' · ', muted: true }, { text: 'Design System' }, { text: ' · ', muted: true }, { text: 'IA' },
 ];
+// Typed with two corrections: a quick typo in "Design", then "Product" erased in favour of "IA"
+const HERO_TYPOS = [{ at: 9, text: 'n' }, { at: 21, text: 'Product' }];
 
 const SKILL_PROJS = {
   'UX Research': [
@@ -204,7 +206,9 @@ export default function Home() {
                 Product Designer <span className="text-brand-gradient">IA</span>
               </h1>
               <StreamingText
+                variant="type"
                 segments={HERO_SEGMENTS}
+                typos={HERO_TYPOS}
                 style={{fontSize:'clamp(16px,4.4vw,20px)',fontWeight:600,color:'var(--blue)',letterSpacing:'-0.01em',marginBottom:28}}
               />
               <p style={{fontSize:17,color:'var(--muted)',lineHeight:1.7,maxWidth:580,marginBottom:16,fontWeight:300}}>

@@ -252,15 +252,17 @@ const STREAMING_DEMO = [
   { text: 'UX' }, { text: ' · ', muted: true }, { text: 'Design System' }, { text: ' · ', muted: true }, { text: 'IA' },
 ];
 
+const STREAMING_TYPOS = [{ at: 9, text: 'n' }, { at: 21, text: 'Product' }];
+
 function StreamingTextDemo() {
   const [key, setKey] = useState(0);
+  const textStyle = { fontSize: 20, fontWeight: 600, color: 'var(--blue)', letterSpacing: '-0.01em', marginBottom: 28 };
   return (
-    <Stack spacing={3} alignItems="flex-start">
-      <StreamingText
-        segments={STREAMING_DEMO}
-        replayKey={key}
-        style={{ fontSize: 20, fontWeight: 600, color: 'var(--blue)', letterSpacing: '-0.01em', marginBottom: 8 }}
-      />
+    <Stack spacing={2} alignItems="flex-start">
+      <Typography sx={{ fontSize: 12, color: 'var(--muted)' }}>variant="type" (hero)</Typography>
+      <StreamingText variant="type" segments={STREAMING_DEMO} typos={STREAMING_TYPOS} replayKey={key} style={textStyle} />
+      <Typography sx={{ fontSize: 12, color: 'var(--muted)' }}>variant="stream"</Typography>
+      <StreamingText segments={STREAMING_DEMO} replayKey={key} style={textStyle} />
       <Button variant="secondary" size="sm" onClick={() => setKey(k => k + 1)}>Rejouer</Button>
     </Stack>
   );
@@ -1047,7 +1049,7 @@ const [showContext, setShowContext] = useState(false);
 
       <Divider sx={{ mb: 4 }} />
 
-      <Section title="StreamingText" subtitle="Texte révélé segment par segment avec un léger flou, comme une réponse de LLM en streaming, avec un statut « Génération… ». Utilisé pour le sous-titre du hero.">
+      <Section title="StreamingText" subtitle="Texte révélé comme une réponse de LLM, avec un statut « Génération… » : frappe lettre par lettre avec corrections (variant type, sous-titre du hero) ou segments révélés avec un léger flou (variant stream).">
         <Group label="Aperçu">
           <StreamingTextDemo />
         </Group>
@@ -1055,8 +1057,10 @@ const [showContext, setShowContext] = useState(false);
         <DocBlock
           props={[
             ['segments', '{ text, muted? }[]', '—', 'Segments révélés un par un. muted = segment secondaire (séparateur « · »), en couleur atténuée.'],
-            ['delay', 'number', '600', 'Attente avant le premier segment (ms).'],
-            ['interval', 'number', '220', 'Délai entre deux segments (ms).'],
+            ['variant', "'stream' | 'type'", "'stream'", 'stream = segments révélés avec un léger flou · type = frappe lettre par lettre avec curseur.'],
+            ['typos', '{ at, text }[]', '[]', 'Variante type : à la position at du texte final, tape text, pause, l\'efface puis continue.'],
+            ['delay', 'number', '600', 'Attente avant le début (ms).'],
+            ['interval', 'number', '220 / 55', 'stream : délai entre deux segments · type : délai par lettre (ms).'],
             ['status', 'string', "'Génération…'", 'Libellé affiché sous le texte pendant le streaming.'],
             ['endCaret', 'boolean', 'true', 'Curseur qui clignote ~3 fois après le dernier segment, puis disparaît.'],
             ['replayKey', 'any', '—', 'Changer la valeur rejoue l\'animation.'],
