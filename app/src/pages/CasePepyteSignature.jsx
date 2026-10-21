@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import CaseLayout, { IllustrationItem, CaseCta, OtherProjects } from '../layouts/CaseLayout';
 import { Link } from 'react-router-dom';
+import { unlock } from '../utils/unlock';
 
 const TOC = [
   { id: 'contexte', label: 'Contexte' },
@@ -21,9 +22,9 @@ function CaseGate({ onUnlock }) {
   const inputRef = useRef(null);
   useEffect(() => { inputRef.current?.focus(); }, []);
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    if (code === 'thomas2026') {
+    if (await unlock('pepyte', code)) {
       sessionStorage.setItem('pepyte_sig_access', 'true');
       onUnlock();
     } else {

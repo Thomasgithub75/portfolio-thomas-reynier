@@ -7,6 +7,7 @@ import FormField from '../components/FormField/FormField';
 import Toggle from '../components/Toggle/Toggle';
 import Tag from '../components/Tag/Tag';
 import { tokens } from '../theme/theme';
+import { unlock, getToken, forgetToken } from '../utils/unlock';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import RefreshIcon from '@mui/icons-material/Refresh';
@@ -14,8 +15,6 @@ import CheckIcon from '@mui/icons-material/Check';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import StopIcon from '@mui/icons-material/Stop';
 
-// ── Auth ──────────────────────────────────────────────────────────────────────
-const PASSWORD = import.meta.env.VITE_LETTER_PASSWORD || 'thomas2026';
 
 // ── Ton options ───────────────────────────────────────────────────────────────
 const TONS = [
@@ -106,8 +105,8 @@ function PasswordGate({ onUnlock }) {
   const [pwd, setPwd] = useState('');
   const [error, setError] = useState(false);
 
-  const submit = () => {
-    if (pwd === PASSWORD) { onUnlock(); }
+  const submit = async () => {
+    if (await unlock('letter', pwd)) { onUnlock(); }
     else { setError(true); setTimeout(() => setError(false), 2000); }
   };
 
@@ -184,18 +183,18 @@ function StreamingBody({ text }) {
 
 // ── Main page ──────────────────────────────────────────────────────────────────
 export default function LettreMotivation() {
-  const [unlocked, setUnlocked] = useState(() => localStorage.getItem('lm_auth') === '1');
+  const [unlocked, setUnlocked] = useState(() => !!getToken('letter'));
 
-  const handleUnlock = () => {
-    localStorage.setItem('lm_auth', '1');
-    setUnlocked(true);
+  const handleLock = () => {
+    forgetToken('letter');
+    setUnlocked(false);
   };
 
-  if (!unlocked) return <PasswordGate onUnlock={handleUnlock} />;
-  return <LettreApp />;
+  if (!unlocked) return <PasswordGate onUnlock={() => setUnlocked(true)} />;
+  return <LettreApp onLock={handleLock} />;
 }
 
-function LettreApp() {
+function LettreApp({ onLock }) {
   const isMobile = useMediaQuery('(max-width:768px)');
 
   // Form
@@ -258,11 +257,13 @@ function LettreApp() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${getToken('letter')}`,
         },
         body: JSON.stringify({ offre, ton, entreprise, poste, contexte: contexteOn ? contexte : '' }),
         signal: abortRef.current.signal,
       });
 
+      if (res.status === 401) { onLock(); return; } // jeton expiré ou mot de passe changé
       if (!res.ok) throw new Error('Erreur API');
 
       const reader = res.body.getReader();
@@ -296,7 +297,7 @@ function LettreApp() {
         console.error('[LettreMotivation] Erreur génération:', err.message);
       }
     }
-  }, [offre, ton, entreprise, poste, contexte, contexteOn]);
+  }, [offre, ton, entreprise, poste, contexte, contexteOn, onLock]);
 
   const handleStop = () => { abortRef.current?.abort(); setStatus('idle'); };
 

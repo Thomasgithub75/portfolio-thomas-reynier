@@ -1,4 +1,5 @@
 import Anthropic from '@anthropic-ai/sdk';
+import { verifyToken, bearer } from './_auth.js';
 
 const THOMAS_PROFILE = `
 Thomas Reynier — Product Designer IA — Paris
@@ -89,13 +90,15 @@ export default async function handler(req, res) {
   // Set CORS headers — only for the matched origin, never wildcard
   res.setHeader('Access-Control-Allow-Origin', origin || 'null');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   res.setHeader('Vary', 'Origin');
 
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   if (!allowed) return res.status(403).json({ error: 'Forbidden' });
+  // Page privée : sans jeton valide (obtenu via /api/unlock), aucune génération ne part sur la clé Anthropic.
+  if (!verifyToken('letter', bearer(req))) return res.status(401).json({ error: 'Accès refusé' });
 
   const { offre, ton = 'equilibre', entreprise = '', poste = '', contexte = '' } = req.body;
 
