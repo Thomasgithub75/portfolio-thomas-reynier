@@ -205,7 +205,7 @@ export default function Home() {
               </h1>
               <StreamingText
                 segments={HERO_SEGMENTS}
-                style={{fontSize:'clamp(16px,4.4vw,20px)',fontWeight:600,color:'var(--blue)',letterSpacing:'-0.01em',marginBottom:16}}
+                style={{fontSize:'clamp(16px,4.4vw,20px)',fontWeight:600,color:'var(--blue)',letterSpacing:'-0.01em',marginBottom:28}}
               />
               <p style={{fontSize:17,color:'var(--muted)',lineHeight:1.7,maxWidth:580,marginBottom:16,fontWeight:300}}>
                 La recherche oriente mes décisions, le Design System structure mes livrables, l'IA accélère la livraison.

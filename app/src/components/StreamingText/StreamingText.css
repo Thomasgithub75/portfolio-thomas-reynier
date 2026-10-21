@@ -3,7 +3,7 @@
 .streaming-text-seg.is-in{opacity:1;filter:none;transform:none}
 .streaming-text-seg.is-muted{color:var(--muted)}
 /* Status sits just under the line (absolute) so showing/hiding it never shifts the layout */
-.streaming-text-status{position:absolute;left:0;top:100%;margin-top:2px;display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;letter-spacing:0;color:var(--muted);opacity:0;transition:opacity .3s ease;pointer-events:none;white-space:nowrap}
+.streaming-text-status{position:absolute;left:0;top:100%;margin-top:6px;display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;letter-spacing:0;color:var(--muted);opacity:0;transition:opacity .3s ease;pointer-events:none;white-space:nowrap}
 .streaming-text-status.is-on{opacity:1}
 .streaming-text-dot{width:7px;height:7px;border-radius:50%;background:var(--blue);animation:streaming-text-pulse 1s ease-in-out infinite}
 @keyframes streaming-text-pulse{50%{opacity:.25}}
