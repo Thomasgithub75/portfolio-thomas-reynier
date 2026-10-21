@@ -255,9 +255,8 @@ export default function Home() {
 
               <Link
                 to="/fonctionnalite-ia"
-                style={{display:'inline-flex',alignItems:'center',gap:8,background:'var(--blue)',color:'var(--on-accent)',fontSize:14,fontWeight:600,padding:'11px 22px',borderRadius:8,textDecoration:'none',marginTop:32}}
-                onMouseEnter={e=>e.currentTarget.style.background='var(--blue-deep)'}
-                onMouseLeave={e=>e.currentTarget.style.background='var(--blue)'}
+                className="btn-brand"
+                style={{display:'inline-flex',alignItems:'center',gap:8,fontSize:14,fontWeight:600,padding:'11px 22px',borderRadius:8,textDecoration:'none',marginTop:32}}
               >
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9l-1.26-2.74L15 5l2.74-1.26L19 1l1.26 2.74L23 5l-2.74 1.26L19 9zm-7.5.5L9 4 6.5 9.5 1 12l5.5 2.5L9 20l2.5-5.5L17 12l-5.5-2.5zM19 15l-1.26 2.74L15 19l2.74 1.26L19 23l1.26-2.74L23 19l-2.74-1.26L19 15z"/></svg>
                 Tester le matching IA
@@ -558,7 +557,7 @@ function HeroBtn({ onClick, primary, href, target, rel, children }) {
   const [pressed, setPressed] = useState(false);
   const base = { display:'inline-flex', alignItems:'center', gap:8, padding:'11px 22px', borderRadius:7, fontSize:15, fontWeight:500, border:'none', cursor:'pointer', fontFamily:'inherit', textDecoration:'none', transition:'background 0.15s,color 0.15s,transform 0.1s', transform: pressed ? 'scale(0.97)' : 'scale(1)' };
   const style = primary
-    ? { ...base, background: pressed ? 'var(--p700)' : hovered ? 'var(--p600)' : 'var(--p500)', color:'var(--on-accent)' }
+    ? base
     : { ...base, background: pressed ? 'var(--g300)' : hovered ? 'var(--g200)' : 'var(--g100)', color: pressed ? 'var(--g800)' : hovered ? 'var(--g700)' : 'var(--g600)' };
   const handlers = {
     onMouseEnter:() => setHovered(true),
@@ -566,8 +565,9 @@ function HeroBtn({ onClick, primary, href, target, rel, children }) {
     onMouseDown:() => setPressed(true),
     onMouseUp:() => setPressed(false),
   };
-  if (href) return <a href={href} target={target} rel={rel} onClick={onClick} style={style} {...handlers}>{children}</a>;
-  return <button onClick={onClick} style={style} {...handlers}>{children}</button>;
+  const className = primary ? 'btn-brand' : undefined;
+  if (href) return <a href={href} target={target} rel={rel} onClick={onClick} className={className} style={style} {...handlers}>{children}</a>;
+  return <button onClick={onClick} className={className} style={style} {...handlers}>{children}</button>;
 }
 
 function LockedCaseCard() {
