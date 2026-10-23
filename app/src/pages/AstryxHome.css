@@ -8,8 +8,11 @@
 .ax-nav-items{display:flex;gap:4px}
 .ax-logo{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:var(--radius-element);background:var(--color-accent);color:var(--color-on-accent);font-size:12px;font-weight:700}
 
+.ax-hero-bg{background:linear-gradient(145deg,var(--color-background-muted) 0%,var(--color-background-body) 55%)}
 .ax-hero{display:grid;grid-template-columns:1.3fr 1fr;gap:56px;align-items:center;padding-block:72px 88px}
 .ax-hero-photo{display:flex;justify-content:center}
+/* Cercle de la photo : mêmes variables que le site (--photo-bg, --photo-ring) */
+.ax-hero-photo .astryx-avatar{background:var(--photo-bg);box-shadow:0 0 0 4px var(--color-background-body),0 0 0 6px var(--photo-ring),0 10px 40px rgba(79,70,229,.12)}
 .ax-accent{color:var(--color-text-accent)}
 .ax-point-icon{display:inline-flex;color:var(--color-icon-accent)}
 .ax-stats{display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:0}

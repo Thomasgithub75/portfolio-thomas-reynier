@@ -120,9 +120,11 @@ function buildTokens(node) {
   const addColor = (rgb, name) => colors.set(rgb, [...(colors.get(rgb) || []), name]);
   const names = collectVarNames();
 
-  for (const name of astryxRoot ? names.astryx : names.site) {
+  // Côté Astryx, les dégradés du site restent visibles : le thème réutilise --brand-gradient
+  for (const name of astryxRoot ? [...names.astryx, ...names.site] : names.site) {
     const raw = contextStyle.getPropertyValue(name).trim();
     if (!raw) continue;
+    if (astryxRoot && names.site.includes(name) && !raw.includes('gradient')) continue;
     if (raw.includes('gradient')) { const g = resolve('backgroundImage', `var(${name})`); if (g) gradients.set(g.replace(/\s+/g, ''), name); continue; }
     if (name.includes('radius')) { const r = resolve('borderTopLeftRadius', `var(${name})`); if (r && !radii.has(r)) radii.set(r, name); continue; }
     if (!/^(#|rgb|hsl|oklch|color|light-dark|var\(|transparent|[a-z]+$)/i.test(raw)) continue;

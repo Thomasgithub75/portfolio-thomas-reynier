@@ -119,6 +119,7 @@ function Nav({ mode, onToggleMode }) {
 
 function Hero() {
   return (
+    <div className="ax-hero-bg">
     <section id="hero" className="ax-container ax-hero">
       <VStack gap={5}>
         <HStack gap={2} vAlign="center">
@@ -162,6 +163,7 @@ function Hero() {
         <Avatar src="/images/profile-cutout.png" name="Thomas Reynier" size={300} tooltip={false} />
       </div>
     </section>
+    </div>
   );
 }
 
@@ -196,7 +198,7 @@ function ProjectCard({ project, locked }) {
         <Heading level={3}>{project.name}</Heading>
         <Text color="secondary">{project.desc}</Text>
         <HStack gap={1} wrap="wrap">
-          {project.tags.map(tag => <Badge key={tag} label={tag} />)}
+          {project.tags.map(tag => <Badge key={tag} label={tag} variant="blue" />)}
         </HStack>
         <Link href={project.href} isStandalone>
           <HStack gap={1} vAlign="center">
