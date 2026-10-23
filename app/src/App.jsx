@@ -17,6 +17,9 @@ import './styles/global.css';
 
 // Astryx playground — lazy loaded so its styles never reach the existing MUI pages
 const AstryxSandbox = lazy(() => import('./pages/AstryxSandbox'));
+// Aperçu de l'accueil en Astryx — en local et sur les aperçus Vercel, jamais sur le domaine public
+const AstryxHome = lazy(() => import('./pages/AstryxHome'));
+const isPreviewHost = import.meta.env.DEV || !window.location.hostname.endsWith('thomas-reynier.fr');
 
 export default function App() {
   return (
@@ -36,6 +39,7 @@ export default function App() {
         <Route path="/wip/nectar" element={import.meta.env.DEV ? <CaseNectar /> : <Navigate to="/" replace />} />
         <Route path="/lettre-motivation" element={<LettreMotivation />} />
         <Route path="/design-system" element={<DesignSystem />} />
+        <Route path="/apercu-astryx" element={isPreviewHost ? <Suspense fallback={null}><AstryxHome /></Suspense> : <Navigate to="/" replace />} />
         {/* Astryx design system playground — local only */}
         <Route path="/wip/astryx" element={import.meta.env.DEV ? <Suspense fallback={null}><AstryxSandbox /></Suspense> : <Navigate to="/" replace />} />
       </Routes>
