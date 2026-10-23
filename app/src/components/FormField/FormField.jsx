@@ -83,7 +83,7 @@ export default function FormField({
   };
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: '5px', width: '100%' }}>
+    <Box data-ds={`FormField / ${type}`} sx={{ display: 'flex', flexDirection: 'column', gap: '5px', width: '100%' }}>
       {label && (
         <Box
           component="label"

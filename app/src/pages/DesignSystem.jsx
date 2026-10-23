@@ -87,6 +87,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import StarIcon from '@mui/icons-material/Star';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
+import AdsClickOutlined from '@mui/icons-material/AdsClickOutlined';
+import { setInspecting } from '../hooks/useInspector';
 import WorkIcon from '@mui/icons-material/Work';
 import SchoolIcon from '@mui/icons-material/School';
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
@@ -230,6 +232,14 @@ function PrimaryScale() {
 }
 
 // ── Toggle demos ──────────────────────────────────────────────────────────────
+
+function InspectorDemo() {
+  return (
+    <Button variant="secondary" startIcon={<AdsClickOutlined sx={{ fontSize: 16 }} />} onClick={() => setInspecting(true)}>
+      Lancer l'inspection
+    </Button>
+  );
+}
 
 function ToggleDemo() {
   const [on, setOn] = useState(false);
@@ -843,6 +853,7 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
           { label: 'Métier & UI', icons: [
             { Icon: StarIcon,               name: 'Star' },
             { Icon: FiberManualRecordIcon,  name: 'FiberManualRecord (dot)' },
+            { Icon: AdsClickOutlined,       name: 'AdsClickOutlined (inspecter)' },
             { Icon: WorkIcon,               name: 'Work' },
             { Icon: SchoolIcon,             name: 'School' },
             { Icon: LightbulbIcon,          name: 'Lightbulb' },
@@ -1044,6 +1055,34 @@ const [showContext, setShowContext] = useState(false);
     rows={3}
   />
 )}`}
+        />
+      </Section>
+
+      <Divider sx={{ mb: 4 }} />
+
+      <Section title="Inspector" subtitle="Mode inspection façon Dev Mode Figma : au survol, nom du composant, dimensions, padding, typo et couleurs avec le nom du token. Activé depuis le bouton « Inspecter » de la Navbar (desktop uniquement).">
+        <Group label="Démo">
+          <InspectorDemo />
+        </Group>
+
+        <DocBlock
+          props={[
+            ['data-ds', 'string (attribut HTML)', '—', 'Nom affiché pour un composant React, ex. data-ds={`Button / ${variant}`}. À poser sur l\'élément racine.'],
+            ['CLASS_NAMES', 'objet (Inspector.jsx)', '—', 'Nom affiché pour les blocs de mise en page stylés par classe CSS (hero-stat → Stat).'],
+            ['setInspecting', 'function (hooks/useInspector)', '—', 'Active / désactive le mode depuis n\'importe quel composant.'],
+          ]}
+          usage={[
+            'Tout nouveau composant porte un data-ds sur son élément racine : « Nom / variante ».',
+            'Les couleurs sont traduites en tokens CSS (--text, --blue…) puis en tokens MUI (tokens.primary[500]) ; une valeur en dur s\'affiche telle quelle, ce qui révèle un token manquant.',
+            'Clic = épingler un élément (les liens ne s\'ouvrent pas pendant l\'inspection). Échap pour quitter.',
+            'Masqué au doigt et sous 900px : le survol n\'existe pas sur mobile.',
+          ]}
+          code={`// Rendre un composant inspectable
+<button data-ds={\`Button / \${variant}\`} style={style}>…</button>
+
+// Activer le mode depuis un composant
+import { setInspecting } from '../hooks/useInspector';
+<Button variant="secondary" onClick={() => setInspecting(true)}>Inspecter</Button>`}
         />
       </Section>
 

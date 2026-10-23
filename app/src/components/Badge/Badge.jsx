@@ -45,6 +45,7 @@ export default function Badge({ children, variant = 'default', sx = {} }) {
   return (
     <Box
       component="span"
+      data-ds={`Badge / ${variant}`}
       sx={{
         display: 'inline-flex',
         alignItems: 'center',

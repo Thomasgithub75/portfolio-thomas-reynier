@@ -51,6 +51,7 @@ export default function Toggle({ checked = false, onChange, label }) {
   return (
     <Box
       component="button"
+      data-ds={`Toggle / ${checked ? 'on' : 'off'}`}
       onClick={handleClick}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => { setHovered(false); setPressed(false); }}
