@@ -227,7 +227,7 @@ export default function Home() {
                 ))}
               </div>
               <div className="hero-stats">
-                {[['5',"ans d'expérience"],['+10','produits SaaS, e‑commerce & retail'],['+100','features']].map(([num,lbl],i) => {
+                {[['5',"ans d'expérience"],['+10','produits SaaS, e‑commerce & retail'],['3','entreprises accompagnées vers l\'IA']].map(([num,lbl],i) => {
                   const hasPlus = num[0]==='+';
                   const digits = hasPlus ? num.slice(1) : num;
                   return (

@@ -42,7 +42,7 @@
 |---------|-------|
 | `5` | ans d'expérience |
 | `+10` | produits SaaS, e-commerce & retail |
-| `+100` | features |
+| `3` | entreprises accompagnées vers l'IA |
 
 ---
 
