@@ -41,7 +41,7 @@
 | Chiffre | Label |
 |---------|-------|
 | `5` | ans d'expérience |
-| `+10` | produit SaaS |
+| `+10` | produits SaaS, e-commerce & retail |
 | `+100` | features |
 
 ---
