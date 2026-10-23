@@ -12,7 +12,6 @@ import JobMatcher from './pages/JobMatcher';
 import LettreMotivation from './pages/LettreMotivation';
 import DesignSystem from './pages/DesignSystem';
 import Intro from './components/Intro/Intro';
-import Inspector from './components/Inspector/Inspector';
 import './styles/global.css';
 
 // Astryx playground — lazy loaded so its styles never reach the existing MUI pages
@@ -43,7 +42,6 @@ export default function App() {
         {/* Astryx design system playground — local only */}
         <Route path="/wip/astryx" element={import.meta.env.DEV ? <Suspense fallback={null}><AstryxSandbox /></Suspense> : <Navigate to="/" replace />} />
       </Routes>
-      <Inspector />
       <Analytics />
       <SpeedInsights />
     </BrowserRouter>

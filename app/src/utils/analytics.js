@@ -6,5 +6,4 @@ export const trackEvent = {
   linkedinClick: (source) => track('linkedin_click', { source }),
   caseStudyOpen: (project) => track('case_study_open', { project }),
   emailCopy: () => track('email_copy'),
-  inspectToggle: (on) => track('inspect_toggle', { on }),
 };

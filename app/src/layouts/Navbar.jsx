@@ -3,10 +3,7 @@ import { createPortal } from 'react-dom';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import DarkModeOutlined from '@mui/icons-material/DarkModeOutlined';
 import LightModeOutlined from '@mui/icons-material/LightModeOutlined';
-import AdsClickOutlined from '@mui/icons-material/AdsClickOutlined';
 import useColorMode from '../hooks/useColorMode';
-import { useInspecting, setInspecting } from '../hooks/useInspector';
-import { trackEvent } from '../utils/analytics';
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -14,7 +11,6 @@ export default function Navbar() {
   const [progress, setProgress] = useState(0);
   const { mode, toggleMode } = useColorMode();
   const isDark = mode === 'dark';
-  const inspecting = useInspecting();
   const location = useLocation();
   const navigate = useNavigate();
   const isHome = location.pathname === '/';
@@ -69,17 +65,6 @@ export default function Navbar() {
             <li><button className="nav-link" style={{background:'none',border:'none',cursor:'pointer',fontFamily:'inherit'}} onClick={() => handleAnchor('projets')}>Projets</button></li>
             <li><button className="nav-cta btn-brand" style={{border:'none',cursor:'pointer',fontFamily:'inherit'}} onClick={() => handleAnchor('contact')}>Contact</button></li>
           </ul>
-          <button
-            className="nav-mode-toggle nav-inspect-toggle"
-            data-inspector-toggle
-            aria-label={inspecting ? 'Quitter le mode inspection' : 'Inspecter le design system du site'}
-            aria-pressed={inspecting}
-            title="Voir les composants et tokens du design system"
-            onClick={() => { trackEvent.inspectToggle(!inspecting); setInspecting(!inspecting); }}
-          >
-            <AdsClickOutlined fontSize="small" />
-            <span className="nav-mode-label">{inspecting ? 'Quitter' : 'Inspecter'}</span>
-          </button>
           <button
             className="nav-mode-toggle"
             aria-label={isDark ? 'Light : passer en mode clair' : 'Dark : passer en mode sombre'}
