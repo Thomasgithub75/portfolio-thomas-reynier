@@ -14,11 +14,11 @@ function readStoredMode() {
 // État partagé : la Navbar (bouton) et les pages Astryx (<Theme mode>) lisent la même valeur
 let mode = readStoredMode();
 const listeners = new Set();
-document.documentElement.dataset.theme = mode;
+document.documentElement.dataset.siteTheme = mode;
 
 function setMode(next) {
   mode = next;
-  document.documentElement.dataset.theme = mode;
+  document.documentElement.dataset.siteTheme = mode;
   try {
     localStorage.setItem(STORAGE_KEY, mode);
   } catch {
@@ -27,7 +27,8 @@ function setMode(next) {
   listeners.forEach(listener => listener());
 }
 
-// Light/dark mode, applied as data-theme on <html> (see styles/global.css) and remembered per browser.
+// Light/dark mode, applied as data-site-theme on <html> (see styles/global.css) and remembered per browser.
+// Not data-theme: Astryx's <Theme> writes that attribute on <html> and removes it when the page unmounts.
 export default function useColorMode() {
   const current = useSyncExternalStore(
     listener => { listeners.add(listener); return () => listeners.delete(listener); },

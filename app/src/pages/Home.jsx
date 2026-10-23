@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import { Theme } from '@astryxdesign/core/theme';
 import { Button } from '@astryxdesign/core/Button';
 import { IconButton } from '@astryxdesign/core/IconButton';
@@ -11,7 +12,6 @@ import { Heading } from '@astryxdesign/core/Heading';
 import { Text } from '@astryxdesign/core/Text';
 import { Link } from '@astryxdesign/core/Link';
 import { Avatar } from '@astryxdesign/core/Avatar';
-import { StatusDot } from '@astryxdesign/core/StatusDot';
 import { Blockquote } from '@astryxdesign/core/Blockquote';
 import { Divider } from '@astryxdesign/core/Divider';
 import { VStack, HStack } from '@astryxdesign/core/Layout';
@@ -160,8 +160,8 @@ function Hero() {
               <img src="/images/profile-cutout.png" alt="Thomas Reynier" />
             </div>
             <div className="ax-status-pill">
-              <StatusDot variant="success" label="Disponible" isPulsing />
-              <Text type="label">À l'écoute</Text>
+              <span className="ax-status-dot" aria-hidden="true" />
+              À l'écoute
             </div>
           </div>
         </div>
@@ -182,35 +182,36 @@ function SectionTitle({ eyebrow, title, intro }) {
   );
 }
 
+// Carte entière cliquable ; au survol : bordure accent, ombre, légère montée, zoom de l'illustration
 function ProjectCard({ project, locked }) {
   return (
-    <Card padding={0} variant={locked ? 'muted' : 'default'}>
-      <div className="ax-thumb">
-        {locked
-          ? <VStack gap={1} hAlign="center"><LockOutlined /><Text type="label" color="secondary">Code requis</Text></VStack>
-          : <img src={project.thumb} alt="" loading="lazy" />}
-      </div>
-      <VStack gap={3} padding={5}>
-        <HStack gap={2} vAlign="center" hAlign="between">
-          <HStack gap={2} vAlign="center">
-            <img className="ax-logo-sm" src={project.logo} alt="" />
-            <Badge label={project.role} variant={locked ? 'neutral' : project.roleVariant} />
+    <RouterLink to={project.href} className="ax-project-link" onClick={() => trackEvent.caseStudyOpen(project.name)}>
+      <Card padding={0} variant={locked ? 'muted' : 'default'} height="100%">
+        <div className="ax-thumb">
+          {locked
+            ? <VStack gap={1} hAlign="center"><LockOutlined /><Text type="label" color="secondary">Code requis</Text></VStack>
+            : <img src={project.thumb} alt="" loading="lazy" />}
+        </div>
+        <VStack gap={3} padding={5}>
+          <HStack gap={2} vAlign="center" hAlign="between">
+            <HStack gap={2} vAlign="center">
+              <img className="ax-logo-sm" src={project.logo} alt="" />
+              <Badge label={project.role} variant={locked ? 'neutral' : project.roleVariant} />
+            </HStack>
+            <Text type="supporting">{locked ? project.date : project.duration}</Text>
           </HStack>
-          <Text type="supporting">{locked ? project.date : project.duration}</Text>
-        </HStack>
-        <Heading level={3}>{project.name}</Heading>
-        <Text color="secondary">{project.desc}</Text>
-        <HStack gap={1} wrap="wrap">
-          {project.tags.map(tag => <Badge key={tag} label={tag} variant="blue" />)}
-        </HStack>
-        <Link href={project.href} isStandalone onClick={() => trackEvent.caseStudyOpen(project.name)}>
-          <HStack gap={1} vAlign="center">
-            {locked ? 'Entrer le code' : 'Voir le projet'}
-            <ArrowForward sx={{ fontSize: 16 }} />
+          <Heading level={3}>{project.name}</Heading>
+          <Text color="secondary">{project.desc}</Text>
+          <HStack gap={1} wrap="wrap">
+            {project.tags.map(tag => <Badge key={tag} label={tag} variant="blue" />)}
           </HStack>
-        </Link>
-      </VStack>
-    </Card>
+          <span className="ax-project-cta">
+            <Text weight="medium" color="accent">{locked ? 'Entrer le code' : 'Voir le projet'}</Text>
+            <ArrowForward className="ax-project-arrow" sx={{ fontSize: 16 }} />
+          </span>
+        </VStack>
+      </Card>
+    </RouterLink>
   );
 }
 

@@ -98,7 +98,7 @@ function collectVarNames() {
 
 function buildTokens(node) {
   const astryxRoot = node.closest('[data-astryx-theme]');
-  const theme = document.documentElement.dataset.theme || 'light';
+  const theme = document.documentElement.dataset.siteTheme || 'light';
   const key = astryxRoot ? `astryx|${astryxRoot.dataset.astryxTheme}|${getComputedStyle(astryxRoot).colorScheme}` : `site|${theme}`;
   if (tokenCache.has(key)) return tokenCache.get(key);
 

@@ -18,11 +18,28 @@
 /* Photo et pastille « À l'écoute » : mêmes variables que le site (--photo-bg, --photo-ring) */
 .ax-photo{width:100%;aspect-ratio:1/1;border-radius:50%;overflow:hidden;background:var(--photo-bg);box-shadow:0 0 0 4px var(--color-background-body),0 0 0 6px var(--photo-ring),0 10px 40px rgba(79,70,229,.12)}
 .ax-photo img{width:100%;height:100%;object-fit:cover;object-position:center top}
-.ax-status-pill{position:absolute;bottom:24px;right:-4px;display:flex;align-items:center;gap:8px;padding:6px 14px;border-radius:var(--radius-full);background:var(--color-background-surface);border:1px solid var(--color-border);box-shadow:0 2px 12px rgba(0,0,0,.08);white-space:nowrap}
+.ax-status-pill{position:absolute;bottom:24px;right:-4px;display:flex;align-items:center;gap:7px;padding:6px 14px;border-radius:20px;background:var(--color-background-surface);border:1px solid var(--color-border);box-shadow:0 2px 12px rgba(0,0,0,.08);font-size:13px;font-weight:500;color:var(--color-text-primary);white-space:nowrap}
+/* Point vert avec halo qui pulse, comme la version d'origine */
+.ax-status-dot{position:relative;width:10px;height:10px;flex-shrink:0}
+.ax-status-dot::before,.ax-status-dot::after{content:'';position:absolute;border-radius:50%;background:#22C55E}
+.ax-status-dot::before{inset:0;animation:ax-dot-pulse 2s ease-out infinite}
+.ax-status-dot::after{inset:1px;z-index:1}
+@keyframes ax-dot-pulse{0%{transform:scale(1);opacity:.6}50%{transform:scale(2.4);opacity:0}100%{transform:scale(1);opacity:0}}
+@media (prefers-reduced-motion:reduce){.ax-status-dot::before{animation:none}}
 
 /* ── Projets ── */
 .ax-thumb{aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--color-background-muted);border-bottom:1px solid var(--color-border);color:var(--color-text-secondary)}
-.ax-thumb img{width:100%;height:100%;object-fit:cover}
+.ax-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+.ax-project-link{display:block;height:100%;text-decoration:none;color:inherit;border-radius:var(--radius-container);transition:transform .2s}
+.ax-project-link .astryx-card{transition:border-color .2s,box-shadow .2s}
+.ax-project-link:hover{transform:translateY(-4px)}
+.ax-project-link:active{transform:scale(.98)}
+.ax-project-link:hover .astryx-card{border-color:var(--color-accent);box-shadow:0 8px 32px rgba(79,70,229,.12)}
+.ax-project-link:hover .ax-thumb img{transform:scale(1.04)}
+.ax-project-link:focus-visible{outline:2px solid var(--focus-outline-color);outline-offset:2px}
+.ax-project-cta{display:inline-flex;align-items:center;gap:6px;color:var(--color-text-accent)}
+.ax-project-arrow{transition:transform .2s}
+.ax-project-link:hover .ax-project-arrow{transform:translateX(4px)}
 .ax-logo-sm{height:22px;width:auto}
 .ax-logo-md{width:34px;height:34px;object-fit:contain;padding:5px;border-radius:var(--radius-element);background:var(--color-background-muted);flex-shrink:0}
 

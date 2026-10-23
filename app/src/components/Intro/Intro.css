@@ -14,6 +14,10 @@
 .intro-inner { position: relative; z-index: 1; text-align: center; padding: 0 16px; transition: transform 0.6s ease; }
 .intro.is-leaving .intro-inner { transform: scale(1.06); }
 
+/* Le thème Astryx (page d'accueil) pose un reset :where(p) avec sa police et sa couleur de texte :
+   l'intro garde explicitement les siennes. */
+.intro p { font-family: inherit; color: inherit; }
+
 /* ── Nom ───────────────────────────────────────────────────────────────────── */
 .intro-name {
   margin: 0;
