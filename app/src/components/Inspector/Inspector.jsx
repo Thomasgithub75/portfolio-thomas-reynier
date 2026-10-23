@@ -55,9 +55,11 @@ const TAG_NAMES = {
 
 // Quand plusieurs tokens partagent la même valeur, on choisit selon le rôle de la couleur
 const ROLE_HINTS = {
-  text: ['--on-brand', '--on-accent', '--text', '--muted', '--ink', '--blue', 'fg', 'text'],
-  fill: ['--bg', '--surface', '--bg-soft', '--panel', 'bg', '--blue'],
-  border: ['--border', 'border', '--blue'],
+  text: ['--color-on-accent', '--color-text-primary', '--color-text-secondary', '--color-text-accent',
+    '--on-brand', '--on-accent', '--text', '--muted', '--ink', '--blue', 'fg', 'text'],
+  fill: ['--color-background-surface', '--color-background-card', '--color-background-body', '--color-background-muted',
+    '--color-accent', '--bg', '--surface', '--bg-soft', '--panel', 'background', 'bg', '--blue'],
+  border: ['--color-border', '--color-border-emphasized', '--border', 'border', '--blue'],
 };
 
 const MAX_DEPTH = 3;
@@ -67,68 +69,83 @@ const SAFE_TOP = 84;     // sous la Navbar flottante
 const SAFE_BOTTOM = 70;  // au-dessus du bandeau d'aide
 
 // ── Tokens : valeur calculée → nom ────────────────────────────────────────────
+// Deux design systems cohabitent : les variables du site (:root, global.css) et
+// celles d'Astryx, déclarées sous le conteneur <Theme> (data-astryx-theme).
 
-let tokenCache = null;
+const tokenCache = new Map();
+let varNames = null;
 
-function rootVarNames() {
-  const names = new Set();
-  for (const sheet of document.styleSheets) {
-    let rules;
-    try { rules = sheet.cssRules; } catch { continue; } // feuilles externes (Google Fonts)
+// Toutes les variables CSS déclarées, triées par origine (site ou Astryx)
+function collectVarNames() {
+  if (varNames) return varNames;
+  const site = new Set();
+  const astryx = new Set();
+  const walk = rules => {
     for (const rule of rules) {
-      if (!rule.selectorText?.includes(':root')) continue;
-      for (const prop of rule.style) if (prop.startsWith('--')) names.add(prop);
+      if (rule.cssRules) walk(rule.cssRules); // @layer, @media, @scope
+      if (!rule.style) continue;
+      const selector = rule.selectorText || '';
+      const isSite = selector === ':root' || selector.startsWith(':root[');
+      for (const prop of rule.style) if (prop.startsWith('--')) (isSite ? site : astryx).add(prop);
     }
+  };
+  for (const sheet of document.styleSheets) {
+    try { walk(sheet.cssRules); } catch { /* feuilles externes (Google Fonts) */ }
   }
-  return [...names];
+  varNames = { site: [...site], astryx: [...astryx] };
+  return varNames;
 }
 
-function buildTokens() {
+function buildTokens(node) {
+  const astryxRoot = node.closest('[data-astryx-theme]');
   const theme = document.documentElement.dataset.theme || 'light';
-  if (tokenCache?.theme === theme) return tokenCache;
+  const key = astryxRoot ? `astryx|${astryxRoot.dataset.astryxTheme}|${getComputedStyle(astryxRoot).colorScheme}` : `site|${theme}`;
+  if (tokenCache.has(key)) return tokenCache.get(key);
 
+  // La sonde est placée dans le bon contexte : var() et light-dark() s'y résolvent comme sur l'élément
+  const context = astryxRoot || document.body;
   const probe = document.createElement('div');
   probe.style.display = 'none';
-  document.body.appendChild(probe);
-  const toRgb = value => {
-    probe.style.color = '';
-    probe.style.color = value;
-    return probe.style.color ? getComputedStyle(probe).color : null;
+  context.appendChild(probe);
+  const resolve = (prop, value) => {
+    probe.style[prop] = '';
+    probe.style[prop] = value;
+    return probe.style[prop] ? getComputedStyle(probe)[prop] : null;
   };
 
-  const toGradient = value => {
-    probe.style.backgroundImage = value;
-    return getComputedStyle(probe).backgroundImage.replace(/\s+/g, '');
-  };
-
-  const rootStyle = getComputedStyle(document.documentElement);
+  const contextStyle = getComputedStyle(context);
   const colors = new Map(); // rgb → [noms de tokens]
   const radii = new Map();
   const gradients = new Map();
   const addColor = (rgb, name) => colors.set(rgb, [...(colors.get(rgb) || []), name]);
+  const names = collectVarNames();
 
-  for (const name of rootVarNames()) {
-    const raw = rootStyle.getPropertyValue(name).trim();
+  for (const name of astryxRoot ? names.astryx : names.site) {
+    const raw = contextStyle.getPropertyValue(name).trim();
     if (!raw) continue;
-    if (raw.includes('gradient')) { gradients.set(toGradient(raw), name); continue; }
-    if (name.startsWith('--radius')) { radii.set(raw, name); continue; }
-    const rgb = toRgb(raw);
+    if (raw.includes('gradient')) { const g = resolve('backgroundImage', `var(${name})`); if (g) gradients.set(g.replace(/\s+/g, ''), name); continue; }
+    if (name.includes('radius')) { const r = resolve('borderTopLeftRadius', `var(${name})`); if (r && !radii.has(r)) radii.set(r, name); continue; }
+    if (!/^(#|rgb|hsl|oklch|color|light-dark|var\(|transparent|[a-z]+$)/i.test(raw)) continue;
+    const rgb = resolve('color', `var(${name})`);
     if (rgb) addColor(rgb, name);
   }
 
-  // Tokens MUI (theme.js) : utilisés par les composants React, en second choix
-  const addTheme = (obj, prefix) => {
-    for (const [key, value] of Object.entries(obj)) {
-      const name = `${prefix}${/^\d/.test(key) ? `[${key}]` : `.${key}`}`;
-      if (typeof value === 'object') addTheme(value, name);
-      else { const rgb = toRgb(value); if (rgb) addColor(rgb, name); }
-    }
-  };
-  addTheme(themeTokens, 'tokens');
+  // Tokens MUI (theme.js) : utilisés par les composants React du site, en second choix
+  if (!astryxRoot) {
+    const addTheme = (obj, prefix) => {
+      for (const [k, value] of Object.entries(obj)) {
+        const name = `${prefix}${/^\d/.test(k) ? `[${k}]` : `.${k}`}`;
+        if (typeof value === 'object') addTheme(value, name);
+        else { const rgb = resolve('color', value); if (rgb) addColor(rgb, name); }
+      }
+    };
+    addTheme(themeTokens, 'tokens');
+  }
 
   probe.remove();
-  tokenCache = { theme, colors, radii, gradients };
-  return tokenCache;
+  const tokens = { source: astryxRoot ? 'Astryx' : 'Portfolio', colors, radii, gradients };
+  tokenCache.set(key, tokens);
+  return tokens;
 }
 
 // Token CSS d'abord (--x), puis celui dont le nom correspond le mieux au rôle
@@ -149,10 +166,21 @@ function isTransparent(color) {
   return !color || color === 'transparent' || /rgba\(.*,\s*0\)$/.test(color);
 }
 
+// « astryx-toggle-button » → « ToggleButton »
+function astryxName(node) {
+  const cls = [...(node.classList || [])].filter(c => c.startsWith('astryx-')).pop();
+  if (!cls) return null;
+  const name = cls.slice(7).split('-').map(w => w[0].toUpperCase() + w.slice(1)).join('');
+  const variant = node.dataset.variant || node.dataset.type;
+  return variant ? `${name} / ${variant}` : name;
+}
+
 function nameFor(el) {
   let node = el;
   for (let depth = 0; node && node !== document.body && depth <= MAX_DEPTH; depth++) {
     if (node.dataset?.ds) return { node, name: node.dataset.ds };
+    const astryx = astryxName(node);
+    if (astryx) return { node, name: astryx };
     const cls = [...(node.classList || [])].find(c => CLASS_NAMES[c]);
     if (cls) return { node, name: CLASS_NAMES[cls] };
     node = node.parentElement;
@@ -175,7 +203,7 @@ function describe(leaf) {
   // Les morceaux d'un SVG remontent à l'icône entière
   const el = leaf.closest('svg') || leaf;
   const { node, name } = nameFor(el);
-  const tk = buildTokens();
+  const tk = buildTokens(node);
   const box = getComputedStyle(node);
   const text = getComputedStyle(el);
   const color = (value, role) => ({ value, token: tokenFor(tk.colors.get(value), role) });
@@ -190,9 +218,10 @@ function describe(leaf) {
     rows.push({ label: 'Texte', swatch: color(text.color, 'text') });
   }
 
-  if (box.backgroundImage.includes('gradient')) {
-    const token = tk.gradients.get(box.backgroundImage.replace(/\s+/g, ''));
-    rows.push({ label: 'Fond', text: token || 'Dégradé', gradient: box.backgroundImage });
+  const gradientToken = tk.gradients.get(box.backgroundImage.replace(/\s+/g, ''));
+  // Un dégradé sans token sur une couleur de fond = calque d'état (survol) : on montre la couleur
+  if (box.backgroundImage.includes('gradient') && (gradientToken || isTransparent(box.backgroundColor))) {
+    rows.push({ label: 'Fond', text: gradientToken || 'Dégradé', gradient: box.backgroundImage });
   } else if (!isTransparent(box.backgroundColor)) {
     rows.push({ label: 'Fond', swatch: color(box.backgroundColor, 'fill') });
   }
@@ -204,7 +233,7 @@ function describe(leaf) {
 
   const radius = box.borderTopLeftRadius;
   if (px(radius)) {
-    const token = tk.radii.get(radius) || (px(radius) > 999 ? '--radius-pill' : null);
+    const token = tk.radii.get(radius) || (px(radius) > 999 ? (tk.source === 'Astryx' ? '--radius-full' : '--radius-pill') : null);
     rows.push({ label: 'Rayon', text: token ? `${token} · ${px(radius) > 999 ? 'pill' : px(radius)}` : `${px(radius)}` });
   }
 
@@ -216,7 +245,7 @@ function describe(leaf) {
   }
 
   const rect = node.getBoundingClientRect();
-  return { node, name, rect, padding, rows };
+  return { node, name, rect, padding, rows, source: tk.source };
 }
 
 // ── Composant ─────────────────────────────────────────────────────────────────
@@ -310,7 +339,7 @@ function placePanel(rect, height) {
 }
 
 function Overlay({ info, pinned }) {
-  const { rect, padding: [pt, pr, pb, pl], name, rows } = info;
+  const { rect, padding: [pt, pr, pb, pl], name, rows, source } = info;
   const panelRef = useRef(null);
   const strip = (style) => <div className="inspector-pad" style={style} />;
 
@@ -335,7 +364,10 @@ function Overlay({ info, pinned }) {
       <div ref={panelRef} className="inspector-panel" style={{ width: PANEL_WIDTH }}>
         <div className="inspector-panel-head">
           <span className="inspector-name">{name}</span>
-          {pinned && <PushPinOutlined sx={{ fontSize: 14 }} />}
+          <span className="inspector-head-end">
+            {pinned && <PushPinOutlined sx={{ fontSize: 14 }} />}
+            <span className={`inspector-source inspector-source--${source.toLowerCase()}`}>{source}</span>
+          </span>
         </div>
         {rows.map(row => (
           <div key={row.label} className="inspector-row">
