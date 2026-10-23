@@ -12,6 +12,7 @@
   --text:#1A2540;--muted:#5B6A8A;--border:#E5E7EB;--bg:#FFFFFF;--bg-soft:#F9FAFB;
   --proj-bg:#EEF2FF;--proj-fg:#4F46E5;--proj-border:#C7D2FE;
   --surface:#FFFFFF;--on-accent:#FFFFFF;--nav-bg:rgba(255,255,255,0.92);
+  --nav-glass-bg:rgba(255,255,255,.72);--nav-glass-border:rgba(15,23,42,.08);
   --border-soft:#E5E9F5;--border-strong:#D1D5DB;
   --ink:#111827;--ink-2:#374151;--n-muted:#6B7280;--n-subtle:#9CA3AF;
   --n-soft:#F3F4F6;--n-faint:#FAFAFA;--panel:#F5F6FF;
@@ -46,6 +47,7 @@
   --text:rgba(255,255,255,.88);--muted:rgba(255,255,255,.64);--border:rgba(255,255,255,.16);--bg:#000000;--bg-soft:#141414;
   --proj-bg:#1E1E1E;--proj-fg:#8D4AFF;--proj-border:rgba(255,255,255,.16);
   --surface:#1E1E1E;--on-accent:#000000;--nav-bg:rgba(0,0,0,0.85);
+  --nav-glass-bg:rgba(28,28,28,.62);--nav-glass-border:rgba(255,255,255,.14);
   --border-soft:rgba(255,255,255,.12);--border-strong:#424242;
   --ink:#FFFFFF;--ink-2:#D7D7D7;--n-muted:rgba(255,255,255,.64);--n-subtle:rgba(255,255,255,.4);
   --n-soft:#242424;--n-faint:#141414;--panel:#141414;
@@ -71,12 +73,12 @@ html{scroll-behavior:smooth;overflow-x:hidden}
 body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 
 /* ── NAV ── */
-.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--nav-bg);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid transparent;border-bottom-color:var(--border);height:60px;display:flex;align-items:center;justify-content:center;overflow:hidden;margin:0;border-radius:0;box-shadow:none;transition:margin .25s ease,border-radius .25s ease,box-shadow .25s ease,border-color .25s ease,background-color .25s ease,backdrop-filter .25s ease}
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--nav-bg);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid transparent;border-bottom-color:var(--border);height:60px;display:flex;align-items:center;justify-content:center;overflow:hidden;margin:0;max-width:100%;border-radius:0;box-shadow:none;transition:margin .25s ease,max-width .25s ease,border-radius .25s ease,box-shadow .25s ease,border-color .25s ease,background-color .25s ease,backdrop-filter .25s ease}
 /* Reading-progress fill — lives inside the nav so it's clipped by its corners (straight at top, rounded once scrolled) */
 .nav-progress{position:absolute;left:0;bottom:0;height:3px;background:var(--blue);transition:width .1s linear}
 /* Scrolled — floating glass card, clearly narrower than the viewport (respond.io-style) */
-.nav-scrolled{margin:14px 20px 0;border-radius:18px;background:rgba(255,255,255,.12);backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);border-color:rgba(255,255,255,.18);box-shadow:0 12px 32px -10px rgba(0,0,0,.5)}
-@media(max-width:640px){.nav-scrolled{margin:12px 16px 0;border-radius:16px}}
+.nav-scrolled{margin:14px auto 0;max-width:min(1000px,calc(100% - 40px));border-radius:18px;background:var(--nav-glass-bg);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border-color:var(--nav-glass-border);box-shadow:0 12px 32px -10px rgba(0,0,0,.35)}
+@media(max-width:640px){.nav-scrolled{margin:12px auto 0;max-width:calc(100% - 32px);border-radius:16px}}
 .nav-inner{max-width:960px;width:100%;padding:0 2rem;display:flex;align-items:center;justify-content:space-between}
 .nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
 .nav-logo-placeholder{width:32px;height:32px;background:var(--blue);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--on-accent);letter-spacing:-0.01em}
