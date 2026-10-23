@@ -2,6 +2,7 @@
 
 > Tous les textes du portfolio centralisés ici.
 > Pour modifier un texte : change-le dans ce fichier et demande à Claude de l'intégrer dans le code.
+> Les textes de la page d'accueil sont dans `app/src/data/home.js`.
 > Claude lit ce fichier avant de travailler sur une section ou une page.
 
 ---

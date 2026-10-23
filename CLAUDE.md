@@ -107,7 +107,8 @@
 | Outil | Usage |
 |-------|-------|
 | React + Vite | Front-end (dossier `app/`) |
-| Material UI (MUI) | Composants UI |
+| Astryx (`@astryxdesign/core`) | Design system cible — thème « portfolio » dans `app/src/theme/astryxTheme.js`, aux couleurs du site. Page d'accueil migrée (`pages/Home.jsx`) |
+| Material UI (MUI) | Composants UI des pages pas encore migrées vers Astryx |
 | React Router | Navigation |
 | Git + GitHub | Versioning |
 | Vercel | Déploiement cible |
@@ -147,6 +148,15 @@
 - **Commande export PDF :** `chrome --headless=new --no-pdf-header-footer --paper-width=8.27 --paper-height=11.69 --print-to-pdf="proposals/cv-thomas-reynier.pdf" "file:///.../cv-v1.html"`
 
 ---
+
+## Migration Astryx (en cours)
+
+- **Fait :** page d'accueil (`pages/Home.jsx` + `Home.css`, contenu dans `data/home.js`).
+- **À faire, page par page :** études de cas, matching IA, lettre de motivation, page design system.
+- **Restent en code maison :** Navbar (verre + menu mobile), effet de frappe (`StreamingText`), pastille « À l'écoute », mise en page du hero (classes `home-hero` / `hero-*` de `global.css`, qui le font tenir sur un écran de téléphone).
+- **Couches CSS :** `styles/layers.css` (importé en premier dans `main.jsx`) fixe l'ordre `reset, astryx-base, astryx-theme`. Le reset d'Astryx n'est pas chargé : celui du site suffit.
+- **Revenir en arrière :** l'ancienne page d'accueil MUI est dans `pages/HomeClassic.jsx` (visible sur `/ancienne-version` en local et sur les aperçus Vercel) ; le site complet d'avant est sauvegardé dans la branche `sauvegarde/avant-astryx`.
+- Les nouveaux composants maison s'ajoutent toujours à `/design-system` ; les composants Astryx sont documentés par `npx astryx component <Nom>`.
 
 ## Notes pour Claude
 

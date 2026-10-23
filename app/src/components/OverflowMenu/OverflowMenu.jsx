@@ -36,6 +36,7 @@ export default function OverflowMenu({ items = [], size = 'md' }) {
     <>
       <button
         type="button"
+        data-ds="OverflowMenu"
         onClick={handleOpen}
         style={{
           display: 'inline-flex',

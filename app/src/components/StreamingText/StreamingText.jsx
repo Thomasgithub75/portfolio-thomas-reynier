@@ -120,7 +120,7 @@ export default function StreamingText({
   const caretClass = running && isType ? ' is-typing' : caret ? ' is-on' : '';
 
   return (
-    <p className="streaming-text" aria-label={label} style={style}>
+    <p className="streaming-text" data-ds={`StreamingText / ${variant}`} aria-label={label} style={style}>
       {isType ? (
         <span aria-hidden="true" className="streaming-text-typed">
           {typedContent}{typed.wrong}

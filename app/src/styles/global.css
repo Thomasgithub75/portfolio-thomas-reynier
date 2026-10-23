@@ -36,7 +36,8 @@
   --role-portfolio-bg:#F0F4FF;--role-portfolio-fg:#2145A8;--role-portfolio-border:#C4D0F5;
 }
 /* Dark mode (test) — palette inspired by tech/fintech apps (Revolut-style): black surfaces, electric violet accent */
-:root[data-theme="dark"]{
+/* data-site-theme (et non data-theme, que le <Theme> Astryx écrit et efface sur <html>) */
+:root[data-site-theme="dark"]{
   color-scheme:dark;
   --p50:rgba(141,74,255,.14);--p100:rgba(141,74,255,.22);--p200:rgba(141,74,255,.45);--p300:#5B0EB3;--p400:#A873FF;
   --p500:#8D4AFF;--p600:#A873FF;--p700:#C9A8FF;--p800:#E8D9FF;--p900:#E8D9FF;

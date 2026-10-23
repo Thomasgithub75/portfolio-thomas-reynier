@@ -111,7 +111,7 @@ export default function Tag({
 
   if (!clickable) {
     return (
-      <Box component="span" sx={{ ...base, cursor: 'default', ...sx }}>
+      <Box component="span" data-ds={`Tag / ${category}`} sx={{ ...base, cursor: 'default', ...sx }}>
         {icon && <span style={{ fontSize: 12 }}>{icon}</span>}
         {children}
       </Box>
@@ -131,6 +131,7 @@ export default function Tag({
   return (
     <Box
       component="button"
+      data-ds={`Tag / ${category}${isActive ? ' · actif' : ''}`}
       onClick={onClick}
       sx={{
         ...base,

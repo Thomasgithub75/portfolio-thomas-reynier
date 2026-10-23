@@ -1,0 +1,33 @@
+/* ── Inspector (mode inspection façon Dev Mode Figma) ── */
+/* Couleur de sélection fixe (bleu Figma) : elle doit se distinguer du violet de marque inspecté */
+.inspector{--insp-accent:#0D99FF;--insp-pad:rgba(80,200,120,.22);position:fixed;inset:0;z-index:2000;pointer-events:none;font-family:'Outfit',sans-serif}
+html.is-inspecting,html.is-inspecting *{cursor:crosshair !important}
+html.is-inspecting [data-inspector-toggle],html.is-inspecting [data-inspector-toggle] *{cursor:pointer !important}
+
+.inspector-box{position:fixed;outline:1.5px solid var(--insp-accent);outline-offset:0;background:rgba(13,153,255,.06);transition:top .08s,left .08s,width .08s,height .08s}
+.inspector-pad{position:absolute;background:var(--insp-pad)}
+.inspector-size{position:absolute;left:50%;bottom:-22px;transform:translateX(-50%);background:var(--insp-accent);color:#fff;font-size:11px;font-weight:500;line-height:1;padding:4px 6px;border-radius:4px;white-space:nowrap;font-variant-numeric:tabular-nums}
+
+.inspector-panel{position:fixed;background:#1E1E1E;color:#fff;border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:10px 12px;box-shadow:0 12px 32px -8px rgba(0,0,0,.45);font-size:12px}
+.inspector-panel-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding-bottom:8px;margin-bottom:6px;border-bottom:1px solid rgba(255,255,255,.1)}
+.inspector-name{font-weight:600;font-size:13px;color:#fff}
+.inspector-head-end{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.inspector-source{font-size:10px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:2px 6px;border-radius:4px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.75)}
+.inspector-source--astryx{background:rgba(123,47,255,.28);color:#D9C2FF}
+.inspector-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:3px 0}
+.inspector-label{color:rgba(255,255,255,.55);flex-shrink:0}
+.inspector-value{display:flex;align-items:center;gap:6px;min-width:0;color:rgba(255,255,255,.92)}
+.inspector-value code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.inspector-swatch{width:12px;height:12px;border-radius:3px;border:1px solid rgba(255,255,255,.25);flex-shrink:0}
+.inspector-empty{color:rgba(255,255,255,.45)}
+
+.inspector-hint{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);display:flex;align-items:center;gap:8px;background:#1E1E1E;color:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.12);border-radius:9999px;padding:8px 14px;font-size:13px;box-shadow:0 8px 24px -8px rgba(0,0,0,.4);white-space:nowrap}
+.inspector-hint-dot{width:8px;height:8px;border-radius:50%;background:var(--insp-accent);box-shadow:0 0 0 3px rgba(13,153,255,.25)}
+.inspector-hint kbd{font-family:inherit;font-size:11px;background:rgba(255,255,255,.12);border-radius:4px;padding:2px 6px}
+
+/* Bouton de la Navbar — desktop uniquement (le survol n'existe pas au doigt) */
+.nav-inspect-toggle{margin-left:16px}
+@media (hover:hover) and (min-width:901px){.nav-inspect-toggle + .nav-mode-toggle{margin-left:8px}}
+.nav-inspect-toggle[aria-pressed="true"]{background:#0D99FF;border-color:#0D99FF;color:#fff}
+.nav-inspect-toggle[aria-pressed="true"]:hover{background:#0B87E0}
+@media (hover:none),(max-width:900px){.nav-mode-toggle.nav-inspect-toggle{display:none}}

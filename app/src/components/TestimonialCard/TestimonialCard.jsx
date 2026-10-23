@@ -134,7 +134,7 @@ export default function TestimonialCard({
   // ── Featured — pleine largeur, 2 colonnes internes ──
   if (featured) {
     return (
-      <Box sx={{ ...cardBase, p: '32px' }}>
+      <Box data-ds="TestimonialCard / featured" sx={{ ...cardBase, p: '32px' }}>
         <Box sx={{
           display: 'grid',
           gridTemplateColumns: '1fr 1fr',
@@ -188,7 +188,7 @@ export default function TestimonialCard({
 
   // ── Compact — layout vertical ──
   return (
-    <Box sx={{ ...cardBase, p: '24px' }}>
+    <Box data-ds="TestimonialCard / compact" sx={{ ...cardBase, p: '24px' }}>
       <Stack direction="row" alignItems="center" justifyContent="space-between">
         <Stars />
         <Logo size={20} />

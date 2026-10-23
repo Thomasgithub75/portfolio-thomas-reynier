@@ -98,14 +98,14 @@ export default function Button({
 
   if (href && !disabled) {
     return (
-      <a href={href} style={style} {...events}>
+      <a href={href} style={style} data-ds={`Button / ${variant}`} {...events}>
         {startIcon}{children}{endIcon}
       </a>
     );
   }
 
   return (
-    <button type="button" style={style} disabled={disabled} onClick={onClick} {...events}>
+    <button type="button" style={style} disabled={disabled} onClick={onClick} data-ds={`Button / ${variant}`} {...events}>
       {startIcon}{children}{endIcon}
     </button>
   );
