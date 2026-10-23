@@ -316,6 +316,7 @@ h1.case-h1{font-size:clamp(28px,4vw,44px);font-weight:600;letter-spacing:-0.03em
 .hero-point-text strong{color:var(--text);font-weight:500}
 .hero-stats{display:flex;align-items:stretch;margin-bottom:32px}
 .hero-stat{padding:4px 24px}
+.hero-stat:first-child{flex-shrink:0}
 .hero-stat-num{display:block;font-size:26px;font-weight:600;letter-spacing:-0.03em;line-height:1.1}
 .hero-ctas{display:flex;gap:12px;align-items:center}
 .home-hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
