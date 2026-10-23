@@ -1,5 +1,12 @@
-// Contenu de la page d'accueil, utilisé par l'aperçu Astryx (pages/AstryxHome.jsx).
-// Copie du contenu de pages/Home.jsx : à fusionner dans un seul fichier si la migration est validée.
+// Contenu de la page d'accueil (pages/Home.jsx, version Astryx).
+// pages/HomeClassic.jsx (ancienne version MUI, gardée pour revenir en arrière) a encore son propre contenu.
+
+// Sous-titre du hero, tapé comme une réponse de LLM
+export const HERO_SEGMENTS = [
+  { text: 'UX' }, { text: ' · ', muted: true }, { text: 'Design System' }, { text: ' · ', muted: true }, { text: 'IA' },
+];
+// Deux corrections : une faute de frappe dans « Design », puis « Product » effacé au profit de « IA »
+export const HERO_TYPOS = [{ at: 9, text: 'n' }, { at: 21, text: 'Product' }];
 
 export const HERO_POINTS = [
   { label: 'Parcours & interfaces', desc: 'de la recherche utilisateur à la livraison' },
@@ -34,6 +41,13 @@ export const LOCKED_PROJECT = {
   desc: "Comment transformer un dashboard de pilotage aveugle en outil de décision — feature conçue de A à Z, de l'insight à la mise en production.",
   tags: ['Product Design', 'Logique métier', 'Prototypage'],
 };
+
+// Aperçu (factice) du résultat de matching, à droite de la section
+export const MATCHING_PREVIEW = [
+  { logo: '/images/logo-pepyte.svg', label: 'Recherche utilisateur', w: 170 },
+  { logo: '/images/logo-weborama.svg', label: 'Design System', w: 140 },
+  { logo: '/images/logo-nectar.svg', label: "Utilisation de l'IA", w: 110 },
+];
 
 export const MATCHING_STEPS = [
   "Collez votre offre d'emploi",

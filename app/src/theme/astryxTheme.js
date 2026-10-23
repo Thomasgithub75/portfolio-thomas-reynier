@@ -95,5 +95,10 @@ export const portfolioTheme = defineTheme({
     badge: {
       base: { borderRadius: '9999px' },
     },
+    // Titres aux tailles du site : h1 du hero et h2 de section (global.css)
+    heading: {
+      'type:display-1': { fontSize: 'clamp(30px,8vw,56px)', fontWeight: '700', lineHeight: '1.08', letterSpacing: '-0.03em' },
+      'type:display-3': { fontSize: 'clamp(24px,3.5vw,32px)', fontWeight: '600', lineHeight: '1.2', letterSpacing: '-0.025em' },
+    },
   },
 });

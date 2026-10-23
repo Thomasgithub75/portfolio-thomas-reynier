@@ -1,0 +1,4 @@
+/* Ordre des couches CSS, déclaré avant toute autre feuille : le reset du site (global.css)
+   passe sous les styles des composants Astryx, qui passent sous leurs surcharges de thème.
+   Sans cette ligne, l'ordre dépend du chargement et le reset efface les paddings Astryx. */
+@layer reset, astryx-base, astryx-theme;
