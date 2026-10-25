@@ -107,8 +107,8 @@
 | Outil | Usage |
 |-------|-------|
 | React + Vite | Front-end (dossier `app/`) |
-| Astryx (`@astryxdesign/core`) | Design system cible — thème « portfolio » dans `app/src/theme/astryxTheme.js`, aux couleurs du site. Page d'accueil migrée (`pages/Home.jsx`) |
-| Material UI (MUI) | Composants UI des pages pas encore migrées vers Astryx |
+| Astryx (`@astryxdesign/core`) | Design system du site — thème « portfolio » dans `app/src/theme/astryxTheme.js`, aux couleurs du site |
+| `@mui/icons-material` | Icônes uniquement (plus aucun composant MUI) |
 | React Router | Navigation |
 | Git + GitHub | Versioning |
 | Vercel | Déploiement cible |
@@ -149,20 +149,21 @@
 
 ---
 
-## Migration Astryx (en cours)
+## Design system Astryx
 
-- **Fait :** page d'accueil (`pages/Home.jsx` + `Home.css`, contenu dans `data/home.js`).
-- **À faire, page par page :** études de cas, matching IA, lettre de motivation, page design system.
-- **Restent en code maison :** Navbar (verre + menu mobile), effet de frappe (`StreamingText`), pastille « À l'écoute », mise en page du hero (classes `home-hero` / `hero-*` de `global.css`, qui le font tenir sur un écran de téléphone).
+- **Toutes les pages** passent par `layouts/AstryxPage.jsx` (Navbar + `<Theme>` Astryx + Footer). Index des composants : `COMPONENTS.md`.
+- **Restent en code maison :** Navbar (verre + menu mobile), effet de frappe (`StreamingText`), pastille « À l'écoute », mise en page du hero (classes `home-hero` / `hero-*` de `global.css`, qui le font tenir sur un écran de téléphone), styles éditoriaux des études de cas (classes `case-*`), feuille A4 de la lettre.
 - **Couches CSS :** `styles/layers.css` (importé en premier dans `main.jsx`) fixe l'ordre `reset, astryx-base, astryx-theme`. Le reset d'Astryx n'est pas chargé : celui du site suffit.
-- **Revenir en arrière :** l'ancienne page d'accueil MUI est dans `pages/HomeClassic.jsx` (visible sur `/ancienne-version` en local et sur les aperçus Vercel) ; le site complet d'avant est sauvegardé dans la branche `sauvegarde/avant-astryx`.
-- Les nouveaux composants maison s'ajoutent toujours à `/design-system` ; les composants Astryx sont documentés par `npx astryx component <Nom>`.
+- **Mode clair/sombre :** `hooks/useColorMode` (sombre par défaut) écrit `data-site-theme` sur `<html>` — pas `data-theme`, que le `<Theme>` Astryx écrit et efface.
+- **Le thème Astryx pose un reset `:where(p)`** (police + couleur) tant qu'une page Astryx est affichée : un texte maison qui doit garder sa police ou sa couleur les déclare explicitement (ex. `.intro p`).
+- **Revenir en arrière :** l'ancienne page d'accueil MUI est dans `pages/HomeClassic.jsx` (visible sur `/ancienne-version` en local et sur les aperçus Vercel) ; le site complet d'avant Astryx est sauvegardé dans la branche `sauvegarde/avant-astryx`.
+- Les nouveaux composants maison s'ajoutent à `/design-system` et à `COMPONENTS.md` ; les composants Astryx sont documentés par `npx astryx component <Nom>`.
 
 ## Notes pour Claude
 
 - Thomas est **Product Designer, non développeur** — prendre toutes les décisions techniques
 - Toujours penser à l'objectif de conversion (recruteur qui doit contacter Thomas)
-- Respecter les tokens de couleur définis dans `app/src/theme/theme.js`
+- Respecter les tokens de couleur Astryx (`var(--color-…)`, définis dans `app/src/theme/astryxTheme.js`) ; jamais de couleur en dur dans une page
 - Chaque nouveau composant doit apparaître dans la page `/design-system`
 - Commits en anglais, courts et descriptifs
 - **Icônes : utiliser exclusivement Material Design Icons (`@mui/icons-material`) sur tout le site — aucune autre bibliothèque d'icônes autorisée**
