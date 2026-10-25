@@ -2,7 +2,6 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import PushPinOutlined from '@mui/icons-material/PushPinOutlined';
 import { useInspecting, setInspecting } from '../../hooks/useInspector';
-import { tokens as themeTokens } from '../../theme/theme';
 import './Inspector.css';
 
 // ── Mode inspection ───────────────────────────────────────────────────────────
@@ -132,25 +131,13 @@ function buildTokens(node) {
     if (rgb) addColor(rgb, name);
   }
 
-  // Tokens MUI (theme.js) : utilisés par les composants React du site, en second choix
-  if (!astryxRoot) {
-    const addTheme = (obj, prefix) => {
-      for (const [k, value] of Object.entries(obj)) {
-        const name = `${prefix}${/^\d/.test(k) ? `[${k}]` : `.${k}`}`;
-        if (typeof value === 'object') addTheme(value, name);
-        else { const rgb = resolve('color', value); if (rgb) addColor(rgb, name); }
-      }
-    };
-    addTheme(themeTokens, 'tokens');
-  }
-
   probe.remove();
   const tokens = { source: astryxRoot ? 'Astryx' : 'Portfolio', colors, radii, gradients };
   tokenCache.set(key, tokens);
   return tokens;
 }
 
-// Token CSS d'abord (--x), puis celui dont le nom correspond le mieux au rôle
+// Token dont le nom correspond le mieux au rôle
 function tokenFor(names, role) {
   if (!names?.length) return null;
   const css = names.filter(n => n.startsWith('--'));

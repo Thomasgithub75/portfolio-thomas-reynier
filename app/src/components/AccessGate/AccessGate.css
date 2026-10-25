@@ -1,0 +1,9 @@
+/* Écran d'accès (AccessGate) */
+.ax-gate{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;justify-content:center;padding:24px;overflow:hidden;background:var(--color-background-body);font-family:var(--font-family-body)}
+.ax-gate-bg{position:absolute;inset:0;background-size:cover;background-position:top;filter:blur(16px) brightness(.35);transform:scale(1.05);pointer-events:none}
+.ax-gate-back{position:absolute;top:24px;left:24px;z-index:1}
+.ax-gate-card{position:relative;z-index:1;width:100%;max-width:420px}
+.ax-gate-card.is-error{animation:ax-gate-shake .4s ease}
+.ax-gate-icon{width:56px;height:56px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:var(--color-accent-muted);color:var(--color-text-accent)}
+@keyframes ax-gate-shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+@media (prefers-reduced-motion:reduce){.ax-gate-card.is-error{animation:none}}

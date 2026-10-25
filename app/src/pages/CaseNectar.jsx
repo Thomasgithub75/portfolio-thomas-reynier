@@ -1,5 +1,4 @@
-import CaseLayout, { IllustrationItem, Step, MissionBanner, CaseCta, OtherProjects } from '../layouts/CaseLayout';
-import { Link } from 'react-router-dom';
+import CaseLayout, { CaseHeader, IllustrationItem, Step, MissionBanner, CaseCta, OtherProjects } from '../layouts/CaseLayout';
 
 const TOC = [
   { id: 'contexte', label: 'Contexte' },
@@ -16,35 +15,20 @@ const TOC = [
 export default function CaseNectar() {
   return (
     <CaseLayout title="Nectar" tocItems={TOC}>
-      <div className="case-header">
-        <div className="container">
-          <Link className="back-link" to="/#projets">
-            <svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-            Retour aux projets
-          </Link>
-          <div className="header-tags">
-            {['UX Research','Benchmark','Figma Make','Design System','Claude MCP','Founding Design IA'].map(t => (
-              <span key={t} className="htag tag tag--display">{t}</span>
-            ))}
-          </div>
-          <div className="case-title-row">
-            <img className="case-logo" src="/images/logo-nectar.svg" alt="Nectar"/>
-            <h1 className="case-h1">Nectar</h1>
-          </div>
-          <p className="meta-row">AI Product Designer · Projet personnel — B2B SaaS · En cours · Figma · Figma Make · Claude · Supabase · Vercel</p>
-          <p className="reading-time">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            Lecture · ~5 min
-          </p>
-          <p className="case-intro">Nectar est un outil SaaS B2B mobile-first pour collecter et centraliser les insights terrain des équipes commerciales. Ma mission couvre l'ensemble du process, de la recherche utilisateur au développement, entièrement piloté par IA.</p>
-          <div className="stats-row">
-            <div className="stat"><div className="stat-val">1</div><div className="stat-label">designer-développeur — de la recherche au produit</div></div>
-            <div className="stat"><div className="stat-val">6</div><div className="stat-label">phases du process pilotées par IA</div></div>
-            <div className="stat"><div className="stat-val">45</div><div className="stat-label">variants Figma générés via MCP Claude</div></div>
-            <div className="stat"><div className="stat-val">100%</div><div className="stat-label">du process piloté par IA</div></div>
-          </div>
-        </div>
-      </div>
+      <CaseHeader
+        tags={['UX Research','Benchmark','Figma Make','Design System','Claude MCP','Founding Design IA']}
+        logo="/images/logo-nectar.svg"
+        title="Nectar"
+        meta="AI Product Designer · Projet personnel — B2B SaaS · En cours · Figma · Figma Make · Claude · Supabase · Vercel"
+        readingTime="~5 min"
+        intro="Nectar est un outil SaaS B2B mobile-first pour collecter et centraliser les insights terrain des équipes commerciales. Ma mission couvre l'ensemble du process, de la recherche utilisateur au développement, entièrement piloté par IA."
+        stats={[
+          ["1", "designer-développeur — de la recherche au produit"],
+          ["6", "phases du process pilotées par IA"],
+          ["45", "variants Figma générés via MCP Claude"],
+          ["100%", "du process piloté par IA"],
+        ]}
+      />
 
       <div className="container">
         <div className="illustrations-section">

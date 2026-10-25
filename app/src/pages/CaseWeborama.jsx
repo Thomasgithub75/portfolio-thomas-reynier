@@ -1,5 +1,4 @@
-import CaseLayout, { IllustrationItem, Step, MissionBanner, Quote, CaseCta, OtherProjects } from '../layouts/CaseLayout';
-import { Link } from 'react-router-dom';
+import CaseLayout, { CaseHeader, IllustrationItem, Step, MissionBanner, Quote, CaseCta, OtherProjects } from '../layouts/CaseLayout';
 
 const TOC = [
   { id: 'contexte', label: 'Contexte' },
@@ -18,35 +17,20 @@ const TOC = [
 export default function CaseWeborama() {
   return (
     <CaseLayout title="Weborama" tocItems={TOC}>
-      <div className="case-header">
-        <div className="container">
-          <Link className="back-link" to="/#projets">
-            <svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-            Retour aux projets
-          </Link>
-          <div className="header-tags">
-            {['Design System','Atomic Design','Variables & Tokens','Figma Make','AI Ready','UX Design'].map(t => (
-              <span key={t} className="htag tag tag--display">{t}</span>
-            ))}
-          </div>
-          <div className="case-title-row">
-            <img className="case-logo" src="/images/logo-weborama.svg" alt="Weborama"/>
-            <h1 className="case-h1">Weborama</h1>
-          </div>
-          <p className="meta-row">Product Designer · Weborama — AdTech SaaS · 16 mois · Figma · Zeroheight · Storybook · Figma Make</p>
-          <p className="reading-time">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            Lecture · ~6 min
-          </p>
-          <p className="case-intro">Weborama est une AdTech spécialisée dans la data et l'IA sémantique. Ma mission couvre la rationalisation du Design System sur 4 applications existantes et la conception d'une nouvelle application SaaS avec un process AI Ready via Figma Make.</p>
-          <div className="stats-row">
-            <div className="stat"><div className="stat-val">2</div><div className="stat-label">Design Systems livrés</div></div>
-            <div className="stat"><div className="stat-val">−80%</div><div className="stat-label">de composants après rationalisation</div></div>
-            <div className="stat"><div className="stat-val">195</div><div className="stat-label">variants créés pour les 4 applications</div></div>
-            <div className="stat"><div className="stat-val">100%</div><div className="stat-label">prototypes IA conformes au Design System</div></div>
-          </div>
-        </div>
-      </div>
+      <CaseHeader
+        tags={['Design System','Atomic Design','Variables & Tokens','Figma Make','AI Ready','UX Design']}
+        logo="/images/logo-weborama.svg"
+        title="Weborama"
+        meta="Product Designer · Weborama — AdTech SaaS · 16 mois · Figma · Zeroheight · Storybook · Figma Make"
+        readingTime="~6 min"
+        intro="Weborama est une AdTech spécialisée dans la data et l'IA sémantique. Ma mission couvre la rationalisation du Design System sur 4 applications existantes et la conception d'une nouvelle application SaaS avec un process AI Ready via Figma Make."
+        stats={[
+          ["2", "Design Systems livrés"],
+          ["−80%", "de composants après rationalisation"],
+          ["195", "variants créés pour les 4 applications"],
+          ["100%", "prototypes IA conformes au Design System"],
+        ]}
+      />
 
       <div className="container">
         <div className="illustrations-section">

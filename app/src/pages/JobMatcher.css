@@ -1,0 +1,38 @@
+/* Matching IA (JobMatcher) — mise en page ; couleurs et typo des composants : tokens Astryx */
+.jm-page{min-height:100vh;background:var(--color-background-body)}
+.jm-header{background:linear-gradient(145deg,var(--color-background-muted) 0%,var(--color-background-body) 55%);border-bottom:1px solid var(--color-border);padding:120px 0 40px}
+.jm-intro{max-width:520px;font-size:15px;font-weight:300;line-height:1.65;color:var(--color-text-secondary)}
+.jm-form{padding-top:36px;padding-bottom:12px}
+.jm-results{padding-top:28px;padding-bottom:60px}
+
+.jm-match{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px}
+.jm-match > :last-child{justify-self:end}
+.jm-times{font-size:22px;font-weight:300;color:var(--color-text-secondary);text-align:center;min-width:56px}
+.jm-logo{width:52px;height:52px;border-radius:12px;object-fit:contain;flex-shrink:0;background:var(--color-background-surface);border:1px solid var(--color-border)}
+.jm-logo--initials{display:inline-flex;align-items:center;justify-content:center;background:var(--color-background-inverted);color:var(--color-background-body);font-size:17px;font-weight:800;letter-spacing:-.02em;border:none}
+.jm-avatar{width:52px;height:52px;border-radius:50%;object-fit:cover;border:1px solid var(--color-border);flex-shrink:0}
+
+.jm-card{page-break-inside:avoid}
+.jm-num{width:24px;height:24px;border-radius:50%;background:var(--color-accent);color:var(--color-on-accent);font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.jm-proof.is-locked{background:var(--color-background-muted)}
+.jm-proj-logo{width:18px;height:18px;object-fit:contain;border-radius:4px;flex-shrink:0}
+.jm-proof-text{font-size:13.5px;font-weight:300;line-height:1.7;color:var(--color-text-primary)}
+.jm-proof-text.is-faded{-webkit-mask-image:linear-gradient(to bottom,black 35%,transparent 100%);mask-image:linear-gradient(to bottom,black 35%,transparent 100%);max-height:70px;overflow:hidden}
+.jm-locked-banner{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px 14px;border-radius:var(--radius-element);background:var(--color-accent-muted);border:1px solid var(--color-border-emphasized);color:var(--color-text-accent)}
+.jm-cta{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:24px;border-radius:var(--radius-container);background:var(--color-accent-muted);border:1px solid var(--color-border-emphasized)}
+.print-url{display:none;font-size:10px;color:var(--color-text-secondary)}
+
+@media (max-width:768px){
+  .jm-header{padding:96px 0 28px}
+  .jm-match{grid-template-columns:1fr;gap:12px}
+  .jm-match > :last-child{justify-self:start}
+  .jm-times{text-align:left}
+  .jm-cta > *{width:100%}
+}
+
+@media print{
+  @page{size:A4;margin:15mm 18mm}
+  .no-print,.nav,.ax-footer{display:none !important}
+  body,.ax-page,.jm-page{background:#fff !important}
+  .print-url{display:block}
+}

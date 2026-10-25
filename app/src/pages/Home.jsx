@@ -1,8 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import { Theme } from '@astryxdesign/core/theme';
 import { Button } from '@astryxdesign/core/Button';
-import { IconButton } from '@astryxdesign/core/IconButton';
 import { ToggleButton } from '@astryxdesign/core/ToggleButton';
 import { Badge } from '@astryxdesign/core/Badge';
 import { Card } from '@astryxdesign/core/Card';
@@ -19,25 +16,19 @@ import RouteOutlined from '@mui/icons-material/RouteOutlined';
 import LayersOutlined from '@mui/icons-material/LayersOutlined';
 import AutoAwesomeOutlined from '@mui/icons-material/AutoAwesomeOutlined';
 import LockOutlined from '@mui/icons-material/LockOutlined';
-import ArrowForward from '@mui/icons-material/ArrowForward';
 import GridViewOutlined from '@mui/icons-material/GridViewOutlined';
 import HomeOutlined from '@mui/icons-material/HomeOutlined';
 import SearchOutlined from '@mui/icons-material/SearchOutlined';
 import MailOutlined from '@mui/icons-material/MailOutlined';
 import LinkedIn from '@mui/icons-material/LinkedIn';
-import FileDownloadOutlined from '@mui/icons-material/FileDownloadOutlined';
-import Navbar from '../layouts/Navbar';
+import AstryxPage from '../layouts/AstryxPage';
+import ProjectCard from '../components/ProjectCard/ProjectCard';
 import StreamingText from '../components/StreamingText/StreamingText';
-import useColorMode from '../hooks/useColorMode';
 import { trackEvent } from '../utils/analytics';
-import { portfolioTheme } from '../theme/astryxTheme';
 import {
   HERO_SEGMENTS, HERO_TYPOS, HERO_POINTS, HERO_STATS, PROJECTS, LOCKED_PROJECT, MATCHING_STEPS,
   MATCHING_PREVIEW, SKILL_PROJECTS, CORE_SKILLS, SEC_SKILLS, TOOLS, TESTIMONIALS, CONTACT,
 } from '../data/home';
-// Styles des composants Astryx (cloisonnés dans leurs propres classes). Le reset Astryx n'est pas
-// chargé : le site a déjà le sien, et celui d'Astryx toucherait aussi les pages encore en MUI.
-import '@astryxdesign/core/astryx.css';
 import './Home.css';
 
 // Page d'accueil construite avec le design system Astryx (thème « portfolio », theme/astryxTheme.js).
@@ -53,8 +44,6 @@ function scrollTo(id) {
 }
 
 export default function Home() {
-  const { mode } = useColorMode();
-
   useEffect(() => {
     window.scrollTo(0, 0);
     // Arrivée depuis une autre page sur /#ancre
@@ -63,22 +52,16 @@ export default function Home() {
   }, []);
 
   return (
-    <>
-      <Navbar />
-      <Theme theme={portfolioTheme} mode={mode}>
-        <div className="ax-page">
-          <main>
-            <Hero />
-            <Projects />
-            <Matching />
-            <Expertises />
-            <Testimonials />
-            <Contact />
-          </main>
-          <Footer />
-        </div>
-      </Theme>
-    </>
+    <AstryxPage>
+      <main>
+        <Hero />
+        <Projects />
+        <Matching />
+        <Expertises />
+        <Testimonials />
+        <Contact />
+      </main>
+    </AstryxPage>
   );
 }
 
@@ -179,39 +162,6 @@ function SectionTitle({ eyebrow, title, intro }) {
       <Heading level={2} type="display-3">{title}</Heading>
       {intro && <Text color="secondary">{intro}</Text>}
     </VStack>
-  );
-}
-
-// Carte entière cliquable ; au survol : bordure accent, ombre, légère montée, zoom de l'illustration
-function ProjectCard({ project, locked }) {
-  return (
-    <RouterLink to={project.href} className="ax-project-link" onClick={() => trackEvent.caseStudyOpen(project.name)}>
-      <Card padding={0} variant={locked ? 'muted' : 'default'} height="100%">
-        <div className="ax-thumb">
-          {locked
-            ? <VStack gap={1} hAlign="center"><LockOutlined /><Text type="label" color="secondary">Code requis</Text></VStack>
-            : <img src={project.thumb} alt="" loading="lazy" />}
-        </div>
-        <VStack gap={3} padding={5}>
-          <HStack gap={2} vAlign="center" hAlign="between">
-            <HStack gap={2} vAlign="center">
-              <img className="ax-logo-sm" src={project.logo} alt="" />
-              <Badge label={project.role} variant={locked ? 'neutral' : project.roleVariant} />
-            </HStack>
-            <Text type="supporting">{locked ? project.date : project.duration}</Text>
-          </HStack>
-          <Heading level={3}>{project.name}</Heading>
-          <Text color="secondary">{project.desc}</Text>
-          <HStack gap={1} wrap="wrap">
-            {project.tags.map(tag => <Badge key={tag} label={tag} variant="blue" />)}
-          </HStack>
-          <span className="ax-project-cta">
-            <Text weight="medium" color="accent">{locked ? 'Entrer le code' : 'Voir le projet'}</Text>
-            <ArrowForward className="ax-project-arrow" sx={{ fontSize: 16 }} />
-          </span>
-        </VStack>
-      </Card>
-    </RouterLink>
   );
 }
 
@@ -441,22 +391,5 @@ function Contact() {
         </VStack>
       </div>
     </Section>
-  );
-}
-
-function Footer() {
-  const open = (url, track) => { track?.(); window.open(url, '_blank', 'noopener'); };
-  return (
-    <footer className="ax-container ax-footer">
-      <Divider />
-      <HStack hAlign="between" vAlign="center" wrap="wrap" gap={2}>
-        <Text type="supporting">© 2026 Thomas Reynier · Product Designer · Paris</Text>
-        <HStack gap={1}>
-          <IconButton label="Email" tooltip="reynier.design@gmail.com" icon={<MailOutlined sx={{ fontSize: 18 }} />} variant="ghost" onClick={() => open(CONTACT.mailto, () => trackEvent.contactClick('footer'))} />
-          <IconButton label="LinkedIn" tooltip="Voir mon profil LinkedIn" icon={<LinkedIn sx={{ fontSize: 18 }} />} variant="ghost" onClick={() => open(CONTACT.linkedin, () => trackEvent.linkedinClick('footer'))} />
-          <IconButton label="Télécharger mon CV (PDF)" tooltip="Télécharger mon CV (PDF)" icon={<FileDownloadOutlined sx={{ fontSize: 18 }} />} variant="ghost" onClick={() => open(CONTACT.cv, trackEvent.cvDownload)} />
-        </HStack>
-      </HStack>
-    </footer>
   );
 }

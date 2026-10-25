@@ -1,0 +1,55 @@
+/* Lettre de motivation — interface en tokens Astryx ; la feuille A4 garde des couleurs fixes (document imprimé) */
+.lm-page{padding-top:80px;min-height:100vh;background:var(--color-background-body)}
+.lm-container{max-width:1200px;margin:0 auto;padding-inline:32px}
+.lm-head{padding-block:32px 24px}
+.lm-grid{display:grid;grid-template-columns:340px 1fr;gap:16px;align-items:start;padding-bottom:64px}
+.lm-status{font-size:11.5px;font-weight:400;color:var(--color-text-secondary)}
+.lm-status.is-generating{color:var(--color-text-accent)}
+.lm-status.is-done{color:#22C55E}
+.lm-status.is-error{color:#EF4444}
+.lm-panel{padding:20px;background:var(--color-background-muted)}
+.lm-empty{min-height:400px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:var(--color-text-secondary)}
+.lm-error{text-align:center;padding:40px;color:#EF4444;font-size:13px}
+
+/* Feuille A4 */
+.lm-sheet{background:#fff;color:#1A2540;border:1px solid #E5E7EB;box-shadow:0 2px 16px rgba(26,37,64,.07),0 8px 32px rgba(26,37,64,.04);border-radius:3px;padding:48px 52px;font-family:'Outfit',sans-serif}
+.lm-sender{margin-bottom:24px}
+.lm-sender-name,.lm-signature{font-size:14px;font-weight:700;letter-spacing:-.01em;color:#1A2540}
+.lm-signature{font-size:13px;font-weight:600;margin-top:28px}
+.lm-sender-info{font-size:11.5px;color:#5B6A8A;font-weight:300;line-height:1.9}
+.lm-date{font-size:12px;color:#8B9BB8;font-weight:300;margin-bottom:6px}
+.lm-recipient{margin-bottom:24px}
+.lm-recipient-label{font-size:10.5px;color:#A0AFCF;text-transform:uppercase;letter-spacing:.06em;font-weight:500;margin-bottom:2px}
+.lm-recipient-name{font-size:13px;font-weight:600;color:#1A2540;letter-spacing:-.01em}
+.lm-p{font-size:13px;color:#405070;line-height:1.8;font-weight:300;margin-bottom:13px}
+.lm-p strong{font-weight:600}
+.lm-kpi{background:#EEF2FF;border:1px solid #E0E7FF;border-left:3px solid #6366F1;border-radius:8px;padding:12px 16px;margin:14px 0;font-size:12.5px;color:#4338CA;line-height:1.7;display:flex;gap:10px;align-items:flex-start}
+.lm-kpi-icon{color:#6366F1;font-weight:700;flex-shrink:0;margin-top:1px}
+.lm-print-textarea{display:flex;flex-direction:column;gap:6px}
+.lm-kpi--edit{padding:4px 8px 4px 12px;margin:0}
+.lm-kpi--edit .lm-kpi-icon{padding-top:10px;font-size:12px}
+.lm-edit{width:100%;resize:vertical;border:1px solid transparent;border-radius:6px;padding:8px 10px;background:transparent;font-family:inherit;font-size:13px;font-weight:300;line-height:1.8;color:#405070;transition:background .15s,border-color .15s}
+.lm-edit:hover{background:#F6F8FB}
+.lm-edit:focus{outline:none;background:#fff;border-color:#4F46E5}
+.lm-edit--kpi{font-size:12.5px;font-weight:500;line-height:1.7;color:#4338CA}
+.lm-edit--kpi:hover,.lm-edit--kpi:focus{background:rgba(255,255,255,.6)}
+.lm-print-body{display:none}
+
+@media (max-width:768px){
+  .lm-container{padding-inline:16px}
+  .lm-head{padding-block:24px 16px}
+  .lm-grid{grid-template-columns:1fr;padding-bottom:48px}
+  .lm-sheet{padding:28px 20px}
+}
+
+/* Impression : seule la feuille A4 */
+@media print{
+  @page{size:A4;margin:0}
+  body > *{visibility:hidden !important}
+  .lm-print-area,.lm-print-area *{visibility:visible !important}
+  .lm-print-area{position:fixed !important;top:0 !important;left:0 !important;width:210mm !important;padding:20mm 22mm !important;background:#fff !important;box-shadow:none !important;border:none !important}
+  .lm-print-textarea{display:none !important}
+  .lm-print-body{display:block !important}
+  .lm-p{font-size:12pt !important;line-height:1.8 !important;color:#1A2540 !important;margin-bottom:10pt !important}
+  .lm-kpi{display:flex !important;gap:10pt !important;padding:10pt 14pt !important;margin:12pt 0 !important;font-size:11pt !important;border-radius:6pt !important}
+}

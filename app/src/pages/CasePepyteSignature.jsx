@@ -1,7 +1,9 @@
-import { useState, useEffect, useRef } from 'react';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import CaseLayout, { IllustrationItem, CaseCta, OtherProjects } from '../layouts/CaseLayout';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import useMediaQuery from '../hooks/useMediaQuery';
+import { Text } from '@astryxdesign/core/Text';
+import { HStack } from '@astryxdesign/core/Layout';
+import AccessGate from '../components/AccessGate/AccessGate';
+import CaseLayout, { CaseHeader, IllustrationItem, CaseCta, OtherProjects } from '../layouts/CaseLayout';
 
 const TOC = [
   { id: 'contexte', label: 'Contexte' },
@@ -15,89 +17,18 @@ const TOC = [
 ];
 
 function CaseGate({ onUnlock }) {
-  const [code, setCode] = useState('');
-  const [error, setError] = useState(false);
-  const [shake, setShake] = useState(false);
-  const inputRef = useRef(null);
-  useEffect(() => { inputRef.current?.focus(); }, []);
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    if (code === 'thomas2026') {
-      sessionStorage.setItem('pepyte_sig_access', 'true');
-      onUnlock();
-    } else {
-      setError(true);
-      setShake(true);
-      setTimeout(() => setShake(false), 420);
-      setTimeout(() => setError(false), 2200);
-    }
-  }
-
   return (
-    <div style={{ minHeight: '100vh', background: '#F8F9FB', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: 24, position: 'relative', overflow: 'hidden' }}>
-      <style>{`@keyframes shake-gate{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}`}</style>
-      {/* Blurred background */}
-      <div style={{ position: 'absolute', inset: 0, backgroundImage: 'url(/images/pepyte-sig-apres.jpg)', backgroundSize: 'cover', backgroundPosition: 'top', filter: 'blur(16px) brightness(.35)', transform: 'scale(1.05)', pointerEvents: 'none' }}/>
-      <Link to="/" style={{ position: 'absolute', top: 24, left: 24, display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, color: 'rgba(255,255,255,.7)', textDecoration: 'none', fontWeight: 500, zIndex: 1 }}>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-        Retour
-      </Link>
-      <div
-        style={{
-          position: 'relative', zIndex: 1,
-          background: '#fff', borderRadius: 18, padding: '44px 40px', width: '100%', maxWidth: 400,
-          boxShadow: '0 32px 100px rgba(0,0,0,.3)',
-          animation: shake ? 'shake-gate .4s ease' : 'none',
-        }}
-      >
-        <div style={{ textAlign: 'center', marginBottom: 28 }}>
-          <div style={{ width: 56, height: 56, borderRadius: '50%', background: '#F3F4F6', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 18px' }}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#374151" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-            </svg>
-          </div>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginBottom: 10 }}>
-            <img src="/images/logo-pepyte.svg" alt="Pepyte" style={{ height: 18 }}/>
-            <span style={{ fontSize: 12, color: '#9CA3AF' }}>·</span>
-            <span style={{ fontSize: 13, color: '#6B7280', fontWeight: 500 }}>Mon nouveau process IA</span>
-          </div>
-          <p style={{ fontSize: 20, fontWeight: 700, color: '#111827', marginBottom: 8 }}>Étude de cas protégée</p>
-          <p style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.65 }}>
-            Cette étude de cas est présentée uniquement lors d'un entretien en direct. Entrez le code pour y accéder.
-          </p>
-        </div>
-        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-          <input
-            ref={inputRef}
-            type="password"
-            value={code}
-            onChange={e => { setCode(e.target.value); setError(false); }}
-            placeholder="Code d'accès"
-            style={{
-              width: '100%', padding: '12px 14px', borderRadius: 9, fontSize: 15,
-              border: error ? '1.5px solid #EF4444' : '1.5px solid #E5E7EB',
-              outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box',
-              background: error ? '#FEF2F2' : '#fff',
-              transition: 'border-color .15s, background .15s',
-            }}
-          />
-          {error && <p style={{ fontSize: 12, color: '#EF4444', margin: 0 }}>Code incorrect. Contactez Thomas pour obtenir l'accès.</p>}
-          <button
-            type="submit"
-            style={{ width: '100%', padding: '12px', borderRadius: 9, fontSize: 14, fontWeight: 600, background: '#111827', color: '#fff', border: 'none', cursor: 'pointer', fontFamily: 'inherit', marginTop: 4 }}
-          >
-            Accéder à l'étude de cas
-          </button>
-        </form>
-        <p style={{ textAlign: 'center', fontSize: 12, color: '#9CA3AF', marginTop: 18 }}>
-          Pas encore de code ?{' '}
-          <a href="https://mail.google.com/mail/?view=cm&to=reynier.design@gmail.com" target="_blank" rel="noopener" style={{ color: 'var(--blue)', textDecoration: 'none', fontWeight: 500 }}>
-            Contactez Thomas
-          </a>
-        </p>
-      </div>
-    </div>
+    <AccessGate
+      bgImage="/images/pepyte-sig-apres.jpg"
+      eyebrow={<HStack gap={2} vAlign="center"><img src="/images/logo-pepyte.svg" alt="Pepyte" style={{ height: 18 }} /><Text type="supporting">Mon nouveau process IA</Text></HStack>}
+      title="Étude de cas protégée"
+      description="Cette étude de cas est présentée uniquement lors d'un entretien en direct. Entrez le code pour y accéder."
+      submitLabel="Accéder à l'étude de cas"
+      errorMessage="Code incorrect. Contactez Thomas pour obtenir l'accès."
+      showContact
+      check={code => code === 'thomas2026'}
+      onUnlock={() => { sessionStorage.setItem('pepyte_sig_access', 'true'); onUnlock(); }}
+    />
   );
 }
 
@@ -110,37 +41,20 @@ export default function CasePepyteSignature() {
 
   return (
     <CaseLayout title="Pepyte : Mon nouveau process IA" tocItems={TOC}>
-      <div className="case-header">
-        <div className="container">
-          <Link className="back-link" to="/#projets">
-            <svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-            Retour aux projets
-          </Link>
-          <div className="header-tags">
-            {['Product Design','Prototypage','Logique métier','SaaS B2B'].map(t => (
-              <span key={t} className="htag tag tag--display">{t}</span>
-            ))}
-          </div>
-          <div className="case-title-row">
-            <img className="case-logo" src="/images/logo-pepyte.svg" alt="Pepyte"/>
-            <h1 className="case-h1">Mon nouveau process IA</h1>
-          </div>
-          <p className="meta-row">Product Designer · Pepyte · HR tech SaaS · Figma · Prototypes HTML</p>
-          <p className="reading-time">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            Lecture · ~5 min
-          </p>
-          <p className="case-intro">
-            Les headhunters de Pepyte passaient du temps sur les mauvaises offres, non par manque de méthode, mais parce que leur dashboard ne répondait pas à la bonne question. J'ai conçu un signal unique, calculé automatiquement, pour qu'ils sachent en un coup d'œil où agir.
-          </p>
-          <div className="stats-row">
-            <div className="stat"><div className="stat-val">8–12</div><div className="stat-label">offres actives pilotées en parallèle par recruteur</div></div>
-            <div className="stat"><div className="stat-val">0</div><div className="stat-label">calcul mental, une décision sans effort</div></div>
-            <div className="stat"><div className="stat-val">0</div><div className="stat-label">mise à jour manuelle, priorité recalculée en temps réel</div></div>
-            <div className="stat"><div className="stat-val">0</div><div className="stat-label">offre urgente noyée dans le volume</div></div>
-          </div>
-        </div>
-      </div>
+      <CaseHeader
+        tags={['Product Design','Prototypage','Logique métier','SaaS B2B']}
+        logo="/images/logo-pepyte.svg"
+        title="Mon nouveau process IA"
+        meta="Product Designer · Pepyte · HR tech SaaS · Figma · Prototypes HTML"
+        readingTime="~5 min"
+        intro="Les headhunters de Pepyte passaient du temps sur les mauvaises offres, non par manque de méthode, mais parce que leur dashboard ne répondait pas à la bonne question. J'ai conçu un signal unique, calculé automatiquement, pour qu'ils sachent en un coup d'œil où agir."
+        stats={[
+          ["8–12", "offres actives pilotées en parallèle par recruteur"],
+          ["0", "calcul mental, une décision sans effort"],
+          ["0", "mise à jour manuelle, priorité recalculée en temps réel"],
+          ["0", "offre urgente noyée dans le volume"],
+        ]}
+      />
 
       <div className="container">
 
