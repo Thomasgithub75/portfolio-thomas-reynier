@@ -1,11 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import useMediaQuery from '../hooks/useMediaQuery';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import Navbar from '../layouts/Navbar';
-import { Theme } from '@astryxdesign/core/theme';
 import Footer from '../layouts/Footer';
-import useColorMode from '../hooks/useColorMode';
-import { portfolioTheme } from '../theme/astryxTheme';
 import { trackEvent } from '../utils/analytics';
 import StreamingText from '../components/StreamingText/StreamingText';
 
@@ -580,7 +577,7 @@ export default function Home() {
         </div>
       </section>
 
-      <ClassicFooter />
+      <Footer />
     </>
   );
 }
@@ -861,10 +858,4 @@ function SkillTag({ skill, active, isCore, onToggle }) {
       {skill}
     </button>
   );
-}
-
-// Le footer est désormais en Astryx : il lui faut le thème
-function ClassicFooter() {
-  const { mode } = useColorMode();
-  return <Theme theme={portfolioTheme} mode={mode}><Footer /></Theme>;
 }
