@@ -1,5 +1,4 @@
-import CaseLayout, { IllustrationItem, Step, MissionBanner, CaseCta, OtherProjects } from '../layouts/CaseLayout';
-import { Link } from 'react-router-dom';
+import CaseLayout, { CaseHeader, IllustrationItem, Step, MissionBanner, CaseCta, OtherProjects } from '../layouts/CaseLayout';
 
 const TOC = [
   { id: 'contexte', label: 'Contexte' },
@@ -19,35 +18,20 @@ const TOC = [
 export default function CasePortfolio() {
   return (
     <CaseLayout title="Portfolio" tocItems={TOC}>
-      <div className="case-header">
-        <div className="container">
-          <Link className="back-link" to="/#projets">
-            <svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-            Retour aux projets
-          </Link>
-          <div className="header-tags">
-            {['Besoin identifié', 'Benchmark', 'Idéation', 'Design', 'Knowledge', 'Design System', 'Claude Code', 'Vercel'].map(t => (
-              <span key={t} className="htag tag tag--display">{t}</span>
-            ))}
-          </div>
-          <div className="case-title-row">
-            <img className="case-logo" src="/images/logo-portfolio.svg" alt="Portfolio"/>
-            <h1 className="case-h1">Portfolio — Feature Lettre de Motivation</h1>
-          </div>
-          <p className="meta-row">Product Designer · Projet personnel · 2026 · Claude Code · React · MUI · Vercel</p>
-          <p className="reading-time">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            Lecture · ~5 min
-          </p>
-          <p className="case-intro">Ce portfolio est un produit. La feature Lettre de Motivation en est l'étude de cas principale — pas parce qu'elle est spectaculaire, mais parce qu'elle est représentative. Un besoin identifié, un process design complet, une solution livrée. C'est ma façon de travailler. Ce que vous voyez ici, vous l'avez sur chaque projet.</p>
-          <div className="stats-row">
-            <div className="stat"><div className="stat-val">30s</div><div className="stat-label">du brief à la lettre générée · offre collée, lettre personnalisée</div></div>
-            <div className="stat"><div className="stat-val">4</div><div className="stat-label">tons adaptables · Équilibré · Formel · Concis · Engagé</div></div>
-            <div className="stat"><div className="stat-val">1</div><div className="stat-label">profil · CLAUDE.md · réutilisé sur toutes les candidatures</div></div>
-            <div className="stat"><div className="stat-val">100%</div><div className="stat-label">décisions humaines · l'IA exécute, le designer décide</div></div>
-          </div>
-        </div>
-      </div>
+      <CaseHeader
+        tags={['Besoin identifié', 'Benchmark', 'Idéation', 'Design', 'Knowledge', 'Design System', 'Claude Code', 'Vercel']}
+        logo="/images/logo-portfolio.svg"
+        title="Portfolio — Feature Lettre de Motivation"
+        meta="Product Designer · Projet personnel · 2026 · Claude Code · React · MUI · Vercel"
+        readingTime="~5 min"
+        intro="Ce portfolio est un produit. La feature Lettre de Motivation en est l'étude de cas principale — pas parce qu'elle est spectaculaire, mais parce qu'elle est représentative. Un besoin identifié, un process design complet, une solution livrée. C'est ma façon de travailler. Ce que vous voyez ici, vous l'avez sur chaque projet."
+        stats={[
+          ["30s", "du brief à la lettre générée · offre collée, lettre personnalisée"],
+          ["4", "tons adaptables · Équilibré · Formel · Concis · Engagé"],
+          ["1", "profil · CLAUDE.md · réutilisé sur toutes les candidatures"],
+          ["100%", "décisions humaines · l'IA exécute, le designer décide"],
+        ]}
+      />
 
       <div className="container">
         <div className="illustrations-section">

@@ -1,0 +1,7 @@
+/* Gabarit commun (AstryxPage) : fond de page, conteneur, footer */
+.ax-page{background:var(--color-background-body);color:var(--color-text-primary);font-family:var(--font-family-body);min-height:100vh}
+.ax-container{max-width:1040px;margin:0 auto;padding-inline:2rem}
+.ax-section{padding-block:88px}
+.ax-footer{padding-block:0 32px;display:flex;flex-direction:column;gap:20px}
+@media (max-width:900px){.ax-section{padding-block:64px}}
+@media (max-width:640px){.ax-container{padding-inline:1.25rem}}

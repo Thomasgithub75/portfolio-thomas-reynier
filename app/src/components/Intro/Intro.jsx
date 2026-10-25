@@ -28,7 +28,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-import { tokens } from '../../theme/theme';
 import './Intro.css';
 
 const STORAGE_KEY = 'introSeen';
@@ -47,6 +46,10 @@ function prefersReducedMotion() {
   return typeof window !== 'undefined'
     && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 }
+
+// Accent IA de l'intro (dégradé de la réponse, halo)
+const AI_VIOLET = '#8B5CF6';
+const AI_VIOLET_LIGHT = '#C084FC';
 
 export default function Intro({
   name = 'Thomas Reynier',
@@ -158,7 +161,7 @@ export default function Intro({
       className={`intro${leaving ? ' is-leaving' : ''}`}
       aria-hidden="true"
       onClick={() => setLeaving(true)}
-      style={{ '--intro-violet-1': tokens.aiViolet, '--intro-violet-2': tokens.aiVioletLight }}
+      style={{ '--intro-violet-1': AI_VIOLET, '--intro-violet-2': AI_VIOLET_LIGHT }}
     >
       <div className={`intro-glow${glow ? ' is-on' : ''}`} />
       <div className="intro-inner">

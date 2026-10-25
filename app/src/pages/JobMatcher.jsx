@@ -1,93 +1,39 @@
 import { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import Navbar from '../layouts/Navbar';
-import Footer from '../layouts/Footer';
-import Button from '../components/Button/Button';
+import { Link as RouterLink } from 'react-router-dom';
+import { Badge } from '@astryxdesign/core/Badge';
+import { Button } from '@astryxdesign/core/Button';
+import { Card } from '@astryxdesign/core/Card';
+import { Divider } from '@astryxdesign/core/Divider';
+import { Heading } from '@astryxdesign/core/Heading';
+import { Link } from '@astryxdesign/core/Link';
+import { Text } from '@astryxdesign/core/Text';
+import { TextArea } from '@astryxdesign/core/TextArea';
+import { VStack, HStack } from '@astryxdesign/core/Layout';
+import ArrowBack from '@mui/icons-material/ArrowBack';
+import ArrowForward from '@mui/icons-material/ArrowForward';
+import AutoAwesomeOutlined from '@mui/icons-material/AutoAwesomeOutlined';
+import LockOutlined from '@mui/icons-material/LockOutlined';
+import MailOutlined from '@mui/icons-material/MailOutlined';
+import PrintOutlined from '@mui/icons-material/PrintOutlined';
+import AstryxPage from '../layouts/AstryxPage';
 import { COMPETENCIES } from '../data/competencies';
+import { CONTACT } from '../data/home';
+import './JobMatcher.css';
 
-/* ── Print CSS ──────────────────────────────────────────────────────────────
-   Approche simple : on masque les éléments non-imprimables via .no-print,
-   le reste coule naturellement sur la page A4. Pas de position:fixed.
-─────────────────────────────────────────────────────────────────────────── */
-const PRINT_STYLE = `
-@media print {
-  @page { size: A4; margin: 15mm 18mm; }
-  .no-print { display: none !important; }
-  .nav      { display: none !important; }
-  .footer   { display: none !important; }
-  body, .jm-bg { background: #fff !important; }
-  .jm-card  { box-shadow: none !important; border: 1px solid #E5E7EB !important; }
-}
-@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-`;
-
-function injectPrintStyle() {
-  if (document.getElementById('jm-print-style')) return;
-  const s = document.createElement('style');
-  s.id = 'jm-print-style';
-  s.textContent = PRINT_STYLE;
-  document.head.appendChild(s);
+function RouterAnchor({ href, ...props }) {
+  return <RouterLink to={href} {...props} />;
 }
 
 /* ── Company logo ────────────────────────────────────────────────────────── */
 function CompanyLogo({ domaine, entreprise }) {
   const [failed, setFailed] = useState(false);
   const initials = (entreprise || '?').slice(0, 2).toUpperCase();
-  if (!domaine || failed) {
-    return (
-      <div style={{
-        width: 52, height: 52, borderRadius: 12, flexShrink: 0,
-        background: 'var(--text)', display: 'flex', alignItems: 'center',
-        justifyContent: 'center', fontSize: 17, fontWeight: 800, color: '#fff',
-        letterSpacing: '-.02em',
-      }}>{initials}</div>
-    );
-  }
-  return (
-    <img
-      src={`https://logo.clearbit.com/${domaine}`}
-      alt={entreprise}
-      onError={() => setFailed(true)}
-      style={{ width: 52, height: 52, borderRadius: 12, objectFit: 'contain', background: 'var(--bg)', border: '1px solid var(--border)', flexShrink: 0 }}
-    />
-  );
+  if (!domaine || failed) return <span className="jm-logo jm-logo--initials">{initials}</span>;
+  return <img className="jm-logo" src={`https://logo.clearbit.com/${domaine}`} alt={entreprise} onError={() => setFailed(true)} />;
 }
 
-/* ── Spinner icon ────────────────────────────────────────────────────────── */
-const SpinnerIcon = () => (
-  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ animation: 'spin 1s linear infinite' }}>
-    <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
-  </svg>
-);
-
-const SparkleIcon = () => (
-  <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M19 9l-1.26-2.74L15 5l2.74-1.26L19 1l1.26 2.74L23 5l-2.74 1.26L19 9zm-7.5.5L9 4 6.5 9.5 1 12l5.5 2.5L9 20l2.5-5.5L17 12l-5.5-2.5zM19 15l-1.26 2.74L15 19l2.74 1.26L19 23l1.26-2.74L23 19l-2.74-1.26L19 15z"/>
-  </svg>
-);
-
-const PrintIcon = () => (
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <polyline points="6 9 6 2 18 2 18 9"/>
-    <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
-    <rect x="6" y="14" width="12" height="8"/>
-  </svg>
-);
-
-const MailIcon = () => (
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/>
-  </svg>
-);
-
-const LockIcon = () => (
-  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-  </svg>
-);
-
 /* ── Page ─────────────────────────────────────────────────────────────────── */
+// Impression (export PDF) : les éléments .no-print, la Navbar et le footer sont masqués (JobMatcher.css)
 export default function JobMatcher() {
   const [offre, setOffre]   = useState('');
   const [loading, setLoading] = useState(false);
@@ -95,9 +41,8 @@ export default function JobMatcher() {
   const [results, setResults] = useState(null);
   const [meta, setMeta]     = useState(null);
   const resultsRef = useRef(null);
-  const isMobile   = useMediaQuery('(max-width:768px)');
 
-  useEffect(() => { injectPrintStyle(); }, []);
+  useEffect(() => { window.scrollTo(0, 0); }, []);
 
   async function handleAnalyse(e) {
     if (e?.preventDefault) e.preventDefault();
@@ -128,253 +73,162 @@ export default function JobMatcher() {
   }
 
   const today = new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+  const errorStatus = error === true
+    ? { type: 'error', message: 'Collez une offre complète pour démarrer le matching.' }
+    : error === 'server'
+      ? { type: 'error', message: 'Une erreur est survenue. Réessayez dans quelques secondes.' }
+      : undefined;
 
   return (
-    <>
-      <Navbar/>
-      <div className="jm-bg" style={{ minHeight: '100vh', background: 'var(--bg-soft)' }}>
-
-        {/* ── Page header — masqué à l'impression ──────────────────────── */}
-        <div className="no-print" style={{ background: 'var(--bg)', borderBottom: '1px solid var(--border)', padding: isMobile ? '24px 20px 28px' : '36px 0 40px' }}>
+    <AstryxPage>
+      <div className="jm-page">
+        {/* ── En-tête — masqué à l'impression ─────────────────────────── */}
+        <div className="jm-header no-print">
           <div className="container">
-            <Link className="back-link" to="/">
-              <svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-              Retour
-            </Link>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 20, marginBottom: 8 }}>
-              <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '.08em', textTransform: 'uppercase', color: 'var(--blue)', background: 'var(--blue-light)', padding: '3px 10px', borderRadius: 20 }}>Matching IA</span>
-            </div>
-            <h1 style={{ fontSize: isMobile ? 26 : 34, fontWeight: 800, color: 'var(--text)', letterSpacing: '-.03em', lineHeight: 1.15, marginBottom: 10 }}>
-              Testez notre compatibilité.
-            </h1>
-            <p style={{ fontSize: 15, color: 'var(--muted)', fontWeight: 300, maxWidth: 520, lineHeight: 1.65 }}>
-              Collez votre offre d'emploi. En quelques secondes, vous saurez quelles compétences je peux prouver — et avec quels projets concrets. Résultat exportable en PDF.
-            </p>
+            <VStack gap={4}>
+              <Link as={RouterAnchor} href="/" color="secondary" isStandalone>
+                <HStack gap={1} vAlign="center"><ArrowBack sx={{ fontSize: 14 }} />Retour</HStack>
+              </Link>
+              <HStack><Badge label="Matching IA" variant="purple" icon={<AutoAwesomeOutlined sx={{ fontSize: 14 }} />} /></HStack>
+              <Heading level={1} type="display-2">Testez notre compatibilité.</Heading>
+              <p className="jm-intro">
+                Collez votre offre d'emploi. En quelques secondes, vous saurez quelles compétences je peux prouver — et avec quels projets concrets. Résultat exportable en PDF.
+              </p>
+            </VStack>
           </div>
         </div>
 
-        {/* ── Formulaire — masqué à l'impression ───────────────────────── */}
-        <div className="container no-print" style={{ paddingTop: 36, paddingBottom: 12 }}>
+        {/* ── Formulaire — masqué à l'impression ──────────────────────── */}
+        <div className="container no-print jm-form">
           <form onSubmit={handleAnalyse}>
-            <label style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', display: 'block', marginBottom: 8 }}>
-              Votre offre d'emploi
-            </label>
-            <textarea
-              value={offre}
-              onChange={e => { setOffre(e.target.value); setError(false); }}
-              placeholder="Collez l'offre complète ici — titre du poste, missions, compétences recherchées..."
-              rows={isMobile ? 8 : 10}
-              style={{
-                width: '100%', boxSizing: 'border-box',
-                padding: '14px 16px', borderRadius: 10, fontSize: 14,
-                border: error === true ? '1.5px solid #EF4444' : '1.5px solid var(--border)',
-                background: 'var(--bg)', fontFamily: 'inherit', lineHeight: 1.6,
-                resize: 'vertical', outline: 'none', color: 'var(--text)',
-                transition: 'border-color .15s',
-              }}
-            />
-            {error === true && (
-              <p style={{ fontSize: 12, color: '#EF4444', marginTop: 6 }}>
-                Collez une offre complète pour démarrer le matching.
-              </p>
-            )}
-            {error === 'server' && (
-              <p style={{ fontSize: 12, color: '#EF4444', marginTop: 6 }}>
-                Une erreur est survenue. Réessayez dans quelques secondes.
-              </p>
-            )}
-            <div style={{ marginTop: 14 }}>
-              <Button
-                variant="primary"
-                disabled={loading || offre.trim().length < 10}
-                onClick={handleAnalyse}
-                startIcon={loading ? <SpinnerIcon/> : <SparkleIcon/>}
-                sx={{ width: isMobile ? '100%' : 'auto' }}
-              >
-                {loading ? 'Analyse en cours…' : 'Lancer l\'analyse'}
-              </Button>
-            </div>
+            <VStack gap={4}>
+              <TextArea
+                label="Votre offre d'emploi"
+                value={offre}
+                onChange={value => { setOffre(value); setError(false); }}
+                placeholder="Collez l'offre complète ici — titre du poste, missions, compétences recherchées..."
+                rows={10}
+                status={errorStatus}
+                statusVariant="detached"
+              />
+              <HStack>
+                <Button
+                  type="submit"
+                  label={loading ? 'Analyse en cours…' : "Lancer l'analyse"}
+                  variant="primary"
+                  size="lg"
+                  isLoading={loading}
+                  isDisabled={offre.trim().length < 10}
+                  icon={<AutoAwesomeOutlined sx={{ fontSize: 16 }} />}
+                />
+              </HStack>
+            </VStack>
           </form>
         </div>
 
-        {/* ── Résultats — visibles à l'écran ET dans le PDF ───────────── */}
+        {/* ── Résultats — visibles à l'écran ET dans le PDF ──────────── */}
         {results && (
-          <div ref={resultsRef} style={{ paddingBottom: 60 }}>
-            <div className="container">
-              <hr className="no-print" style={{ border: 'none', borderTop: '1px solid var(--border)', margin: '28px 0' }}/>
+          <div ref={resultsRef} className="container jm-results">
+            <VStack gap={5}>
+              <div className="no-print"><Divider /></div>
 
-              {/* Carte entreprise × Thomas ─────────────────────────────── */}
-              <div className="jm-card" style={{
-                background: 'var(--bg)', borderRadius: 14, border: '1px solid var(--border)',
-                padding: isMobile ? '20px 16px' : '24px 28px',
-                display: 'flex', alignItems: 'center',
-                flexDirection: isMobile ? 'column' : 'row',
-                gap: isMobile ? 20 : 0,
-                marginBottom: 20,
-              }}>
-                {/* Entreprise */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: 14, flex: 1 }}>
-                  <CompanyLogo domaine={meta?.domaine} entreprise={meta?.entreprise}/>
-                  <div>
-                    <p style={{ fontSize: 11, fontWeight: 600, color: 'var(--muted)', letterSpacing: '.06em', textTransform: 'uppercase', marginBottom: 3 }}>Entreprise</p>
-                    <p style={{ fontSize: 17, fontWeight: 800, color: 'var(--text)', letterSpacing: '-.02em' }}>{meta?.entreprise || '—'}</p>
-                    {meta?.poste && <p style={{ fontSize: 13, color: 'var(--muted)', marginTop: 2, fontWeight: 400 }}>{meta.poste}</p>}
-                  </div>
+              {/* Entreprise × Thomas */}
+              <Card padding={6}>
+                <div className="jm-match">
+                  <HStack gap={3} vAlign="center">
+                    <CompanyLogo domaine={meta?.domaine} entreprise={meta?.entreprise} />
+                    <VStack gap={0.5}>
+                      <Text type="label" color="secondary">Entreprise</Text>
+                      <Text size="lg" weight="bold">{meta?.entreprise || '—'}</Text>
+                      {meta?.poste && <Text type="supporting">{meta.poste}</Text>}
+                    </VStack>
+                  </HStack>
+                  <span className="jm-times">×</span>
+                  <HStack gap={3} vAlign="center">
+                    <img className="jm-avatar" src="/images/profile-thumb.jpg" alt="Thomas Reynier" />
+                    <VStack gap={0.5}>
+                      <Text type="label" color="secondary">Candidat</Text>
+                      <Text size="lg" weight="bold">Thomas Reynier</Text>
+                      <Text type="supporting">Product Designer IA · Paris</Text>
+                    </VStack>
+                  </HStack>
                 </div>
+              </Card>
 
-                {/* × */}
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: isMobile ? '100%' : 72, flexShrink: 0 }}>
-                  {isMobile
-                    ? <div style={{ width: '100%', height: 1, background: 'var(--border)', position: 'relative' }}>
-                        <span style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', background: 'var(--bg-soft)', padding: '0 10px', fontSize: 13, color: 'var(--muted)', fontWeight: 500 }}>×</span>
-                      </div>
-                    : <span style={{ fontSize: 22, color: 'var(--border)', fontWeight: 300 }}>×</span>
-                  }
-                </div>
-
-                {/* Thomas */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: 14, flex: 1, justifyContent: isMobile ? 'flex-start' : 'flex-end' }}>
-                  <div style={{ textAlign: isMobile ? 'left' : 'right' }}>
-                    <p style={{ fontSize: 11, fontWeight: 600, color: 'var(--muted)', letterSpacing: '.06em', textTransform: 'uppercase', marginBottom: 3 }}>Candidat</p>
-                    <p style={{ fontSize: 17, fontWeight: 800, color: 'var(--text)', letterSpacing: '-.02em' }}>Thomas Reynier</p>
-                    <p style={{ fontSize: 13, color: 'var(--muted)', marginTop: 2 }}>Product Designer IA · Paris</p>
-                  </div>
-                  <img
-                    src="/images/profile-thumb.jpg"
-                    alt="Thomas Reynier"
-                    style={{ width: 52, height: 52, borderRadius: '50%', objectFit: 'cover', border: '1px solid var(--border)', flexShrink: 0, order: isMobile ? 0 : 1 }}
-                  />
-                </div>
-              </div>
-
-              {/* Titre + bouton PDF ───────────────────────────────────── */}
-              <div style={{ display: 'flex', alignItems: isMobile ? 'flex-start' : 'center', justifyContent: 'space-between', flexDirection: isMobile ? 'column' : 'row', gap: 12, marginBottom: 20 }}>
-                <div>
-                  <p style={{ fontSize: 13, color: 'var(--muted)', marginBottom: 4 }}>
-                    {results.length} point{results.length > 1 ? 's' : ''} de compatibilité · {today}
-                  </p>
-                  <h2 style={{ fontSize: isMobile ? 19 : 22, fontWeight: 700, color: 'var(--text)', letterSpacing: '-.02em' }}>
-                    Analyse de compatibilité
-                  </h2>
-                </div>
+              {/* Titre + export PDF */}
+              <HStack hAlign="between" vAlign="center" wrap="wrap" gap={3}>
+                <VStack gap={0.5}>
+                  <Text type="supporting">{results.length} point{results.length > 1 ? 's' : ''} de compatibilité · {today}</Text>
+                  <Heading level={2}>Analyse de compatibilité</Heading>
+                </VStack>
                 <div className="no-print">
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => window.print()}
-                    startIcon={<PrintIcon/>}
-                  >
-                    Exporter en PDF
-                  </Button>
+                  <Button label="Exporter en PDF" variant="ghost" size="sm" icon={<PrintOutlined sx={{ fontSize: 16 }} />} onClick={() => window.print()} />
                 </div>
-              </div>
+              </HStack>
 
-              {/* Cards compétences ────────────────────────────────────── */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+              {/* Compétences */}
+              <VStack gap={4}>
                 {results.map((comp, idx) => (
-                  <div
-                    key={comp.id}
-                    className="jm-card"
-                    style={{ background: 'var(--bg)', borderRadius: 12, border: '1px solid var(--border)', overflow: 'hidden', pageBreakInside: 'avoid' }}
-                  >
-                    {/* En-tête compétence */}
-                    <div style={{ padding: isMobile ? '12px 16px' : '14px 24px', borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'center', gap: 12, background: 'var(--bg-soft)' }}>
-                      <span style={{ width: 24, height: 24, borderRadius: '50%', background: 'var(--blue)', color: '#fff', fontSize: 11, fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>{idx + 1}</span>
-                      <p style={{ fontSize: 14, fontWeight: 700, color: 'var(--text)' }}>{comp.label}</p>
-                    </div>
-
-                    {/* Projets */}
-                    <div style={{ display: 'flex', flexDirection: 'column' }}>
-                      {comp.projects.map((proj, pIdx) => (
-                        <div
-                          key={proj.name}
-                          style={{
-                            padding: isMobile ? '16px' : '18px 24px',
-                            borderBottom: pIdx < comp.projects.length - 1 ? '1px solid var(--border)' : 'none',
-                            display: 'flex', flexDirection: 'column', gap: 8,
-                            background: proj.locked ? 'var(--bg-soft)' : 'var(--bg)',
-                          }}
-                        >
-                          {/* Ligne projet */}
-                          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                            <img src={proj.logo} alt={proj.name} style={{ width: 18, height: 18, objectFit: 'contain', borderRadius: 4, flexShrink: 0 }}/>
-                            <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)' }}>{proj.name}</span>
-                            {proj.locked ? (
-                              <span className="no-print" style={{ marginLeft: 'auto', display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: 11, fontWeight: 600, color: 'var(--muted)', background: 'var(--bg-soft)', border: '1px solid var(--border)', padding: '3px 9px', borderRadius: 20, flexShrink: 0 }}>
-                                <LockIcon/>En entretien
+                  <div key={comp.id} className="jm-card">
+                    <Card padding={0}>
+                      <HStack gap={3} vAlign="center" padding={4}>
+                        <span className="jm-num">{idx + 1}</span>
+                        <Text weight="bold">{comp.label}</Text>
+                      </HStack>
+                      {comp.projects.map(proj => (
+                        <div key={proj.name} className={`jm-proof${proj.locked ? ' is-locked' : ''}`}>
+                          <Divider />
+                          <VStack gap={2} padding={5}>
+                            <HStack gap={2} vAlign="center" hAlign="between" wrap="wrap">
+                              <HStack gap={2} vAlign="center">
+                                <img className="jm-proj-logo" src={proj.logo} alt="" />
+                                <Text weight="bold" size="sm">{proj.name}</Text>
+                              </HStack>
+                              <span className="no-print">
+                                {proj.locked
+                                  ? <Badge label="En entretien" icon={<LockOutlined sx={{ fontSize: 12 }} />} />
+                                  : (
+                                    <Link href={proj.url} target="_blank" isStandalone size="sm" weight="semibold">
+                                      <HStack gap={1} vAlign="center">Voir la preuve complète<ArrowForward sx={{ fontSize: 12 }} /></HStack>
+                                    </Link>
+                                  )}
                               </span>
-                            ) : (
-                              <a className="no-print" href={proj.url} target="_blank" rel="noopener noreferrer" style={{ marginLeft: 'auto', fontSize: 12, color: 'var(--blue)', fontWeight: 600, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 4, flexShrink: 0 }}>
-                                Voir la preuve complète
-                                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                              </a>
+                            </HStack>
+                            <p className={`jm-proof-text${proj.locked ? ' is-faded' : ''}`}>{proj.proof}</p>
+                            {proj.locked && (
+                              <div className="jm-locked-banner">
+                                <HStack gap={2} vAlign="start">
+                                  <LockOutlined sx={{ fontSize: 14 }} />
+                                  <Text size="sm" color="accent">Cette étude de cas se présente uniquement en entretien — c'est précisément l'occasion d'en parler.</Text>
+                                </HStack>
+                                <span className="no-print">
+                                  <Button label="Planifier un échange" variant="secondary" size="sm" href={CONTACT.mailto} target="_blank" icon={<MailOutlined sx={{ fontSize: 14 }} />} />
+                                </span>
+                              </div>
                             )}
-                          </div>
-
-                          {/* Preuve */}
-                          {proj.locked ? (
-                            <>
-                              <div style={{ position: 'relative' }}>
-                                <p style={{ fontSize: 13.5, color: 'var(--text)', lineHeight: 1.7, fontWeight: 300, WebkitMaskImage: 'linear-gradient(to bottom, black 35%, transparent 100%)', maskImage: 'linear-gradient(to bottom, black 35%, transparent 100%)', userSelect: 'none' }}>
-                                  {proj.proof}
-                                </p>
-                              </div>
-                              {/* Bannière entretien */}
-                              <div style={{ display: 'flex', alignItems: isMobile ? 'flex-start' : 'center', justifyContent: 'space-between', flexDirection: isMobile ? 'column' : 'row', gap: 10, background: 'var(--blue-light)', border: '1px solid var(--blue-border)', borderRadius: 9, padding: '12px 14px', marginTop: 4 }}>
-                                <div style={{ display: 'flex', alignItems: 'flex-start', gap: 9 }}>
-                                  <LockIcon/>
-                                  <p style={{ fontSize: 12.5, color: 'var(--blue-deep)', lineHeight: 1.55, fontWeight: 400 }}>
-                                    Cette étude de cas se présente uniquement en entretien — c'est précisément l'occasion d'en parler.
-                                  </p>
-                                </div>
-                                <a
-                                  href="https://mail.google.com/mail/?view=cm&to=reynier.design@gmail.com"
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="no-print"
-                                  style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12, fontWeight: 700, color: 'var(--blue)', background: 'var(--bg)', border: '1.5px solid var(--blue-border)', borderRadius: 7, padding: '6px 12px', textDecoration: 'none', whiteSpace: 'nowrap', flexShrink: 0 }}
-                                >
-                                  <MailIcon/>
-                                  Planifier un échange
-                                </a>
-                              </div>
-                            </>
-                          ) : (
-                            <p style={{ fontSize: 13.5, color: 'var(--text)', lineHeight: 1.7, fontWeight: 300 }}>{proj.proof}</p>
-                          )}
-
-                          {/* URL PDF only */}
-                          <p style={{ display: 'none', fontSize: 10, color: 'var(--muted)' }} className="print-url">
-                            {proj.locked ? 'Présentée en entretien — thomas-reynier.fr' : `thomas-reynier.fr${proj.url}`}
-                          </p>
+                            <p className="print-url">
+                              {proj.locked ? 'Présentée en entretien — thomas-reynier.fr' : `thomas-reynier.fr${proj.url}`}
+                            </p>
+                          </VStack>
                         </div>
                       ))}
-                    </div>
+                    </Card>
                   </div>
                 ))}
-              </div>
+              </VStack>
 
-              {/* CTA contact — masqué à l'impression ─────────────────── */}
-              <div className="no-print" style={{ marginTop: 28, padding: '24px', background: 'var(--blue-light)', borderRadius: 12, border: '1px solid var(--blue-border)', display: 'flex', alignItems: isMobile ? 'flex-start' : 'center', justifyContent: 'space-between', flexDirection: isMobile ? 'column' : 'row', gap: 16 }}>
-                <div>
-                  <p style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 4 }}>La suite se passe en entretien</p>
-                  <p style={{ fontSize: 13, color: 'var(--muted)', fontWeight: 300 }}>Je présente chaque point de compatibilité en détail lors d'un entretien vidéo. Prenons 30 minutes.</p>
-                </div>
-                <Button
-                  variant="primary"
-                  size="sm"
-                  href="https://mail.google.com/mail/?view=cm&to=reynier.design@gmail.com"
-                  startIcon={<MailIcon/>}
-                  sx={{ width: isMobile ? '100%' : 'auto', justifyContent: 'center', flexShrink: 0 }}
-                >
-                  Planifier un échange
-                </Button>
+              {/* CTA contact — masqué à l'impression */}
+              <div className="jm-cta no-print">
+                <VStack gap={1}>
+                  <Text weight="bold">La suite se passe en entretien</Text>
+                  <Text type="supporting">Je présente chaque point de compatibilité en détail lors d'un entretien vidéo. Prenons 30 minutes.</Text>
+                </VStack>
+                <Button label="Planifier un échange" variant="primary" href={CONTACT.mailto} target="_blank" icon={<MailOutlined sx={{ fontSize: 16 }} />} />
               </div>
-            </div>
+            </VStack>
           </div>
         )}
       </div>
-      <Footer/>
-    </>
+    </AstryxPage>
   );
 }

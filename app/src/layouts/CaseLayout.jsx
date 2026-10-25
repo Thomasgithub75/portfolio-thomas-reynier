@@ -1,10 +1,33 @@
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { Link } from 'react-router-dom';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import Navbar from './Navbar';
-import Footer from './Footer';
+import { Link as RouterLink } from 'react-router-dom';
+import { Button } from '@astryxdesign/core/Button';
+import { IconButton } from '@astryxdesign/core/IconButton';
+import { Badge } from '@astryxdesign/core/Badge';
+import { Grid } from '@astryxdesign/core/Grid';
+import { Heading } from '@astryxdesign/core/Heading';
+import { Text } from '@astryxdesign/core/Text';
+import { Link } from '@astryxdesign/core/Link';
+import { VStack, HStack } from '@astryxdesign/core/Layout';
+import ArrowBack from '@mui/icons-material/ArrowBack';
+import AccessTime from '@mui/icons-material/AccessTime';
+import KeyboardArrowUp from '@mui/icons-material/KeyboardArrowUp';
+import MailOutlined from '@mui/icons-material/MailOutlined';
+import LinkedIn from '@mui/icons-material/LinkedIn';
+import useMediaQuery from '../hooks/useMediaQuery';
+import AstryxPage from './AstryxPage';
+import ProjectCard from '../components/ProjectCard/ProjectCard';
 import { trackEvent } from '../utils/analytics';
+import { CONTACT } from '../data/home';
+import './CaseLayout.css';
+
+// Gabarit des études de cas. Interface en Astryx (en-tête, tags, boutons, autres projets, footer) ;
+// le corps de l'article (sections, étapes, citations, illustrations) garde ses styles éditoriaux de global.css.
+
+// Lien Astryx vers une route interne (React Router)
+function RouterAnchor({ href, ...props }) {
+  return <RouterLink to={href} {...props} />;
+}
 
 function useBackToTop() {
   const [v, setV] = useState(false);
@@ -127,52 +150,37 @@ export function Quote({ text, avatar, name, role }) {
   );
 }
 
-export function CaseCta() {
+// En-tête commun : retour, tags, logo + titre, méta, temps de lecture, intro, chiffres clés
+export function CaseHeader({ tags, logo, title, meta, readingTime, intro, stats }) {
   return (
-    <div className="case-cta">
+    <div className="case-header">
       <div className="container">
-        <p className="cta-eyebrow">Vous avez aimé ce projet ?</p>
-        <h2>Travaillons ensemble</h2>
-        <p className="cta-sub">Disponible pour des missions freelance, des opportunités CDI<br/>ou des collaborations ponctuelles à Paris.</p>
-        <div className="cta-buttons">
-          <a href="https://mail.google.com/mail/?view=cm&to=reynier.design@gmail.com" target="_blank" rel="noopener" className="cta-btn cta-btn-primary" onClick={() => trackEvent.contactClick('case_cta')}>
-            <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
-            Me contacter
-          </a>
-          <a href="https://www.linkedin.com/in/thomas-reynier-product-design/" target="_blank" rel="noopener" className="cta-btn cta-btn-ghost" onClick={() => trackEvent.linkedinClick('case_cta')}>
-            <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-            Mon profil LinkedIn
-          </a>
+        <div className="ax-case-back">
+          <Link as={RouterAnchor} href="/#projets" color="secondary" isStandalone>
+            <HStack gap={1} vAlign="center"><ArrowBack sx={{ fontSize: 14 }} />Retour aux projets</HStack>
+          </Link>
         </div>
-      </div>
-    </div>
-  );
-}
-
-export function OtherProjects({ projects }) {
-  return (
-    <div className="next-section" id="autres-projets">
-      <div className="container">
-        <p className="section-label">Autres projets</p>
-        <div className="projects-grid-2">
-          {projects.map(p => (
-            <Link key={p.name} to={p.href} className="project-card-case">
-              <div className="project-thumb"><img loading="lazy" src={p.thumb} alt={p.name}/></div>
-              <div className="project-body">
-                <div className="project-header">
-                  <div className="project-header-left">
-                    <img className="project-logo-sm" src={p.logo} alt={p.name}/>
-                    <span className={`project-role-badge ${p.roleClass}`}>{p.role}</span>
-                  </div>
-                  <span className="project-dur">{p.duration}</span>
-                </div>
-                <p className="project-name-sm">{p.name}</p>
-                <p className="project-desc-sm">{p.desc}</p>
-                <div className="project-tags-row">
-                  {p.tags.map(t => <span key={t} className="p-tag">{t}</span>)}
-                </div>
-              </div>
-            </Link>
+        <HStack gap={1} wrap="wrap">
+          {tags.map(t => <Badge key={t} label={t} variant="blue" />)}
+        </HStack>
+        <div className="case-title-row ax-case-title">
+          <img className="case-logo" src={logo} alt="" />
+          <Heading level={1} type="display-2">{title}</Heading>
+        </div>
+        <VStack gap={1}>
+          <Text type="supporting" size="sm">{meta}</Text>
+          <span className="ax-reading-time">
+            <AccessTime sx={{ fontSize: 13 }} />
+            <Text type="supporting">Lecture · {readingTime}</Text>
+          </span>
+        </VStack>
+        <p className="case-intro">{intro}</p>
+        <div className="stats-row">
+          {stats.map(([val, label]) => (
+            <div key={label} className="stat">
+              <span className="ax-stat-val"><Text type="inherit" color="accent">{val}</Text></span>
+              <Text type="supporting" display="block">{label}</Text>
+            </div>
           ))}
         </div>
       </div>
@@ -180,7 +188,46 @@ export function OtherProjects({ projects }) {
   );
 }
 
-export default function CaseLayout({ title, tocItems, tocMissions, children }) {
+export function CaseCta() {
+  return (
+    <div className="ax-case-cta">
+      <VStack gap={3} hAlign="center">
+        <p className="section-label">Vous avez aimé ce projet ?</p>
+        <Heading level={2} type="display-3">Travaillons ensemble</Heading>
+        <Text color="secondary" justify="center">
+          Disponible pour des missions freelance, des opportunités CDI<br />ou des collaborations ponctuelles à Paris.
+        </Text>
+        <HStack gap={2} wrap="wrap" hAlign="center">
+          <Button label="Me contacter" variant="primary" size="lg" href={CONTACT.mailto} target="_blank" icon={<MailOutlined sx={{ fontSize: 16 }} />} onClick={() => trackEvent.contactClick('case_cta')} />
+          <Button label="Mon profil LinkedIn" variant="secondary" size="lg" href={CONTACT.linkedin} target="_blank" icon={<LinkedIn sx={{ fontSize: 16 }} />} onClick={() => trackEvent.linkedinClick('case_cta')} />
+        </HStack>
+      </VStack>
+    </div>
+  );
+}
+
+// Couleur du badge de rôle selon le projet
+const ROLE_VARIANTS = { pepyte: 'purple', weborama: 'teal', nectar: 'orange', portfolio: 'blue' };
+
+export function OtherProjects({ projects }) {
+  return (
+    <div className="next-section" id="autres-projets">
+      <div className="container">
+        <VStack gap={5}>
+          <p className="section-label">Autres projets</p>
+          <Grid columns={{ minWidth: 280, max: 2 }} gap={4}>
+            {projects.map(p => {
+              const key = Object.keys(ROLE_VARIANTS).find(k => p.href.includes(k));
+              return <ProjectCard key={p.name} project={{ ...p, roleVariant: ROLE_VARIANTS[key] || 'blue' }} />;
+            })}
+          </Grid>
+        </VStack>
+      </div>
+    </div>
+  );
+}
+
+export default function CaseLayout({ tocItems, children }) {
   const bttVisible = useBackToTop();
   const { activeId, tocVisible } = useToc(tocItems.filter(i => i.id).map(i => i.id));
   const showToc = !useMediaQuery('(max-width:1200px)');
@@ -189,8 +236,7 @@ export default function CaseLayout({ title, tocItems, tocMissions, children }) {
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
   return (
-    <>
-      <Navbar/>
+    <AstryxPage>
       {/* TOC — not rendered at all below 1200px: a fixed-position element placed off-screen
           (left: calc(50% + 500px)) triggers a horizontal rubber-band scroll bug in iOS Safari
           even when hidden via CSS display:none */}
@@ -205,10 +251,9 @@ export default function CaseLayout({ title, tocItems, tocMissions, children }) {
         </aside>
       )}
       {children}
-      <button className={`back-to-top${bttVisible ? ' visible' : ''}`} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} aria-label="Retour en haut">
-        <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
-      </button>
-      <Footer/>
-    </>
+      <div className={`ax-back-to-top${bttVisible ? ' is-visible' : ''}`}>
+        <IconButton label="Retour en haut" icon={<KeyboardArrowUp sx={{ fontSize: 18 }} />} elevation="med" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} />
+      </div>
+    </AstryxPage>
   );
 }

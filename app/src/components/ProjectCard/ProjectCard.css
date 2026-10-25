@@ -1,0 +1,14 @@
+/* Carte d'étude de cas (ProjectCard) */
+.ax-thumb{aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--color-background-muted);border-bottom:1px solid var(--color-border);color:var(--color-text-secondary)}
+.ax-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+.ax-project-link{display:block;height:100%;text-decoration:none;color:inherit;border-radius:var(--radius-container);transition:transform .2s}
+.ax-project-link .astryx-card{transition:border-color .2s,box-shadow .2s}
+.ax-project-link:hover{transform:translateY(-4px)}
+.ax-project-link:active{transform:scale(.98)}
+.ax-project-link:hover .astryx-card{border-color:var(--color-accent);box-shadow:0 8px 32px rgba(79,70,229,.12)}
+.ax-project-link:hover .ax-thumb img{transform:scale(1.04)}
+.ax-project-link:focus-visible{outline:2px solid var(--focus-outline-color);outline-offset:2px}
+.ax-project-cta{display:inline-flex;align-items:center;gap:6px;color:var(--color-text-accent)}
+.ax-project-arrow{transition:transform .2s}
+.ax-project-link:hover .ax-project-arrow{transform:translateX(4px)}
+.ax-logo-sm{height:22px;width:auto}

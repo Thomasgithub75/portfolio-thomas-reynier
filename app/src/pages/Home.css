@@ -1,9 +1,6 @@
 /* Page d'accueil (Astryx) — structure et quelques éléments maison.
    Couleurs, rayons et typo des composants viennent des tokens Astryx (theme/astryxTheme.js).
    La mise en page du hero vient des classes home-hero / hero-* de global.css (règles mobile comprises). */
-.ax-page{background:var(--color-background-body);color:var(--color-text-primary);font-family:var(--font-family-body)}
-.ax-container{max-width:1040px;margin:0 auto;padding-inline:2rem}
-.ax-section{padding-block:88px}
 
 /* ── Hero ── */
 .ax-hero-bg{background:linear-gradient(145deg,var(--color-background-muted) 0%,var(--color-background-body) 55%)}
@@ -28,19 +25,6 @@
 @media (prefers-reduced-motion:reduce){.ax-status-dot::before{animation:none}}
 
 /* ── Projets ── */
-.ax-thumb{aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--color-background-muted);border-bottom:1px solid var(--color-border);color:var(--color-text-secondary)}
-.ax-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
-.ax-project-link{display:block;height:100%;text-decoration:none;color:inherit;border-radius:var(--radius-container);transition:transform .2s}
-.ax-project-link .astryx-card{transition:border-color .2s,box-shadow .2s}
-.ax-project-link:hover{transform:translateY(-4px)}
-.ax-project-link:active{transform:scale(.98)}
-.ax-project-link:hover .astryx-card{border-color:var(--color-accent);box-shadow:0 8px 32px rgba(79,70,229,.12)}
-.ax-project-link:hover .ax-thumb img{transform:scale(1.04)}
-.ax-project-link:focus-visible{outline:2px solid var(--focus-outline-color);outline-offset:2px}
-.ax-project-cta{display:inline-flex;align-items:center;gap:6px;color:var(--color-text-accent)}
-.ax-project-arrow{transition:transform .2s}
-.ax-project-link:hover .ax-project-arrow{transform:translateX(4px)}
-.ax-logo-sm{height:22px;width:auto}
 .ax-logo-md{width:34px;height:34px;object-fit:contain;padding:5px;border-radius:var(--radius-element);background:var(--color-background-muted);flex-shrink:0}
 
 /* ── Matching IA ── */
@@ -60,14 +44,11 @@
 /* ── Témoignages, contact, footer ── */
 .ax-featured{grid-column:1 / -1}
 .ax-contact{text-align:center}
-.ax-footer{padding-block:0 32px;display:flex;flex-direction:column;gap:20px}
 
 @media (max-width:900px){
   .ax-matching{grid-template-columns:1fr}
   .ax-matching-preview{justify-self:start}
   .ax-exp-grid{grid-template-columns:1fr}
   .ax-exp-grid > :last-child{position:static}
-  .ax-section{padding-block:64px}
 }
 @media (max-width:768px){.ax-matching-preview{display:none}}
-@media (max-width:640px){.ax-container{padding-inline:1.25rem}}
